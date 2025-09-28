@@ -48,9 +48,19 @@ function normalizeLogEntry(logEntry) {
     logger.error(`Transform failed for log: ${rawLog}, Error: ${err.message}`);
   }
 
-  // Warn about unmapped fields
+  const ignoredFields = [
+    'event',
+    'source',
+    'destination',
+    'user',
+    'raw',
+    'level',
+    '@timestamp',
+    'log.original'
+  ];
+
   for (const key in logEntry) {
-    if (!Object.keys(mapping).includes(key) && key !== 'log.original') {
+    if (!Object.keys(mapping).includes(key) && !ignoredFields.includes(key)) {
       logger.warn(`Unmapped field '${key}' in log entry: ${rawLog}`);
     }
   }
@@ -60,10 +70,11 @@ function normalizeLogEntry(logEntry) {
 }
 
 /**
- * Reads all parsed JSON files from the parsed storage directory.
+ * Reads all parsed JSON files for a given level.
  */
-async function readParsedLogs() {
-  const parsedDir = path.join(__dirname, '../parser/storage/parsed');
+async function readParsedLogs(level) {
+  // هنا بقى level2 أو level3 زي ما هو
+  const parsedDir = path.join(__dirname, `../parser/storage/parsed/${level}`);
   const files = await fs.readdir(parsedDir).catch(err => {
     logger.error(`Failed to read parsed directory ${parsedDir}: ${err.message}`);
     return [];
@@ -102,10 +113,10 @@ async function storeNormalizedLogs(filePath, normalizedData) {
 }
 
 /**
- * Normalizes all logs and stores them in source-specific and combined files.
+ * Normalizes all logs for a given level and stores them in level-specific folders.
  */
-async function normalizeLogs() {
-  const parsedLogs = await readParsedLogs();
+async function normalizeLogs(level) {
+  const parsedLogs = await readParsedLogs(level);
   const normalizedData = [];
   let successCount = 0;
 
@@ -122,7 +133,7 @@ async function normalizeLogs() {
     }
   }
 
-  const outputDir = path.join(__dirname, 'storage', 'normalized');
+  const outputDir = path.join(__dirname, 'storage', 'normalized', level);
   const allNormalizedFile = path.join(outputDir, 'all_normalized.json');
 
   // Read existing combined data
@@ -152,7 +163,7 @@ async function normalizeLogs() {
     await storeNormalizedLogs(typeFile, typeLogs);
   }
 
-  logger.info(`Normalization complete. Total logs: ${parsedLogs.length}, Successfully normalized: ${successCount}`);
+  logger.info(`Normalization complete for ${level}. Total logs: ${parsedLogs.length}, Successfully normalized: ${successCount}`);
   return normalizedData;
 }
 

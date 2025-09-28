@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SIEM Alerts</title>
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; background:#1e1e2f; color:#fff; }
+    header { background:#111; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+    header h1 { margin:0; color:#4fc3f7; }
+    .filters { display:flex; gap:10px; }
+    select { padding:5px 10px; border:none; border-radius:5px; background:#2a2a3d; color:#fff; }
+    .container { padding:20px; }
+    table { width:100%; border-collapse: collapse; }
+    table th, td { padding:8px 12px; border-bottom:1px solid #444; text-align:left; }
+    table th { background:#333; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SIEM Alerts</h1>
+    <div class="filters">
+      <select id="statusFilter">
+        <option value="all">All Statuses</option>
+        <option value="open">Open</option>
+        <option value="inprogress">In Progress</option>
+        <option value="closed">Closed</option>
+      </select>
+      <select id="severityFilter">
+        <option value="all">All Severities</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <nav style="background:#222; padding:10px; display:flex; gap:15px;">
+  <a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a>
+  <a href="alerts.html" style="color:#fff; text-decoration:none;">Alerts</a>
+  <a href="search.html" style="color:#fff; text-decoration:none;">Search</a>
+  <a href="incidents.html" style="color:#fff; text-decoration:none;">Incidents</a>
+  <a href="reports.html" style="color:#fff; text-decoration:none;">Reports</a>
+  <a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a>
+</nav>
+
+  </header>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>@timestamp</th>
+          <th>Severity</th>
+          <th>Status</th>
+          <th>Rule</th>
+        </tr>
+      </thead>
+      <tbody id="alertsTable">
+        <tr><td colspan="5">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    async function loadAlerts() {
+      const res = await fetch(`/api/alerts?level=1&status=open`);
+      const data = await res.json();
+      const alerts = data.alerts || [];
+
+      const tbody = document.getElementById('alertsTable');
+      tbody.innerHTML = '';
+      alerts.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><a href="alertDetails.html?id=${a.id}" style="color:#4fc3f7">${a.id}</a></td>
+          <td>${a.created_at}</td>
+          <td>${a.severity}</td>
+          <td>${a.status}</td>
+          <td>${a.rule_id}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    loadAlerts();
+  </script>
+</body>
+</html>

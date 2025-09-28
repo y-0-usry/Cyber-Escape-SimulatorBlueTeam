@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Incidents</title>
+  <style>
+    body { background:#1e1e2f; color:#fff; font-family: Arial, sans-serif; margin:0; }
+    header { background:#111; padding:10px 20px; color:#4fc3f7; }
+    .container { padding:20px; }
+    button { padding:8px 15px; border:none; border-radius:5px; background:#4fc3f7; color:#000; cursor:pointer; }
+    table { width:100%; border-collapse: collapse; margin-top:20px; }
+    th, td { padding:8px 12px; border-bottom:1px solid #444; text-align:left; }
+    th { background:#333; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Incidents</h1>
+    <nav style="background:#222; padding:10px; display:flex; gap:15px;">
+  <a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a>
+  <a href="alerts.html" style="color:#fff; text-decoration:none;">Alerts</a>
+  <a href="search.html" style="color:#fff; text-decoration:none;">Search</a>
+  <a href="incidents.html" style="color:#fff; text-decoration:none;">Incidents</a>
+  <a href="reports.html" style="color:#fff; text-decoration:none;">Reports</a>
+  <a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a>
+</nav>
+
+  </header>
+  <div class="container">
+    <button onclick="createIncident()">+ New Incident</button>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Title</th><th>Status</th><th>Owner</th></tr>
+      </thead>
+      <tbody id="incidentsTable"><tr><td colspan="4">Loading...</td></tr></tbody>
+    </table>
+  </div>
+  <script>
+    async function loadIncidents() {
+      const res = await fetch('/api/incidents');
+      const data = await res.json();
+      const tbody = document.getElementById('incidentsTable');
+      tbody.innerHTML = '';
+      data.forEach(i => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${i.id}</td><td>${i.title}</td><td>${i.status}</td><td>${i.owner}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    async function createIncident() {
+      await fetch('/api/incidents', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({title:"New Incident", alerts:[], assignee:"analyst"})
+      });
+      loadIncidents();
+    }
+    loadIncidents();
+  </script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 // Backend/src/core/parser/parser.js
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
-const { readLogFiles } = require('../ingestion/fileReader'); // Updated to readLogFiles
+const { readLogFiles } = require('../ingestion/fileReader');
 
 /**
  * Detects the format of a log line and returns the appropriate parser function.
@@ -55,7 +55,7 @@ function parseFirewall(line) {
     "source": { "ip": srcIp, "port": parseInt(srcPort, 10) },
     "destination": { "ip": dstIp, "port": parseInt(dstPort, 10) },
     "raw": line,
-    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '')
+    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '') // Extract level from path
   };
 }
 
@@ -72,7 +72,7 @@ function parseJson(line) {
     "source": { "ip": jsonData.source_ip, "port": jsonData.source_port || 0 },
     "destination": { "ip": jsonData.dest_ip, "port": jsonData.dest_port || 0 },
     "raw": line,
-    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '')
+    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '') // Extract level from path
   };
 }
 
@@ -89,7 +89,7 @@ function parseCsv(line) {
     "source": { "ip": srcIp, "port": parseInt(srcPort, 10) },
     "destination": { "ip": dstIp, "port": parseInt(dstPort, 10) },
     "raw": line,
-    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '')
+    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '') // Extract level from path
   };
 }
 
@@ -112,7 +112,7 @@ function parseWindows(line) {
     "user": { "name": user },
     "source": { "ip": srcIp },
     "raw": line,
-    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '')
+    "level": path.basename(path.dirname(path.dirname(path.dirname(__dirname)))).replace('level', '') // Extract level from path
   };
 }
 
@@ -132,16 +132,14 @@ function parseLine(line) {
 
 /**
  * Stores parsed log data to a file or database (currently JSON file).
- * @param {string} filePath - The target file path for storage (e.g., storage/parsed/firewall.json).
+ * @param {string} filePath - The target file path for storage (e.g., storage/parsed/level1/firewall.json).
  * @param {Array<Object>} parsedData - Array of parsed log objects.
  * @returns {Promise<void>}
  */
 async function storeLogs(filePath, parsedData) {
   const storageDir = path.dirname(filePath);
-  if (!fs.existsSync(storageDir)) {
-    await fs.promises.mkdir(storageDir, { recursive: true });
-  }
-  await fs.promises.writeFile(filePath, JSON.stringify(parsedData, null, 2), 'utf8');
+  await fs.mkdir(storageDir, { recursive: true }).catch(err => console.error(`Failed to create directory ${storageDir}: ${err.message}`));
+  await fs.writeFile(filePath, JSON.stringify(parsedData, null, 2), 'utf8').catch(err => console.error(`Failed to write file ${filePath}: ${err.message}`));
 }
 
 /**
@@ -150,7 +148,7 @@ async function storeLogs(filePath, parsedData) {
  * @returns {Promise<Array<Object>>} Array of parsed log objects.
  */
 async function parseLogFile(logFilePath) {
-  const level = path.basename(path.dirname(path.dirname(logFilePath)));
+  const level = path.basename(path.dirname(path.dirname(logFilePath))).replace('level', ''); // Extract level (e.g., "1" from "level1")
   const fileName = path.basename(logFilePath, '.log');
   const parsedData = [];
 
@@ -165,7 +163,7 @@ async function parseLogFile(logFilePath) {
     }
   }
 
-  const storagePath = path.join(__dirname, 'storage', 'parsed', `${fileName}.json`);
+  const storagePath = path.join(__dirname, 'storage', 'parsed', `level${level}`, `${fileName}.json`);
   await storeLogs(storagePath, parsedData);
 
   return parsedData;

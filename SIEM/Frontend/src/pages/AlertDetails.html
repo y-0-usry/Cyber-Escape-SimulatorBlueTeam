@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Details</title>
+  <style>
+    body { background:#1e1e2f; color:#fff; font-family: Arial, sans-serif; margin:0; }
+    header { background:#111; padding:10px 20px; color:#4fc3f7; }
+    .container { padding:20px; }
+    pre { background:#2a2a3d; padding:15px; border-radius:10px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Alert Details</h1>
+  </header>
+  <div class="container">
+    <h2 id="alertId"></h2>
+    <p><strong>Severity:</strong> <span id="severity"></span></p>
+    <p><strong>Status:</strong> <span id="status"></span></p>
+    <p><strong>Rule:</strong> <span id="rule"></span></p>
+    <h3>Event Data</h3>
+    <pre id="eventData">Loading...</pre>
+    <nav style="background:#222; padding:10px; display:flex; gap:15px;">
+  <a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a>
+  <a href="alerts.html" style="color:#fff; text-decoration:none;">Alerts</a>
+  <a href="search.html" style="color:#fff; text-decoration:none;">Search</a>
+  <a href="incidents.html" style="color:#fff; text-decoration:none;">Incidents</a>
+  <a href="reports.html" style="color:#fff; text-decoration:none;">Reports</a>
+  <a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a>
+</nav>
+
+  </div>
+
+  <script>
+    async function loadDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const res = await fetch(`/api/alerts/${id}`);
+      const alert = await res.json();
+
+      document.getElementById('alertId').textContent = `Alert: ${alert.id}`;
+      document.getElementById('severity').textContent = alert.severity;
+      document.getElementById('status').textContent = alert.status;
+      document.getElementById('rule').textContent = alert.rule_id;
+      document.getElementById('eventData').textContent = JSON.stringify(alert.event, null, 2);
+    }
+    loadDetails();
+  </script>
+</body>
+</html>

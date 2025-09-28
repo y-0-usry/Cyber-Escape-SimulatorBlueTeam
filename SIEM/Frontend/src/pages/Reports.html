@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports</title>
+  <style>
+    body { background:#1e1e2f; color:#fff; font-family: Arial, sans-serif; margin:0; }
+    header { background:#111; padding:10px 20px; color:#4fc3f7; }
+    .container { padding:20px; }
+    button { padding:10px; margin:5px; border:none; border-radius:5px; background:#4fc3f7; color:#000; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header><h1>Reports</h1>
+  <nav style="background:#222; padding:10px; display:flex; gap:15px;">
+  <a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a>
+  <a href="alerts.html" style="color:#fff; text-decoration:none;">Alerts</a>
+  <a href="search.html" style="color:#fff; text-decoration:none;">Search</a>
+  <a href="incidents.html" style="color:#fff; text-decoration:none;">Incidents</a>
+  <a href="reports.html" style="color:#fff; text-decoration:none;">Reports</a>
+  <a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a>
+</nav>
+</header>
+  <div class="container">
+    <button onclick="generate('pdf')">Generate PDF</button>
+    <button onclick="generate('csv')">Generate CSV</button>
+  </div>
+  <script>
+    async function generate(fmt) {
+      const res = await fetch('/api/reports?format='+fmt);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'report.'+fmt;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  </script>
+</body>
+</html>
