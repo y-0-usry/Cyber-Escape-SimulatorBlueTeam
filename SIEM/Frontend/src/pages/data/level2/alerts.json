@@ -1,0 +1,202 @@
+[
+  {
+    "alert_id": "6f9a99dc6871",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:30:01.000Z",
+    "source_ip": "192.168.1.10",
+    "destination_ip": "8.8.8.8",
+    "linked_log": {
+      "log.original": "2025-09-05 12:30:01 ALLOW TCP 192.168.1.10:54321 -> 8.8.8.8:53",
+      "@timestamp": "2025-09-05T09:30:01.000Z",
+      "observer.type": "host",
+      "event.category": "network",
+      "event.type": "network_traffic",
+      "event.action": "allow",
+      "network.protocol": "TCP",
+      "source.ip": "192.168.1.10",
+      "source.port": 54321,
+      "destination.ip": "8.8.8.8",
+      "destination.port": 53
+    }
+  },
+  {
+    "alert_id": "fc22da3565bd",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:30:05.000Z",
+    "source_ip": "10.0.0.5",
+    "destination_ip": "192.168.1.1",
+    "linked_log": {
+      "log.original": "2025-09-05 12:30:05 DENY  UDP 10.0.0.5:60000 -> 192.168.1.1:22",
+      "@timestamp": "2025-09-05T09:30:05.000Z",
+      "observer.type": "host",
+      "event.category": "network",
+      "event.type": "network_traffic",
+      "event.action": "deny",
+      "network.protocol": "UDP",
+      "source.ip": "10.0.0.5",
+      "source.port": 60000,
+      "destination.ip": "192.168.1.1",
+      "destination.port": 22
+    }
+  },
+  {
+    "alert_id": "b0ae91c01c07",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:30:07.000Z",
+    "source_ip": "172.16.0.15",
+    "destination_ip": "104.26.3.2",
+    "linked_log": {
+      "log.original": "2025-09-05 12:30:07 ALLOW TCP 172.16.0.15:49152 -> 104.26.3.2:443",
+      "@timestamp": "2025-09-05T09:30:07.000Z",
+      "observer.type": "host",
+      "event.category": "network",
+      "event.type": "network_traffic",
+      "event.action": "allow",
+      "network.protocol": "TCP",
+      "source.ip": "172.16.0.15",
+      "source.port": 49152,
+      "destination.ip": "104.26.3.2",
+      "destination.port": 443
+    }
+  },
+  {
+    "alert_id": "17b6db73059a",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:30:10.000Z",
+    "source_ip": "192.168.1.20",
+    "destination_ip": "192.168.1.254",
+    "linked_log": {
+      "log.original": "2025-09-05 12:30:10 ALLOW ICMP 192.168.1.20 -> 192.168.1.254",
+      "@timestamp": "2025-09-05T09:30:10.000Z",
+      "observer.type": "host",
+      "event.category": "network",
+      "event.type": "network_traffic",
+      "event.action": "allow",
+      "network.protocol": "ICMP",
+      "source.ip": "192.168.1.20",
+      "source.port": 0,
+      "destination.ip": "192.168.1.254",
+      "destination.port": 0
+    }
+  },
+  {
+    "alert_id": "76ae7c74eb13",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:30:15.000Z",
+    "source_ip": "192.168.1.25",
+    "destination_ip": "185.199.110.153",
+    "linked_log": {
+      "log.original": "2025-09-05 12:30:15 DENY  TCP 192.168.1.25:12345 -> 185.199.110.153:80",
+      "@timestamp": "2025-09-05T09:30:15.000Z",
+      "observer.type": "host",
+      "event.category": "network",
+      "event.type": "network_traffic",
+      "event.action": "deny",
+      "network.protocol": "TCP",
+      "source.ip": "192.168.1.25",
+      "source.port": 12345,
+      "destination.ip": "185.199.110.153",
+      "destination.port": 80
+    }
+  },
+  {
+    "alert_id": "746fba79fc14",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:32:11.000Z",
+    "source_ip": "192.168.1.10",
+    "destination_ip": "unknown",
+    "linked_log": {
+      "log.original": "2025-09-05 12:32:11 SECURITY_SUCCESS User \"Administrator\" logged in from 192.168.1.10",
+      "@timestamp": "2025-09-05T09:32:11.000Z",
+      "observer.type": "host",
+      "event.category": "authentication",
+      "event.type": "security",
+      "event.action": "login",
+      "event.outcome": "success",
+      "user.name": "Administrator",
+      "source.ip": "192.168.1.10"
+    }
+  },
+  {
+    "alert_id": "bb76557ebe21",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:33:42.000Z",
+    "source_ip": "10.0.0.5",
+    "destination_ip": "unknown",
+    "linked_log": {
+      "log.original": "2025-09-05 12:33:42 SECURITY_FAILURE Failed login attempt for user \"guest\" from 10.0.0.5",
+      "@timestamp": "2025-09-05T09:33:42.000Z",
+      "observer.type": "host",
+      "event.category": "authentication",
+      "event.type": "security",
+      "event.action": "login",
+      "event.outcome": "failure",
+      "user.name": "guest",
+      "source.ip": "10.0.0.5"
+    }
+  },
+  {
+    "alert_id": "daf27bc27ecf",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:34:15.000Z",
+    "source_ip": "172.16.0.15",
+    "destination_ip": "unknown",
+    "linked_log": {
+      "log.original": "2025-09-05 12:34:15 SECURITY_SUCCESS User \"Mohamed\" logged in from 172.16.0.15",
+      "@timestamp": "2025-09-05T09:34:15.000Z",
+      "observer.type": "host",
+      "event.category": "authentication",
+      "event.type": "security",
+      "event.action": "login",
+      "event.outcome": "success",
+      "user.name": "Mohamed",
+      "source.ip": "172.16.0.15"
+    }
+  },
+  {
+    "alert_id": "afed20c2d1b2",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:35:30.000Z",
+    "source_ip": "0.0.0.0",
+    "destination_ip": "unknown",
+    "linked_log": {
+      "log.original": "2025-09-05 12:35:30 SECURITY_WARNING Password change attempt for user \"guest\"",
+      "@timestamp": "2025-09-05T09:35:30.000Z",
+      "observer.type": "host",
+      "event.category": "authentication",
+      "event.type": "security",
+      "event.action": "password_change",
+      "event.outcome": "warning",
+      "user.name": "guest",
+      "source.ip": "0.0.0.0"
+    }
+  },
+  {
+    "alert_id": "f5d4305b1c3c",
+    "alert_type": "malicious_activity",
+    "severity": "high",
+    "timestamp": "2025-09-05T09:36:02.000Z",
+    "source_ip": "185.199.110.153",
+    "destination_ip": "unknown",
+    "linked_log": {
+      "log.original": "2025-09-05 12:36:02 SECURITY_FAILURE Failed login attempt for user \"root\" from 185.199.110.153",
+      "@timestamp": "2025-09-05T09:36:02.000Z",
+      "observer.type": "host",
+      "event.category": "authentication",
+      "event.type": "security",
+      "event.action": "login",
+      "event.outcome": "failure",
+      "user.name": "root",
+      "source.ip": "185.199.110.153"
+    }
+  }
+]

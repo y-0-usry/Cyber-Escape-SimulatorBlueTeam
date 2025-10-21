@@ -1,86 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SIEM Alerts</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberVault SIEM Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#1e1e2f; color:#fff; }
-    header { background:#111; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
-    header h1 { margin:0; color:#4fc3f7; }
-    .filters { display:flex; gap:10px; }
-    select { padding:5px 10px; border:none; border-radius:5px; background:#2a2a3d; color:#fff; }
-    .container { padding:20px; }
-    table { width:100%; border-collapse: collapse; }
-    table th, td { padding:8px 12px; border-bottom:1px solid #444; text-align:left; }
-    table th { background:#333; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #040d21;
+      color: #e0f2f1;
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(59,130,246,0.6);
+    }
   </style>
 </head>
-<body>
-  <header>
-    <h1>SIEM Alerts</h1>
-    <div class="filters">
-      <select id="statusFilter">
-        <option value="all">All Statuses</option>
-        <option value="open">Open</option>
-        <option value="inprogress">In Progress</option>
-        <option value="closed">Closed</option>
+<body class="min-h-screen p-6">
+
+  <h1 class="text-4xl font-bold text-blue-400 text-center mb-4">CyberVault SIEM Dashboard</h1>
+
+  <!-- Level Selector -->
+  <div class="flex justify-center mb-6">
+    <label for="level-selector" class="text-blue-300 mr-2">Select Level:</label>
+    <select id="level-selector" class="bg-gray-800 text-white px-4 py-2 rounded">
+      <option value="level1">Level 1</option>
+      <option value="level2">Level 2</option>
+      <option value="level3">Level 3</option>
+    </select>
+  </div>
+
+  <!-- Alerts Filters -->
+  <div class="flex flex-wrap justify-center gap-4 mb-6">
+    <div>
+      <label for="alert-time-filter" class="text-blue-300 mr-2">Alert Time:</label>
+      <select id="alert-time-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+        <option value="all">All</option>
+        <option value="5">Last 5 min</option>
+        <option value="60">Last Hour</option>
+        <option value="1440">Today</option>
       </select>
-      <select id="severityFilter">
-        <option value="all">All Severities</option>
+    </div>
+    <div>
+      <label for="alert-severity-filter" class="text-blue-300 mr-2">Severity:</label>
+      <select id="alert-severity-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+        <option value="all">All</option>
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
       </select>
     </div>
-    <nav style="background:#222; padding:10px; display:flex; gap:15px;">
-  <a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a>
-  <a href="alerts.html" style="color:#fff; text-decoration:none;">Alerts</a>
-  <a href="search.html" style="color:#fff; text-decoration:none;">Search</a>
-  <a href="incidents.html" style="color:#fff; text-decoration:none;">Incidents</a>
-  <a href="reports.html" style="color:#fff; text-decoration:none;">Reports</a>
-  <a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a>
-</nav>
-
-  </header>
-
-  <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>@timestamp</th>
-          <th>Severity</th>
-          <th>Status</th>
-          <th>Rule</th>
-        </tr>
-      </thead>
-      <tbody id="alertsTable">
-        <tr><td colspan="5">Loading...</td></tr>
-      </tbody>
-    </table>
   </div>
 
-  <script>
-    async function loadAlerts() {
-      const res = await fetch(`/api/alerts?level=1&status=open`);
-      const data = await res.json();
-      const alerts = data.alerts || [];
+  <!-- Alerts -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10" id="alerts-container"></div>
 
-      const tbody = document.getElementById('alertsTable');
-      tbody.innerHTML = '';
-      alerts.forEach(a => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><a href="alertDetails.html?id=${a.id}" style="color:#4fc3f7">${a.id}</a></td>
-          <td>${a.created_at}</td>
-          <td>${a.severity}</td>
-          <td>${a.status}</td>
-          <td>${a.rule_id}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-    loadAlerts();
-  </script>
+  <!-- Evidence Filters -->
+  <h2 class="text-2xl text-orange-400 mb-2"><i class="fas fa-file-shield"></i> Evidence</h2>
+  <div class="flex flex-wrap justify-center gap-4 mb-6">
+    <div>
+      <label for="evidence-time-filter" class="text-orange-300 mr-2">Evidence Time:</label>
+      <select id="evidence-time-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+        <option value="all">All</option>
+        <option value="5">Last 5 min</option>
+        <option value="60">Last Hour</option>
+        <option value="1440">Today</option>
+      </select>
+    </div>
+    <div>
+      <label for="evidence-severity-filter" class="text-orange-300 mr-2">Severity:</label>
+      <select id="evidence-severity-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+        <option value="all">All</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Evidence -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="evidence-list"></div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-50">
+    <div class="bg-gray-900 p-6 rounded-lg max-w-2xl w-full relative">
+      <button id="close-modal" class="absolute top-2 right-4 text-white text-xl">&times;</button>
+      <h3 class="text-xl text-blue-400 mb-4"><i class="fas fa-file-alt"></i> Linked Log</h3>
+      <pre id="log-details" class="text-sm text-green-200 bg-gray-800 p-4 rounded overflow-auto max-h-[60vh]"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
