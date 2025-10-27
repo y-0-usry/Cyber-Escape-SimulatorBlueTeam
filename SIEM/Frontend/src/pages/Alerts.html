@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyberVault SIEM Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -26,9 +27,8 @@
 
   <h1 class="text-4xl font-bold text-blue-400 text-center mb-4">CyberVault SIEM Dashboard</h1>
 
-  <!-- Level Selector -->
-  <div class="flex justify-center mb-6">
-    <label for="level-selector" class="text-blue-300 mr-2">Select Level:</label>
+  <div class="flex justify-between items-center mb-4">
+    <button id="reset-session" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">🔄 Reset Session</button>
     <select id="level-selector" class="bg-gray-800 text-white px-4 py-2 rounded">
       <option value="level1">Level 1</option>
       <option value="level2">Level 2</option>
@@ -36,58 +36,64 @@
     </select>
   </div>
 
-  <!-- Alerts Filters -->
-  <div class="flex flex-wrap justify-center gap-4 mb-6">
-    <div>
-      <label for="alert-time-filter" class="text-blue-300 mr-2">Alert Time:</label>
-      <select id="alert-time-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
-        <option value="all">All</option>
-        <option value="5">Last 5 min</option>
-        <option value="60">Last Hour</option>
-        <option value="1440">Today</option>
-      </select>
-    </div>
-    <div>
-      <label for="alert-severity-filter" class="text-blue-300 mr-2">Severity:</label>
-      <select id="alert-severity-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
-        <option value="all">All</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-    </div>
+  <!-- 🔥 Threat Summary Panel -->
+  <div id="threat-summary" class="bg-gray-800 text-white p-4 rounded-lg mb-6 flex justify-around text-center">
+    <div><span class="text-2xl font-bold text-red-400" id="count-high">0</span><br>High</div>
+    <div><span class="text-2xl font-bold text-yellow-300" id="count-medium">0</span><br>Medium</div>
+    <div><span class="text-2xl font-bold text-green-400" id="count-low">0</span><br>Low</div>
+    <div><span class="text-2xl font-bold text-blue-300" id="count-total">0</span><br>Total</div>
   </div>
 
-  <!-- Alerts -->
+  <!-- 📊 Severity Pie Chart -->
+  <canvas id="severityChart" class="mx-auto mb-6 max-w-xs"></canvas>
+    <!-- 🔍 Filters -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+    <select id="alert-time-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+      <option value="all">All Time</option>
+      <option value="5">Last 5 min</option>
+      <option value="60">Last Hour</option>
+      <option value="1440">Today</option>
+    </select>
+    <select id="alert-severity-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
+      <option value="all">All Severity</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <select id="sort-order" class="bg-gray-800 text-white px-4 py-2 rounded">
+      <option value="desc">Newest First</option>
+      <option value="asc">Oldest First</option>
+    </select>
+    <input id="ip-filter" type="text" placeholder="Source IP" class="bg-gray-800 text-white px-4 py-2 rounded" />
+    <input id="dest-filter" type="text" placeholder="Destination IP" class="bg-gray-800 text-white px-4 py-2 rounded" />
+    <input id="log-filter" type="text" placeholder="Search in logs..." class="bg-gray-800 text-white px-4 py-2 rounded" />
+    <input id="days-filter" type="number" min="1" placeholder="Last X days" class="bg-gray-800 text-white px-4 py-2 rounded" />
+    <input id="date-filter" type="date" class="bg-gray-800 text-white px-4 py-2 rounded" />
+  </div>
+
+  <!-- 🧠 Alerts -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10" id="alerts-container"></div>
 
-  <!-- Evidence Filters -->
-  <h2 class="text-2xl text-orange-400 mb-2"><i class="fas fa-file-shield"></i> Evidence</h2>
-  <div class="flex flex-wrap justify-center gap-4 mb-6">
-    <div>
-      <label for="evidence-time-filter" class="text-orange-300 mr-2">Evidence Time:</label>
-      <select id="evidence-time-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
-        <option value="all">All</option>
-        <option value="5">Last 5 min</option>
-        <option value="60">Last Hour</option>
-        <option value="1440">Today</option>
-      </select>
-    </div>
-    <div>
-      <label for="evidence-severity-filter" class="text-orange-300 mr-2">Severity:</label>
-      <select id="evidence-severity-filter" class="bg-gray-800 text-white px-4 py-2 rounded">
-        <option value="all">All</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-    </div>
+  <!-- 📁 Export Evidence -->
+  <div class="text-right mb-4">
+    <button id="export-evidence" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded">📁 Export Evidence</button>
   </div>
 
-  <!-- Evidence -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="evidence-list"></div>
+  <!-- 🧩 Evidence -->
+  <h2 class="text-2xl text-orange-400 mb-2"><i class="fas fa-file-shield"></i> Evidence</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10" id="evidence-list"></div>
 
-  <!-- Modal -->
+  <!-- 🧩 Evidence Timeline Section -->
+  <h2 class="text-2xl text-orange-400 mb-2"><i class="fas fa-clock"></i> Evidence Timeline</h2>
+  <div class="flex flex-col gap-4 mb-6" id="evidence-timeline"></div>
+
+  <!-- 🧠 Analyst Notes Summary -->
+  <div class="text-right mb-6">
+    <button id="view-notes" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+      🧠 View All Notes
+    </button>
+  </div>
+    <!-- 🧾 Modal Viewer -->
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-50">
     <div class="bg-gray-900 p-6 rounded-lg max-w-2xl w-full relative">
       <button id="close-modal" class="absolute top-2 right-4 text-white text-xl">&times;</button>
@@ -96,6 +102,34 @@
     </div>
   </div>
 
+  <!-- 🧪 Investigation Workflow Panel -->
+  <div class="bg-gray-800 p-4 rounded-lg mb-6">
+    <h2 class="text-2xl text-yellow-400 mb-2"><i class="fas fa-tasks"></i> Investigation Workflow</h2>
+    <ul id="investigation-status" class="list-disc list-inside text-white text-sm space-y-1">
+      <li>Alerts triaged: <span id="triaged-count">0</span></li>
+      <li>Evidence collected: <span id="evidence-count">0</span></li>
+      <li>Notes added: <span id="notes-count">0</span></li>
+      <li>Linked alerts viewed: <span id="linked-count">0</span></li>
+    </ul>
+  </div>
+
+  <!-- 📜 Analyst Actions Log -->
+  <div class="bg-gray-800 p-4 rounded-lg mb-6">
+    <h2 class="text-2xl text-green-400 mb-2"><i class="fas fa-history"></i> Analyst Actions Log</h2>
+    <ul id="actions-log" class="text-sm text-white space-y-1"></ul>
+  </div>
+
+  <!-- 📊 Dashboard Summary -->
+  <div class="bg-gray-800 p-4 rounded-lg mb-6">
+    <h2 class="text-2xl text-blue-400 mb-2"><i class="fas fa-chart-bar"></i> Dashboard Summary</h2>
+    <ul class="text-sm text-white space-y-1">
+      <li>Total alerts loaded: <span id="summary-total">0</span></li>
+      <li>Unique source IPs: <span id="summary-ips">0</span></li>
+      <li>Most frequent severity: <span id="summary-severity">N/A</span></li>
+    </ul>
+  </div>
+
+  <!-- 📜 Script -->
   <script src="script.js"></script>
 </body>
 </html>
