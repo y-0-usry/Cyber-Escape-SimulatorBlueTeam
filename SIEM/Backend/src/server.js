@@ -16,7 +16,7 @@ const pagesPath = path.join(__dirname, '../../Frontend/src/pages');
 // Serve static HTML files from Frontend/src/pages
 app.use(express.static(pagesPath, {
   extensions: ['html'], // Automatically serve .html files
-  index: 'Dashboard.html' // Default to Dashboard.html for root path
+  index: 'Alerts.html' // Default to Alerts.html for root path
 }));
 
 // Parse JSON bodies for POST requests
@@ -30,11 +30,29 @@ app.use('/api/incidents', incidentsRouter);
 app.use('/api/reports', reportsRouter);
 app.use('/api', authRouter);
 
-// Handle root route to serve Dashboard.html
+// Handle root route to serve Alerts.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(pagesPath, 'Dashboard.html'), (err) => {
+  res.sendFile(path.join(pagesPath, 'Alerts.html'), (err) => {
     if (err) {
-      res.status(500).send('Error serving Dashboard.html');
+      res.status(500).send('Error serving Alerts.html');
+    }
+  });
+});
+
+// Level 1 game page
+app.get('/level1', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'Level1.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving Level1.html');
+    }
+  });
+});
+
+// Answer Key page
+app.get('/AnswerKey', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'AnswerKey.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving AnswerKey.html');
     }
   });
 });

@@ -1,0 +1,10 @@
+2025-09-05T09:15:30Z | Alert: ET MALWARE Possible Ransomware Beacon | SID: 2013504 | Source: 192.168.1.10 | Dest: 203.0.113.99 | Priority: 1
+2025-09-05T09:15:35Z | Alert: ET POLICY Suspicious PowerShell Invoke | SID: 2020450 | Source: 192.168.1.10 | Dest: 203.0.113.200 | Priority: 2
+2025-09-05T09:30:00Z | Alert: ET POLICY Encoded Command Execution | SID: 2020451 | Source: 192.168.1.10 | Dest: 198.51.100.50 | Priority: 2
+2025-09-05T09:45:00Z | Alert: ET POLICY SMB Lateral Movement | SID: 2020555 | Source: 192.168.1.10 | Dest: 192.168.1.200 | Priority: 2
+2025-09-05T10:00:00Z | Alert: ET POLICY SMB Authentication Attempt | SID: 2020556 | Source: 192.168.1.10 | Dest: 192.168.1.201 | Priority: 2
+2025-09-05T10:15:00Z | Alert: ET POLICY SMB File Transfer | SID: 2020557 | Source: 192.168.1.10 | Dest: 192.168.1.202 | Priority: 2
+2025-09-05T11:00:00Z | Alert: ET INFO Backup Scanner | SID: 2099999 | Source: 192.168.1.50 | Dest: 10.0.0.10 | Priority: 4
+2025-09-05T11:30:00Z | Alert: ET POLICY Bulk File Rename Detected | SID: 2033333 | Source: 192.168.1.10 | Dest: 192.168.1.5 | Priority: 1
+2025-09-05T12:00:00Z | Alert: ET MALWARE Shadow Copy Deletion | SID: 2033334 | Source: 192.168.1.10 | Dest: 192.168.1.5 | Priority: 1
+2025-09-05T12:30:00Z | Alert: ET MALWARE Ransomware File Extension Change | SID: 2033335 | Source: 192.168.1.10 | Dest: 192.168.1.5 | Priority: 1

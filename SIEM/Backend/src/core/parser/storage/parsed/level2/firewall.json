@@ -1,87 +1,172 @@
 [
   {
-    "@timestamp": "2025-09-05 12:30:01",
+    "@timestamp": "2025-12-07 09:15:00",
     "event": {
       "action": "ALLOW",
       "type": "network_traffic"
     },
     "source": {
-      "ip": "192.168.1.10",
+      "ip": "192.168.1.100",
       "port": 54321
     },
     "destination": {
       "ip": "8.8.8.8",
       "port": 53
     },
-    "raw": "2025-09-05 12:30:01 ALLOW TCP 192.168.1.10:54321 -> 8.8.8.8:53",
+    "raw": "2025-12-07 09:15:00 ALLOW TCP 192.168.1.100:54321 -> 8.8.8.8:53",
     "level": "Backend"
   },
   {
-    "@timestamp": "2025-09-05 12:30:05",
-    "event": {
-      "action": "DENY",
-      "type": "network_traffic"
-    },
-    "source": {
-      "ip": "UDP",
-      "port": null
-    },
-    "destination": {
-      "ip": "->",
-      "port": null
-    },
-    "raw": "2025-09-05 12:30:05 DENY  UDP 10.0.0.5:60000 -> 192.168.1.1:22",
-    "level": "Backend"
-  },
-  {
-    "@timestamp": "2025-09-05 12:30:07",
+    "@timestamp": "2025-12-07 09:15:05",
     "event": {
       "action": "ALLOW",
       "type": "network_traffic"
     },
     "source": {
-      "ip": "172.16.0.15",
-      "port": 49152
+      "ip": "192.168.1.100",
+      "port": 54322
     },
     "destination": {
-      "ip": "104.26.3.2",
+      "ip": "10.0.0.50",
       "port": 443
     },
-    "raw": "2025-09-05 12:30:07 ALLOW TCP 172.16.0.15:49152 -> 104.26.3.2:443",
+    "raw": "2025-12-07 09:15:05 ALLOW TCP 192.168.1.100:54322 -> 10.0.0.50:443",
     "level": "Backend"
   },
   {
-    "@timestamp": "2025-09-05 12:30:10",
-    "event": {
-      "action": "ALLOW",
-      "type": "network_traffic"
-    },
-    "source": {
-      "ip": "192.168.1.20",
-      "port": null
-    },
-    "destination": {
-      "ip": "192.168.1.254",
-      "port": null
-    },
-    "raw": "2025-09-05 12:30:10 ALLOW ICMP 192.168.1.20 -> 192.168.1.254",
-    "level": "Backend"
-  },
-  {
-    "@timestamp": "2025-09-05 12:30:15",
+    "@timestamp": "2025-12-07 09:15:10",
     "event": {
       "action": "DENY",
       "type": "network_traffic"
     },
     "source": {
-      "ip": "TCP",
+      "ip": "203.0.113.45",
+      "port": 12345
+    },
+    "destination": {
+      "ip": "192.168.1.1",
+      "port": 22
+    },
+    "raw": "2025-12-07 09:15:10 DENY TCP 203.0.113.45:12345 -> 192.168.1.1:22",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:15",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.50",
+      "port": 5353
+    },
+    "destination": {
+      "ip": "8.8.8.8",
+      "port": 53
+    },
+    "raw": "2025-12-07 09:15:15 ALLOW UDP 192.168.1.50:5353 -> 8.8.8.8:53",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:20",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 12346
+    },
+    "destination": {
+      "ip": "192.168.1.1",
+      "port": 22
+    },
+    "raw": "2025-12-07 09:15:20 DENY TCP 203.0.113.45:12346 -> 192.168.1.1:22",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:25",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 12347
+    },
+    "destination": {
+      "ip": "192.168.1.1",
+      "port": 22
+    },
+    "raw": "2025-12-07 09:15:25 DENY TCP 203.0.113.45:12347 -> 192.168.1.1:22",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:30",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.75",
+      "port": 44500
+    },
+    "destination": {
+      "ip": "172.16.0.10",
+      "port": 3306
+    },
+    "raw": "2025-12-07 09:15:30 ALLOW TCP 192.168.1.75:44500 -> 172.16.0.10:3306",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:35",
+    "event": {
+      "action": "DROP",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "203.0.113.100",
       "port": null
     },
     "destination": {
-      "ip": "->",
+      "ip": "192.168.1.0",
       "port": null
     },
-    "raw": "2025-09-05 12:30:15 DENY  TCP 192.168.1.25:12345 -> 185.199.110.153:80",
+    "raw": "2025-12-07 09:15:35 DROP ICMP 203.0.113.100 -> 192.168.1.0",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:40",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.100",
+      "port": 54323
+    },
+    "destination": {
+      "ip": "10.0.0.50",
+      "port": 80
+    },
+    "raw": "2025-12-07 09:15:40 ALLOW TCP 192.168.1.100:54323 -> 10.0.0.50:80",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-12-07 09:15:45",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 12348
+    },
+    "destination": {
+      "ip": "192.168.1.1",
+      "port": 22
+    },
+    "raw": "2025-12-07 09:15:45 DENY TCP 203.0.113.45:12348 -> 192.168.1.1:22",
     "level": "Backend"
   }
 ]

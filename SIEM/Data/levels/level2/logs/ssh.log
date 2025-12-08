@@ -1,0 +1,10 @@
+2025-12-07T09:08:00Z sshd[2341]: Invalid user admin from 203.0.113.45 port 54321
+2025-12-07T09:08:05Z sshd[2342]: Invalid user root from 203.0.113.45 port 54322
+2025-12-07T09:08:10Z sshd[2343]: Invalid user test from 203.0.113.45 port 54323
+2025-12-07T09:08:15Z sshd[2344]: Invalid user oracle from 203.0.113.45 port 54324
+2025-12-07T09:08:20Z sshd[2345]: Invalid user mysql from 203.0.113.45 port 54325
+2025-12-07T09:08:25Z sshd[2346]: Failed password for invalid user admin from 203.0.113.45 port 54326
+2025-12-07T09:08:30Z sshd[2347]: Failed password for root from 203.0.113.45 port 54327
+2025-12-07T09:08:35Z sshd[2348]: Accepted password for jdoe from 192.168.1.200 port 54328
+2025-12-07T09:08:40Z sshd[2349]: Accepted publickey for admin from 192.168.1.150 port 54329
+2025-12-07T09:08:45Z sshd[2350]: Disconnect from 203.0.113.45 port 54330 [preauth]

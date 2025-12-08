@@ -1,0 +1,10 @@
+2025-12-07 09:00:00 [AUDIT] User: dbadmin | Query: SELECT * FROM users | Result: 150 rows | Duration: 0.234s
+2025-12-07 09:00:05 [AUDIT] User: appuser | Query: SELECT email FROM users WHERE id=5 | Result: 1 rows | Duration: 0.012s
+2025-12-07 09:00:10 [AUDIT] User: dbadmin | Query: INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com') | Result: 1 rows | Duration: 0.045s
+2025-12-07 09:00:15 [AUDIT] User: readonly | Query: SELECT COUNT(*) FROM transactions | Result: 1 rows | Duration: 0.008s
+2025-12-07 09:00:20 [AUDIT] User: dbadmin | Query: UPDATE users SET role='admin' WHERE id=10 | Result: 1 rows | Duration: 0.034s
+2025-12-07 09:00:25 [AUDIT] User: appuser | Query: DELETE FROM logs WHERE date < '2025-01-01' | Result: 45670 rows | Duration: 1.234s
+2025-12-07 09:00:30 [AUDIT] User: backup_user | Query: SELECT * FROM sensitive_data | Result: 500 rows | Duration: 0.567s
+2025-12-07 09:00:35 [AUDIT] User: dbadmin | Query: DROP TABLE audit_logs | Result: 0 rows | Duration: 0.012s
+2025-12-07 09:00:40 [AUDIT] User: appuser | Query: SELECT password_hash FROM users | Result: 150 rows | Duration: 0.089s
+2025-12-07 09:00:45 [AUDIT] User: dbadmin | Query: CREATE USER attacker IDENTIFIED BY 'Password123' | Result: 1 rows | Duration: 0.025s

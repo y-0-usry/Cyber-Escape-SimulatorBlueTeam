@@ -1,5 +1,15 @@
-2025-09-05 12:32:11 SECURITY_SUCCESS User "Administrator" logged in from 192.168.1.10
-2025-09-05 12:33:42 SECURITY_FAILURE Failed login attempt for user "guest" from 10.0.0.5
-2025-09-05 12:34:15 SECURITY_SUCCESS User "Mohamed" logged in from 172.16.0.15
-2025-09-05 12:35:30 SECURITY_WARNING Password change attempt for user "guest"
-2025-09-05 12:36:02 SECURITY_FAILURE Failed login attempt for user "root" from 185.199.110.153
+2025-09-05 08:00:00 SECURITY_SUCCESS User "Administrator" logged in from 192.168.1.10
+2025-09-05 08:30:00 SECURITY_SUCCESS User "Mohamed" logged in from 172.16.0.15
+2025-09-05 09:00:00 SECURITY_SUCCESS User "jsmith" logged in from 192.168.1.50
+2025-09-05 09:10:00 SECURITY_FAILURE Failed login attempt for user "guest" from 10.0.0.5
+2025-09-05 09:10:05 SECURITY_FAILURE Failed login attempt for user "admin" from 10.0.0.5
+2025-09-05 09:10:10 SECURITY_FAILURE Failed login attempt for user "root" from 10.0.0.5
+2025-09-05 09:15:00 SECURITY_WARNING PowerShell execution detected for user "jsmith"
+2025-09-05 09:15:30 SECURITY_WARNING Registry modification detected on host 192.168.1.10
+2025-09-05 09:30:00 SECURITY_WARNING Suspicious process spawned by PowerShell on 192.168.1.10
+2025-09-05 10:00:00 SECURITY_FAILURE Failed login attempt for user "root" from 185.199.110.153
+2025-09-05 10:30:00 SECURITY_WARNING Password change attempt for user "guest"
+2025-09-05 11:00:00 SECURITY_WARNING File system changes detected on 192.168.1.10
+2025-09-05 11:30:00 SECURITY_WARNING Multiple file renames detected on 192.168.1.10
+2025-09-05 12:00:00 SECURITY_FAILURE Shadow copy deletion detected on 192.168.1.10
+2025-09-05 12:30:00 SECURITY_FAILURE Mass file encryption activity on 192.168.1.10

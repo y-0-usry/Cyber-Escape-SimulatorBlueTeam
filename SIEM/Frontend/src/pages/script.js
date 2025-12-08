@@ -1,5 +1,6 @@
 const levelSelector = document.getElementById('level-selector');
 const alertsContainer = document.getElementById('alerts-container');
+const linkedAlertsContainer = document.getElementById('linked-alerts-container');
 const evidenceList = document.getElementById('evidence-list');
 const modal = document.getElementById('modal');
 const logDetails = document.getElementById('log-details');
@@ -20,6 +21,7 @@ const dashboardSummary = {
 
 let allAlerts = [];
 let evidence = [];
+let linkedAlerts = [];
 let actionHistory = [];
 
 let alertTimeFilter = 'all';
@@ -42,6 +44,7 @@ closeModal.addEventListener('click', () => {
 
 document.getElementById('reset-session').addEventListener('click', () => {
   evidence = [];
+  linkedAlerts = [];
   actionHistory = [];
   ipFilter = '';
   destFilter = '';
@@ -54,6 +57,7 @@ document.getElementById('reset-session').addEventListener('click', () => {
   document.getElementById('days-filter').value = '';
   document.getElementById('date-filter').value = '';
   renderAlerts();
+  renderLinkedAlerts();
   renderEvidence();
   renderTimeline();
   renderActionsLog();
@@ -92,23 +96,29 @@ function getNote(id) {
   return localStorage.getItem(`note-${id}`) || '';
 }
 
-function createCard(alert, isEvidence = false) {
+function createCard(alert, isEvidence = false, isLinked = false) {
   const card = document.createElement('div');
   card.className = 'bg-gray-900 rounded-lg p-4 card';
 
+  const icon = isEvidence ? '<i class="fas fa-file-shield"></i>' : (isLinked ? '<i class="fas fa-link"></i>' : '<i class="fas fa-bolt"></i>');
+  const borderColor = isLinked ? 'border-l-4 border-cyan-500' : '';
+
   card.innerHTML = `
-    <h3 class="text-lg font-bold text-blue-400 mb-2">
-      ${isEvidence ? '<i class="fas fa-file-shield"></i>' : '<i class="fas fa-bolt"></i>'}
+    <h3 class="text-lg font-bold text-blue-400 mb-2 ${borderColor}">
+      ${icon}
       ${alert.alert_id}
     </h3>
     <p class="text-sm text-blue-200"><i class="fas fa-clock"></i> ${formatTime(alert.timestamp)}</p>
     <p class="text-sm text-blue-200"><i class="fas fa-network-wired"></i> ${alert.source_ip} → ${alert.destination_ip}</p>
     <p class="text-sm ${getSeverityColor(alert.severity)} font-semibold mt-2">Severity: ${alert.severity}</p>
+    <p class="text-sm text-gray-400 mt-1">Type: ${alert.alert_type}</p>
     <div class="mt-4 flex flex-wrap gap-2">
       <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded view-log"><i class="fas fa-eye"></i> View Log</button>
       <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1 rounded view-linked"><i class="fas fa-link"></i> Linked Alerts</button>
-      ${!isEvidence
-        ? `<button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded add-evidence"><i class="fas fa-plus-circle"></i> Add</button>`
+      ${!isEvidence && !isLinked
+        ? `<button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded add-evidence"><i class="fas fa-plus-circle"></i> Add to Evidence</button>`
+        : isLinked 
+        ? `<button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded add-evidence"><i class="fas fa-plus-circle"></i> Add to Evidence</button>`
         : `<button class="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded remove-evidence"><i class="fas fa-trash-alt"></i> Remove</button>`}
     </div>
     ${isEvidence ? `
@@ -158,6 +168,17 @@ function renderTimeline() {
       <p class="text-sm text-green-300 italic">${note ? `"${note}"` : 'No note added.'}</p>
     `;
     timelineContainer.appendChild(div);
+  });
+}
+
+function renderLinkedAlerts() {
+  linkedAlertsContainer.innerHTML = '';
+  if (linkedAlerts.length === 0) {
+    linkedAlertsContainer.innerHTML = '<p class="text-gray-400 col-span-3">No linked alerts. Click "Linked Alerts" button on any alert to see related alerts.</p>';
+    return;
+  }
+  linkedAlerts.forEach(alert => {
+    linkedAlertsContainer.appendChild(createCard(alert, false, true));
   });
 }
 
@@ -222,15 +243,21 @@ function sortByTimestamp(list, order) {
   });
 }
 
-function showLinkedAlerts(alert) {
+function showLinkedAlerts(selectedAlert) {
   const related = allAlerts.filter(a =>
-    a.source_ip === alert.source_ip ||
-    a.destination_ip === alert.destination_ip
+    (a.source_ip === selectedAlert.source_ip ||
+    a.destination_ip === selectedAlert.destination_ip) &&
+    a.alert_id !== selectedAlert.alert_id
   );
-  const summary = related.map(a => `• ${a.alert_id} (${a.severity})`).join('\n');
-  alert(`🔗 Linked Alerts for ${alert.alert_id}:\n\n${summary}`);
-  logAction(`Viewed linked alerts for ${alert.alert_id}`);
+  
+  linkedAlerts = related;
+  renderLinkedAlerts();
+  
+  logAction(`Viewed ${related.length} linked alerts for ${selectedAlert.alert_id}`);
   updateLinkedCount();
+  
+  // Scroll to linked alerts section
+  document.getElementById('linked-alerts-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 function updateThreatSummary(list) {
   const high = list.filter(a => a.severity.toLowerCase() === 'high').length;
@@ -357,6 +384,22 @@ document.getElementById('export-evidence').addEventListener('click', () => {
   URL.revokeObjectURL(url);
   logAction('Exported evidence as JSON');
 });
+
+document.getElementById('export-linked').addEventListener('click', () => {
+  if (linkedAlerts.length === 0) {
+    window.alert('No linked alerts to export. Click "Linked Alerts" on any alert first.');
+    return;
+  }
+  const blob = new Blob([JSON.stringify(linkedAlerts, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'linked_alerts.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  logAction(`Exported ${linkedAlerts.length} linked alerts as JSON`);
+});
+
 function logAction(text) {
   const time = formatTime(new Date());
   actionHistory.push({ time, text });
@@ -401,24 +444,30 @@ function updateDashboardSummary(list) {
 }
 
 async function loadAlerts(level) {
-  alertsContainer.innerHTML = '';
+  alertsContainer.innerHTML = '<p class="text-gray-400">Loading alerts...</p>';
+  linkedAlertsContainer.innerHTML = '';
   evidence = [];
+  linkedAlerts = [];
   evidenceList.innerHTML = '';
   timelineContainer.innerHTML = '';
   actionHistory = [];
   renderActionsLog();
   updateInvestigationStatus();
 
-  const path = `data/${level}/alerts.json`;
+  const timestamp = new Date().getTime();
+  const path = `data/${level}/alerts.json?t=${timestamp}`;
 
   try {
     const res = await fetch(path);
     const alerts = await res.json();
     allAlerts = alerts;
     renderAlerts();
+    updateThreatSummary(alerts);
+    updateDashboardSummary(alerts);
+    renderSeverityChart(alerts);
     logAction(`Loaded ${alerts.length} alerts from ${level}`);
   } catch (err) {
-    alertsContainer.innerHTML = `<p class="text-red-500">Failed to load alerts for ${level}</p>`;
+    alertsContainer.innerHTML = `<p class="text-red-500">Failed to load alerts for ${level}. Error: ${err.message}</p>`;
     console.error(err);
   }
 }

@@ -1,7 +1,7 @@
 [
   {
-    "log.original": "2025-09-05 12:32:11 SECURITY_SUCCESS User \"Administrator\" logged in from 192.168.1.10",
-    "@timestamp": "2025-09-05T09:32:11.000Z",
+    "log.original": "2025-12-07 09:01:00 SECURITY_SUCCESS User \"Administrator\" logged in from 192.168.1.10",
+    "@timestamp": "2025-12-07T07:01:00.000Z",
     "observer.type": "host",
     "event.category": "authentication",
     "event.type": "security",
@@ -11,8 +11,8 @@
     "source.ip": "192.168.1.10"
   },
   {
-    "log.original": "2025-09-05 12:33:42 SECURITY_FAILURE Failed login attempt for user \"guest\" from 10.0.0.5",
-    "@timestamp": "2025-09-05T09:33:42.000Z",
+    "log.original": "2025-12-07 09:01:05 SECURITY_FAILURE Failed login attempt for user \"guest\" from 10.0.0.5",
+    "@timestamp": "2025-12-07T07:01:05.000Z",
     "observer.type": "host",
     "event.category": "authentication",
     "event.type": "security",
@@ -22,8 +22,63 @@
     "source.ip": "10.0.0.5"
   },
   {
-    "log.original": "2025-09-05 12:34:15 SECURITY_SUCCESS User \"Mohamed\" logged in from 172.16.0.15",
-    "@timestamp": "2025-09-05T09:34:15.000Z",
+    "log.original": "2025-12-07 09:01:10 SECURITY_FAILURE Failed login attempt for user \"admin\" from 10.0.0.5",
+    "@timestamp": "2025-12-07T07:01:10.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "admin",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-12-07 09:01:15 SECURITY_FAILURE Failed login attempt for user \"test\" from 10.0.0.5",
+    "@timestamp": "2025-12-07T07:01:15.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "test",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-12-07 09:01:20 SECURITY_FAILURE Failed login attempt for user \"root\" from 10.0.0.5",
+    "@timestamp": "2025-12-07T07:01:20.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "root",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-12-07 09:01:25 SECURITY_FAILURE Failed login attempt for user \"admin\" from 10.0.0.5",
+    "@timestamp": "2025-12-07T07:01:25.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "admin",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-12-07 09:01:30 SECURITY_SUCCESS User \"jdoe\" logged in from 192.168.1.50",
+    "@timestamp": "2025-12-07T07:01:30.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "success",
+    "user.name": "jdoe",
+    "source.ip": "192.168.1.50"
+  },
+  {
+    "log.original": "2025-12-07 09:01:35 SECURITY_SUCCESS User \"Mohamed\" logged in from 172.16.0.15",
+    "@timestamp": "2025-12-07T07:01:35.000Z",
     "observer.type": "host",
     "event.category": "authentication",
     "event.type": "security",
@@ -33,25 +88,25 @@
     "source.ip": "172.16.0.15"
   },
   {
-    "log.original": "2025-09-05 12:35:30 SECURITY_WARNING Password change attempt for user \"guest\"",
-    "@timestamp": "2025-09-05T09:35:30.000Z",
+    "log.original": "2025-12-07 09:01:40 SECURITY_WARNING Password change attempt for user \"Administrator\"",
+    "@timestamp": "2025-12-07T07:01:40.000Z",
     "observer.type": "host",
     "event.category": "authentication",
     "event.type": "security",
     "event.action": "password_change",
     "event.outcome": "warning",
-    "user.name": "guest",
+    "user.name": "Administrator",
     "source.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-09-05 12:36:02 SECURITY_FAILURE Failed login attempt for user \"root\" from 185.199.110.153",
-    "@timestamp": "2025-09-05T09:36:02.000Z",
+    "log.original": "2025-12-07 09:01:45 SECURITY_FAILURE Failed login attempt for user \"root\" from 203.0.113.45",
+    "@timestamp": "2025-12-07T07:01:45.000Z",
     "observer.type": "host",
     "event.category": "authentication",
     "event.type": "security",
     "event.action": "login",
     "event.outcome": "failure",
     "user.name": "root",
-    "source.ip": "185.199.110.153"
+    "source.ip": "203.0.113.45"
   }
 ]

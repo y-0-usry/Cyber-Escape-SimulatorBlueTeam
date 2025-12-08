@@ -1,0 +1,212 @@
+[
+  {
+    "@timestamp": "2025-12-07 09:10:00",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "malware.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:00 192.168.1.100 A malware.com 8.8.8.8 NOERROR 0.052"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:05",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "c2.malware.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:05 192.168.1.100 A c2.malware.com 8.8.8.8 NOERROR 0.048"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:10",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "evil.example.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:10 192.168.1.100 A evil.example.com 8.8.8.8 NOERROR 0.055"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:15",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "safe.google.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.50"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:15 192.168.1.50 A safe.google.com 8.8.8.8 NOERROR 0.025"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:20",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "exfil.malware.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:20 192.168.1.100 A exfil.malware.com 8.8.8.8 NOERROR 0.051"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:25",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "trusted.microsoft.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.75"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:25 192.168.1.75 A trusted.microsoft.com 8.8.8.8 NOERROR 0.018"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:30",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "malware.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:30 192.168.1.100 A malware.com 8.8.8.8 NOERROR 0.052"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:35",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "malware.com",
+        "type": "MX"
+      },
+      "response_code": "NXDOMAIN"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:35 192.168.1.100 MX malware.com 8.8.8.8 NXDOMAIN 0.045"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:40",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "localhost.local",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.200"
+    },
+    "destination": {
+      "ip": "192.168.1.1"
+    },
+    "raw": "2025-12-07 09:10:40 192.168.1.200 A localhost.local 192.168.1.1 NOERROR 0.002"
+  },
+  {
+    "@timestamp": "2025-12-07 09:10:45",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "c2.malware.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "192.168.1.100"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2025-12-07 09:10:45 192.168.1.100 A c2.malware.com 8.8.8.8 NOERROR 0.049"
+  }
+]

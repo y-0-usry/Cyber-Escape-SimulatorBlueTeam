@@ -1,0 +1,192 @@
+[
+  {
+    "@timestamp": "2025-12-07T09:08:00Z",
+    "event": {
+      "action": "invalid_user",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2341
+    },
+    "user": {
+      "name": "admin"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54321
+    },
+    "raw": "2025-12-07T09:08:00Z sshd[2341]: Invalid user admin from 203.0.113.45 port 54321"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:05Z",
+    "event": {
+      "action": "invalid_user",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2342
+    },
+    "user": {
+      "name": "root"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54322
+    },
+    "raw": "2025-12-07T09:08:05Z sshd[2342]: Invalid user root from 203.0.113.45 port 54322"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:10Z",
+    "event": {
+      "action": "invalid_user",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2343
+    },
+    "user": {
+      "name": "test"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54323
+    },
+    "raw": "2025-12-07T09:08:10Z sshd[2343]: Invalid user test from 203.0.113.45 port 54323"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:15Z",
+    "event": {
+      "action": "invalid_user",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2344
+    },
+    "user": {
+      "name": "oracle"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54324
+    },
+    "raw": "2025-12-07T09:08:15Z sshd[2344]: Invalid user oracle from 203.0.113.45 port 54324"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:20Z",
+    "event": {
+      "action": "invalid_user",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2345
+    },
+    "user": {
+      "name": "mysql"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54325
+    },
+    "raw": "2025-12-07T09:08:20Z sshd[2345]: Invalid user mysql from 203.0.113.45 port 54325"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:25Z",
+    "event": {
+      "action": "failed_auth",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2346
+    },
+    "user": {
+      "name": "invalid"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54326
+    },
+    "raw": "2025-12-07T09:08:25Z sshd[2346]: Failed password for invalid user admin from 203.0.113.45 port 54326"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:30Z",
+    "event": {
+      "action": "failed_auth",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2347
+    },
+    "user": {
+      "name": "root"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54327
+    },
+    "raw": "2025-12-07T09:08:30Z sshd[2347]: Failed password for root from 203.0.113.45 port 54327"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:35Z",
+    "event": {
+      "action": "successful_auth",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2348
+    },
+    "user": {
+      "name": "jdoe"
+    },
+    "source": {
+      "ip": "192.168.1.200",
+      "port": 54328
+    },
+    "raw": "2025-12-07T09:08:35Z sshd[2348]: Accepted password for jdoe from 192.168.1.200 port 54328"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:40Z",
+    "event": {
+      "action": "successful_auth",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2349
+    },
+    "user": {
+      "name": "admin"
+    },
+    "source": {
+      "ip": "192.168.1.150",
+      "port": 54329
+    },
+    "raw": "2025-12-07T09:08:40Z sshd[2349]: Accepted publickey for admin from 192.168.1.150 port 54329"
+  },
+  {
+    "@timestamp": "2025-12-07T09:08:45Z",
+    "event": {
+      "action": "unknown",
+      "type": "authentication"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 2350
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "203.0.113.45",
+      "port": 54330
+    },
+    "raw": "2025-12-07T09:08:45Z sshd[2350]: Disconnect from 203.0.113.45 port 54330 [preauth]"
+  }
+]

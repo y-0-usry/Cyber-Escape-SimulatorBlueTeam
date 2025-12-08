@@ -1,0 +1,137 @@
+[
+  {
+    "@timestamp": "2025-12-07T09:03:00Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "jdoe"
+    },
+    "source": {
+      "ip": "203.0.113.100"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:00Z VPN_CONNECT User: jdoe | IP: 203.0.113.100 | Protocol: OpenVPN | Status: SUCCESS | Duration: 3600s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:05Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "msmith"
+    },
+    "source": {
+      "ip": "203.0.113.101"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:05Z VPN_CONNECT User: msmith | IP: 203.0.113.101 | Protocol: IPSec | Status: SUCCESS | Duration: 1800s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:10Z",
+    "event": {
+      "action": "vpn_disconnect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "jdoe"
+    },
+    "source": {
+      "ip": "203.0.113.100"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:10Z VPN_DISCONNECT User: jdoe | IP: 203.0.113.100 | Protocol: OpenVPN | Status: SUCCESS | Duration: 3600s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:15Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "admin_test"
+    },
+    "source": {
+      "ip": "203.0.113.102"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:15Z VPN_CONNECT User: admin_test | IP: 203.0.113.102 | Protocol: OpenVPN | Status: SUCCESS | Duration: 7200s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:20Z",
+    "event": {
+      "action": "vpn_failed",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "203.0.113.103"
+    },
+    "event_outcome": "auth_failed",
+    "raw": "2025-12-07T09:03:20Z VPN_FAILED User: unknown | IP: 203.0.113.103 | Protocol: OpenVPN | Status: AUTH_FAILED | Duration: 0s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:25Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "kwalsh"
+    },
+    "source": {
+      "ip": "203.0.113.104"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:25Z VPN_CONNECT User: kwalsh | IP: 203.0.113.104 | Protocol: AnyConnect | Status: SUCCESS | Duration: 5400s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:30Z",
+    "event": {
+      "action": "vpn_disconnect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "msmith"
+    },
+    "source": {
+      "ip": "203.0.113.101"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:30Z VPN_DISCONNECT User: msmith | IP: 203.0.113.101 | Protocol: IPSec | Status: SUCCESS | Duration: 1800s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:35Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "jdoe"
+    },
+    "source": {
+      "ip": "203.0.113.105"
+    },
+    "event_outcome": "success",
+    "raw": "2025-12-07T09:03:35Z VPN_CONNECT User: jdoe | IP: 203.0.113.105 | Protocol: OpenVPN | Status: SUCCESS | Duration: 900s"
+  },
+  {
+    "@timestamp": "2025-12-07T09:03:45Z",
+    "event": {
+      "action": "vpn_idle",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "admin_test"
+    },
+    "source": {
+      "ip": "203.0.113.102"
+    },
+    "event_outcome": "idle",
+    "raw": "2025-12-07T09:03:45Z VPN_IDLE User: admin_test | IP: 203.0.113.102 | Protocol: OpenVPN | Status: IDLE | Duration: 7200s"
+  }
+]

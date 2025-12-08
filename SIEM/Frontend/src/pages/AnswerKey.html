@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Answer Key & Tutorial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+  <div class="container mx-auto p-6 max-w-4xl">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-900 to-purple-900 p-6 rounded-lg mb-6 flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold">Level 1 - Answer Key & Tutorial</h1>
+        <p class="text-gray-300 mt-2">📚 Complete guide to solving the Level 1 scenario</p>
+      </div>
+      <button onclick="window.location.href='/level1'" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold">
+        ← Back to Game
+      </button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+      <button class="tab-btn active bg-blue-600 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="phase1">
+        <i class="fas fa-list-check"></i> Phase 1 (Triage)
+      </button>
+      <button class="tab-btn bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="phase2">
+        <i class="fas fa-search"></i> Phase 2 (Investigation)
+      </button>
+      <button class="tab-btn bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="timeline">
+        <i class="fas fa-clock"></i> Attack Timeline
+      </button>
+      <button class="tab-btn bg-red-600 hover:bg-red-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="mistakes">
+        <i class="fas fa-warning"></i> Common Mistakes
+      </button>
+      <button class="tab-btn bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="scoring">
+        <i class="fas fa-star"></i> Scoring Guide
+      </button>
+    </div>
+
+    <!-- Phase 1 Content -->
+    <div id="phase1" class="tab-content">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-6">
+        <!-- Q1: False Positives -->
+        <div class="border-l-4 border-yellow-500 pl-4 py-4">
+          <h3 class="text-2xl font-bold mb-2">❓ Q1: False Positive Alert IDs</h3>
+          <p class="text-gray-300 mb-4"><strong>Question:</strong> Enter ALL False Positive alert IDs (comma-separated)</p>
+          
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-mono text-green-400 text-sm break-all">
+              0d7db4f04e47, 1bd81298dc32, 1d7ded5d4655, 1fee7c33d620, 27b08a5150ab,<br>
+              29378fc58586, 2d91f114f5cb, 422e11686642, 48e82ba59d4f, 519b82111d0c,<br>
+              5284108be3a0, 65a602b8a4be, 75859d320ba7, 7de16b9f5bc6, 80d75cb282e4,<br>
+              86fcb549b9ea, 871ba0a8c340, 8a1a5f934fbf, 92dec39ee538, 9600dded1a9f,<br>
+              9a7d4e1e90a2, b3d4e994327b, b77c3ee083fe, ba6a127f72f3, c79316d0c654,<br>
+              d20046810727, d22bda16854c, efeb55528435, f584cc871a48, fb477713f660
+            </p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">🔍 How to Identify False Positives:</p>
+            <ul class="list-disc list-inside space-y-2 text-sm">
+              <li><strong>Threshold:</strong> You only need ~70% of the IDs to pass (enter at least 21 of 30).</li>
+              <li><strong>Low Severity Noise:</strong> Low network traffic and benign firewall blocks.</li>
+              <li><strong>Backup/Intranet:</strong> Source IPs 192.168.1.50 or 192.168.1.60.</li>
+              <li><strong>Office365:</strong> Source IP 172.16.0.15 or logs mentioning office365.</li>
+              <li><strong>Priority 4 IDS:</strong> Any log containing "Priority 4" or "ET INFO".</li>
+              <li><strong>Routine DNS:</strong> Queries to backup.local, intranet.portal.local, office365.com.</li>
+              <li><strong>Tip:</strong> Phase 1 classification (Q2-Q10) now only uses HIGH/MEDIUM alerts; low-severity noise will not appear there.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q2-Q10: MITRE Classifications -->
+        <div class="border-l-4 border-blue-500 pl-4 py-4">
+          <h3 class="text-2xl font-bold mb-4">❓ Q2-Q10: MITRE ATT&CK Tactic Classification</h3>
+          <p class="text-gray-300 mb-4">For each high/medium alert, classify by MITRE tactic:</p>
+
+          <div class="space-y-3">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-blue-300">🔵 PowerShell Execution Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">malicious_script</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "PowerShell", "Invoke", "Encoded"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-purple-300">🟣 SMB / Port 445 Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">lateral_movement</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "SMB", "445", "Lateral"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-red-300">🔴 C2 Communication Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">c2_communication</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "Ransomware", "Beacon", "C2", "malware-cloud"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-green-300">🟢 Registry Modification Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">persistence</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "Registry", "Persistence", "RunOnce"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-orange-300">🟠 Shadow Copy Deletion Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">defense_evasion</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "Shadow", "Deletion", "Delete"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-pink-300">🔴 File Encryption/Rename Alerts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">impact</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "Encryption", "Rename", "File Extension", "bulk file"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-indigo-300">🔵 Failed Login Attempts</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">credential_access</span></p>
+              <p class="text-xs text-gray-400 mt-1">When log contains: "Failed login", "brute force", "authentication failed"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11: Compromised IP -->
+        <div class="border-l-4 border-red-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q11: Primary Compromised Host IP</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> What is the primary compromised host IP address?</p>
+          <div class="bg-gray-900 p-4 rounded mb-2">
+            <p class="font-mono text-green-400 text-lg">192.168.1.10</p>
+          </div>
+          <p class="text-sm text-gray-400">💡 This IP appears most frequently in high-severity alerts (PowerShell, C2, lateral movement, encryption)</p>
+        </div>
+
+        <!-- Q12-Q14: Actions -->
+        <div class="border-l-4 border-green-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-4">❓ Q12-Q14: Recommended Actions</h3>
+          
+          <div class="space-y-3">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q12: PowerShell Execution Alert</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">isolate</span></p>
+              <p class="text-xs text-gray-400 mt-1">PowerShell with encoded commands is malicious → isolate immediately</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q13: SMB Lateral Movement Alert</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">isolate_all</span></p>
+              <p class="text-xs text-gray-400 mt-1">Lateral movement = active intrusion → isolate ALL affected hosts</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q14: File Encryption Activity</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">isolate</span></p>
+              <p class="text-xs text-gray-400 mt-1">Mass encryption = final ransomware stage → isolate network NOW</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 Content -->
+    <div id="phase2" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-6">
+        <!-- Q1: Attack Type -->
+        <div class="border-l-4 border-red-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Phase 2 Q1: Attack Type</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> Based on all evidence, what type of attack occurred? (1-2 words)</p>
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-mono text-green-400">ransomware</p>
+            <p class="text-xs text-gray-400 mt-2">Also accepts: crypto, encrypt</p>
+          </div>
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">🔍 Evidence:</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>File encryption activity detected</li>
+              <li>Shadow copy deletion (prevents recovery)</li>
+              <li>Bulk file renames</li>
+              <li>DNS queries to: ransom-key-server.net, payment-gateway-ransom.com</li>
+              <li>All characteristics of ransomware attack</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q2: Initial Vector -->
+        <div class="border-l-4 border-orange-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Phase 2 Q2: Initial Attack Vector</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> What was the most likely initial attack vector? (1-2 words)</p>
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-mono text-green-400">phishing</p>
+            <p class="text-xs text-gray-400 mt-2">Also accepts: email, malicious attachment, spear phishing</p>
+          </div>
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">💡 Why Phishing?</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Ransomware typically enters via email attachments</li>
+              <li>Attack started from internal network</li>
+              <li>User executed malicious script/attachment</li>
+              <li>No external network access before infection</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q3: Attack Chain IDs -->
+        <div class="border-l-4 border-yellow-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Phase 2 Q3: Alert IDs in Attack Chain</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> Enter ALL alert IDs that are part of the main attack chain (comma-separated)</p>
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="text-green-400 text-sm">
+              <strong>Include:</strong> All TRUE POSITIVE alerts (everything except False Positives from Q1)<br>
+              <strong>Approximate count:</strong> 30-40 alert IDs
+            </p>
+          </div>
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">📋 What to Include:</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>✅ All High severity alerts</li>
+              <li>✅ All Medium severity alerts</li>
+              <li>✅ Alerts from source IP 192.168.1.10</li>
+              <li>✅ PowerShell, C2, lateral movement, encryption alerts</li>
+              <li>✅ Shadow copy deletion, registry modification</li>
+              <li>✅ Malicious DNS queries</li>
+              <li>❌ Exclude all False Positives from Q1</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q4: Detection Stage -->
+        <div class="border-l-4 border-purple-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Phase 2 Q4: Attack Detection Stage</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> At what stage of the attack was the incident detected?</p>
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-mono text-green-400 text-lg">impact</p>
+          </div>
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">🔴 Why "Impact"?</p>
+            <p class="text-sm mb-3">The shift briefing said: "Files are being encrypted on network" - this is the FINAL stage of a ransomware attack:</p>
+            <div class="text-sm space-y-1">
+              <p><strong>Attack Stages (MITRE):</strong></p>
+              <p>1️⃣ Initial Access (attacker gains entry)</p>
+              <p>2️⃣ Execution (malware runs)</p>
+              <p>3️⃣ Persistence (maintains access)</p>
+              <p>4️⃣ Lateral Movement (spreads to other hosts)</p>
+              <p>5️⃣ <strong>Impact</strong> ← We detected it HERE (files encrypted)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Attack Timeline -->
+    <div id="timeline" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-2xl font-bold mb-6">📅 Complete Attack Timeline</h2>
+        
+        <div class="space-y-2">
+          <div class="flex gap-4">
+            <div class="text-green-400 font-mono min-w-20">08:00</div>
+            <div class="flex-1 border-l-2 border-green-500 pl-4 pb-4">
+              <p>✅ Normal shift start (Administrator login from 192.168.1.10)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-green-400 font-mono min-w-20">08:30</div>
+            <div class="flex-1 border-l-2 border-green-500 pl-4 pb-4">
+              <p>✅ Normal user activity (Mohamed login from 172.16.0.15)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-green-400 font-mono min-w-20">09:00</div>
+            <div class="flex-1 border-l-2 border-green-500 pl-4 pb-4">
+              <p>✅ Normal activity (jsmith login from 192.168.1.50)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-yellow-400 font-mono min-w-20">09:10</div>
+            <div class="flex-1 border-l-2 border-yellow-500 pl-4 pb-4">
+              <p>⚠️ Brute force attempts detected (guest, admin, root from 10.0.0.5)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">09:15</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 C2 Beacon detected (192.168.1.10 → 203.0.113.99:443)</p>
+              <p>🔴 PowerShell execution detected</p>
+              <p>🔴 Malicious DNS queries:</p>
+              <p class="ml-4 text-sm">• c2.malware-cloud.com</p>
+              <p class="ml-4 text-sm">• powershell.update-check.com</p>
+              <p>🔴 Registry modification detected</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">09:30</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 Encoded PowerShell command execution</p>
+              <p>🔴 Suspicious process spawned</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">09:45</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 SMB Lateral Movement BEGINS (192.168.1.10 → 192.168.1.200:445)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">10:00</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 SMB to second host (192.168.1.10 → 192.168.1.201:445)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">10:15</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 SMB to third host (192.168.1.10 → 192.168.1.202:445)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">11:00</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 File system changes detected on 192.168.1.10</p>
+              <p>🔴 DNS query: ransom-key-server.net</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">11:30</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 Bulk file renames detected (ransomware markers)</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">12:00</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 CRITICAL: Shadow copy deletion (prevents recovery)</p>
+              <p>🔴 DNS query: payment-gateway-ransom.com</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="text-red-400 font-mono min-w-20">12:30</div>
+            <div class="flex-1 border-l-2 border-red-500 pl-4 pb-4">
+              <p>🔴 IMPACT: Mass file encryption activity detected</p>
+              <p class="text-sm mt-2">👤 Shift supervisor notified → Game starts HERE</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Mistakes -->
+    <div id="mistakes" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-4">
+        <h2 class="text-2xl font-bold mb-6">⚠️ Common Mistakes to Avoid</h2>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 1: Marking legitimate traffic as malicious</p>
+          <p class="text-sm">Don't flag backup scanner, intranet access, or office365 traffic as attacks.</p>
+          <p class="text-xs text-gray-400 mt-2">💡 Look for the source IPs: 192.168.1.50 (backup), 192.168.1.60 (intranet), 172.16.0.15 (office365)</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 2: Missing the compromised host IP</p>
+          <p class="text-sm">The IP 192.168.1.10 appears in almost EVERY high-severity alert. It's the main attack source!</p>
+          <p class="text-xs text-gray-400 mt-2">💡 This should be obvious when you look at the alerts</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 3: Wrong attack type</p>
+          <p class="text-sm">Saying "malware" instead of "ransomware" - be specific!</p>
+          <p class="text-xs text-gray-400 mt-2">💡 The clues: encryption, shadow copy deletion, ransom payment site</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 4: Incomplete attack chain</p>
+          <p class="text-sm">Forgetting to include ALL related alerts - you need 30-40 IDs, not just a few!</p>
+          <p class="text-xs text-gray-400 mt-2">💡 Include everything that's not a false positive</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 5: Using too many hints</p>
+          <p class="text-sm">Each hint costs 5 points! Use hints wisely.</p>
+          <p class="text-xs text-gray-400 mt-2">💡 Try to answer without hints first, only use if really stuck</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 6: Wrong MITRE classifications</p>
+          <p class="text-sm">Reading the log.original carefully is key! "PowerShell" → malicious_script, "SMB" → lateral_movement</p>
+          <p class="text-xs text-gray-400 mt-2">💡 Match keywords in raw logs to identify the tactic</p>
+        </div>
+
+        <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+          <p class="font-semibold text-red-300 mb-2">❌ Mistake 7: Not reading the scenario briefing</p>
+          <p class="text-sm">The initial shift briefing tells you "files are being encrypted" - that's the Impact stage!</p>
+          <p class="text-xs text-gray-400 mt-2">💡 Pay attention to contextual clues</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scoring Guide -->
+    <div id="scoring" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-6">
+        <h2 class="text-2xl font-bold mb-6">💯 Scoring System</h2>
+
+        <!-- Base Points -->
+        <div class="bg-gray-700 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">📊 Base Points</h3>
+          <div class="space-y-2 text-sm">
+            <p>Phase 1 Questions: <span class="font-mono bg-gray-900 px-2 py-1 rounded">14 questions × 10 points = 140 points</span></p>
+            <p>Phase 2 Questions: <span class="font-mono bg-gray-900 px-2 py-1 rounded">4 questions × 20 points = 80 points</span></p>
+            <p>Ticket Creation: <span class="font-mono bg-gray-900 px-2 py-1 rounded">50 points</span></p>
+            <p class="font-bold pt-2 border-t border-gray-600">Maximum Base Score: <span class="text-green-400">270 points</span></p>
+          </div>
+        </div>
+
+        <!-- Bonuses & Penalties -->
+        <div class="bg-gray-700 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">⚡ Bonuses & Penalties</h3>
+          <div class="space-y-3">
+            <div class="bg-green-900/30 border-l-2 border-green-500 p-3 rounded">
+              <p class="font-semibold text-green-400">✅ Speed Bonus</p>
+              <p class="text-sm">+5 points per minute remaining</p>
+              <p class="text-xs text-gray-400">Example: Finish with 5 minutes left = +25 points</p>
+            </div>
+            <div class="bg-red-900/30 border-l-2 border-red-500 p-3 rounded">
+              <p class="font-semibold text-red-400">❌ Hint Penalty</p>
+              <p class="text-sm">-5 points per hint viewed</p>
+              <p class="text-xs text-gray-400">Example: Use 3 hints = -15 points</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final Calculation -->
+        <div class="bg-blue-900/30 border-l-4 border-blue-500 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">🧮 Final Score Calculation</h3>
+          <div class="bg-gray-900 p-4 rounded font-mono text-sm">
+            Final Score = Base Points + Speed Bonus - (Hints × 5)
+          </div>
+        </div>
+
+        <!-- Performance Ratings -->
+        <div class="bg-gray-700 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">🏆 Performance Ratings</h3>
+          <div class="space-y-2 text-sm">
+            <p><span class="text-yellow-400">⭐</span> <strong>Expert (250+):</strong> Outstanding SOC analyst skills</p>
+            <p><span class="text-green-400">✓</span> <strong>Proficient (200-249):</strong> Strong analytical abilities</p>
+            <p><span class="text-blue-400">◆</span> <strong>Competent (150-199):</strong> Good understanding</p>
+            <p><span class="text-gray-400">○</span> <strong>Developing (100-149):</strong> Needs improvement</p>
+            <p><span class="text-red-400">✗</span> <strong>Novice (&lt;100):</strong> Requires additional training</p>
+          </div>
+        </div>
+
+        <!-- Pro Tips -->
+        <div class="bg-yellow-900/30 border-l-4 border-yellow-500 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">💡 Pro Tips to Maximize Score</h3>
+          <ul class="space-y-2 text-sm list-disc list-inside">
+            <li>Answer correctly on first try = no hint penalty</li>
+            <li>Finish quickly = more speed bonus points</li>
+            <li>Combine both: Perfect answers + fast completion = 300+ points possible</li>
+            <li>Use hints strategically - only on hardest questions</li>
+            <li>Read raw logs carefully - they contain all clues</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabName = btn.dataset.tab;
+        
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        // Remove active state from all buttons
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('bg-blue-600', 'bg-purple-600', 'bg-green-600', 'bg-red-600', 'bg-yellow-600');
+          b.classList.add('hover:bg-gray-700');
+        });
+        
+        // Show selected tab
+        document.getElementById(tabName).classList.remove('hidden');
+        
+        // Set button as active
+        btn.classList.remove('hover:bg-gray-700');
+        btn.classList.add(btn.dataset.tab === 'phase1' ? 'bg-blue-600' : 
+                         btn.dataset.tab === 'phase2' ? 'bg-purple-600' :
+                         btn.dataset.tab === 'timeline' ? 'bg-green-600' :
+                         btn.dataset.tab === 'mistakes' ? 'bg-red-600' : 'bg-yellow-600');
+      });
+    });
+  </script>
+</body>
+</html>

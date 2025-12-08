@@ -1,0 +1,167 @@
+[
+  {
+    "log.original": "2025-09-05 08:00:00 SECURITY_SUCCESS User \"Administrator\" logged in from 192.168.1.10",
+    "@timestamp": "2025-09-05T05:00:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "success",
+    "user.name": "Administrator",
+    "source.ip": "192.168.1.10"
+  },
+  {
+    "log.original": "2025-09-05 08:30:00 SECURITY_SUCCESS User \"Mohamed\" logged in from 172.16.0.15",
+    "@timestamp": "2025-09-05T05:30:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "success",
+    "user.name": "Mohamed",
+    "source.ip": "172.16.0.15"
+  },
+  {
+    "log.original": "2025-09-05 09:00:00 SECURITY_SUCCESS User \"jsmith\" logged in from 192.168.1.50",
+    "@timestamp": "2025-09-05T06:00:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "success",
+    "user.name": "jsmith",
+    "source.ip": "192.168.1.50"
+  },
+  {
+    "log.original": "2025-09-05 09:10:00 SECURITY_FAILURE Failed login attempt for user \"guest\" from 10.0.0.5",
+    "@timestamp": "2025-09-05T06:10:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "guest",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-09-05 09:10:05 SECURITY_FAILURE Failed login attempt for user \"admin\" from 10.0.0.5",
+    "@timestamp": "2025-09-05T06:10:05.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "admin",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-09-05 09:10:10 SECURITY_FAILURE Failed login attempt for user \"root\" from 10.0.0.5",
+    "@timestamp": "2025-09-05T06:10:10.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "root",
+    "source.ip": "10.0.0.5"
+  },
+  {
+    "log.original": "2025-09-05 09:15:00 SECURITY_WARNING PowerShell execution detected for user \"jsmith\"",
+    "@timestamp": "2025-09-05T06:15:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "jsmith",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 09:15:30 SECURITY_WARNING Registry modification detected on host 192.168.1.10",
+    "@timestamp": "2025-09-05T06:15:30.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 09:30:00 SECURITY_WARNING Suspicious process spawned by PowerShell on 192.168.1.10",
+    "@timestamp": "2025-09-05T06:30:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 10:00:00 SECURITY_FAILURE Failed login attempt for user \"root\" from 185.199.110.153",
+    "@timestamp": "2025-09-05T07:00:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "login",
+    "event.outcome": "failure",
+    "user.name": "root",
+    "source.ip": "185.199.110.153"
+  },
+  {
+    "log.original": "2025-09-05 10:30:00 SECURITY_WARNING Password change attempt for user \"guest\"",
+    "@timestamp": "2025-09-05T07:30:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "password_change",
+    "event.outcome": "warning",
+    "user.name": "guest",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 11:00:00 SECURITY_WARNING File system changes detected on 192.168.1.10",
+    "@timestamp": "2025-09-05T08:00:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 11:30:00 SECURITY_WARNING Multiple file renames detected on 192.168.1.10",
+    "@timestamp": "2025-09-05T08:30:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 12:00:00 SECURITY_FAILURE Shadow copy deletion detected on 192.168.1.10",
+    "@timestamp": "2025-09-05T09:00:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2025-09-05 12:30:00 SECURITY_FAILURE Mass file encryption activity on 192.168.1.10",
+    "@timestamp": "2025-09-05T09:30:00.000Z",
+    "observer.type": "host",
+    "event.category": "authentication",
+    "event.type": "security",
+    "event.action": "unknown",
+    "event.outcome": "unknown",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "@timestamp": "2025-09-05 08:00:00",
+    "event": {
+      "action": "administrator",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "logged"
+    },
+    "raw": "2025-09-05 08:00:00 SECURITY_SUCCESS User \"Administrator\" logged in from 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 08:30:00",
+    "event": {
+      "action": "mohamed",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "logged"
+    },
+    "raw": "2025-09-05 08:30:00 SECURITY_SUCCESS User \"Mohamed\" logged in from 172.16.0.15",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:00:00",
+    "event": {
+      "action": "jsmith",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "logged"
+    },
+    "raw": "2025-09-05 09:00:00 SECURITY_SUCCESS User \"jsmith\" logged in from 192.168.1.50",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:10:00",
+    "event": {
+      "action": "login",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2025-09-05 09:10:00 SECURITY_FAILURE Failed login attempt for user \"guest\" from 10.0.0.5",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:10:05",
+    "event": {
+      "action": "login",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2025-09-05 09:10:05 SECURITY_FAILURE Failed login attempt for user \"admin\" from 10.0.0.5",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:10:10",
+    "event": {
+      "action": "login",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2025-09-05 09:10:10 SECURITY_FAILURE Failed login attempt for user \"root\" from 10.0.0.5",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:15:00",
+    "event": {
+      "action": "execution",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "detected"
+    },
+    "raw": "2025-09-05 09:15:00 SECURITY_WARNING PowerShell execution detected for user \"jsmith\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:15:30",
+    "event": {
+      "action": "modification",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "detected"
+    },
+    "raw": "2025-09-05 09:15:30 SECURITY_WARNING Registry modification detected on host 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:30:00",
+    "event": {
+      "action": "process",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "spawned"
+    },
+    "raw": "2025-09-05 09:30:00 SECURITY_WARNING Suspicious process spawned by PowerShell on 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 10:00:00",
+    "event": {
+      "action": "login",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2025-09-05 10:00:00 SECURITY_FAILURE Failed login attempt for user \"root\" from 185.199.110.153",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 10:30:00",
+    "event": {
+      "action": "change",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2025-09-05 10:30:00 SECURITY_WARNING Password change attempt for user \"guest\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 11:00:00",
+    "event": {
+      "action": "system",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "changes"
+    },
+    "raw": "2025-09-05 11:00:00 SECURITY_WARNING File system changes detected on 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 11:30:00",
+    "event": {
+      "action": "file",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "renames"
+    },
+    "raw": "2025-09-05 11:30:00 SECURITY_WARNING Multiple file renames detected on 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 12:00:00",
+    "event": {
+      "action": "copy",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "deletion"
+    },
+    "raw": "2025-09-05 12:00:00 SECURITY_FAILURE Shadow copy deletion detected on 192.168.1.10",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 12:30:00",
+    "event": {
+      "action": "file",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "encryption"
+    },
+    "raw": "2025-09-05 12:30:00 SECURITY_FAILURE Mass file encryption activity on 192.168.1.10",
+    "level": "Backend"
+  }
+]

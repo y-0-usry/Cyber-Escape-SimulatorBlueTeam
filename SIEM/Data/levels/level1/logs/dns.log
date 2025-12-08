@@ -1,0 +1,9 @@
+2025-09-05 09:00:00 192.168.1.60 A intranet.portal.local 192.168.1.5 NOERROR
+2025-09-05 09:05:00 192.168.1.50 A backup.local 192.168.1.5 NOERROR
+2025-09-05 09:15:05 192.168.1.10 A c2.malware-cloud.com 8.8.8.8 NXDOMAIN
+2025-09-05 09:15:08 192.168.1.10 TXT powershell.update-check.com 8.8.8.8 NOERROR
+2025-09-05 09:15:15 192.168.1.10 A evil-download.net 8.8.8.8 NOERROR
+2025-09-05 09:30:00 192.168.1.10 A suspicious-domain.xyz 9.9.9.9 NOERROR
+2025-09-05 10:00:00 172.16.0.15 A office365.com 1.1.1.1 NOERROR
+2025-09-05 11:00:00 192.168.1.10 A ransom-key-server.net 9.9.9.9 NOERROR
+2025-09-05 12:00:00 192.168.1.10 A payment-gateway-ransom.com 8.8.8.8 NOERROR

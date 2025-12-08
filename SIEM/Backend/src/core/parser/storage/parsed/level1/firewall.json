@@ -1,0 +1,308 @@
+[
+  {
+    "@timestamp": "2025-09-05 09:00:01",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 54321
+    },
+    "destination": {
+      "ip": "8.8.8.8",
+      "port": 53
+    },
+    "raw": "2025-09-05 09:00:01 ALLOW TCP 192.168.1.10:54321 -> 8.8.8.8:53",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:00:15",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "172.16.0.15",
+      "port": 49152
+    },
+    "destination": {
+      "ip": "104.26.3.2",
+      "port": 443
+    },
+    "raw": "2025-09-05 09:00:15 ALLOW TCP 172.16.0.15:49152 -> 104.26.3.2:443",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:00:30",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.20",
+      "port": null
+    },
+    "destination": {
+      "ip": "192.168.1.254",
+      "port": null
+    },
+    "raw": "2025-09-05 09:00:30 ALLOW ICMP 192.168.1.20 -> 192.168.1.254",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:00:45",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.60",
+      "port": 80
+    },
+    "destination": {
+      "ip": "192.168.1.5",
+      "port": 80
+    },
+    "raw": "2025-09-05 09:00:45 ALLOW TCP 192.168.1.60:80 -> 192.168.1.5:80",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:01:00",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "UDP",
+      "port": null
+    },
+    "destination": {
+      "ip": "->",
+      "port": null
+    },
+    "raw": "2025-09-05 09:01:00 DENY  UDP 10.0.0.5:60000 -> 192.168.1.1:22",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:01:15",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "TCP",
+      "port": null
+    },
+    "destination": {
+      "ip": "->",
+      "port": null
+    },
+    "raw": "2025-09-05 09:01:15 DENY  TCP 192.168.1.25:12345 -> 185.199.110.153:80",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:15:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 51515
+    },
+    "destination": {
+      "ip": "203.0.113.99",
+      "port": 443
+    },
+    "raw": "2025-09-05 09:15:00 ALLOW TCP 192.168.1.10:51515 -> 203.0.113.99:443",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:15:30",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "TCP",
+      "port": null
+    },
+    "destination": {
+      "ip": "->",
+      "port": null
+    },
+    "raw": "2025-09-05 09:15:30 DENY  TCP 192.168.1.10:445 -> 192.168.1.200:445",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:16:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 52000
+    },
+    "destination": {
+      "ip": "203.0.113.99",
+      "port": 8080
+    },
+    "raw": "2025-09-05 09:16:00 ALLOW TCP 192.168.1.10:52000 -> 203.0.113.99:8080",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:30:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 53001
+    },
+    "destination": {
+      "ip": "198.51.100.50",
+      "port": 443
+    },
+    "raw": "2025-09-05 09:30:00 ALLOW TCP 192.168.1.10:53001 -> 198.51.100.50:443",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 09:45:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 445
+    },
+    "destination": {
+      "ip": "192.168.1.200",
+      "port": 445
+    },
+    "raw": "2025-09-05 09:45:00 ALLOW TCP 192.168.1.10:445 -> 192.168.1.200:445",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 10:00:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 445
+    },
+    "destination": {
+      "ip": "192.168.1.201",
+      "port": 445
+    },
+    "raw": "2025-09-05 10:00:00 ALLOW TCP 192.168.1.10:445 -> 192.168.1.201:445",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 10:15:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 445
+    },
+    "destination": {
+      "ip": "192.168.1.202",
+      "port": 445
+    },
+    "raw": "2025-09-05 10:15:00 ALLOW TCP 192.168.1.10:445 -> 192.168.1.202:445",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 10:30:00",
+    "event": {
+      "action": "DENY",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "TCP",
+      "port": null
+    },
+    "destination": {
+      "ip": "->",
+      "port": null
+    },
+    "raw": "2025-09-05 10:30:00 DENY  TCP 192.168.1.25:5985 -> 192.168.1.5:5985",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 11:00:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.50",
+      "port": 445
+    },
+    "destination": {
+      "ip": "10.0.0.10",
+      "port": 445
+    },
+    "raw": "2025-09-05 11:00:00 ALLOW TCP 192.168.1.50:445 -> 10.0.0.10:445",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 11:30:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "172.16.0.15",
+      "port": 52000
+    },
+    "destination": {
+      "ip": "198.51.100.25",
+      "port": 443
+    },
+    "raw": "2025-09-05 11:30:00 ALLOW TCP 172.16.0.15:52000 -> 198.51.100.25:443",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 12:00:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 60001
+    },
+    "destination": {
+      "ip": "203.0.113.200",
+      "port": 443
+    },
+    "raw": "2025-09-05 12:00:00 ALLOW TCP 192.168.1.10:60001 -> 203.0.113.200:443",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2025-09-05 12:30:00",
+    "event": {
+      "action": "ALLOW",
+      "type": "network_traffic"
+    },
+    "source": {
+      "ip": "192.168.1.10",
+      "port": 60002
+    },
+    "destination": {
+      "ip": "203.0.113.200",
+      "port": 8443
+    },
+    "raw": "2025-09-05 12:30:00 ALLOW TCP 192.168.1.10:60002 -> 203.0.113.200:8443",
+    "level": "Backend"
+  }
+]

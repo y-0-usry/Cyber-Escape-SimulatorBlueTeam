@@ -16,15 +16,55 @@ const logger = winston.createLogger({
 });
 
 /**
- * Detects log source type (firewall or windows) based on log content.
+ * Detects log source type based on log content.
  * @param {Object} logEntry
- * @returns {string} sourceType
+ * @returns {string} sourceType (firewall, windows, dns, ids, ssh, web_server, database, vpn, proxy)
  */
 function detectSourceType(logEntry) {
   const raw = logEntry['log.original'] || logEntry.raw || '';
-  if (/SECURITY_(SUCCESS|FAILURE|WARNING)|User\s+"/i.test(raw)) {
+  const eventType = logEntry.event && logEntry.event.type ? logEntry.event.type.toLowerCase() : '';
+
+  // Windows logs
+  if (/SECURITY_(SUCCESS|FAILURE|WARNING)|User\s+"/i.test(raw) || eventType === 'security') {
     return 'windows';
   }
+
+  // DNS logs
+  if (eventType === 'dns' || /\s(A|AAAA|MX|CNAME|TXT|NS)\s/i.test(raw)) {
+    return 'dns';
+  }
+
+  // IDS/IPS alerts
+  if (eventType === 'ids_alert' || /Alert:|SID:|Priority:/i.test(raw)) {
+    return 'ids';
+  }
+
+  // SSH/System authentication
+  if (eventType === 'authentication' && /sshd\[|ssh:/i.test(raw)) {
+    return 'ssh';
+  }
+
+  // Web server logs
+  if (eventType === 'web_traffic' || /HTTP\/\d\.\d|Apache|Nginx/i.test(raw)) {
+    return 'web_server';
+  }
+
+  // Database logs
+  if (eventType === 'database' || /\[AUDIT\]|\[QUERY\]|SELECT|INSERT|UPDATE|DELETE/i.test(raw)) {
+    return 'database';
+  }
+
+  // VPN logs
+  if (eventType === 'vpn' || /VPN_(CONNECT|DISCONNECT)|OpenVPN|IPSec/i.test(raw)) {
+    return 'vpn';
+  }
+
+  // Proxy logs
+  if (eventType === 'proxy' || /CONNECT|GET|POST\s+.*proxy/i.test(raw)) {
+    return 'proxy';
+  }
+
+  // Default to firewall
   return 'firewall';
 }
 

@@ -1,0 +1,142 @@
+[
+  {
+    "@timestamp": "2025-12-07 09:00:00",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "dbadmin",
+      "query": "SELECT * FROM users"
+    },
+    "rows_returned": 150,
+    "raw": "2025-12-07 09:00:00 [AUDIT] User: dbadmin | Query: SELECT * FROM users | Result: 150 rows | Duration: 0.234s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:05",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "appuser",
+      "query": "SELECT email FROM users WHERE id=5"
+    },
+    "rows_returned": 1,
+    "raw": "2025-12-07 09:00:05 [AUDIT] User: appuser | Query: SELECT email FROM users WHERE id=5 | Result: 1 rows | Duration: 0.012s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:10",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "dbadmin",
+      "query": "INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com')"
+    },
+    "rows_returned": 1,
+    "raw": "2025-12-07 09:00:10 [AUDIT] User: dbadmin | Query: INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com') | Result: 1 rows | Duration: 0.045s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:15",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "readonly",
+      "query": "SELECT COUNT(*) FROM transactions"
+    },
+    "rows_returned": 1,
+    "raw": "2025-12-07 09:00:15 [AUDIT] User: readonly | Query: SELECT COUNT(*) FROM transactions | Result: 1 rows | Duration: 0.008s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:20",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "dbadmin",
+      "query": "UPDATE users SET role='admin' WHERE id=10"
+    },
+    "rows_returned": 1,
+    "raw": "2025-12-07 09:00:20 [AUDIT] User: dbadmin | Query: UPDATE users SET role='admin' WHERE id=10 | Result: 1 rows | Duration: 0.034s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:25",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "appuser",
+      "query": "DELETE FROM logs WHERE date < '2025-01-01'"
+    },
+    "rows_returned": 45670,
+    "raw": "2025-12-07 09:00:25 [AUDIT] User: appuser | Query: DELETE FROM logs WHERE date < '2025-01-01' | Result: 45670 rows | Duration: 1.234s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:30",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "backup_user",
+      "query": "SELECT * FROM sensitive_data"
+    },
+    "rows_returned": 500,
+    "raw": "2025-12-07 09:00:30 [AUDIT] User: backup_user | Query: SELECT * FROM sensitive_data | Result: 500 rows | Duration: 0.567s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:35",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "dbadmin",
+      "query": "DROP TABLE audit_logs"
+    },
+    "rows_returned": 0,
+    "raw": "2025-12-07 09:00:35 [AUDIT] User: dbadmin | Query: DROP TABLE audit_logs | Result: 0 rows | Duration: 0.012s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:40",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "appuser",
+      "query": "SELECT password_hash FROM users"
+    },
+    "rows_returned": 150,
+    "raw": "2025-12-07 09:00:40 [AUDIT] User: appuser | Query: SELECT password_hash FROM users | Result: 150 rows | Duration: 0.089s"
+  },
+  {
+    "@timestamp": "2025-12-07 09:00:45",
+    "event": {
+      "action": "database_query",
+      "type": "database"
+    },
+    "database": {
+      "audit_level": "AUDIT",
+      "user": "dbadmin",
+      "query": "CREATE USER attacker IDENTIFIED BY 'Password123'"
+    },
+    "rows_returned": 1,
+    "raw": "2025-12-07 09:00:45 [AUDIT] User: dbadmin | Query: CREATE USER attacker IDENTIFIED BY 'Password123' | Result: 1 rows | Duration: 0.025s"
+  }
+]

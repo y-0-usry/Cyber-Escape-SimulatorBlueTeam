@@ -1,0 +1,112 @@
+[
+  {
+    "log.original": "2025-12-07 09:00:00 [AUDIT] User: dbadmin | Query: SELECT * FROM users | Result: 150 rows | Duration: 0.234s",
+    "@timestamp": "2025-12-07T07:00:00.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "read",
+    "database.user": "dbadmin",
+    "database.query": "SELECT * FROM users",
+    "rows_affected": 150
+  },
+  {
+    "log.original": "2025-12-07 09:00:05 [AUDIT] User: appuser | Query: SELECT email FROM users WHERE id=5 | Result: 1 rows | Duration: 0.012s",
+    "@timestamp": "2025-12-07T07:00:05.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "read",
+    "database.user": "appuser",
+    "database.query": "SELECT email FROM users WHERE id=5",
+    "rows_affected": 1
+  },
+  {
+    "log.original": "2025-12-07 09:00:10 [AUDIT] User: dbadmin | Query: INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com') | Result: 1 rows | Duration: 0.045s",
+    "@timestamp": "2025-12-07T07:00:10.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "write",
+    "database.user": "dbadmin",
+    "database.query": "INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com')",
+    "rows_affected": 1
+  },
+  {
+    "log.original": "2025-12-07 09:00:15 [AUDIT] User: readonly | Query: SELECT COUNT(*) FROM transactions | Result: 1 rows | Duration: 0.008s",
+    "@timestamp": "2025-12-07T07:00:15.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "read",
+    "database.user": "readonly",
+    "database.query": "SELECT COUNT(*) FROM transactions",
+    "rows_affected": 1
+  },
+  {
+    "log.original": "2025-12-07 09:00:20 [AUDIT] User: dbadmin | Query: UPDATE users SET role='admin' WHERE id=10 | Result: 1 rows | Duration: 0.034s",
+    "@timestamp": "2025-12-07T07:00:20.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "modify",
+    "database.user": "dbadmin",
+    "database.query": "UPDATE users SET role='admin' WHERE id=10",
+    "rows_affected": 1
+  },
+  {
+    "log.original": "2025-12-07 09:00:25 [AUDIT] User: appuser | Query: DELETE FROM logs WHERE date < '2025-01-01' | Result: 45670 rows | Duration: 1.234s",
+    "@timestamp": "2025-12-07T07:00:25.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "modify",
+    "database.user": "appuser",
+    "database.query": "DELETE FROM logs WHERE date < '2025-01-01'",
+    "rows_affected": 45670
+  },
+  {
+    "log.original": "2025-12-07 09:00:30 [AUDIT] User: backup_user | Query: SELECT * FROM sensitive_data | Result: 500 rows | Duration: 0.567s",
+    "@timestamp": "2025-12-07T07:00:30.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "read",
+    "database.user": "backup_user",
+    "database.query": "SELECT * FROM sensitive_data",
+    "rows_affected": 500
+  },
+  {
+    "log.original": "2025-12-07 09:00:35 [AUDIT] User: dbadmin | Query: DROP TABLE audit_logs | Result: 0 rows | Duration: 0.012s",
+    "@timestamp": "2025-12-07T07:00:35.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "modify",
+    "database.user": "dbadmin",
+    "database.query": "DROP TABLE audit_logs",
+    "rows_affected": 0
+  },
+  {
+    "log.original": "2025-12-07 09:00:40 [AUDIT] User: appuser | Query: SELECT password_hash FROM users | Result: 150 rows | Duration: 0.089s",
+    "@timestamp": "2025-12-07T07:00:40.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "read",
+    "database.user": "appuser",
+    "database.query": "SELECT password_hash FROM users",
+    "rows_affected": 150
+  },
+  {
+    "log.original": "2025-12-07 09:00:45 [AUDIT] User: dbadmin | Query: CREATE USER attacker IDENTIFIED BY 'Password123' | Result: 1 rows | Duration: 0.025s",
+    "@timestamp": "2025-12-07T07:00:45.000Z",
+    "observer.type": "database",
+    "event.category": "database",
+    "event.type": "query",
+    "event.action": "modify",
+    "database.user": "dbadmin",
+    "database.query": "CREATE USER attacker IDENTIFIED BY 'Password123'",
+    "rows_affected": 1
+  }
+]
