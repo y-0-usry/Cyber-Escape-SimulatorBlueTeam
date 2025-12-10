@@ -15,14 +15,17 @@
 </head>
 <body class="min-h-screen p-6">
   <header class="flex flex-col gap-2 mb-4">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between flex-wrap gap-2">
       <h1 class="text-3xl font-bold text-blue-400">Level 1: SOC Tier 1 Analyst</h1>
-      <div class="flex gap-3 items-center text-sm">
+      <div class="flex gap-2 items-center text-sm flex-wrap">
         <div class="bg-gray-800 px-3 py-2 rounded">⏳ Time: <span id="timer">15:00</span></div>
+        <div class="bg-gray-800 px-3 py-2 rounded">🔥 Impact: <span id="impact-level" class="text-green-400">0%</span></div>
         <div class="bg-gray-800 px-3 py-2 rounded">🔄 Attempts: <span id="attempts">3</span></div>
+        <button id="add-time-btn" onclick="addTimeExtension()" class="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded">⏰ Add 5 Mins (0/3)</button>
         <button id="reset-level" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded">Reset</button>
       </div>
     </div>
+    <div id="impact-warning" class="hidden bg-red-900/50 border-l-4 border-red-500 p-3 rounded text-red-200 text-sm"></div>
   </header>
 
   <section id="intro-section" class="bg-gray-900 p-6 rounded mb-6">
@@ -36,6 +39,27 @@
       Your task: analyze all available alerts from today's logs, identify false positives, 
       determine the attack chain, and create an incident ticket.
     </p>
+    
+    <div class="bg-gray-800 p-4 rounded mb-4 border-l-4 border-yellow-500">
+      <h3 class="text-lg text-yellow-400 mb-2">⚠️ Game Rules</h3>
+      <ul class="text-sm text-blue-100 space-y-1">
+        <li> <strong>Time Limit:</strong> 15 minutes to complete all phases</li>
+        <li> <strong>Progressive Impact:</strong> Attack severity increases every 2 minutes (-1 to 50 points)</li>
+        <li> <strong>Time Extensions:</strong> Add 5 minutes up to 3 times (Cost: 5, 10, 20 points)</li>
+        <li> <strong>Hints:</strong> Each hint costs 5 points (unless you have free hints from previous levels)</li>
+        <li> <strong>Scoring:</strong> Correct answers, speed bonus, minus penalties</li>
+      </ul>
+    </div>
+    
+    <div class="bg-gray-800 p-4 rounded mb-4 border-l-4 border-green-500">
+      <h3 class="text-lg text-green-400 mb-2">🎁 Performance Rewards</h3>
+      <ul class="text-sm text-blue-100 space-y-1">
+        <li> <strong>Expert (250+):</strong> 3 free hints for next level</li>
+        <li> <strong>Proficient (200-249):</strong> 2 free hints for next level</li>
+        <li> <strong>Competent (150-199):</strong> 1 free hint for next level</li>
+      </ul>
+    </div>
+    
     <button id="start-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-semibold">
       <i class="fas fa-play"></i> Start Analysis
     </button>
@@ -94,7 +118,12 @@
   </section>
 
   <section id="final-section" class="bg-gray-900 p-6 rounded mb-6 hidden">
-    <h2 class="text-3xl text-green-300 mb-4"><i class="fas fa-check-circle"></i> Level Complete!</h2>
+    <h2 class="text-3xl text-green-300 mb-4 text-center"><i class="fas fa-check-circle"></i> Level Complete!</h2>
+    
+    <!-- Performance Rating -->
+    <div id="performance-rating" class="bg-gray-800 p-6 rounded mb-4 border-2 border-green-500"></div>
+    
+    <!-- Score Cards -->
     <div class="grid md:grid-cols-3 gap-4 mb-4">
       <div class="bg-gray-800 p-4 rounded">
         <p class="text-sm text-blue-200">Total Score</p>
@@ -109,10 +138,25 @@
         <p class="text-2xl text-yellow-400 font-bold" id="final-accuracy">0%</p>
       </div>
     </div>
+    
+    <!-- Performance Charts -->
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div class="bg-gray-800 p-4 rounded text-center">
+        <h3 class="text-lg text-blue-300 mb-3">Accuracy</h3>
+        <canvas id="accuracy-chart" width="150" height="150" class="mx-auto"></canvas>
+      </div>
+      <div class="bg-gray-800 p-4 rounded text-center">
+        <h3 class="text-lg text-blue-300 mb-3">Score Progress</h3>
+        <canvas id="score-chart" width="300" height="150" class="mx-auto"></canvas>
+      </div>
+    </div>
+    
+    <!-- Breakdown -->
     <div class="bg-gray-800 p-4 rounded mb-4">
       <h3 class="text-lg text-blue-300 mb-2">Performance Breakdown</h3>
       <ul id="breakdown-list" class="text-sm text-blue-100 space-y-1"></ul>
     </div>
+    
     <button id="return-dashboard" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Return to Dashboard</button>
   </section>
 

@@ -10,14 +10,21 @@
 <body class="bg-gray-900 text-gray-100">
   <div class="container mx-auto p-6 max-w-4xl">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-900 to-purple-900 p-6 rounded-lg mb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold">Level 1 - Answer Key & Tutorial</h1>
-        <p class="text-gray-300 mt-2">📚 Complete guide to solving the Level 1 scenario</p>
+    <div class="bg-gradient-to-r from-blue-900 to-purple-900 p-6 rounded-lg mb-6">
+      <div class="flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h1 class="text-3xl font-bold">Level 1 - Answer Key & Tutorial</h1>
+          <p class="text-gray-300 mt-2">📚 Complete guide to solving the Level 1 scenario</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="window.location.href='/level1'" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold">
+            ← Back to Game
+          </button>
+          <button onclick="nextLevel()" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded font-semibold flex items-center gap-2">
+            Next Level <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
-      <button onclick="window.location.href='/level1'" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded font-semibold">
-        ← Back to Game
-      </button>
     </div>
 
     <!-- Navigation Tabs -->
@@ -79,46 +86,51 @@
 
           <div class="space-y-3">
             <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-blue-300">🔵 PowerShell Execution Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">malicious_script</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "PowerShell", "Invoke", "Encoded"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-purple-300">🟣 SMB / Port 445 Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">lateral_movement</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "SMB", "445", "Lateral"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-red-300">🔴 C2 Communication Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">c2_communication</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "Ransomware", "Beacon", "C2", "malware-cloud"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-green-300">🟢 Registry Modification Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">persistence</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "Registry", "Persistence", "RunOnce"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-orange-300">🟠 Shadow Copy Deletion Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">defense_evasion</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "Shadow", "Deletion", "Delete"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-pink-300">🔴 File Encryption/Rename Alerts</p>
-              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">impact</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "Encryption", "Rename", "File Extension", "bulk file"</p>
-            </div>
-
-            <div class="bg-gray-700 p-3 rounded">
-              <p class="font-semibold text-indigo-300">🔵 Failed Login Attempts</p>
+              <p class="font-semibold text-indigo-300">🔵 Failed Login Attempts (Priority 1)</p>
               <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">credential_access</span></p>
-              <p class="text-xs text-gray-400 mt-1">When log contains: "Failed login", "brute force", "authentication failed"</p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "Failed login", "brute force", "authentication failed"</p>
             </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-blue-300">🔵 PowerShell / Script Execution (Priority 2)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">malicious_script</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "PowerShell", "Invoke", "Encoded", "script", "process spawned"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-purple-300">🟣 SMB / Port 445 / Lateral Movement (Priority 3)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">lateral_movement</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "SMB", "445", "Lateral", "Authentication Attempt", "File Transfer"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-red-300">🔴 C2 Communication / Beacon (Priority 4)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">c2_communication</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "Ransomware Beacon", "C2", "malware-cloud"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-green-300">🟢 Registry Modification (Priority 5)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">persistence</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "Registry", "Persistence", "RunOnce"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-orange-300">🟠 Shadow Copy Deletion (Priority 6)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">defense_evasion</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "Shadow copy", "Shadow Deletion", "Delete"</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-pink-300">🔴 File Encryption / Ransom Payment (Priority 7)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">impact</span></p>
+              <p class="text-xs text-gray-400 mt-1">Keywords: "Encryption", "Rename", "File Extension", "bulk file", "mass file encryption", "ransom-key", "payment-gateway"</p>
+            </div>
+          </div>
+          
+          <div class="bg-blue-900/30 border-l-4 border-blue-500 p-4 rounded mt-4">
+            <p class="font-semibold mb-2">💡 Classification Logic</p>
+            <p class="text-sm">The system uses <strong>priority order</strong>: if a log matches multiple patterns, the <strong>first match wins</strong>. For example, if you see "PowerShell SMB", it's classified as <code>malicious_script</code> (higher priority) not <code>lateral_movement</code>.</p>
           </div>
         </div>
 
@@ -475,6 +487,18 @@
   </div>
 
   <script>
+    // Next Level function
+    function nextLevel() {
+      // Get reward hints from localStorage
+      const rewardHints = localStorage.getItem('level1_reward_hints') || 0;
+      const finalScore = localStorage.getItem('level1_final_score') || 0;
+      
+      alert(`🎮 Level 2 Coming Soon!\\n\\n📊 Your Level 1 Score: ${finalScore}\\n🎁 Free Hints Earned: ${rewardHints}\\n\\nStay tuned for more challenges!`);
+      
+      // Future: Redirect to Level 2
+      // window.location.href = '/level2?hints=' + rewardHints;
+    }
+    
     // Tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {

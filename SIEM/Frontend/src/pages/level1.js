@@ -2,12 +2,16 @@
 let alerts = [];
 let score = 0;
 let hintsUsed = 0;
+let freeHints = 0; // Reward hints from previous levels
 let attempts = 3;
 let timerSeconds = 15 * 60;
 let startTime = 0;
 let timerId = null;
 let correctAnswers = 0;
 let totalQuestions = 0;
+let timeExtensions = 0; // Track how many times "Add 5 mins" was used
+let impactLevel = 0; // Progressive alert impact (0-100)
+let impactInterval = null; // Timer for progressive impact
 
 // === DOM SECTIONS ===
 const sections = {
@@ -27,18 +31,77 @@ function showSection(name) {
 // === TIMER ===
 function startTimer() {
   clearInterval(timerId);
+  clearInterval(impactInterval);
   startTime = Date.now();
+  
   timerId = setInterval(() => {
     timerSeconds--;
     const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
     const s = String(timerSeconds % 60).padStart(2, '0');
     document.getElementById('timer').textContent = `${m}:${s}`;
+    
     if (timerSeconds <= 0) {
       clearInterval(timerId);
-      window.alert('Time expired! Try again.');
+      clearInterval(impactInterval);
+      window.alert('⏰ Time expired! The attack succeeded.');
       handleReset();
     }
   }, 1000);
+  
+  // Start progressive impact system (increases every 2 minutes)
+  impactInterval = setInterval(() => {
+    impactLevel = Math.min(100, impactLevel + 10);
+    updateImpactDisplay();
+    
+    if (impactLevel >= 80) {
+      showImpactWarning();
+    }
+  }, 120000); // Every 2 minutes
+}
+
+function updateImpactDisplay() {
+  const impactEl = document.getElementById('impact-level');
+  if (impactEl) {
+    impactEl.textContent = `${impactLevel}%`;
+    impactEl.className = impactLevel >= 80 ? 'text-red-400 font-bold' : 
+                         impactLevel >= 50 ? 'text-orange-400' : 'text-green-400';
+  }
+}
+
+function showImpactWarning() {
+  const warningEl = document.getElementById('impact-warning');
+  if (warningEl && impactLevel >= 80) {
+    warningEl.classList.remove('hidden');
+    warningEl.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ⚠️ CRITICAL: Attack impact at ${impactLevel}% - Time is running out!`;
+  }
+}
+
+function addTimeExtension() {
+  if (timeExtensions >= 3) {
+    window.alert('❌ Maximum time extensions reached (3/3)');
+    return;
+  }
+  
+  const penalties = [5, 10, 20];
+  const penalty = penalties[timeExtensions];
+  
+  if (window.confirm(`⏰ Add 5 minutes?\n\nPenalty: -${penalty} points\nExtensions used: ${timeExtensions + 1}/3`)) {
+    timeExtensions++;
+    timerSeconds += 300; // Add 5 minutes
+    score = Math.max(0, score - penalty);
+    updateScore();
+    
+    const btn = document.getElementById('add-time-btn');
+    if (btn) {
+      btn.textContent = `⏰ Add 5 Mins (${timeExtensions}/3)`;
+      if (timeExtensions >= 3) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+    
+    window.alert(`✅ +5 minutes added\n-${penalty} points penalty\n\n${3 - timeExtensions} extensions remaining`);
+  }
 }
 
 // === RESET ===
@@ -54,15 +117,32 @@ function handleReset() {
   timerSeconds = 15 * 60;
   correctAnswers = 0;
   totalQuestions = 0;
+  timeExtensions = 0;
+  impactLevel = 0;
+  
+  // Reset UI
   updateScore();
+  updateImpactDisplay();
+  const warningEl = document.getElementById('impact-warning');
+  if (warningEl) warningEl.classList.add('hidden');
+  
+  const addTimeBtn = document.getElementById('add-time-btn');
+  if (addTimeBtn) {
+    addTimeBtn.textContent = '⏰ Add 5 Mins (0/3)';
+    addTimeBtn.disabled = false;
+    addTimeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+  }
+  
   showSection('intro');
   clearInterval(timerId);
+  clearInterval(impactInterval);
 }
 
 // === SCORE UI ===
 function updateScore() {
   document.getElementById('score').textContent = score;
-  document.getElementById('hints-used').textContent = hintsUsed;
+  const hintsDisplay = freeHints > 0 ? `${hintsUsed} (\ud83c\udf81 ${freeHints} free)` : hintsUsed;
+  document.getElementById('hints-used').textContent = hintsDisplay;
 }
 
 // === FALSE POSITIVE DETECTION ===
@@ -104,13 +184,22 @@ function buildGeneralQuestions() {
     const raw = alert.linked_log?.['log.original'] || '';
     let correctType = 'unknown';
     
-    if (/PowerShell|Invoke|Encoded|script/i.test(raw)) correctType = 'malicious_script';
-    if (/SMB|445|Lateral/i.test(raw)) correctType = 'lateral_movement';
-    if (/Ransomware|Beacon|C2|malware-cloud/i.test(raw)) correctType = 'c2_communication';
-    if (/Registry|Persistence|RunOnce/i.test(raw)) correctType = 'persistence';
-    if (/Shadow|Deletion|Delete/i.test(raw)) correctType = 'defense_evasion';
-    if (/Encryption|Rename|File.*Extension|bulk.*file/i.test(raw)) correctType = 'impact';
-    if (/Failed.*login|brute.*force|authentication.*failed/i.test(raw)) correctType = 'credential_access';
+    // Use else-if chain so first match wins (most specific to least specific)
+    if (/Failed.*login|brute.*force|authentication.*failed/i.test(raw)) {
+      correctType = 'credential_access';
+    } else if (/PowerShell|Invoke|Encoded|script|process.*spawned/i.test(raw)) {
+      correctType = 'malicious_script';
+    } else if (/SMB|445|Lateral|Authentication.*Attempt|File.*Transfer/i.test(raw)) {
+      correctType = 'lateral_movement';
+    } else if (/Ransomware|Beacon|C2|malware-cloud/i.test(raw)) {
+      correctType = 'c2_communication';
+    } else if (/Registry|Persistence|RunOnce/i.test(raw)) {
+      correctType = 'persistence';
+    } else if (/Shadow.*copy|Shadow.*Deletion|Delete/i.test(raw)) {
+      correctType = 'defense_evasion';
+    } else if (/Encryption|Rename|File.*Extension|bulk.*file|mass.*file.*encryption|ransom.*key|payment.*gateway/i.test(raw)) {
+      correctType = 'impact';
+    }
 
     questions.push({
       id: `q-classify-${idx}`,
@@ -241,7 +330,15 @@ function renderGeneralQuestions() {
       
       hintText.classList.remove('hidden');
       hintsUsed++;
-      score = Math.max(0, score - 5);
+      
+      // Use free hints first, then deduct points
+      if (freeHints > 0) {
+        freeHints--;
+        this.innerHTML = '🎁 Free Hint Used!';
+      } else {
+        score = Math.max(0, score - 5);
+        this.innerHTML = '💡 Hint Used (-5 points)';
+      }
       updateScore();
     });
 
@@ -388,7 +485,15 @@ function renderScenarioQuestions() {
       
       hintText.classList.remove('hidden');
       hintsUsed++;
-      score = Math.max(0, score - 5);
+      
+      // Use free hints first, then deduct points
+      if (freeHints > 0) {
+        freeHints--;
+        this.innerHTML = '🎁 Free Hint Used!';
+      } else {
+        score = Math.max(0, score - 5);
+        this.innerHTML = '💡 Hint Used (-5 points)';
+      }
       updateScore();
     });
 
@@ -406,28 +511,25 @@ function evaluateScenarioQuestions() {
     
     const value = input.value.trim().toLowerCase();
     const correctAnswer = card.dataset.answer.toLowerCase();
-    const pattern = card.dataset.pattern;
+    const qid = card.dataset.qid;
     let isCorrect = false;
 
-    if (pattern) {
-      // Questions with regex patterns (attack type, vector)
-      const regex = new RegExp(pattern, 'i');
-      isCorrect = regex.test(value);
-    } else if (input.tagName === 'INPUT') {
+    if (input.tagName === 'SELECT') {
+      // Select inputs - exact match (Q4: attack stage)
+      isCorrect = value === correctAnswer;
+    } else if (qid === 'sc-attack-type') {
+      // Q1: Attack type - pattern matching for ransomware/crypto/encrypt
+      isCorrect = /(ransomware|crypto|encrypt)/i.test(value);
+    } else if (qid === 'sc-initial-vector') {
+      // Q2: Initial vector - pattern matching for phishing/email/attachment
+      isCorrect = /(phishing|email|malicious.*attachment|spear.*phishing)/i.test(value);
+    } else if (qid === 'sc-attack-chain-ids') {
       // Q3: Attack chain IDs - allow 80% accuracy
       const userIds = value.split(',').map(s => s.trim().toLowerCase()).filter(s => s).sort();
       const correctIds = correctAnswer.split(',').map(s => s.trim().toLowerCase()).filter(s => s).sort();
-      
-      if (card.dataset.qid === 'sc-attack-chain-ids') {
-        const overlap = userIds.filter(id => correctIds.includes(id)).length;
-        const minRequired = Math.ceil(correctIds.length * 0.8);
-        isCorrect = overlap >= minRequired;
-      } else {
-        isCorrect = userIds.length === correctIds.length && userIds.every((id, i) => id === correctIds[i]);
-      }
-    } else {
-      // Select inputs - exact match
-      isCorrect = value === correctAnswer;
+      const overlap = userIds.filter(id => correctIds.includes(id)).length;
+      const minRequired = Math.ceil(correctIds.length * 0.8);
+      isCorrect = overlap >= minRequired;
     }
 
     if (isCorrect) {
@@ -470,6 +572,7 @@ function createIncidentTicket() {
   score += speedBonus;
 
   clearInterval(timerId);
+  clearInterval(impactInterval);
   showFinalResults(elapsedSeconds, speedBonus);
 }
 
@@ -478,42 +581,157 @@ function showFinalResults(elapsedSeconds, speedBonus) {
   const m = Math.floor(elapsedSeconds / 60);
   const s = elapsedSeconds % 60;
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  
+  // Calculate impact penalty
+  const impactPenalty = Math.floor(impactLevel / 2); // 0-50 point penalty
+  const finalScore = Math.max(0, score - impactPenalty);
 
-  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-score').textContent = finalScore;
   document.getElementById('final-time').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   document.getElementById('final-accuracy').textContent = `${accuracy}%`;
 
   const breakdown = document.getElementById('breakdown-list');
   const baseScore = score - speedBonus;
   const hintPenalty = hintsUsed * 5;
+  const timeExtensionPenalty = [0, 5, 15, 35][Math.min(timeExtensions, 3)]; // Cumulative
 
   breakdown.innerHTML = `
     <li class="flex justify-between"><span>✅ Correct Answers:</span><span class="text-green-400">${correctAnswers}/${totalQuestions}</span></li>
     <li class="flex justify-between"><span>❌ Incorrect Answers:</span><span class="text-red-400">${totalQuestions - correctAnswers}</span></li>
     <li class="flex justify-between"><span>💡 Hints Used:</span><span class="text-yellow-400">${hintsUsed} (-${hintPenalty} points)</span></li>
+    <li class="flex justify-between"><span>⏰ Time Extensions:</span><span class="text-orange-400">${timeExtensions} (-${timeExtensionPenalty} points)</span></li>
     <li class="flex justify-between"><span>⚡ Speed Bonus:</span><span class="text-blue-400">+${speedBonus} points</span></li>
-    <li class="flex justify-between"><span>🎯 Base Score:</span><span>${baseScore}</span></li>
-    <li class="flex justify-between border-t border-gray-700 pt-2 mt-2 font-bold"><span>📊 Final Score:</span><span class="text-lg text-green-400">${score}</span></li>
+    <li class="flex justify-between"><span>🔥 Impact Penalty:</span><span class="text-red-400">-${impactPenalty} points (${impactLevel}%)</span></li>
+    <li class="flex justify-between border-t border-gray-700 pt-2 mt-2 font-bold"><span>📊 Final Score:</span><span class="text-lg text-green-400">${finalScore}</span></li>
   `;
+  
+  // Determine performance rating and reward hints
+  let rating = '';
+  let rewardHints = 0;
+  let ratingColor = '';
+  
+  if (finalScore >= 250) {
+    rating = '⭐ Expert';
+    rewardHints = 3;
+    ratingColor = 'text-yellow-400';
+  } else if (finalScore >= 200) {
+    rating = '✓ Proficient';
+    rewardHints = 2;
+    ratingColor = 'text-green-400';
+  } else if (finalScore >= 150) {
+    rating = '◆ Competent';
+    rewardHints = 1;
+    ratingColor = 'text-blue-400';
+  } else {
+    rating = '○ Needs Improvement';
+    rewardHints = 0;
+    ratingColor = 'text-gray-400';
+  }
+  
+  // Store reward hints for next level
+  localStorage.setItem('level1_reward_hints', rewardHints);
+  localStorage.setItem('level1_final_score', finalScore);
+  
+  // Add rating display
+  const ratingEl = document.getElementById('performance-rating');
+  if (ratingEl) {
+    ratingEl.innerHTML = `
+      <div class="text-center">
+        <p class="text-3xl font-bold ${ratingColor} mb-2">${rating}</p>
+        ${rewardHints > 0 ? `<p class="text-green-300">🎁 Earned ${rewardHints} free hint${rewardHints > 1 ? 's' : ''} for next level!</p>` : '<p class="text-gray-400">Keep practicing to earn rewards!</p>'}
+      </div>
+    `;
+  }
+  
+  // Draw performance charts
+  drawPerformanceCharts(accuracy, finalScore, correctAnswers, totalQuestions);
 
   showSection('final');
   
-  // Add button to view answer key
+  // Add buttons
   const finalSection = document.getElementById('final-section');
   if (finalSection && !document.getElementById('answer-key-btn')) {
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'flex gap-4 mt-6 flex-wrap';
+    
     const answerKeyBtn = document.createElement('button');
     answerKeyBtn.id = 'answer-key-btn';
-    answerKeyBtn.className = 'bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded font-semibold mt-4 flex items-center gap-2';
-    answerKeyBtn.innerHTML = '<i class="fas fa-book"></i> View Answer Key & Explanation';
+    answerKeyBtn.className = 'bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded font-semibold flex items-center gap-2';
+    answerKeyBtn.innerHTML = '<i class="fas fa-book"></i> View Answer Key';
     answerKeyBtn.addEventListener('click', () => {
       window.location.href = '/AnswerKey.html';
     });
     
-    // Insert after final score display
+    buttonContainer.appendChild(answerKeyBtn);
+    
     const scoreCard = finalSection.querySelector('.bg-gray-800');
     if (scoreCard) {
-      scoreCard.appendChild(answerKeyBtn);
+      scoreCard.appendChild(buttonContainer);
     }
+  }
+}
+
+function drawPerformanceCharts(accuracy, finalScore, correct, total) {
+  // Accuracy pie chart
+  const accuracyCanvas = document.getElementById('accuracy-chart');
+  if (accuracyCanvas) {
+    const ctx = accuracyCanvas.getContext('2d');
+    const centerX = 75;
+    const centerY = 75;
+    const radius = 60;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, 150, 150);
+    
+    // Draw background circle
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = '#374151';
+    ctx.fill();
+    
+    // Draw accuracy arc
+    const endAngle = (accuracy / 100) * 2 * Math.PI - Math.PI / 2;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, -Math.PI / 2, endAngle);
+    ctx.lineTo(centerX, centerY);
+    ctx.fillStyle = accuracy >= 80 ? '#10b981' : accuracy >= 60 ? '#f59e0b' : '#ef4444';
+    ctx.fill();
+    
+    // Draw center text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 24px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`${accuracy}%`, centerX, centerY);
+  }
+  
+  // Score bar chart
+  const scoreCanvas = document.getElementById('score-chart');
+  if (scoreCanvas) {
+    const ctx = scoreCanvas.getContext('2d');
+    ctx.clearRect(0, 0, 300, 150);
+    
+    const maxScore = 300;
+    const barHeight = 40;
+    const barWidth = (finalScore / maxScore) * 280;
+    
+    // Draw background bar
+    ctx.fillStyle = '#374151';
+    ctx.fillRect(10, 55, 280, barHeight);
+    
+    // Draw score bar
+    const gradient = ctx.createLinearGradient(10, 0, 290, 0);
+    gradient.addColorStop(0, '#3b82f6');
+    gradient.addColorStop(0.5, '#8b5cf6');
+    gradient.addColorStop(1, '#ec4899');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(10, 55, barWidth, barHeight);
+    
+    // Draw score text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${finalScore} / ${maxScore}`, 150, 75);
   }
 }
 
@@ -567,4 +785,23 @@ document.getElementById('return-dashboard').addEventListener('click', () => {
 });
 
 // === INITIALIZE ===
+// Load reward hints from previous level (if any)
+const previousLevelHints = localStorage.getItem('level0_reward_hints') || 0;
+freeHints = parseInt(previousLevelHints);
+
+if (freeHints > 0) {
+  window.addEventListener('DOMContentLoaded', () => {
+    const intro = document.getElementById('intro-section');
+    if (intro) {
+      const rewardBanner = document.createElement('div');
+      rewardBanner.className = 'bg-green-900/50 border-l-4 border-green-500 p-4 rounded mb-4';
+      rewardBanner.innerHTML = `
+        <p class="text-green-300 font-semibold">🎁 Reward from Previous Level!</p>
+        <p class="text-green-200 text-sm">You have ${freeHints} free hint${freeHints > 1 ? 's' : ''} available for this level.</p>
+      `;
+      intro.insertBefore(rewardBanner, intro.firstChild.nextSibling);
+    }
+  });
+}
+
 loadAlerts();
