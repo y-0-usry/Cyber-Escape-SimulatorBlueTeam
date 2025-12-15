@@ -13,9 +13,9 @@ const port = process.env.PORT || 3000;
 // Define the path to the Frontend/src/pages directory
 const pagesPath = path.join(__dirname, '../../Frontend/src/pages');
 
-// Serve static HTML files from Frontend/src/pages
+// Serve static files (HTML, JSON, etc.) from Frontend/src/pages
 app.use(express.static(pagesPath, {
-  extensions: ['html'], // Automatically serve .html files
+  extensions: ['html', 'json'], // Automatically serve .html and .json files
   index: 'Alerts.html' // Default to Alerts.html for root path
 }));
 
@@ -53,6 +53,32 @@ app.get('/AnswerKey', (req, res) => {
   res.sendFile(path.join(pagesPath, 'AnswerKey.html'), (err) => {
     if (err) {
       res.status(500).send('Error serving AnswerKey.html');
+    }
+  });
+});
+
+// Level 2 game page
+app.get('/level2', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'Level2.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving Level2.html');
+    }
+  });
+});
+
+// Answer Key 2 page
+app.get('/AnswerKey2', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'AnswerKey2.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving AnswerKey2.html');
+    }
+  });
+});
+
+app.get('/AnswerKey2.html', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'AnswerKey2.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving AnswerKey2.html');
     }
   });
 });

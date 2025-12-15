@@ -1,10 +1,20 @@
-2025-12-07 09:00:00 [AUDIT] User: dbadmin | Query: SELECT * FROM users | Result: 150 rows | Duration: 0.234s
-2025-12-07 09:00:05 [AUDIT] User: appuser | Query: SELECT email FROM users WHERE id=5 | Result: 1 rows | Duration: 0.012s
-2025-12-07 09:00:10 [AUDIT] User: dbadmin | Query: INSERT INTO users (name, email) VALUES ('hacker', 'hack@evil.com') | Result: 1 rows | Duration: 0.045s
-2025-12-07 09:00:15 [AUDIT] User: readonly | Query: SELECT COUNT(*) FROM transactions | Result: 1 rows | Duration: 0.008s
-2025-12-07 09:00:20 [AUDIT] User: dbadmin | Query: UPDATE users SET role='admin' WHERE id=10 | Result: 1 rows | Duration: 0.034s
-2025-12-07 09:00:25 [AUDIT] User: appuser | Query: DELETE FROM logs WHERE date < '2025-01-01' | Result: 45670 rows | Duration: 1.234s
-2025-12-07 09:00:30 [AUDIT] User: backup_user | Query: SELECT * FROM sensitive_data | Result: 500 rows | Duration: 0.567s
-2025-12-07 09:00:35 [AUDIT] User: dbadmin | Query: DROP TABLE audit_logs | Result: 0 rows | Duration: 0.012s
-2025-12-07 09:00:40 [AUDIT] User: appuser | Query: SELECT password_hash FROM users | Result: 150 rows | Duration: 0.089s
-2025-12-07 09:00:45 [AUDIT] User: dbadmin | Query: CREATE USER attacker IDENTIFIED BY 'Password123' | Result: 1 rows | Duration: 0.025s
+2025-01-15 06:00:00 SELECT * FROM users WHERE id = 1 user: appuser database: main status: OK
+2025-01-15 06:05:00 INSERT INTO logs (timestamp, action) VALUES ('2025-01-15 06:05:00', 'login') user: appuser database: main status: OK
+2025-01-15 06:10:00 SELECT COUNT(*) FROM orders WHERE date > '2025-01-01' user: analyst database: main status: OK
+2025-01-15 06:15:00 UPDATE products SET price = 100 WHERE id = 5 user: admin database: main status: OK
+2025-01-15 06:20:00 DELETE FROM temp_sessions WHERE expire_time < NOW() user: maintenance database: main status: OK
+2025-01-15 06:25:00 SELECT * FROM inventory WHERE quantity < 10 user: manager database: main status: OK
+2025-01-15 06:30:00 INSERT INTO audit_log (user, action, timestamp) VALUES ('admin', 'database_backup', '2025-01-15 06:30:00') user: system database: main status: OK
+2025-01-15 06:35:00 SELECT * FROM transactions WHERE amount > 1000 user: auditor database: main status: OK
+2025-01-15 06:40:00 UPDATE user_settings SET theme = 'dark' WHERE user_id = 42 user: appuser database: main status: OK
+2025-01-15 06:45:00 SELECT COUNT(*) FROM active_connections user: monitor database: main status: OK
+2025-01-15 07:00:00 SELECT * FROM sensitive_data WHERE department = 'HR' user: developer database: main status: OK
+2025-01-15 07:05:00 INSERT INTO employee_records (name, salary) VALUES ('John', '50000') user: hr_admin database: main status: OK
+2025-01-15 07:10:00 SELECT * FROM customer_pii WHERE age > 18 user: analytics database: main status: OK
+2025-01-15 07:15:00 BACKUP DATABASE main TO '/backups/level2_backup.bak' user: dba database: main status: OK
+2025-01-15 08:00:00 SELECT * FROM audit_log WHERE user = 'developer' AND timestamp > '2025-01-15 07:00:00' user: developer database: main status: OK
+2025-01-15 08:15:00 SELECT * FROM users WHERE id = 1; DROP TABLE users; -- user: developer database: main status: BLOCKED_SQLINJECTION
+2025-01-15 08:20:00 SELECT * FROM products WHERE id = 1 UNION SELECT * FROM sensitive_data -- user: developer database: main status: BLOCKED_SQLINJECTION
+2025-01-15 08:25:00 INSERT INTO audit_log (user, action, timestamp) VALUES ('developer', 'data_export_large', '2025-01-15 08:25:00') user: developer database: main status: OK
+2025-01-15 08:30:00 SELECT email FROM customers WHERE email LIKE '%@%' user: developer database: main status: OK
+2025-01-15 08:35:00 SELECT * FROM sensitive_data LIMIT 1000000 user: developer database: main status: LARGE_QUERY_EXECUTED

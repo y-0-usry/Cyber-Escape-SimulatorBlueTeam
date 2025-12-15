@@ -1,10 +1,24 @@
-2025-12-07T09:03:00Z VPN_CONNECT User: jdoe | IP: 203.0.113.100 | Protocol: OpenVPN | Status: SUCCESS | Duration: 3600s
-2025-12-07T09:03:05Z VPN_CONNECT User: msmith | IP: 203.0.113.101 | Protocol: IPSec | Status: SUCCESS | Duration: 1800s
-2025-12-07T09:03:10Z VPN_DISCONNECT User: jdoe | IP: 203.0.113.100 | Protocol: OpenVPN | Status: SUCCESS | Duration: 3600s
-2025-12-07T09:03:15Z VPN_CONNECT User: admin_test | IP: 203.0.113.102 | Protocol: OpenVPN | Status: SUCCESS | Duration: 7200s
-2025-12-07T09:03:20Z VPN_FAILED User: unknown | IP: 203.0.113.103 | Protocol: OpenVPN | Status: AUTH_FAILED | Duration: 0s
-2025-12-07T09:03:25Z VPN_CONNECT User: kwalsh | IP: 203.0.113.104 | Protocol: AnyConnect | Status: SUCCESS | Duration: 5400s
-2025-12-07T09:03:30Z VPN_DISCONNECT User: msmith | IP: 203.0.113.101 | Protocol: IPSec | Status: SUCCESS | Duration: 1800s
-2025-12-07T09:03:35Z VPN_CONNECT User: jdoe | IP: 203.0.113.105 | Protocol: OpenVPN | Status: SUCCESS | Duration: 900s
-2025-12-07T09:03:40Z VPN_RECONNECT User: kwalsh | IP: 203.0.113.106 | Protocol: AnyConnect | Status: SUCCESS | Duration: 3600s
-2025-12-07T09:03:45Z VPN_IDLE User: admin_test | IP: 203.0.113.102 | Protocol: OpenVPN | Status: IDLE | Duration: 7200s
+2025-01-15 06:00:00 CONNECT 192.168.1.10 from 192.168.1.10 - OK
+2025-01-15 06:00:05 AUTH_SUCCESS 192.168.1.10 user: admin password_verified: true
+2025-01-15 06:15:00 CONNECT 192.168.1.20 from 192.168.1.20 - OK
+2025-01-15 06:15:05 AUTH_SUCCESS 192.168.1.20 user: john password_verified: true
+2025-01-15 06:30:00 DISCONNECT 192.168.1.10 total_time: 30m
+2025-01-15 07:00:00 CONNECT 192.168.1.30 from 192.168.1.30 - OK
+2025-01-15 07:00:05 AUTH_SUCCESS 192.168.1.30 user: sarah password_verified: true
+2025-01-15 08:10:00 AUTH_FAILED 172.16.0.99 user: admin password_verified: false
+2025-01-15 08:10:02 AUTH_FAILED 172.16.0.99 user: root password_verified: false
+2025-01-15 08:10:04 AUTH_FAILED 172.16.0.99 user: vpnadmin password_verified: false
+2025-01-15 08:10:06 AUTH_FAILED 172.16.0.99 user: admin password_verified: false
+2025-01-15 08:10:08 CONNECT_BLOCKED 172.16.0.99 - Too many failed attempts
+2025-01-15 08:15:00 DISCONNECT 192.168.1.20 total_time: 135m
+2025-01-15 08:30:00 CONNECT 192.168.1.40 from 192.168.1.40 - OK
+2025-01-15 08:30:05 AUTH_SUCCESS 192.168.1.40 user: michael password_verified: true
+2025-01-15 09:00:00 DISCONNECT 192.168.1.30 total_time: 120m
+2025-01-15 09:00:00 CONNECT 192.168.1.50 from 192.168.1.50 - OK
+2025-01-15 09:00:05 AUTH_SUCCESS 192.168.1.50 user: david password_verified: true
+2025-01-15 09:30:00 DISCONNECT 192.168.1.40 total_time: 60m
+2025-01-15 10:00:00 CONNECT 192.168.1.60 from 192.168.1.60 - OK
+2025-01-15 10:00:05 AUTH_SUCCESS 192.168.1.60 user: emma password_verified: true
+2025-01-15 10:30:00 DISCONNECT 192.168.1.50 total_time: 90m
+2025-01-15 11:00:00 CONNECT 192.168.1.70 from 192.168.1.70 - OK
+2025-01-15 11:00:05 AUTH_SUCCESS 192.168.1.70 user: alex password_verified: true

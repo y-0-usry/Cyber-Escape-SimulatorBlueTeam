@@ -1,10 +1,23 @@
-2025-12-07 09:01:00 SECURITY_SUCCESS User "Administrator" logged in from 192.168.1.10
-2025-12-07 09:01:05 SECURITY_FAILURE Failed login attempt for user "guest" from 10.0.0.5
-2025-12-07 09:01:10 SECURITY_FAILURE Failed login attempt for user "admin" from 10.0.0.5
-2025-12-07 09:01:15 SECURITY_FAILURE Failed login attempt for user "test" from 10.0.0.5
-2025-12-07 09:01:20 SECURITY_FAILURE Failed login attempt for user "root" from 10.0.0.5
-2025-12-07 09:01:25 SECURITY_FAILURE Failed login attempt for user "admin" from 10.0.0.5
-2025-12-07 09:01:30 SECURITY_SUCCESS User "jdoe" logged in from 192.168.1.50
-2025-12-07 09:01:35 SECURITY_SUCCESS User "Mohamed" logged in from 172.16.0.15
-2025-12-07 09:01:40 SECURITY_WARNING Password change attempt for user "Administrator"
-2025-12-07 09:01:45 SECURITY_FAILURE Failed login attempt for user "root" from 203.0.113.45
+2025-01-15 06:00:00 EventID 4624 LOGON admin from 192.168.1.10 Type 3 LogonGuid: {0}
+2025-01-15 06:05:00 EventID 4625 FAILED_LOGON testuser from 192.168.1.15 Type 3 Failure: Account locked out
+2025-01-15 06:15:00 EventID 4624 LOGON john from 192.168.1.20 Type 3 LogonGuid: {1}
+2025-01-15 06:30:00 EventID 4648 EXPLICIT_LOGON admin -> SYSTEM Type 9 LogonGuid: {0}
+2025-01-15 06:45:00 EventID 4720 USER_CREATED user: testuser description: Test Account
+2025-01-15 07:00:00 EventID 4722 USER_ENABLED user: testuser
+2025-01-15 07:15:00 EventID 4624 LOGON sarah from 192.168.1.30 Type 3 LogonGuid: {2}
+2025-01-15 07:30:00 EventID 4688 PROCESS_CREATE parent_process: svchost.exe process: ntlm.exe user: SYSTEM
+2025-01-15 07:45:00 EventID 4689 PROCESS_TERMINATE process: explorer.exe user: admin exit_code: 0
+2025-01-15 08:00:00 EventID 5140 SHARE_ACCESSED share: \\\\server\\admin$ client_ip: 192.168.1.10 access_mask: READ
+2025-01-15 08:15:00 EventID 4768 KERBEROS_TGT user: developer client_ip: 185.122.21.55
+2025-01-15 08:16:00 EventID 4672 SPECIAL_PRIVILEGES user: developer privilege: SeDebugPrivilege
+2025-01-15 08:17:00 EventID 4672 SPECIAL_PRIVILEGES user: developer privilege: SeBackupPrivilege
+2025-01-15 08:18:00 EventID 4673 PRIVILEGE_USE user: developer privilege: SeDebugPrivilege result: success
+2025-01-15 08:19:00 EventID 4661 OBJECT_ACCESS object: C:\\Users\\developer\\Documents\\data.sql access_type: DELETE
+2025-01-15 08:20:00 EventID 5140 SHARE_ACCESSED share: \\\\10.0.0.10\\backup$ client_ip: 185.122.21.55 access_mask: WRITE
+2025-01-15 08:25:00 EventID 4689 PROCESS_TERMINATE process: malware.exe user: developer exit_code: 0
+2025-01-15 08:30:00 EventID 4738 USER_CHANGED user: developer display_name: changed
+2025-01-15 09:00:00 EventID 4624 LOGON michael from 192.168.1.40 Type 3 LogonGuid: {3}
+2025-01-15 09:15:00 EventID 4701 SCHEDULED_TASK_REGISTERED task: BackupTask user: SYSTEM path: C:\\Windows\\System32\\backup.ps1
+2025-01-15 09:30:00 EventID 4706 SCHEDULED_TASK_UPDATED task: BackupTask
+2025-01-15 10:00:00 EventID 4719 AUDIT_POLICY_CHANGED audit: Process Creation enabled
+2025-01-15 10:15:00 EventID 4624 LOGON david from 192.168.1.50 Type 3 LogonGuid: {4}
