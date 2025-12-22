@@ -1,268 +1,114 @@
 [
   {
-    "@timestamp": "2025-01-15 06:00:00",
+    "@timestamp": "2024-01-15 09:05:44",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "jennifer",
+      "query": "SELECT * FROM employees"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:00:00 SELECT * FROM users WHERE id = 1 user: appuser database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 09:05:44 User:jennifer.adams Query:SELECT * FROM employees"
   },
   {
-    "@timestamp": "2025-01-15 06:05:00",
+    "@timestamp": "2024-01-15 09:15:33",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "webapp_service",
+      "query": "SELECT * FROM users WHERE id=12345"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:05:00 INSERT INTO logs (timestamp, action) VALUES ('2025-01-15 06:05:00', 'login') user: appuser database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 09:15:33 User:webapp_service Query:SELECT * FROM users WHERE id=12345"
   },
   {
-    "@timestamp": "2025-01-15 06:10:00",
+    "@timestamp": "2024-01-15 10:22:44",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "webapp_service",
+      "query": "UPDATE orders SET status='shipped' WHERE order_id=98765"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:10:00 SELECT COUNT(*) FROM orders WHERE date > '2025-01-01' user: analyst database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 10:22:44 User:webapp_service Query:UPDATE orders SET status='shipped' WHERE order_id=98765"
   },
   {
-    "@timestamp": "2025-01-15 06:15:00",
+    "@timestamp": "2024-01-15 11:18:22",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "api_service",
+      "query": "INSERT INTO logs VALUES(...)"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:15:00 UPDATE products SET price = 100 WHERE id = 5 user: admin database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 11:18:22 User:api_service Query:INSERT INTO logs VALUES(...)"
   },
   {
-    "@timestamp": "2025-01-15 06:20:00",
+    "@timestamp": "2024-01-15 13:45:18",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "sarah",
+      "query": "SELECT DATE, SUM(revenue) FROM sales"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:20:00 DELETE FROM temp_sessions WHERE expire_time < NOW() user: maintenance database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 13:45:18 User:sarah.jenkins Query:SELECT DATE, SUM(revenue) FROM sales"
   },
   {
-    "@timestamp": "2025-01-15 06:25:00",
+    "@timestamp": "2024-01-15 14:22:09",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "QUERY",
+      "user": "alex",
+      "query": "SELECT * FROM test_data LIMIT 100"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:25:00 SELECT * FROM inventory WHERE quantity < 10 user: manager database: main status: OK"
+    "raw": "[QUERY] 2024-01-15 14:22:09 User:alex.rodriguez Query:SELECT * FROM test_data LIMIT 100"
   },
   {
-    "@timestamp": "2025-01-15 06:30:00",
+    "@timestamp": "2024-01-15 02:00:15",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "AUDIT",
+      "user": "SVC_SQLBackup",
+      "query": "BACKUP DATABASE CompanyDB"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:30:00 INSERT INTO audit_log (user, action, timestamp) VALUES ('admin', 'database_backup', '2025-01-15 06:30:00') user: system database: main status: OK"
+    "raw": "[AUDIT] 2024-01-15 02:00:15 User:SVC_SQLBackup Query:BACKUP DATABASE CompanyDB"
   },
   {
-    "@timestamp": "2025-01-15 06:35:00",
+    "@timestamp": "2024-01-15 16:33:52",
     "event": {
       "action": "database_query",
       "type": "database"
     },
     "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
+      "audit_level": "AUDIT",
+      "user": "kevin",
+      "query": "EXPORT test_scenarios"
     },
     "rows_returned": 0,
-    "raw": "2025-01-15 06:35:00 SELECT * FROM transactions WHERE amount > 1000 user: auditor database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 06:40:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 06:40:00 UPDATE user_settings SET theme = 'dark' WHERE user_id = 42 user: appuser database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 06:45:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 06:45:00 SELECT COUNT(*) FROM active_connections user: monitor database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 07:00:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 07:00:00 SELECT * FROM sensitive_data WHERE department = 'HR' user: developer database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 07:05:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 07:05:00 INSERT INTO employee_records (name, salary) VALUES ('John', '50000') user: hr_admin database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 07:10:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 07:10:00 SELECT * FROM customer_pii WHERE age > 18 user: analytics database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 08:00:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:00:00 SELECT * FROM audit_log WHERE user = 'developer' AND timestamp > '2025-01-15 07:00:00' user: developer database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 08:15:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:15:00 SELECT * FROM users WHERE id = 1; DROP TABLE users; -- user: developer database: main status: BLOCKED_SQLINJECTION"
-  },
-  {
-    "@timestamp": "2025-01-15 08:20:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:20:00 SELECT * FROM products WHERE id = 1 UNION SELECT * FROM sensitive_data -- user: developer database: main status: BLOCKED_SQLINJECTION"
-  },
-  {
-    "@timestamp": "2025-01-15 08:25:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:25:00 INSERT INTO audit_log (user, action, timestamp) VALUES ('developer', 'data_export_large', '2025-01-15 08:25:00') user: developer database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 08:30:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:30:00 SELECT email FROM customers WHERE email LIKE '%@%' user: developer database: main status: OK"
-  },
-  {
-    "@timestamp": "2025-01-15 08:35:00",
-    "event": {
-      "action": "database_query",
-      "type": "database"
-    },
-    "database": {
-      "audit_level": "unknown",
-      "user": "unknown",
-      "query": "unknown"
-    },
-    "rows_returned": 0,
-    "raw": "2025-01-15 08:35:00 SELECT * FROM sensitive_data LIMIT 1000000 user: developer database: main status: LARGE_QUERY_EXECUTED"
+    "raw": "[AUDIT] 2024-01-15 16:33:52 User:kevin.martinez Query:EXPORT test_scenarios"
   }
 ]

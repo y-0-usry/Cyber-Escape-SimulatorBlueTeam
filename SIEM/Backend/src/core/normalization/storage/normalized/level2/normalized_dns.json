@@ -1,7 +1,7 @@
 [
   {
-    "log.original": "2025-01-15 06:00:00 192.168.1.10 A google.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.657Z",
+    "log.original": "2024-01-15 09:47:28 192.168.1.112 A paypa1.suspicious.tk",
+    "@timestamp": "2025-12-22T16:35:53.892Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -13,8 +13,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:05:00 192.168.1.20 A microsoft.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 09:15:22 192.168.1.45 A stackoverflow.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -26,8 +26,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:10:00 192.168.1.30 A github.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 10:22:17 192.168.1.78 A onedrive.live.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -39,8 +39,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:15:00 192.168.1.40 A aws.amazon.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 13:42:18 192.168.1.103 A cdn.adobe.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -52,8 +52,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:20:00 192.168.1.50 A slack.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 14:08:27 192.168.1.67 A smtp.office365.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -65,8 +65,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:25:00 192.168.1.60 A docker.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 14:28:45 192.168.1.45 A git.company.local",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -78,8 +78,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:30:00 192.168.1.70 A kubernetes.io NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 03:15:22 192.168.10.50 A git.company.local",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -91,8 +91,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:35:00 192.168.1.80 A npm.js NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 02:00:15 192.168.10.55 A backup.company.local",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -104,8 +104,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:40:00 192.168.1.90 A stackoverflow.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 15:48:12 192.168.1.45 A drive.google.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -117,8 +117,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 06:45:00 192.168.1.100 A linkedin.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 15:52:37 192.168.1.45 A drive.google.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -130,8 +130,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:00:00 192.168.1.110 A twitter.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 16:08:44 192.168.1.45 A drive.google.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -143,8 +143,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:05:00 192.168.1.120 A facebook.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 14:18:33 192.168.1.45 A linkedin.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -156,8 +156,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:10:00 192.168.1.130 A youtube.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 14:35:51 192.168.1.45 A indeed.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -169,8 +169,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:15:00 192.168.1.140 A wikipedia.org NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 10:42:18 192.168.1.45 A github.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -182,8 +182,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:20:00 192.168.1.150 A reddit.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 11:28:47 192.168.1.45 A news.ycombinator.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -195,8 +195,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:25:00 192.168.1.160 A medium.com NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 08:15:52 192.168.1.88 A update.microsoft.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",
@@ -208,164 +208,8 @@
     "destination.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:30:00 192.168.1.170 A dev.to NOERROR 200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:00:00 192.168.1.10 A update.malware-cdn.net NOERROR 192.0.2.88",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:00:05 192.168.1.100 A update.malware-cdn.net NOERROR 192.0.2.88",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:05:00 10.0.0.5 A malicious-c2.evil.com NOERROR 203.0.113.200",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:15:00 192.168.1.20 A confluence.company.local NOERROR 10.0.0.5",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:20:00 192.168.1.30 A jira.company.local NOERROR 10.0.0.5",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:25:00 192.168.1.40 A mail.company.local NOERROR 10.0.0.5",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 08:30:00 192.168.1.50 A vpn.company.local NOERROR 10.0.0.1",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 09:00:00 192.168.1.60 A git.company.local NOERROR 10.0.0.20",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 09:15:00 192.168.1.70 A artifact-registry.company.local NOERROR 10.0.0.21",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 09:30:00 192.168.1.80 A monitoring.company.local NOERROR 10.0.0.22",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 10:00:00 192.168.1.90 A help.company.local NOERROR 10.0.0.23",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
-    "observer.type": "dns",
-    "event.category": "network",
-    "event.type": "dns",
-    "event.action": "dns_query",
-    "dns.question.name": "unknown",
-    "dns.question.type": "unknown",
-    "dns.response_code": "NOERROR",
-    "source.ip": "0.0.0.0",
-    "destination.ip": "0.0.0.0"
-  },
-  {
-    "log.original": "2025-01-15 10:15:00 192.168.1.100 A intranet.company.local NOERROR 10.0.0.24",
-    "@timestamp": "2025-12-14T14:35:31.658Z",
+    "log.original": "2024-01-15 08:16:12 192.168.1.88 A download.windowsupdate.com",
+    "@timestamp": "2025-12-22T16:35:53.895Z",
     "observer.type": "dns",
     "event.category": "network",
     "event.type": "dns",

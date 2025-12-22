@@ -1,1 +1,135 @@
-[]
+[
+  {
+    "@timestamp": "2024-01-15T15:48:12Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "50001"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 1,
+    "raw": "2024-01-15T15:48:12Z Alert: DLP Block - Google Drive Upload SID:50001 Priority:1 192.168.1.45 -> drive.google.com Blocked sensitive data upload"
+  },
+  {
+    "@timestamp": "2024-01-15T15:52:37Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "10005"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 3,
+    "raw": "2024-01-15T15:52:37Z Alert: Large File Transfer SID:10005 Priority:3 192.168.1.45 -> drive.google.com 1.9GB upload detected"
+  },
+  {
+    "@timestamp": "2024-01-15T22:43:08Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "50002"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 1,
+    "raw": "2024-01-15T22:43:08Z Alert: DLP Block - USB Copy SID:50002 Priority:1 192.168.1.45 USB copy blocked sensitive patterns"
+  },
+  {
+    "@timestamp": "2024-01-15T12:15:48Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "20001"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 3,
+    "raw": "2024-01-15T12:15:48Z Alert: Malware Signature False Positive SID:20001 Priority:3 192.168.1.88 -> cdn.jquery.com Outdated rule jQuery CDN"
+  },
+  {
+    "@timestamp": "2024-01-15T14:28:45Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "10001"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 3,
+    "raw": "2024-01-15T14:28:45Z Alert: Large Data Transfer SID:10001 Priority:3 192.168.1.45 -> 192.168.10.15 Internal Git 4.8GB"
+  },
+  {
+    "@timestamp": "2024-01-15T10:22:18Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "10002"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 4,
+    "raw": "2024-01-15T10:22:18Z Alert: Normal File Transfer SID:10002 Priority:4 192.168.1.78 -> onedrive.live.com Corporate sync"
+  },
+  {
+    "@timestamp": "2024-01-15T13:42:18Z",
+    "event": {
+      "action": "alert",
+      "type": "ids_alert"
+    },
+    "rule": {
+      "name": "Unknown",
+      "id": "10003"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "destination": {
+      "ip": "0.0.0.0"
+    },
+    "severity": 4,
+    "raw": "2024-01-15T13:42:18Z Alert: Normal File Transfer SID:10003 Priority:4 192.168.1.103 -> cdn.adobe.com Marketing assets"
+  }
+]

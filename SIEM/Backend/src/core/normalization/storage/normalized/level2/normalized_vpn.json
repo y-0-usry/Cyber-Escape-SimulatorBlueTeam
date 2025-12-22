@@ -1,90 +1,90 @@
 [
   {
-    "log.original": "2025-01-15 07:00:00 VPN_CONNECT User: john.doe | IP: 192.168.1.100 | Status: SUCCESS",
-    "@timestamp": "2025-12-14T14:22:38.858Z",
+    "log.original": "2024-01-15 22:17:09 VPN_CONNECT sarah.mitchell 98.203.45.122 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.943Z",
     "observer.type": "vpn",
     "event.category": "network",
     "event.type": "vpn",
     "event.action": "vpn_connect",
     "event.outcome": "success",
-    "user.name": "john.doe",
-    "source.ip": "192.168.1.100"
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 07:30:00 VPN_DISCONNECT User: john.doe | IP: 192.168.1.100 | Status: SUCCESS",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
+    "log.original": "2024-01-15 23:04:51 VPN_DISCONNECT sarah.mitchell 98.203.45.122 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.943Z",
     "observer.type": "vpn",
     "event.category": "network",
     "event.type": "vpn",
     "event.action": "vpn_disconnect",
     "event.outcome": "success",
-    "user.name": "john.doe",
-    "source.ip": "192.168.1.100"
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 08:10:00 VPN_CONNECT User: admin | IP: 172.16.0.99 | Status: AUTHENTICATION_FAILED",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
-    "observer.type": "vpn",
-    "event.category": "network",
-    "event.type": "vpn",
-    "event.action": "vpn_connect",
-    "event.outcome": "authentication_failed",
-    "user.name": "admin",
-    "source.ip": "172.16.0.99"
-  },
-  {
-    "log.original": "2025-01-15 08:10:05 VPN_CONNECT User: root | IP: 172.16.0.99 | Status: AUTHENTICATION_FAILED",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
-    "observer.type": "vpn",
-    "event.category": "network",
-    "event.type": "vpn",
-    "event.action": "vpn_connect",
-    "event.outcome": "authentication_failed",
-    "user.name": "root",
-    "source.ip": "172.16.0.99"
-  },
-  {
-    "log.original": "2025-01-15 08:10:10 VPN_CONNECT User: administrator | IP: 172.16.0.99 | Status: AUTHENTICATION_FAILED",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
-    "observer.type": "vpn",
-    "event.category": "network",
-    "event.type": "vpn",
-    "event.action": "vpn_connect",
-    "event.outcome": "authentication_failed",
-    "user.name": "administrator",
-    "source.ip": "172.16.0.99"
-  },
-  {
-    "log.original": "2025-01-15 08:10:15 VPN_CONNECT User: vpnuser | IP: 172.16.0.99 | Status: BLOCKED_TOO_MANY_ATTEMPTS",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
-    "observer.type": "vpn",
-    "event.category": "network",
-    "event.type": "vpn",
-    "event.action": "vpn_connect",
-    "event.outcome": "blocked_too_many_attempts",
-    "user.name": "vpnuser",
-    "source.ip": "172.16.0.99"
-  },
-  {
-    "log.original": "2025-01-15 09:00:00 VPN_CONNECT User: jane.smith | IP: 192.168.1.110 | Status: SUCCESS",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
+    "log.original": "2024-01-15 23:12:44 VPN_CONNECT robert.wilson 76.184.23.91 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.943Z",
     "observer.type": "vpn",
     "event.category": "network",
     "event.type": "vpn",
     "event.action": "vpn_connect",
     "event.outcome": "success",
-    "user.name": "jane.smith",
-    "source.ip": "192.168.1.110"
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
   },
   {
-    "log.original": "2025-01-15 10:00:00 VPN_DISCONNECT User: jane.smith | IP: 192.168.1.110 | Status: SUCCESS",
-    "@timestamp": "2025-12-14T14:22:38.859Z",
+    "log.original": "2024-01-15 20:45:29 VPN_CONNECT alex.rodriguez 68.47.192.103 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.943Z",
     "observer.type": "vpn",
     "event.category": "network",
     "event.type": "vpn",
-    "event.action": "vpn_disconnect",
+    "event.action": "vpn_connect",
     "event.outcome": "success",
-    "user.name": "jane.smith",
-    "source.ip": "192.168.1.110"
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2024-01-15 07:18:22 VPN_CONNECT james.wilson 213.144.82.49 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "observer.type": "vpn",
+    "event.category": "network",
+    "event.type": "vpn",
+    "event.action": "vpn_connect",
+    "event.outcome": "success",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2024-01-15 03:22:14 VPN_CONNECT sarah.jenkins 73.92.184.201 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "observer.type": "vpn",
+    "event.category": "network",
+    "event.type": "vpn",
+    "event.action": "vpn_connect",
+    "event.outcome": "success",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2024-01-15 09:15:08 VPN_CONNECT amanda.brown 192.168.1.67 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "observer.type": "vpn",
+    "event.category": "network",
+    "event.type": "vpn",
+    "event.action": "vpn_connect",
+    "event.outcome": "success",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
+  },
+  {
+    "log.original": "2024-01-15 13:42:19 VPN_CONNECT lisa.thompson 192.168.1.103 Status:SUCCESS",
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "observer.type": "vpn",
+    "event.category": "network",
+    "event.type": "vpn",
+    "event.action": "vpn_connect",
+    "event.outcome": "success",
+    "user.name": "unknown",
+    "source.ip": "0.0.0.0"
   }
 ]

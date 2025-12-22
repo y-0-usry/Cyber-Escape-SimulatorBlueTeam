@@ -12,6 +12,7 @@ let totalQuestions = 0;
 let timeExtensions = 0; // Track how many times "Add 5 mins" was used
 let impactLevel = 0; // Progressive alert impact (0-100)
 let impactInterval = null; // Timer for progressive impact
+let cachedGeneralQuestions = null; // Cache questions to prevent re-evaluation
 
 // === DOM SECTIONS ===
 const sections = {
@@ -119,6 +120,7 @@ function handleReset() {
   totalQuestions = 0;
   timeExtensions = 0;
   impactLevel = 0;
+  cachedGeneralQuestions = null; // Clear cached questions for new attempt
   
   // Reset UI
   updateScore();
@@ -347,11 +349,20 @@ function renderGeneralQuestions() {
 }
 
 function evaluateGeneralQuestions() {
-  const questions = buildGeneralQuestions();
+  if (!cachedGeneralQuestions) {
+    cachedGeneralQuestions = buildGeneralQuestions();
+  }
+  const questions = cachedGeneralQuestions;
   const cards = document.querySelectorAll('#questions-container [data-qid]');
   let correct = 0;
 
   cards.forEach(card => {
+    // Skip if already evaluated
+    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
+      if (card.classList.contains('border-green-500')) correct++;
+      return;
+    }
+
     const input = card.querySelector('.answer-input');
     if (!input) return;
     
@@ -506,6 +517,12 @@ function evaluateScenarioQuestions() {
   let correct = 0;
 
   cards.forEach(card => {
+    // Skip if already evaluated
+    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
+      if (card.classList.contains('border-green-500')) correct++;
+      return;
+    }
+
     const input = card.querySelector('.answer-input');
     if (!input) return;
     

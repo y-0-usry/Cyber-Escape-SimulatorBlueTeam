@@ -3,5 +3,12 @@
     "express": "^5.1.0",
     "js-yaml": "^4.1.0",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^23.7.0"
+  },
+  "scripts": {
+    "start:server": "node SIEM/Backend/src/server.js",
+    "test:e2e": "node tests/level2_e2e.js"
   }
 }

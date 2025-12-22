@@ -1,1 +1,546 @@
-[]
+[
+  {
+    "@timestamp": "2024-01-15 14:23:11",
+    "event": {
+      "action": "clone",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "authentication"
+    },
+    "raw": "2024-01-15 14:23:11 SECURITY_FAILURE Git clone authentication failed for user \"sarah.mitchell\" from 192.168.1.45",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 14:28:45",
+    "event": {
+      "action": "git",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "repository"
+    },
+    "raw": "2024-01-15 14:28:45 SECURITY_WARNING Large Git repository clone 4.8GB by user \"sarah.mitchell\" from 192.168.1.45",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 14:52:10",
+    "event": {
+      "action": "denied",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "to"
+    },
+    "raw": "2024-01-15 14:52:10 SECURITY_FAILURE Access denied to Finance repo for user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:05:33",
+    "event": {
+      "action": "repository",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "access"
+    },
+    "raw": "2024-01-15 15:05:33 SECURITY_WARNING HR repository access by \"sarah.mitchell\" outside role from 192.168.1.45",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:12:18",
+    "event": {
+      "action": "file",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "read"
+    },
+    "raw": "2024-01-15 15:12:18 SECURITY_WARNING Massive file read 4823 files 2.1GB detected user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:28:44",
+    "event": {
+      "action": "creation",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "failed"
+    },
+    "raw": "2024-01-15 15:28:44 SECURITY_FAILURE ZIP creation failed permission denied user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:31:02",
+    "event": {
+      "action": "archive",
+      "type": "security",
+      "outcome": "critical"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "created"
+    },
+    "raw": "2024-01-15 15:31:02 SECURITY_CRITICAL ZIP archive created 1.9GB by user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:45:27",
+    "event": {
+      "action": "access",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "anomaly"
+    },
+    "raw": "2024-01-15 15:45:27 SECURITY_WARNING File access anomaly 127 accesses in 15min by user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 16:02:15",
+    "event": {
+      "action": "repository",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "browsing"
+    },
+    "raw": "2024-01-15 16:02:15 SECURITY_WARNING Multiple repository browsing detected user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 22:17:09",
+    "event": {
+      "action": "vpn",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "login"
+    },
+    "raw": "2024-01-15 22:17:09 SECURITY_WARNING Weekend VPN login user \"sarah.mitchell\" from 98.203.45.122",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 22:34:51",
+    "event": {
+      "action": "night",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "file"
+    },
+    "raw": "2024-01-15 22:34:51 SECURITY_WARNING Late night file access user \"sarah.mitchell\" Saturday 22:34",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 22:41:23",
+    "event": {
+      "action": "device",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "connected"
+    },
+    "raw": "2024-01-15 22:41:23 SECURITY_WARNING USB device connected by user \"sarah.mitchell\" SanDisk Ultra 64GB",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 22:43:08",
+    "event": {
+      "action": "copy",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "to"
+    },
+    "raw": "2024-01-15 22:43:08 SECURITY_FAILURE File copy to USB blocked by DLP user \"sarah.mitchell\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 03:15:22",
+    "event": {
+      "action": "git",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "backup"
+    },
+    "raw": "2024-01-15 03:15:22 SECURITY_SUCCESS Automated Git backup 3.2GB by service account \"SVC_DevOps\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 09:05:44",
+    "event": {
+      "action": "payroll",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "export"
+    },
+    "raw": "2024-01-15 09:05:44 SECURITY_SUCCESS HR payroll export 482MB by user \"jennifer.adams\" approved",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 10:22:17",
+    "event": {
+      "action": "sync",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "1.8GB"
+    },
+    "raw": "2024-01-15 10:22:17 SECURITY_SUCCESS OneDrive sync 1.8GB by user \"michael.chen\" corporate account",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 11:18:33",
+    "event": {
+      "action": "support",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "USB"
+    },
+    "raw": "2024-01-15 11:18:33 SECURITY_SUCCESS IT support USB usage by \"david.park\" ticket INC-2024-0145",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 02:00:15",
+    "event": {
+      "action": "backup",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "2.4GB"
+    },
+    "raw": "2024-01-15 02:00:15 SECURITY_SUCCESS Database backup 2.4GB by service account \"SVC_SQLBackup\" scheduled",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 20:45:29",
+    "event": {
+      "action": "working",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "late"
+    },
+    "raw": "2024-01-15 20:45:29 SECURITY_SUCCESS Developer working late user \"alex.rodriguez\" ticket CHG-2024-0089 approved",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 23:12:44",
+    "event": {
+      "action": "admin",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "VPN"
+    },
+    "raw": "2024-01-15 23:12:44 SECURITY_SUCCESS IT Admin VPN maintenance user \"robert.wilson\" ticket INC-2024-0148",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 13:42:18",
+    "event": {
+      "action": "assets",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "download"
+    },
+    "raw": "2024-01-15 13:42:18 SECURITY_SUCCESS Marketing assets download 1.2GB user \"lisa.thompson\" Adobe Creative Cloud",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 04:30:11",
+    "event": {
+      "action": "security",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "scan"
+    },
+    "raw": "2024-01-15 04:30:11 SECURITY_SUCCESS Automated security scan by service account \"SVC_SecurityScanner\"",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 01:15:08",
+    "event": {
+      "action": "server",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "replication"
+    },
+    "raw": "2024-01-15 01:15:08 SECURITY_SUCCESS File server replication 3.7GB system process DFS",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 08:15:52",
+    "event": {
+      "action": "update",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "download"
+    },
+    "raw": "2024-01-15 08:15:52 SECURITY_SUCCESS Windows update download 842MB by SYSTEM",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 14:08:27",
+    "event": {
+      "action": "large",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attachment"
+    },
+    "raw": "2024-01-15 14:08:27 SECURITY_SUCCESS Email large attachment sent by user \"amanda.brown\" ticket REQ-2024-0045 approved",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 15:22:41",
+    "event": {
+      "action": "conference",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "recording"
+    },
+    "raw": "2024-01-15 15:22:41 SECURITY_SUCCESS Video conference recording 1.1GB by user \"james.wilson\" Board meeting",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 11:47:19",
+    "event": {
+      "action": "scan",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "to"
+    },
+    "raw": "2024-01-15 11:47:19 SECURITY_SUCCESS Printer scan to network 45MB office scanner",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 16:33:52",
+    "event": {
+      "action": "test",
+      "type": "security",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "data"
+    },
+    "raw": "2024-01-15 16:33:52 SECURITY_SUCCESS QA test data export 380MB by user \"kevin.martinez\" ticket TASK-2024-0234",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 07:22:14",
+    "event": {
+      "action": "brute-force",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "blocked"
+    },
+    "raw": "2024-01-15 07:22:14 SECURITY_FAILURE SSH brute-force blocked 247 attempts from 45.142.212.98 Russia",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 09:47:33",
+    "event": {
+      "action": "email",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "quarantined"
+    },
+    "raw": "2024-01-15 09:47:33 SECURITY_WARNING Phishing email quarantined user \"emily.roberts\" no click",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 12:15:48",
+    "event": {
+      "action": "malware",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "signature"
+    },
+    "raw": "2024-01-15 12:15:48 SECURITY_WARNING IDS malware signature false positive jQuery CDN legitimate",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 18:34:22",
+    "event": {
+      "action": "scan",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "blocked"
+    },
+    "raw": "2024-01-15 18:34:22 SECURITY_FAILURE Port scan blocked from 103.45.221.67 China 1247 packets",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 19:08:51",
+    "event": {
+      "action": "injection",
+      "type": "security",
+      "outcome": "failure"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "attempt"
+    },
+    "raw": "2024-01-15 19:08:51 SECURITY_FAILURE SQL injection attempt blocked from 185.220.101.33 Netherlands WAF",
+    "level": "Backend"
+  },
+  {
+    "@timestamp": "2024-01-15 21:19:37",
+    "event": {
+      "action": "attempt",
+      "type": "security",
+      "outcome": "warning"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "sanitized"
+    },
+    "raw": "2024-01-15 21:19:37 SECURITY_WARNING XSS attempt sanitized from 94.102.49.190 France harmless",
+    "level": "Backend"
+  }
+]

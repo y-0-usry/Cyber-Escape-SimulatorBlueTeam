@@ -66,21 +66,30 @@ app.get('/level2', (req, res) => {
   });
 });
 
-// Answer Key 2 page
-app.get('/AnswerKey2', (req, res) => {
-  res.sendFile(path.join(pagesPath, 'AnswerKey2.html'), (err) => {
+// Answer Key Level 2 page
+app.get('/AnswerKey_Level2', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'AnswerKey_Level2.html'), (err) => {
     if (err) {
-      res.status(500).send('Error serving AnswerKey2.html');
+      res.status(500).send('Error serving AnswerKey_Level2.html');
     }
   });
 });
 
-app.get('/AnswerKey2.html', (req, res) => {
-  res.sendFile(path.join(pagesPath, 'AnswerKey2.html'), (err) => {
+app.get('/AnswerKey_Level2.html', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'AnswerKey_Level2.html'), (err) => {
     if (err) {
-      res.status(500).send('Error serving AnswerKey2.html');
+      res.status(500).send('Error serving AnswerKey_Level2.html');
     }
   });
+});
+
+// Legacy routes for AnswerKey2 (redirect to AnswerKey_Level2)
+app.get('/AnswerKey2', (req, res) => {
+  res.redirect('/AnswerKey_Level2');
+});
+
+app.get('/AnswerKey2.html', (req, res) => {
+  res.redirect('/AnswerKey_Level2.html');
 });
 
 // Catch-all for non-existent routes

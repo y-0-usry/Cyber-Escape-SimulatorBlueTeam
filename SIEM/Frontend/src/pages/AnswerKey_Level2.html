@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 2 - Answer Key & Tutorial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+  <div class="container mx-auto p-6 max-w-4xl">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-900 to-pink-900 p-6 rounded-lg mb-6">
+      <div class="flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h1 class="text-3xl font-bold">Level 2 - Answer Key & Tutorial</h1>
+          <p class="text-gray-300 mt-2">📚 Complete guide to solving the Insider Threat scenario</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="window.location.href='/level2'" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded font-semibold">
+            ← Back to Game
+          </button>
+          <button onclick="window.location.href='/level3'" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded font-semibold flex items-center gap-2">
+            Level 3 <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+      <button class="tab-btn active bg-purple-600 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="phase1">
+        <i class="fas fa-list-check"></i> Phase 1 (18 Questions)
+      </button>
+      <button class="tab-btn bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="phase2">
+        <i class="fas fa-search"></i> Phase 2 (8 Questions)
+      </button>
+      <button class="tab-btn bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="timeline">
+        <i class="fas fa-clock"></i> Attack Timeline
+      </button>
+      <button class="tab-btn bg-red-600 hover:bg-red-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="mistakes">
+        <i class="fas fa-warning"></i> Common Mistakes
+      </button>
+      <button class="tab-btn bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded font-semibold flex items-center gap-2" data-tab="scoring">
+        <i class="fas fa-star"></i> Scoring Guide
+      </button>
+    </div>
+
+    <!-- Phase 1 Content -->
+    <div id="phase1" class="tab-content">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-6">
+        <div class="bg-purple-900/30 border-l-4 border-purple-500 p-4 rounded">
+          <h3 class="text-lg text-purple-300 mb-2">🎯 Phase 1 Overview</h3>
+          <p class="text-sm text-gray-300">18 questions testing alert classification, false positive identification, correlation, and hypothesis formation for an insider threat scenario.</p>
+        </div>
+
+        <!-- Q1-Q12: Individual Classification -->
+        <div class="border-l-4 border-blue-500 pl-4 py-4">
+          <h3 class="text-2xl font-bold mb-4">❓ Q1-Q12: Individual Alert Classification</h3>
+          <p class="text-gray-300 mb-4">For each alert, classify as: <strong>True Positive</strong>, <strong>False Positive</strong>, or <strong>Needs Context</strong></p>
+
+          <div class="bg-gray-700 p-4 rounded mb-4">
+            <p class="font-semibold mb-2">🔍 Classification Strategy:</p>
+            <ul class="list-disc list-inside space-y-2 text-sm">
+              <li><strong>True Positives (Insider Threat):</strong> sarah.mitchell accessing repos outside role, large data transfers, DLP blocks, off-hours activity</li>
+              <li><strong>False Positives:</strong> Service accounts (SVC_*), approved tickets (INC-*, CHG-*), scheduled jobs (02:00, 03:00), legitimate business ops</li>
+              <li><strong>Distractors:</strong> Failed external attacks (brute-force, phishing, port scans) - not relevant to insider threat</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-red-300">🔴 Git Clone (4.8GB) - sarah.mitchell</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">True Positive</span></p>
+              <p class="text-xs text-gray-400 mt-1">Large repository clone outside normal workflow</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-red-300">🔴 HR Repository Access - sarah.mitchell (Developer role)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">True Positive</span></p>
+              <p class="text-xs text-gray-400 mt-1">Accessing HR database - clear role violation</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-red-300">🔴 Google Drive Upload (1.9GB) - Personal Account</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">True Positive</span></p>
+              <p class="text-xs text-gray-400 mt-1">Data exfiltration to personal cloud storage</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-green-300">🟢 DevOps CI/CD Backup (3.2GB) - SVC_DevOps</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">False Positive</span></p>
+              <p class="text-xs text-gray-400 mt-1">Service account, scheduled backup</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-green-300">🟢 HR Payroll Export (482MB) - jennifer.adams</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">False Positive</span></p>
+              <p class="text-xs text-gray-400 mt-1">HR team member performing legitimate job function</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold text-yellow-300">🟡 External SSH Brute-Force (Blocked)</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">False Positive</span> (for this scenario)</p>
+              <p class="text-xs text-gray-400 mt-1">External attack - successfully blocked - not relevant to insider threat</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13: Multi-Select FP -->
+        <div class="border-l-4 border-yellow-500 pl-4 py-4">
+          <h3 class="text-2xl font-bold mb-2">❓ Q13: False Positive Multi-Select ✨</h3>
+          <p class="text-gray-300 mb-4"><strong>Question:</strong> Which of these alerts are FALSE POSITIVES? (Select all that apply)</p>
+
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-semibold text-green-400 mb-2">✅ Correct Answers (Select ALL):</p>
+            <ul class="list-disc list-inside space-y-1 text-sm">
+              <li>DevOps CI/CD backup (SVC_DevOps - automated)</li>
+              <li>HR payroll export (HR team member - approved)</li>
+              <li>Corporate OneDrive sync (business account)</li>
+              <li>IT support USB usage (ticket INC-2024-0145)</li>
+              <li>Database backup job (SVC_SQLBackup - scheduled)</li>
+              <li>Developer working late (approved CHG-2024-0089)</li>
+              <li>IT admin VPN maintenance (emergency ticket)</li>
+              <li>Marketing assets download (Creative Cloud)</li>
+              <li>Automated security scan (SVC_SecurityScanner)</li>
+              <li>File server replication (DFS - system process)</li>
+              <li>Windows updates (legitimate system process)</li>
+              <li>Email large attachment (approved REQ-2024-0045)</li>
+              <li>Video conference recording (Board meeting)</li>
+              <li>Printer scan to network (office scanner)</li>
+              <li>QA testing data export (ticket TASK-2024-0234)</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">🔑 Identification Patterns:</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li><strong>Service Accounts:</strong> SVC_*, SYSTEM → Usually legitimate</li>
+              <li><strong>Tickets:</strong> INC-*, CHG-*, REQ-*, TASK-* → Approved activities</li>
+              <li><strong>Scheduled:</strong> 02:00, 03:00 (overnight) → Automated jobs</li>
+              <li><strong>Business Context:</strong> HR doing payroll, Marketing using Adobe, IT support</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q14: Top 5 -->
+        <div class="border-l-4 border-orange-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q14: Top 5 Priority Alerts</h3>
+          <p class="text-gray-300 mb-4"><strong>Question:</strong> Select the TOP 5 alerts requiring immediate investigation</p>
+
+          <div class="bg-gray-900 p-4 rounded mb-2">
+            <p class="font-semibold text-green-400 mb-2">✅ Correct Top 5:</p>
+            <ol class="list-decimal list-inside space-y-1 text-sm">
+              <li>Google Drive Upload (1.9GB to personal account) - CRITICAL</li>
+              <li>DLP Block - Sensitive Data (Exfiltration attempt) - HIGH</li>
+              <li>HR Repo Access (Outside role) - HIGH</li>
+              <li>Git Clone (4.8GB repository) - HIGH</li>
+              <li>ZIP Archive Creation (1.9GB data collection) - CRITICAL</li>
+            </ol>
+          </div>
+
+          <p class="text-sm text-gray-400">💡 Focus on data exfiltration indicators, role violations, and DLP blocks</p>
+        </div>
+
+        <!-- Q15: Correlation -->
+        <div class="border-l-4 border-purple-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q15: Correlation</h3>
+          <p class="text-gray-300 mb-4"><strong>Question:</strong> Which alerts are part of the same incident?</p>
+
+          <div class="bg-gray-900 p-4 rounded mb-2">
+            <p class="font-semibold text-green-400 mb-2">✅ All Insider Threat Alerts (sarah.mitchell):</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Git clone attempts (failed + success)</li>
+              <li>Repository access (HR repo - outside role)</li>
+              <li>Massive file reads</li>
+              <li>ZIP creation</li>
+              <li>DLP blocks (cloud upload, USB copy)</li>
+              <li>Google Drive upload (success)</li>
+              <li>Off-hours VPN</li>
+              <li>Job search activity</li>
+            </ul>
+          </div>
+
+          <p class="text-sm text-gray-400">❌ Separate: External attacks, false positives</p>
+        </div>
+
+        <!-- Q16-Q18: Final Questions -->
+        <div class="border-l-4 border-green-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-4">❓ Q16-Q18: Analysis Questions</h3>
+
+          <div class="space-y-3">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q16: Most Suspicious Behavior</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">Combination of all</span></p>
+              <p class="text-xs text-gray-400 mt-1">Single indicators can be legitimate; combinations are stronger</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q17: MITRE Mapping</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">T1078 – Valid Accounts</span></p>
+              <p class="text-xs text-gray-400 mt-1">Attacker using legitimate credentials (no exploitation)</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q18: Hypothesis</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">Suspicious internal user behavior indicating data theft</span></p>
+              <p class="text-xs text-gray-400 mt-1">Pattern: valid creds + role violations + data collection + exfiltration</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 Content -->
+    <div id="phase2" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg space-y-6">
+        <div class="bg-orange-900/30 border-l-4 border-orange-500 p-4 rounded">
+          <h3 class="text-lg text-orange-300 mb-2">🎯 Phase 2 Overview</h3>
+          <p class="text-sm text-gray-300">8 questions validating the scenario, MITRE techniques, timeline, and SOC decision-making.</p>
+        </div>
+
+        <!-- Q1: Attack Type -->
+        <div class="border-l-4 border-red-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q1: Attack Type</h3>
+          <p class="text-gray-300 mb-2"><strong>Question:</strong> Based on all evidence, what type of attack occurred?</p>
+          <div class="bg-gray-900 p-4 rounded mb-4">
+            <p class="font-mono text-green-400">Insider Threat / Data Exfiltration</p>
+          </div>
+        </div>
+
+        <!-- Q2: Evidence -->
+        <div class="border-l-4 border-blue-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q2: Supporting Evidence (Select 2)</h3>
+          <div class="bg-gray-900 p-4 rounded">
+            <p class="font-semibold text-green-400 mb-2">✅ Correct (Any 2):</p>
+            <ul class="list-disc list-inside text-sm">
+              <li>Valid credentials used</li>
+              <li>No malware traces</li>
+              <li>Unusual user behavior</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q3: MITRE -->
+        <div class="border-l-4 border-purple-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-2">❓ Q3: MITRE Techniques (Select ALL)</h3>
+          <div class="bg-gray-900 p-4 rounded">
+            <p class="font-semibold text-green-400 mb-2">✅ Correct:</p>
+            <ul class="list-disc list-inside text-sm">
+              <li><strong>T1078</strong> – Valid Accounts (primary)</li>
+              <li><strong>T1560</strong> – Archive Collected Data (ZIP)</li>
+              <li><strong>T1567</strong> – Exfiltration Over Web Service (Google Drive)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q4-Q8 -->
+        <div class="border-l-4 border-green-500 pl-4 py-4">
+          <h3 class="text-xl font-bold mb-4">❓ Q4-Q8: Remaining Questions</h3>
+
+          <div class="space-y-3">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q4: Timeline - What happened FIRST?</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">Repository access attempt</span></p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q5: Why NOT Ransomware?</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">No encryption, No ransom note, Legitimate access</span></p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q6: Business Impact</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">Data confidentiality breach</span></p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q7: Failed External Attack</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">External SSH brute-force (blocked)</span> or Port scan</p>
+            </div>
+
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-semibold">Q8: SOC Decision - What to do FIRST?</p>
+              <p class="text-sm">Answer: <span class="font-mono bg-gray-900 px-2 py-1 rounded">Disable user access immediately</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Content -->
+    <div id="timeline" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">Attack Timeline</h2>
+        
+        <div class="space-y-4">
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-blue-500">
+            <p class="font-semibold text-blue-300">14:23 - Initial Access Attempt</p>
+            <p class="text-sm text-gray-300">Git clone attempt #1 (authentication failed)</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-purple-500">
+            <p class="font-semibold text-purple-300">14:28 - Data Collection Begins</p>
+            <p class="text-sm text-gray-300">Successful Git clone (4.8GB proprietary algorithms)</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-yellow-500">
+            <p class="font-semibold text-yellow-300">15:05 - Role Violation</p>
+            <p class="text-sm text-gray-300">Unauthorized HR repository access</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-orange-500">
+            <p class="font-semibold text-orange-300">15:12 - Massive Data Read</p>
+            <p class="text-sm text-gray-300">4,823 files, 2.1GB - Sequential bulk read</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-red-500">
+            <p class="font-semibold text-red-300">15:31 - Data Preparation</p>
+            <p class="text-sm text-gray-300">ZIP archive creation (1.9GB)</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-red-600">
+            <p class="font-semibold text-red-400">15:48 - Exfiltration Attempt #1</p>
+            <p class="text-sm text-gray-300">Cloud upload (BLOCKED by DLP)</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-red-700">
+            <p class="font-semibold text-red-500">15:52 - Successful Exfiltration</p>
+            <p class="text-sm text-gray-300">Google Drive upload (1.9GB to personal account)</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-pink-500">
+            <p class="font-semibold text-pink-300">22:17 - Off-Hours Activity</p>
+            <p class="text-sm text-gray-300">Saturday VPN login from residential IP</p>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded border-l-4 border-pink-600">
+            <p class="font-semibold text-pink-400">22:43 - Alternative Exfiltration Attempt</p>
+            <p class="text-sm text-gray-300">USB copy attempt (BLOCKED by DLP)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Mistakes -->
+    <div id="mistakes" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 text-red-400">Common Mistakes</h2>
+
+        <div class="space-y-4">
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 1. Ignoring Context</p>
+            <p class="text-sm text-gray-300">Large transfers ≠ always malicious. Check: service accounts, tickets, role context</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 2. Missing Service Account Patterns</p>
+            <p class="text-sm text-gray-300">SVC_* = usually legitimate automation</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 3. Forgetting Approved Tickets</p>
+            <p class="text-sm text-gray-300">INC-*, CHG-*, REQ-* = documented approved activities</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 4. Focusing on External Threats</p>
+            <p class="text-sm text-gray-300">This is an INSIDER scenario - failed external attacks are irrelevant</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 5. Single Indicator Bias</p>
+            <p class="text-sm text-gray-300">Look for PATTERNS, not isolated events</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 6. Ignoring Failed Attempts</p>
+            <p class="text-sm text-gray-300">Persistence (retry after failure) = strong indicator</p>
+          </div>
+
+          <div class="bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-300">❌ 7. Wrong MITRE Mapping</p>
+            <p class="text-sm text-gray-300">No malware = Not T1486 (ransomware)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scoring Guide -->
+    <div id="scoring" class="tab-content hidden">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 text-yellow-400">Scoring Guide</h2>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-green-900/30 border-2 border-green-500 p-4 rounded">
+            <p class="text-lg font-bold text-green-400">EXPERT</p>
+            <p class="text-3xl font-bold text-green-300">300+</p>
+            <p class="text-sm text-gray-300">🎁 3 free hints for Level 3</p>
+          </div>
+
+          <div class="bg-blue-900/30 border-2 border-blue-500 p-4 rounded">
+            <p class="text-lg font-bold text-blue-400">PROFICIENT</p>
+            <p class="text-3xl font-bold text-blue-300">250-299</p>
+            <p class="text-sm text-gray-300">🎁 2 free hints for Level 3</p>
+          </div>
+
+          <div class="bg-purple-900/30 border-2 border-purple-500 p-4 rounded">
+            <p class="text-lg font-bold text-purple-400">COMPETENT</p>
+            <p class="text-3xl font-bold text-purple-300">200-249</p>
+            <p class="text-sm text-gray-300">🎁 1 free hint for Level 3</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">Phase 1: Alert Triage</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Q1-Q12: 10 points each (120 points)</li>
+              <li>Q13 (Multi-select FP): 20 points</li>
+              <li>Q14 (Top 5): 10 points</li>
+              <li>Q15 (Correlation): 20 points</li>
+              <li>Q16-Q18: 10 points each (30 points)</li>
+              <li><strong>Total: 200 points</strong></li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">Phase 2: Scenario Validation</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Q1 (Attack Type): 15 points</li>
+              <li>Q2 (Evidence): 15 points</li>
+              <li>Q3 (MITRE): 20 points</li>
+              <li>Q4-Q8: 10 points each (50 points)</li>
+              <li><strong>Total: 100 points</strong></li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">Phase 3: Incident Ticket</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Quality & Evidence: 50 points</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-700 p-4 rounded">
+            <p class="font-semibold mb-2">Bonuses & Penalties</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+              <li>Speed Bonus: +5 per minute remaining</li>
+              <li>Impact Penalty: -1 to -50 based on level</li>
+              <li>Hints: -5 per hint (free hints don't count)</li>
+              <li>Time Extensions: -5, -10, -20</li>
+            </ul>
+          </div>
+
+          <div class="bg-green-900/30 border-l-4 border-green-500 p-4 rounded">
+            <p class="font-semibold text-green-400">Maximum Possible Score</p>
+            <p class="text-2xl font-bold text-green-300">~400 points</p>
+            <p class="text-sm text-gray-300">(with perfect accuracy + max speed bonus)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab Navigation
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        
+        // Update button styles
+        tabBtns.forEach(b => {
+          b.classList.remove('active', 'bg-blue-600', 'bg-purple-600', 'bg-orange-600', 'bg-green-600', 'bg-red-600', 'bg-yellow-600');
+          b.classList.add('hover:bg-blue-700', 'hover:bg-purple-700', 'hover:bg-orange-700', 'hover:bg-green-700', 'hover:bg-red-700', 'hover:bg-yellow-700');
+        });
+        
+        btn.classList.add('active');
+        if (btn.dataset.tab === 'phase1') btn.classList.add('bg-purple-600');
+        if (btn.dataset.tab === 'phase2') btn.classList.add('bg-orange-600');
+        if (btn.dataset.tab === 'timeline') btn.classList.add('bg-green-600');
+        if (btn.dataset.tab === 'mistakes') btn.classList.add('bg-red-600');
+        if (btn.dataset.tab === 'scoring') btn.classList.add('bg-yellow-600');
+        
+        // Show target content
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        document.getElementById(targetTab).classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

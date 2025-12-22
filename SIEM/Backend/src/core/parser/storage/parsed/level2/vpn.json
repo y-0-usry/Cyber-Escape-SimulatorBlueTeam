@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "@timestamp": "2025-12-22T16:35:53.943Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 22:17:09 VPN_CONNECT sarah.mitchell 98.203.45.122 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.943Z",
+    "event": {
+      "action": "vpn_disconnect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 23:04:51 VPN_DISCONNECT sarah.mitchell 98.203.45.122 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.943Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 23:12:44 VPN_CONNECT robert.wilson 76.184.23.91 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.943Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 20:45:29 VPN_CONNECT alex.rodriguez 68.47.192.103 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 07:18:22 VPN_CONNECT james.wilson 213.144.82.49 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 03:22:14 VPN_CONNECT sarah.jenkins 73.92.184.201 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 09:15:08 VPN_CONNECT amanda.brown 192.168.1.67 Status:SUCCESS"
+  },
+  {
+    "@timestamp": "2025-12-22T16:35:53.944Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "unknown"
+    },
+    "source": {
+      "ip": "0.0.0.0"
+    },
+    "event_outcome": "success",
+    "raw": "2024-01-15 13:42:19 VPN_CONNECT lisa.thompson 192.168.1.103 Status:SUCCESS"
+  }
+]

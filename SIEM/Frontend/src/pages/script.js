@@ -27,6 +27,7 @@ let actionHistory = [];
 let alertTimeFilter = 'all';
 let alertSeverityFilter = 'all';
 let sortOrder = 'desc';
+let alertIdFilter = '';
 let ipFilter = '';
 let destFilter = '';
 let logFilter = '';
@@ -46,11 +47,13 @@ document.getElementById('reset-session').addEventListener('click', () => {
   evidence = [];
   linkedAlerts = [];
   actionHistory = [];
+  alertIdFilter = '';
   ipFilter = '';
   destFilter = '';
   logFilter = '';
   daysFilter = '';
   dateFilter = '';
+  document.getElementById('alert-id-filter').value = '';
   document.getElementById('ip-filter').value = '';
   document.getElementById('dest-filter').value = '';
   document.getElementById('log-filter').value = '';
@@ -209,6 +212,11 @@ function filterBySeverity(list, severity) {
   return list.filter(alert => alert.severity.toLowerCase() === severity);
 }
 
+function filterByAlertId(list, alertId) {
+  if (!alertId) return list;
+  return list.filter(alert => alert.alert_id.toLowerCase().includes(alertId.toLowerCase()));
+}
+
 function filterByIP(list, ip) {
   if (!ip) return list;
   return list.filter(alert => alert.source_ip.includes(ip));
@@ -301,6 +309,7 @@ function renderAlerts() {
   let filtered = [...allAlerts];
   filtered = filterByTime(filtered, alertTimeFilter);
   filtered = filterBySeverity(filtered, alertSeverityFilter);
+  filtered = filterByAlertId(filtered, alertIdFilter);
   filtered = filterByIP(filtered, ipFilter);
   filtered = filterByDestIP(filtered, destFilter);
   filtered = filterByLogContent(filtered, logFilter);
@@ -322,6 +331,7 @@ function renderEvidence() {
   let filtered = [...evidence];
   filtered = filterByTime(filtered, alertTimeFilter);
   filtered = filterBySeverity(filtered, alertSeverityFilter);
+  filtered = filterByAlertId(filtered, alertIdFilter);
   filtered = filterByIP(filtered, ipFilter);
   filtered = filterByDestIP(filtered, destFilter);
   filtered = filterByLogContent(filtered, logFilter);
@@ -346,6 +356,11 @@ document.getElementById('alert-severity-filter').addEventListener('change', e =>
 
 document.getElementById('sort-order').addEventListener('change', e => {
   sortOrder = e.target.value;
+  renderAlerts();
+});
+
+document.getElementById('alert-id-filter').addEventListener('input', e => {
+  alertIdFilter = e.target.value.trim();
   renderAlerts();
 });
 
