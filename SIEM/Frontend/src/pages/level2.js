@@ -200,81 +200,92 @@ function getTruePositives() {
   return alerts.filter(a => !isFalsePositive(a) && isInsiderThreatIndicator(a));
 }
 
-// === PHASE 1: ALERT TRIAGE (18 Questions) ===
+// === PHASE 1: ALERT TRIAGE (18 Questions with Alert IDs) ===
 function buildGeneralQuestions() {
   const fp = alerts.filter(isFalsePositive);
-  const tp = getTruePositives();
+  const tp = alerts.filter(a => !isFalsePositive(a) && isInsiderThreatIndicator(a));
   const questions = [];
 
-  // Q1-Q12: Individual Alert Classification
-  const mixedAlerts = [...tp.slice(0, 8), ...fp.slice(0, 4)].sort(() => Math.random() - 0.5);
+  // Q1-Q12: Individual Alert Classifications - Mixed TP & FP order
+  // Mix TP and FP alternately for better flow
+  const selectedAlerts = [];
+  for (let i = 0; i < 6; i++) {
+    if (tp[i]) selectedAlerts.push(tp[i]);
+    if (fp[i]) selectedAlerts.push(fp[i]);
+  }
   
-  mixedAlerts.forEach((alert, idx) => {
+  selectedAlerts.forEach((alert, idx) => {
     const isTP = !isFalsePositive(alert);
+    
     questions.push({
-      id: `q-classify-${idx}`,
+      id: `q${idx + 1}`,
       type: 'select',
-      title: `Alert ${alert.alert_id.substring(0, 12)}... - Classification?`,
-      hint: `Review: "${alert.linked_log?.['log.original']?.substring(0, 150) || 'No log data'}..."`,
+      title: `Alert ${alert.alert_id}`,
+      hint: isTP ? 'Insider threat pattern detected' : 'Look for service accounts, tickets, or scheduled jobs',
       options: [
         { value: 'true_positive', label: 'True Positive (Malicious)' },
         { value: 'false_positive', label: 'False Positive (Benign)' },
         { value: 'needs_context', label: 'Needs More Context' }
       ],
-      answer: isTP ? 'true_positive' : 'false_positive'
+      answer: isTP ? 'true_positive' : 'false_positive',
+      alertId: alert.alert_id
     });
   });
 
-  // Q13: Multi-Select False Positives ✨ NEW
-  const fpOptions = [
-    ...fp.slice(0, 10),
-    ...tp.slice(0, 3)
-  ].sort(() => Math.random() - 0.5);
+  // Q13: Multi-Select False Positives (mixed options)
+  const fpOptions = [...fp.slice(0, 8), ...tp.slice(0, 5)];
+  const shuffledFP = fpOptions.sort(() => Math.random() - 0.5);
   
   questions.push({
-    id: 'q-fp-multiselect',
+    id: 'q13',
     type: 'multiselect',
-    title: 'Which of these alerts are FALSE POSITIVES? (Select all that apply)',
-    hint: 'Look for service accounts, approved tickets, scheduled jobs, and legitimate business operations.',
-    options: fpOptions.map(a => ({
+    title: 'Q13: Which of these are FALSE POSITIVES? (Select all that apply)',
+    hint: 'Look for: Service accounts (SVC_*), Tickets (INC-*, CHG-*), Scheduled jobs',
+    options: shuffledFP.map(a => ({
       value: a.alert_id,
-      label: a.linked_log?.['log.original']?.substring(0, 80) || a.alert_id,
+      label: `Alert ${a.alert_id}`,
       isCorrect: isFalsePositive(a)
     })),
-    answer: fpOptions.filter(a => isFalsePositive(a)).map(a => a.alert_id).join(',')
+    minCorrect: 5
   });
 
-  // Q14: Top 5 Priority Alerts
+  // Q14: Top 5 Priority (mixed options)
+  const priorityOptions = [...tp.slice(0, 7), ...fp.slice(0, 4)];
+  const shuffledPriority = priorityOptions.sort(() => Math.random() - 0.5);
+  
   questions.push({
-    id: 'q-top5',
+    id: 'q14',
     type: 'multiselect',
-    title: 'Select the TOP 5 alerts requiring immediate investigation',
-    hint: 'Focus on data exfiltration, role violations, and DLP blocks.',
-    options: [...tp, ...fp.slice(0, 5)].map(a => ({
+    title: 'Q14: Select TOP 5 alerts for immediate investigation',
+    hint: 'Focus on: Data exfiltration, role violations, DLP blocks',
+    options: shuffledPriority.map(a => ({
       value: a.alert_id,
-      label: a.linked_log?.['log.original']?.substring(0, 80) || a.alert_id,
-      priority: isInsiderThreatIndicator(a) ? 1 : 0
-    })).sort((a, b) => b.priority - a.priority),
-    answer: tp.slice(0, 5).map(a => a.alert_id).join(','),
-    partialCredit: true
+      label: `Alert ${a.alert_id}`,
+      isCorrect: isInsiderThreatIndicator(a)
+    })),
+    minCorrect: 3
   });
 
   // Q15: Correlation
   questions.push({
-    id: 'q-correlation',
-    type: 'textarea',
-    title: 'Which alerts are part of the same incident? List the alert IDs (comma-separated)',
-    hint: 'All insider threat alerts (sarah.mitchell) belong to one incident.',
-    answer: tp.map(a => a.alert_id).sort().join(','),
-    placeholder: 'Enter alert IDs separated by commas'
+    id: 'q15',
+    type: 'select',
+    title: 'Q15: Are these alerts part of the SAME or SEPARATE incidents?',
+    hint: 'Same user (sarah.mitchell) + Timeline sequence + Attack pattern',
+    options: [
+      { value: 'same', label: 'Same incident (coordinated attack chain)' },
+      { value: 'separate', label: 'Separate unrelated incidents' },
+      { value: 'unclear', label: 'Unclear - needs investigation' }
+    ],
+    answer: 'same'
   });
 
   // Q16: Behavior Analysis
   questions.push({
-    id: 'q-behavior',
+    id: 'q16',
     type: 'select',
-    title: 'Which behavior is MOST suspicious?',
-    hint: 'Single indicators can be legitimate; combinations are stronger.',
+    title: 'Q16: Which behavior is MOST suspicious?',
+    hint: 'Single indicators can be legitimate; combinations are stronger',
     options: [
       { value: 'large_data', label: 'Large data access' },
       { value: 'off_hours', label: 'Off-hours activity' },
@@ -286,10 +297,10 @@ function buildGeneralQuestions() {
 
   // Q17: MITRE Mapping
   questions.push({
-    id: 'q-mitre',
+    id: 'q17',
     type: 'select',
-    title: 'Which MITRE ATT&CK technique best matches the observed behavior?',
-    hint: 'Attacker using legitimate credentials (no exploitation).',
+    title: 'Q17: Which MITRE ATT&CK technique best matches?',
+    hint: 'Valid credentials (sarah.mitchell) - no exploitation',
     options: [
       { value: 'T1078', label: 'T1078 – Valid Accounts' },
       { value: 'T1486', label: 'T1486 – Data Encrypted for Impact' },
@@ -301,15 +312,15 @@ function buildGeneralQuestions() {
 
   // Q18: Hypothesis
   questions.push({
-    id: 'q-hypothesis',
+    id: 'q18',
     type: 'select',
-    title: 'Which statement best describes the situation?',
-    hint: 'Consider the pattern: valid credentials, role violations, data collection, exfiltration.',
+    title: 'Q18: What best describes this situation?',
+    hint: 'Valid credentials + Purposeful actions + Data exfiltration',
     options: [
-      { value: 'isolated', label: 'Isolated alerts requiring individual investigation' },
-      { value: 'misconfiguration', label: 'System misconfiguration causing false alerts' },
-      { value: 'insider_threat', label: 'Suspicious internal user behavior indicating data theft' },
-      { value: 'external_attack', label: 'Active external attack campaign' }
+      { value: 'isolated', label: 'Isolated alerts (individual investigation)' },
+      { value: 'misconfiguration', label: 'System misconfiguration (false alerts)' },
+      { value: 'insider_threat', label: 'Insider threat (internal user stealing data)' },
+      { value: 'external_attack', label: 'External attack campaign' }
     ],
     answer: 'insider_threat'
   });
@@ -333,6 +344,21 @@ function renderGeneralQuestions() {
     card.className = 'bg-gray-800 p-4 rounded text-sm space-y-2 relative';
     card.dataset.qid = q.id;
     card.dataset.answer = q.answer || '';
+    // Store question metadata for proper evaluation
+    if (q.options) {
+      card.dataset.questionMeta = JSON.stringify({ 
+        options: q.options, 
+        type: q.type,
+        acceptAnswers: q.acceptAnswers,
+        minCorrect: q.minCorrect
+      });
+    }
+    if (q.minCorrect !== undefined) {
+      card.dataset.minCorrect = q.minCorrect;
+    }
+    if (q.acceptAnswers) {
+      card.dataset.acceptAnswers = JSON.stringify(q.acceptAnswers);
+    }
 
     let html = `<p class="text-blue-200 font-semibold mb-2">${q.title}</p>`;
     html += `<button class="hint-btn text-xs text-yellow-400 underline hover:text-yellow-300">💡 Show Hint (-5 points)</button>`;
@@ -392,80 +418,91 @@ function renderGeneralQuestions() {
 }
 
 function evaluateGeneralQuestions() {
-  // Use cached questions instead of rebuilding
   const questions = cachedGeneralQuestions;
+  if (!questions || questions.length === 0) {
+    console.error('[Evaluation Error] No cached questions found');
+    return;
+  }
+  
   const cards = document.querySelectorAll('#questions-container [data-qid]');
-  let correct = 0;
-
-  cards.forEach((card, idx) => {
-    // Skip if already evaluated (has border)
-    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
-      if (card.classList.contains('border-green-500')) correct++;
-      return;
+  let phase1Score = 0;
+  let phase1Correct = 0;
+  
+  cards.forEach(card => {
+    const qid = card.dataset.qid;
+    const correctAnswer = card.dataset.answer;
+    const points = 10; // Each question worth 10 points
+    
+    // Remove any existing border colors first
+    card.classList.remove('border-2', 'border-green-500', 'border-red-500');
+    
+    // Check if select question
+    const select = card.querySelector('select.answer-input');
+    if (select) {
+      const userAnswer = select.value;
+      if (userAnswer === correctAnswer) {
+        phase1Score += points;
+        phase1Correct++;
+        card.classList.add('border-2', 'border-green-500');
+      } else {
+        card.classList.add('border-2', 'border-red-500');
+      }
     }
-
-    const q = questions[idx];
-    const correctAnswer = card.dataset.answer.toLowerCase();
-    let userAnswer = '';
-    let isCorrect = false;
-
-    if (q.type === 'select') {
-      const select = card.querySelector('select.answer-input');
-      userAnswer = select ? select.value.toLowerCase() : '';
-      isCorrect = userAnswer === correctAnswer;
-    } 
-    else if (q.type === 'text' || q.type === 'textarea') {
-      const input = card.querySelector('.answer-input');
-      userAnswer = input ? input.value.trim().toLowerCase() : '';
-      
-      // Normalize comma-separated IDs
-      const userIds = userAnswer.split(',').map(s => s.trim()).filter(s => s).sort();
-      const correctIds = correctAnswer.split(',').map(s => s.trim()).filter(s => s).sort();
-      
-      // Allow 70% accuracy for alert IDs
-      const overlap = userIds.filter(id => correctIds.includes(id)).length;
-      const minRequired = Math.ceil(correctIds.length * 0.7);
-      isCorrect = overlap >= minRequired;
-    }
-    else if (q.type === 'multiselect') {
+    // Check if multiselect question
+    else {
       const checkboxes = card.querySelectorAll('input[type="checkbox"]:checked');
-      userAnswer = Array.from(checkboxes).map(cb => cb.value).sort().join(',');
-      const correctIds = correctAnswer.split(',').map(s => s.trim()).filter(s => s).sort();
-      const userIds = userAnswer.split(',').map(s => s.trim()).filter(s => s).sort();
+      const userIds = Array.from(checkboxes).map(cb => cb.value).filter(Boolean);
       
-      // Exact match or high overlap
-      const overlap = userIds.filter(id => correctIds.includes(id)).length;
-      const minRequired = Math.ceil(correctIds.length * 0.8);
-      isCorrect = overlap >= minRequired;
-    }
-
-    if (isCorrect) {
-      correct++;
-      score += 10;
-      card.classList.add('border-2', 'border-green-500');
-    } else {
-      card.classList.add('border-2', 'border-red-500');
+      // Get question metadata
+      let questionMeta = null;
+      try {
+        if (card.dataset.questionMeta) {
+          questionMeta = JSON.parse(card.dataset.questionMeta);
+        }
+      } catch (e) {}
+      
+      let isCorrect = false;
+      
+      if (questionMeta && questionMeta.options) {
+        const correctOptions = questionMeta.options.filter(opt => opt.isCorrect === true).map(opt => opt.value);
+        const wrongOptions = questionMeta.options.filter(opt => opt.isCorrect === false).map(opt => opt.value);
+        
+        const selectedCorrect = userIds.filter(id => correctOptions.includes(id)).length;
+        const selectedWrong = userIds.filter(id => wrongOptions.includes(id)).length;
+        const minRequired = Number(card.dataset.minCorrect || Math.ceil(correctOptions.length * 0.7));
+        
+        isCorrect = selectedCorrect >= minRequired && selectedWrong === 0;
+      } else {
+        // Fallback for old format
+        const correctIds = correctAnswer.split(',').map(s => s.trim()).filter(s => s);
+        const overlap = userIds.filter(id => correctIds.includes(id)).length;
+        const minRequired = Number(card.dataset.minCorrect || Math.ceil(correctIds.length * 0.7));
+        isCorrect = overlap >= minRequired;
+      }
+      
+      if (isCorrect) {
+        phase1Score += points;
+        phase1Correct++;
+        card.classList.add('border-2', 'border-green-500');
+      } else {
+        card.classList.add('border-2', 'border-red-500');
+      }
     }
   });
-
-  correctAnswers += correct;
-  updateScore();
-
-  // Check hypothesis (Q18) is correct
-  const hypothesisCard = Array.from(cards).find(c => c.dataset.qid === 'q-hypothesis');
-  const hypothesisCorrect = hypothesisCard?.classList.contains('border-green-500');
-
-  const percentage = Math.round((correct / cards.length) * 100);
   
-  if (percentage >= 65 && hypothesisCorrect) {
-    window.alert(`✅ Phase 1 Complete!\n\nScore: ${score} points\nAccuracy: ${percentage}%\n\nProceeding to Scenario Validation...`);
+  score += phase1Score;
+  correctAnswers += phase1Correct;
+  updateScore();
+  
+  const percentage = Math.round((phase1Correct / cards.length) * 100);
+  
+  // Must get 100% to proceed
+  if (percentage === 100) {
+    window.alert(`✅ Phase 1 Complete!\n\nCorrect: ${phase1Correct}/${cards.length}\nScore: +${phase1Score} points\n\nProceeding to Phase 2...`);
     showSection('scenario');
     renderScenarioQuestions();
   } else {
-    const msg = !hypothesisCorrect 
-      ? 'The hypothesis (Q18) must be correct to proceed.'
-      : `Need ≥65% accuracy (current: ${percentage}%). Review red-bordered questions.`;
-    window.alert(`❌ Phase 1 Incomplete\n\n${msg}`);
+    window.alert(`❌ Phase 1 Incomplete\n\nCorrect: ${phase1Correct}/${cards.length} (${percentage}%)\nScore: +${phase1Score} points\n\n⚠️ You must answer ALL questions correctly to proceed to Phase 2.\nReview the red-bordered questions.`);
   }
 }
 
@@ -481,7 +518,8 @@ function renderScenarioQuestions() {
       title: 'Q1: Based on all evidence, what type of attack occurred? (1-2 words)',
       hint: 'Think: Internal user, valid credentials, data theft.',
       placeholder: 'Attack Type',
-      pattern: /(insider.*threat|data.*exfiltration|insider.*data.*theft|internal.*breach)/i
+      // Accept English and Arabic synonyms
+      patternSource: 'insider.*threat|data.*exfiltration|insider.*data.*theft|internal.*breach|تهديد.*داخلي|تسريب.*بيانات|سرقة.*بيانات|اختراق.*داخلي'
     },
     {
       id: 'sc-evidence',
@@ -584,7 +622,14 @@ function renderScenarioQuestions() {
     card.className = 'bg-gray-800 p-4 rounded text-sm space-y-2 relative';
     card.dataset.qid = q.id;
     card.dataset.answer = q.answer || '';
-    card.dataset.pattern = q.pattern || '';
+    card.dataset.pattern = q.patternSource || '';
+    if (q.minCorrect) {
+      card.dataset.minCorrect = q.minCorrect;
+    }
+    // Store question metadata for proper evaluation
+    if (q.options) {
+      card.dataset.questionMeta = JSON.stringify({ options: q.options, type: q.type });
+    }
 
     let html = `<p class="text-blue-200 font-semibold mb-2">${q.title}</p>`;
     html += `<button class="hint-btn text-xs text-yellow-400 underline hover:text-yellow-300">💡 Show Hint (-5 points)</button>`;
@@ -641,65 +686,101 @@ function renderScenarioQuestions() {
 
 function evaluateScenarioQuestions() {
   const cards = document.querySelectorAll('#scenario-container [data-qid]');
-  let correct = 0;
+  let phase2Score = 0;
+  let phase2Correct = 0;
 
   cards.forEach(card => {
-    // Skip if already evaluated
-    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
-      if (card.classList.contains('border-green-500')) correct++;
-      return;
-    }
-
     const qid = card.dataset.qid;
-    const correctAnswer = card.dataset.answer.toLowerCase();
-    const pattern = card.dataset.pattern;
-    let userAnswer = '';
-    let isCorrect = false;
-
+    const correctAnswer = card.dataset.answer;
+    const points = qid === 'sc-attack-type' || qid === 'sc-evidence' || qid === 'sc-mitre-techniques' ? 15 : 10;
+    
+    // Check if select question
     const select = card.querySelector('select.answer-input');
     const input = card.querySelector('input.answer-input');
     const checkboxes = card.querySelectorAll('input[type="checkbox"]:checked');
-
+    
     if (select) {
-      userAnswer = select.value.toLowerCase();
-      isCorrect = userAnswer === correctAnswer;
+      const userAnswer = select.value;
+      if (userAnswer === correctAnswer) {
+        phase2Score += points;
+        phase2Correct++;
+        card.classList.add('border-2', 'border-green-500');
+      } else {
+        card.classList.add('border-2', 'border-red-500');
+      }
     } else if (input) {
-      userAnswer = input.value.trim().toLowerCase();
+      const userAnswer = input.value.trim().toLowerCase();
+      const pattern = card.dataset.pattern;
+      let isCorrect = false;
+      
       if (pattern) {
-        const regex = new RegExp(pattern.slice(1, -2), 'i');
+        const regex = new RegExp(pattern, 'i');
         isCorrect = regex.test(userAnswer);
       } else {
-        isCorrect = userAnswer === correctAnswer;
+        isCorrect = userAnswer === correctAnswer.toLowerCase();
+      }
+      
+      if (isCorrect) {
+        phase2Score += points;
+        phase2Correct++;
+        card.classList.add('border-2', 'border-green-500');
+      } else {
+        card.classList.add('border-2', 'border-red-500');
       }
     } else if (checkboxes.length > 0) {
-      userAnswer = Array.from(checkboxes).map(cb => cb.value).sort().join(',');
-      const userIds = userAnswer.split(',');
-      const correctIds = correctAnswer.split(',');
-      const overlap = userIds.filter(id => correctIds.includes(id)).length;
-      isCorrect = overlap >= Math.ceil(correctIds.length * 0.7);
-    }
-
-    if (isCorrect) {
-      correct++;
-      const points = qid === 'sc-attack-type' ? 15 : 
-                     qid === 'sc-evidence' || qid === 'sc-mitre-techniques' ? 15 : 10;
-      score += points;
-      card.classList.add('border-2', 'border-green-500');
-    } else {
-      card.classList.add('border-2', 'border-red-500');
+      const userIds = Array.from(checkboxes).map(cb => cb.value).filter(Boolean);
+      
+      // Get question metadata
+      let questionMeta = null;
+      try {
+        if (card.dataset.questionMeta) {
+          questionMeta = JSON.parse(card.dataset.questionMeta);
+        }
+      } catch (e) {}
+      
+      if (questionMeta && questionMeta.options) {
+        const correctOptions = questionMeta.options.filter(opt => opt.isCorrect).map(opt => opt.value);
+        const wrongOptions = questionMeta.options.filter(opt => opt.isCorrect === false).map(opt => opt.value);
+        
+        const selectedCorrect = userIds.filter(id => correctOptions.includes(id)).length;
+        const selectedWrong = userIds.filter(id => wrongOptions.includes(id)).length;
+        const minRequired = Number(card.dataset.minCorrect || Math.ceil(correctOptions.length * 0.7));
+        
+        if (selectedCorrect >= minRequired && selectedWrong === 0) {
+          phase2Score += points;
+          phase2Correct++;
+          card.classList.add('border-2', 'border-green-500');
+        } else {
+          card.classList.add('border-2', 'border-red-500');
+        }
+      } else {
+        const correctIds = correctAnswer.split(',').filter(Boolean);
+        const overlap = userIds.filter(id => correctIds.includes(id)).length;
+        const minRequired = Math.max(Math.ceil(correctIds.length * 0.7), Number(card.dataset.minCorrect || 0));
+        
+        if (overlap >= minRequired) {
+          phase2Score += points;
+          phase2Correct++;
+          card.classList.add('border-2', 'border-green-500');
+        } else {
+          card.classList.add('border-2', 'border-red-500');
+        }
+      }
     }
   });
 
-  correctAnswers += correct;
+  score += phase2Score;
+  correctAnswers += phase2Correct;
   updateScore();
 
-  const percentage = Math.round((correct / cards.length) * 100);
+  const percentage = Math.round((phase2Correct / cards.length) * 100);
 
-  if (percentage >= 70) {
-    window.alert(`✅ Phase 2 Complete!\n\nScore: ${score} points\nAccuracy: ${percentage}%\n\nProceeding to Incident Ticket Creation...`);
+  // Must get 100% to proceed
+  if (percentage === 100) {
+    window.alert(`✅ Phase 2 Complete!\n\nCorrect: ${phase2Correct}/${cards.length}\nScore: +${phase2Score} points\n\nProceeding to Incident Ticket...`);
     showSection('ticket');
   } else {
-    window.alert(`❌ Phase 2 Incomplete\n\nNeed ≥70% accuracy (current: ${percentage}%). Critical questions must be correct.`);
+    window.alert(`❌ Phase 2 Incomplete\n\nCorrect: ${phase2Correct}/${cards.length} (${percentage}%)\nScore: +${phase2Score} points\n\n⚠️ You must answer ALL questions correctly to proceed.\nReview the red-bordered questions.`);
   }
 }
 
@@ -812,6 +893,8 @@ document.getElementById('view-answerkey')?.addEventListener('click', () => {
 // === LOAD ALERTS ===
 function loadAlerts() {
   const timestamp = Date.now();
+  // Clear cached questions so new data regenerates deterministic question set
+  cachedGeneralQuestions = null;
   fetch(`data/level2/alerts.json?t=${timestamp}`)
     .then(res => res.json())
     .then(data => {

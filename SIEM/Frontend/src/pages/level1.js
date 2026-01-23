@@ -756,6 +756,8 @@ function drawPerformanceCharts(accuracy, finalScore, correct, total) {
 async function loadAlerts() {
   try {
     const timestamp = new Date().getTime();
+    // Clear cached questions so a new run regenerates deterministically
+    cachedGeneralQuestions = null;
     const res = await fetch(`data/level1/alerts.json?t=${timestamp}`);
     if (!res.ok) throw new Error('Failed to fetch alerts');
     
