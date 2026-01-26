@@ -1,0 +1,8 @@
+Jan 12 08:17:02 server sudo: developer : user NOT in sudoers ; TTY=pts/1 ; PWD=/home/developer ; COMMAND=/bin/bash
+Jan 12 08:17:15 server sudo: developer : TTY=pts/1 ; PWD=/home/developer ; USER=root ; COMMAND=/usr/bin/id
+Jan 12 08:17:15 server sudo: pam_unix(sudo:session): session opened for user root by developer(uid=1002)
+Jan 12 08:17:18 server sudo: developer : TTY=pts/1 ; PWD=/home/developer ; USER=root ; COMMAND=/bin/bash
+Jan 12 08:17:20 server sudo: pam_unix(sudo:session): session opened for user root by developer(uid=1002)
+Jan 12 09:25:12 server sudo: admin : TTY=pts/2 ; PWD=/root ; USER=root ; COMMAND=/bin/bash
+Jan 12 09:25:15 server sudo: pam_unix(sudo:session): session opened for user root by admin(uid=1001)
+Jan 12 09:25:20 server sudo: admin : TTY=pts/2 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/apt update

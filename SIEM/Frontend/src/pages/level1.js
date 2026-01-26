@@ -370,11 +370,8 @@ function evaluateGeneralQuestions() {
   let correct = 0;
 
   cards.forEach(card => {
-    // Skip if already evaluated
-    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
-      if (card.classList.contains('border-green-500')) correct++;
-      return;
-    }
+    // Remove borders to allow re-evaluation
+    card.classList.remove('border-2', 'border-green-500', 'border-red-500');
 
     const input = card.querySelector('.answer-input');
     if (!input) return;
@@ -416,14 +413,17 @@ function evaluateGeneralQuestions() {
 
     if (isCorrect) {
       correct++;
-      score += 10;
       card.classList.add('border-2', 'border-green-500');
     } else {
       card.classList.add('border-2', 'border-red-500');
     }
   });
 
-  correctAnswers += correct;
+  // Award points only for newly correct answers
+  const previousCorrect = correctAnswers;
+  correctAnswers = correct;
+  const newlyCorrect = Math.max(0, correct - previousCorrect);
+  score += newlyCorrect * 10;
   updateScore();
 
   if (correct === cards.length) {
@@ -537,11 +537,8 @@ function evaluateScenarioQuestions() {
   let correct = 0;
 
   cards.forEach(card => {
-    // Skip if already evaluated
-    if (card.classList.contains('border-green-500') || card.classList.contains('border-red-500')) {
-      if (card.classList.contains('border-green-500')) correct++;
-      return;
-    }
+    // Remove borders to allow re-evaluation
+    card.classList.remove('border-2', 'border-green-500', 'border-red-500');
 
     const input = card.querySelector('.answer-input');
     if (!input) return;
@@ -571,15 +568,19 @@ function evaluateScenarioQuestions() {
 
     if (isCorrect) {
       correct++;
-      score += 20;
       card.classList.add('border-2', 'border-green-500');
     } else {
       card.classList.add('border-2', 'border-red-500');
     }
   });
 
-  correctAnswers += correct;
-  totalQuestions += cards.length;
+  // Award points only once for all correct answers in this phase
+  const phase2Questions = cards.length;
+  const previousPhase2Correct = totalQuestions > 0 ? correctAnswers - (totalQuestions - phase2Questions) : 0;
+  const newlyCorrect = Math.max(0, correct - previousPhase2Correct);
+  score += newlyCorrect * 20;
+  correctAnswers = (totalQuestions > 0 ? totalQuestions - phase2Questions : 0) + correct;
+  totalQuestions = totalQuestions > 0 ? totalQuestions : phase2Questions;
   updateScore();
 
   if (correct === cards.length) {

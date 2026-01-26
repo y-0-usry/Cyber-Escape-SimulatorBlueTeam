@@ -16,6 +16,9 @@ let timeExtensions = 0;
 let impactLevel = 0;
 let impactInterval = null;
 let cachedGeneralQuestions = null; // Cache questions to avoid re-randomization
+let phase1CorrectCount = 0;
+let phase2CorrectCount = 0;
+let ticketSubmitted = false;
 
 // === UTILITY: Get Alerts Data Path ===
 function getAlertsPath(level) {
@@ -136,6 +139,9 @@ function handleReset() {
   timeExtensions = 0;
   impactLevel = 0;
   cachedGeneralQuestions = null; // Clear cached questions for new attempt
+  phase1CorrectCount = 0;
+  phase2CorrectCount = 0;
+  ticketSubmitted = false;
   
   updateScore();
   updateImpactDisplay();
@@ -446,8 +452,14 @@ function evaluateGeneralQuestions() {
     const correctAnswer = card.dataset.answer;
     const points = 10; // Each question worth 10 points
     
-    // Remove any existing border colors first
-    card.classList.remove('border-2', 'border-green-500', 'border-red-500');
+    // If already correct, count it but don't re-award points
+    if (card.classList.contains('border-green-500')) {
+      phase1Correct++;
+      return;
+    }
+    
+    // Remove red border to allow re-evaluation
+    card.classList.remove('border-2', 'border-red-500');
     
     // Check if select question
     const select = card.querySelector('select.answer-input');
@@ -504,18 +516,20 @@ function evaluateGeneralQuestions() {
   });
   
   score += phase1Score;
-  correctAnswers += phase1Correct;
+  // Update idempotent correct count
+  phase1CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  correctAnswers = phase1CorrectCount + phase2CorrectCount;
   updateScore();
   
-  const percentage = Math.round((phase1Correct / cards.length) * 100);
+  const percentage = Math.round((phase1CorrectCount / cards.length) * 100);
   
   // Must get 100% to proceed
   if (percentage === 100) {
-    window.alert(`✅ Phase 1 Complete!\n\nCorrect: ${phase1Correct}/${cards.length}\nScore: +${phase1Score} points\n\nProceeding to Phase 2...`);
+    window.alert(`✅ Phase 1 Complete!\n\nCorrect: ${phase1CorrectCount}/${cards.length}\nScore: +${phase1Score} points\n\nProceeding to Phase 2...`);
     showSection('scenario');
     renderScenarioQuestions();
   } else {
-    window.alert(`❌ Phase 1 Incomplete\n\nCorrect: ${phase1Correct}/${cards.length} (${percentage}%)\nScore: +${phase1Score} points\n\n⚠️ You must answer ALL questions correctly to proceed to Phase 2.\nReview the red-bordered questions.`);
+    window.alert(`❌ Phase 1 Incomplete\n\nCorrect: ${phase1CorrectCount}/${cards.length} (${percentage}%)\nScore: +${phase1Score} points\n\n⚠️ You must answer ALL questions correctly to proceed to Phase 2.\nReview the red-bordered questions.`);
   }
 }
 
@@ -532,7 +546,7 @@ function renderScenarioQuestions() {
       hint: 'Think: Internal user, valid credentials, data theft.',
       placeholder: 'Attack Type',
       // Accept English and Arabic synonyms
-      patternSource: 'insider.*threat|data.*exfiltration|insider.*data.*theft|internal.*breach|تهديد.*داخلي|تسريب.*بيانات|سرقة.*بيانات|اختراق.*داخلي'
+      patternSource: 'insider.*threat|insider.*attack|data.*exfiltration|insider.*data.*theft|internal.*breach|insider|exfiltration|data.*theft|internal.*threat|تهديد.*داخلي|تسريب.*بيانات|سرقة.*بيانات|اختراق.*داخلي'
     },
     {
       id: 'sc-evidence',
@@ -707,6 +721,15 @@ function evaluateScenarioQuestions() {
     const correctAnswer = card.dataset.answer;
     const points = qid === 'sc-attack-type' || qid === 'sc-evidence' || qid === 'sc-mitre-techniques' ? 15 : 10;
     
+    // If already correct, count it but don't re-award points
+    if (card.classList.contains('border-green-500')) {
+      phase2Correct++;
+      return;
+    }
+    
+    // Remove red border to allow re-evaluation
+    card.classList.remove('border-2', 'border-red-500');
+
     // Check if select question
     const select = card.querySelector('select.answer-input');
     const input = card.querySelector('input.answer-input');
@@ -783,17 +806,18 @@ function evaluateScenarioQuestions() {
   });
 
   score += phase2Score;
-  correctAnswers += phase2Correct;
+  phase2CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  correctAnswers = phase1CorrectCount + phase2CorrectCount;
   updateScore();
 
-  const percentage = Math.round((phase2Correct / cards.length) * 100);
+  const percentage = Math.round((phase2CorrectCount / cards.length) * 100);
 
   // Must get 100% to proceed
   if (percentage === 100) {
-    window.alert(`✅ Phase 2 Complete!\n\nCorrect: ${phase2Correct}/${cards.length}\nScore: +${phase2Score} points\n\nProceeding to Incident Ticket...`);
+    window.alert(`✅ Phase 2 Complete!\n\nCorrect: ${phase2CorrectCount}/${cards.length}\nScore: +${phase2Score} points\n\nProceeding to Incident Ticket...`);
     showSection('ticket');
   } else {
-    window.alert(`❌ Phase 2 Incomplete\n\nCorrect: ${phase2Correct}/${cards.length} (${percentage}%)\nScore: +${phase2Score} points\n\n⚠️ You must answer ALL questions correctly to proceed.\nReview the red-bordered questions.`);
+    window.alert(`❌ Phase 2 Incomplete\n\nCorrect: ${phase2CorrectCount}/${cards.length} (${percentage}%)\nScore: +${phase2Score} points\n\n⚠️ You must answer ALL questions correctly to proceed.\nReview the red-bordered questions.`);
   }
 }
 
@@ -811,9 +835,11 @@ function evaluateTicket() {
   if (/(insider|exfiltration|data.*theft)/i.test(attackType)) ticketScore += 10;
   if (summary.length >= 50) ticketScore += 10;
   if (/sarah\.mitchell|DLP|Google.*Drive|repository/i.test(summary)) ticketScore += 10;
-
-  score += ticketScore;
-  correctAnswers += ticketScore >= 40 ? 1 : 0;
+  if (!ticketSubmitted) {
+    score += ticketScore;
+    correctAnswers += ticketScore >= 40 ? 1 : 0;
+    ticketSubmitted = true;
+  }
   updateScore();
 
   showFinalResults();

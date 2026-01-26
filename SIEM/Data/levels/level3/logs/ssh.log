@@ -1,0 +1,10 @@
+Jan 12 08:15:21 server sshd[4215]: Failed password for invalid user admin from 185.122.21.55 port 45811 ssh2
+Jan 12 08:15:23 server sshd[4217]: Failed password for root from 185.122.21.55 port 45812 ssh2
+Jan 12 08:15:26 server sshd[4221]: Failed password for root from 185.122.21.55 port 45818 ssh2
+Jan 12 08:15:30 server sshd[4224]: Failed password for developer from 185.122.21.55 port 45820 ssh2
+Jan 12 08:16:15 server sshd[4230]: Accepted password for developer from 185.122.21.55 port 45821 ssh2
+Jan 12 08:16:20 server sshd[4230]: pam_unix(sshd:session): session opened for user developer(uid=1002) by (uid=0)
+Jan 12 09:20:45 server sshd[5612]: Accepted publickey for admin from 192.168.1.100 port 52341 ssh2
+Jan 12 09:20:50 server sshd[5612]: pam_unix(sshd:session): session opened for user admin(uid=1001) by (uid=0)
+Jan 12 10:15:33 server sshd[6234]: Failed password for invalid user guest from 203.45.67.89 port 38234 ssh2
+Jan 12 10:15:35 server sshd[6235]: Failed password for invalid user guest from 203.45.67.89 port 38235 ssh2

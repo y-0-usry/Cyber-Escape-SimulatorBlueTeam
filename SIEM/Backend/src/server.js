@@ -92,6 +92,32 @@ app.get('/AnswerKey2.html', (req, res) => {
   res.redirect('/AnswerKey_Level2.html');
 });
 
+// Level 3 game page
+app.get('/level3', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'Level3.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving Level3.html');
+    }
+  });
+});
+
+// Answer Key Level 3 page
+app.get('/LEVEL3_ANSWERS', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'LEVEL3_ANSWERS.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving LEVEL3_ANSWERS.html');
+    }
+  });
+});
+
+app.get('/LEVEL3_ANSWERS.html', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'LEVEL3_ANSWERS.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving LEVEL3_ANSWERS.html');
+    }
+  });
+});
+
 // Catch-all for non-existent routes
 app.use((req, res) => {
   res.status(404).send('Page not found');
