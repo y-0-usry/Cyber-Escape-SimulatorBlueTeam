@@ -1,0 +1,151 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin1",
+      "password": "pass1",
+      "token": null,
+      "profile": {
+        "bio": "Admin user",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 2,
+      "username": "viewer2",
+      "password": "pass2",
+      "token": null,
+      "profile": {
+        "bio": "Viewer user",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 3,
+      "username": "creator3",
+      "password": "pass3",
+      "token": null,
+      "profile": {
+        "bio": "Creator user",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 4,
+      "username": "newuser4",
+      "password": "pass4",
+      "token": null,
+      "profile": {
+        "bio": "New user",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 5,
+      "username": "test",
+      "password": "123456",
+      "token": null,
+      "profile": {
+        "bio": "",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 6,
+      "username": "tessss",
+      "password": "123456",
+      "token": "7e9a9fd6515fab10f7cae60f6d23ba7b951a2b24aa9b3a22f2bb2ce86851f0b1",
+      "profile": {
+        "bio": "",
+        "avatar": ""
+      },
+      "subscribed": false
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Project A",
+      "description": "A sample collaborative project.",
+      "creator_id": 1,
+      "members": [
+        {
+          "user_id": 2,
+          "role": "viewer",
+          "purchased": false
+        }
+      ],
+      "notes": [
+        {
+          "id": 1,
+          "content": "Welcome to Project A",
+          "comments": [],
+          "created_at": "2025-08-26T16:36:43.371Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Sample Task",
+          "description": "Do something",
+          "status": "pending",
+          "assigned_to": null,
+          "comments": [],
+          "created_at": "2025-08-26T16:36:43.371Z"
+        }
+      ],
+      "files": [
+        {
+          "id": 1,
+          "name": "sample.txt",
+          "content": "Sample file content",
+          "uploaded_by": 1,
+          "created_at": "2025-08-26T16:36:43.371Z"
+        }
+      ],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 1,
+          "message": "Project A created",
+          "timestamp": "2025-08-26T16:36:43.371Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Project B",
+      "description": "Another project for testing.",
+      "creator_id": 3,
+      "members": [],
+      "notes": [
+        {
+          "id": 1,
+          "content": "Welcome to Project B",
+          "comments": [],
+          "created_at": "2025-08-26T16:36:43.371Z"
+        }
+      ],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 3,
+          "message": "Project B created",
+          "timestamp": "2025-08-26T16:36:43.371Z"
+        }
+      ]
+    }
+  ],
+  "exploits": {},
+  "notifications": [],
+  "trash": []
+}
