@@ -14,6 +14,19 @@ let impactLevel = 0; // Progressive alert impact (0-100)
 let impactInterval = null; // Timer for progressive impact
 let cachedGeneralQuestions = null; // Cache questions to prevent re-evaluation
 
+// === UTILITY: Get Alerts Data Path ===
+function getAlertsPath(level) {
+  const basePaths = [
+    `data/${level}/alerts.json`,
+    `./data/${level}/alerts.json`,
+    `../pages/data/${level}/alerts.json`,
+    `/SIEM/Frontend/src/pages/data/${level}/alerts.json`,
+    // Dynamic path based on current location
+    `${window.location.pathname.split('/').slice(0, -1).join('/')}/data/${level}/alerts.json`
+  ];
+  return basePaths;
+}
+
 // === DOM SECTIONS ===
 const sections = {
   intro: document.getElementById('intro-section'),
@@ -377,9 +390,16 @@ function evaluateGeneralQuestions() {
       
       // Q1: False Positives - allow 70% accuracy
       if (card.dataset.qid === 'q-fp-ids') {
-        const overlap = userIds.filter(id => correctIds.includes(id)).length;
-        const minRequired = Math.ceil(correctIds.length * 0.7);
-        isCorrect = overlap >= minRequired;
+        // Must provide an answer if there are false positives to find
+        if (correctIds.length === 0) {
+          isCorrect = userIds.length === 0; // If no FPs exist, answer should be empty
+        } else if (userIds.length === 0) {
+          isCorrect = false; // User didn't answer but there are FPs to find
+        } else {
+          const overlap = userIds.filter(id => correctIds.includes(id)).length;
+          const minRequired = Math.ceil(correctIds.length * 0.7);
+          isCorrect = overlap >= minRequired;
+        }
       }
       // Q11: IP address - exact match
       else if (card.dataset.qid === 'q-compromised-ip') {
@@ -758,10 +778,34 @@ async function loadAlerts() {
     const timestamp = new Date().getTime();
     // Clear cached questions so a new run regenerates deterministically
     cachedGeneralQuestions = null;
-    const res = await fetch(`data/level1/alerts.json?t=${timestamp}`);
-    if (!res.ok) throw new Error('Failed to fetch alerts');
     
-    const data = await res.json();
+    // Get all possible paths
+    const possiblePaths = getAlertsPath('level1').map(p => `${p}?t=${timestamp}`);
+    
+    let data = null;
+    let lastError = null;
+
+    for (const path of possiblePaths) {
+      try {
+        console.log(`Trying to load alerts from: ${path}`);
+        const res = await fetch(path);
+        if (!res.ok) {
+          console.warn(`HTTP ${res.status} from ${path}`);
+          continue;
+        }
+        data = await res.json();
+        console.log(`✅ Successfully loaded alerts from: ${path}`);
+        break;
+      } catch (err) {
+        lastError = err;
+        console.warn(`Failed to load from ${path}: ${err.message}`);
+      }
+    }
+
+    if (!data) {
+      throw lastError || new Error('Could not load alerts from any path');
+    }
+
     if (!Array.isArray(data) || data.length === 0) {
       throw new Error('No alerts data received');
     }
@@ -784,7 +828,8 @@ async function loadAlerts() {
     }
   } catch (err) {
     console.error('❌ Error loading alerts:', err);
-    window.alert(`Failed to load alerts: ${err.message}\n\nPlease run: node processAllLogs.js level1 from SIEM/Backend/src/`);
+    const paths = getAlertsPath('level1').join('\n- ');
+    window.alert(`Failed to load alerts: ${err.message}\n\nTried paths:\n- ${paths}\n\nPlease run: node processAllLogs.js level1 from SIEM/Backend/src/`);
   }
 }
 
@@ -822,5 +867,3 @@ if (freeHints > 0) {
     }
   });
 }
-
-loadAlerts();

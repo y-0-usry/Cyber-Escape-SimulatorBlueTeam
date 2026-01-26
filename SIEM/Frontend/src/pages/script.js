@@ -470,20 +470,39 @@ async function loadAlerts(level) {
   updateInvestigationStatus();
 
   const timestamp = new Date().getTime();
-  const path = `data/${level}/alerts.json?t=${timestamp}`;
+  // Try multiple possible paths
+  const possiblePaths = [
+    `data/${level}/alerts.json?t=${timestamp}`,
+    `../data/${level}/alerts.json?t=${timestamp}`,
+    `/SIEM/Frontend/src/pages/data/${level}/alerts.json?t=${timestamp}`
+  ];
 
-  try {
-    const res = await fetch(path);
-    const alerts = await res.json();
-    allAlerts = alerts;
-    renderAlerts();
-    updateThreatSummary(alerts);
-    updateDashboardSummary(alerts);
-    renderSeverityChart(alerts);
-    logAction(`Loaded ${alerts.length} alerts from ${level}`);
-  } catch (err) {
-    alertsContainer.innerHTML = `<p class="text-red-500">Failed to load alerts for ${level}. Error: ${err.message}</p>`;
-    console.error(err);
+  let success = false;
+  let lastError = null;
+
+  for (const path of possiblePaths) {
+    try {
+      const res = await fetch(path);
+      if (!res.ok) continue;
+      const alerts = await res.json();
+      allAlerts = alerts;
+      renderAlerts();
+      updateThreatSummary(alerts);
+      updateDashboardSummary(alerts);
+      renderSeverityChart(alerts);
+      logAction(`Loaded ${alerts.length} alerts from ${level}`);
+      success = true;
+      console.log(`Successfully loaded alerts from: ${path}`);
+      break;
+    } catch (err) {
+      lastError = err;
+      console.log(`Failed to load from ${path}: ${err.message}`);
+    }
+  }
+
+  if (!success) {
+    alertsContainer.innerHTML = `<p class="text-red-500">Failed to load alerts for ${level}. Error: ${lastError?.message}. Please check that the data files exist.</p>`;
+    console.error('All attempts to load alerts failed:', lastError);
   }
 }
 

@@ -17,6 +17,19 @@ let impactLevel = 0;
 let impactInterval = null;
 let cachedGeneralQuestions = null; // Cache questions to avoid re-randomization
 
+// === UTILITY: Get Alerts Data Path ===
+function getAlertsPath(level) {
+  const basePaths = [
+    `data/${level}/alerts.json`,
+    `./data/${level}/alerts.json`,
+    `../pages/data/${level}/alerts.json`,
+    `/SIEM/Frontend/src/pages/data/${level}/alerts.json`,
+    // Dynamic path based on current location
+    `${window.location.pathname.split('/').slice(0, -1).join('/')}/data/${level}/alerts.json`
+  ];
+  return basePaths;
+}
+
 // === DOM SECTIONS ===
 const sections = {
   intro: document.getElementById('intro-section'),
@@ -864,11 +877,6 @@ function showFinalResults() {
     <li>🔥 Impact Penalty: -${impactPenalty} points</li>
     <li>💡 Hints Used: ${hintsUsed}</li>
     <li>⏰ Time Extensions: ${timeExtensions}</li>
-  `;
-
-  showSection('final');
-}
-
 // === EVENT LISTENERS ===
 document.getElementById('start-btn').addEventListener('click', () => {
   loadAlerts();
@@ -895,20 +903,47 @@ function loadAlerts() {
   const timestamp = Date.now();
   // Clear cached questions so new data regenerates deterministic question set
   cachedGeneralQuestions = null;
-  fetch(`data/level2/alerts.json?t=${timestamp}`)
-    .then(res => res.json())
-    .then(data => {
-      alerts = data;
-      if (!alerts || alerts.length < 20) {
-        window.alert('⚠️ Not enough alerts generated. Please run:\n\nnode processAllLogs.js level2');
-        return;
-      }
-      startTimer();
-      showSection('questions');
-      renderGeneralQuestions();
-    })
-    .catch(err => {
-      console.error('Failed to load alerts:', err);
-      window.alert('❌ Error loading alerts. Check the console.');
-    });
+  
+  // Get all possible paths
+  const possiblePaths = getAlertsPath('level2').map(p => `${p}?t=${timestamp}`);
+
+  const tryLoadFromPaths = (pathIndex) => {
+    if (pathIndex >= possiblePaths.length) {
+      // All paths failed
+      const pathsStr = getAlertsPath('level2').join('\n- ');
+      window.alert(`❌ Error loading alerts. Check the console.\n\nTried paths:\n- ${pathsStr}`);
+      console.error('Failed to load alerts from all paths');
+      return;
+    }
+
+    const path = possiblePaths[pathIndex];
+    console.log(`Trying to load alerts from: ${path}`);
+
+    fetch(path)
+      .then(res => {
+        if (!res.ok) {
+          console.warn(`HTTP ${res.status} from ${path}`);
+          throw new Error(`HTTP ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        alerts = data;
+        if (!alerts || alerts.length < 20) {
+          window.alert('⚠️ Not enough alerts generated. Please run:\n\nnode processAllLogs.js level2');
+          return;
+        }
+        console.log(`✅ Successfully loaded ${alerts.length} alerts from: ${path}`);
+        startTimer();
+        showSection('questions');
+        renderGeneralQuestions();
+      })
+      .catch(err => {
+        console.warn(`Failed to load from ${path}: ${err.message}`);
+        // Try next path
+        tryLoadFromPaths(pathIndex + 1);
+      });
+  };
+
+  tryLoadFromPaths(0);
 }
