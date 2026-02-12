@@ -9,7 +9,6 @@
         .hero { background: linear-gradient(to right, #007bff, #6610f2); color: white; padding: 100px 0; text-align: center; border-radius: 0 0 20px 20px; }
         .feature-card { border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background: white; border-radius: 10px; padding: 20px; }
         footer { background: #343a40; color: white; padding: 20px 0; border-top: 1px solid #dee2e6; }
-        .hint-box { display: none; background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin-top: 20px; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -64,17 +63,6 @@
         </div>
     </section>
 
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Ready to Collaborate?</h2>
-            <p class="text-center">Join thousands of teams using ProjectCollab to streamline their workflows.</p>
-            <div class="text-center">
-                <button class="btn btn-primary" onclick="showNextHint()">Get Hint for Advanced Users</button>
-                <div id="hints" class="hint-box"></div>
-            </div>
-        </div>
-    </section>
-
     <footer class="text-center">
         <div class="container">
             <p>&copy; 2025 ProjectCollab. All rights reserved.</p>
@@ -83,25 +71,5 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const hints = [
-            "Examine the role change mechanism closely. Sometimes, the server might accept unexpected values in requests.",
-            "With elevated access, try performing operations on resources you may not fully control.",
-            "Client-side security checks can be bypassed by inspecting and modifying local storage or cookies.",
-            "Sending multiple simultaneous requests might allow bypassing limits on actions like creating or restoring projects.",
-            "Deleted items in trash can be restored, but try parallel requests to exceed limits."
-        ];
-        let hintIndex = 0;
-        function showNextHint() {
-            const hintsDiv = document.getElementById('hints');
-            if (hintIndex < hints.length) {
-                const p = document.createElement('p');
-                p.innerText = `Hint ${hintIndex + 1}: ${hints[hintIndex]}`;
-                hintsDiv.appendChild(p);
-                hintIndex++;
-            }
-            hintsDiv.style.display = 'block';
-        }
-    </script>
 </body>
 </html>

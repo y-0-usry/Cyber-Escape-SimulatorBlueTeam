@@ -46,22 +46,11 @@
     },
     {
       "id": 5,
-      "username": "test",
-      "password": "123456",
+      "username": "attacker1",
+      "password": "exploit123",
       "token": null,
       "profile": {
-        "bio": "",
-        "avatar": ""
-      },
-      "subscribed": false
-    },
-    {
-      "id": 6,
-      "username": "tessss",
-      "password": "123456",
-      "token": "7e9a9fd6515fab10f7cae60f6d23ba7b951a2b24aa9b3a22f2bb2ce86851f0b1",
-      "profile": {
-        "bio": "",
+        "bio": "Attacker account for Red Team Lab",
         "avatar": ""
       },
       "subscribed": false
@@ -85,7 +74,13 @@
           "id": 1,
           "content": "Welcome to Project A",
           "comments": [],
-          "created_at": "2025-08-26T16:36:43.371Z"
+          "created_at": "2026-02-12T14:48:29.544Z"
+        },
+        {
+          "id": 2,
+          "content": "FLAG{youm_wara_youm_habiby_magani_noum}",
+          "comments": [],
+          "created_at": "2026-02-12T14:48:29.545Z"
         }
       ],
       "tasks": [
@@ -96,7 +91,7 @@
           "status": "pending",
           "assigned_to": null,
           "comments": [],
-          "created_at": "2025-08-26T16:36:43.371Z"
+          "created_at": "2026-02-12T14:48:29.545Z"
         }
       ],
       "files": [
@@ -105,7 +100,7 @@
           "name": "sample.txt",
           "content": "Sample file content",
           "uploaded_by": 1,
-          "created_at": "2025-08-26T16:36:43.371Z"
+          "created_at": "2026-02-12T14:48:29.545Z"
         }
       ],
       "activity": [
@@ -114,7 +109,7 @@
           "type": "project_created",
           "user_id": 1,
           "message": "Project A created",
-          "timestamp": "2025-08-26T16:36:43.371Z"
+          "timestamp": "2026-02-12T14:48:29.545Z"
         }
       ]
     },
@@ -129,7 +124,7 @@
           "id": 1,
           "content": "Welcome to Project B",
           "comments": [],
-          "created_at": "2025-08-26T16:36:43.371Z"
+          "created_at": "2026-02-12T14:48:29.545Z"
         }
       ],
       "tasks": [],
@@ -140,7 +135,7 @@
           "type": "project_created",
           "user_id": 3,
           "message": "Project B created",
-          "timestamp": "2025-08-26T16:36:43.371Z"
+          "timestamp": "2026-02-12T14:48:29.545Z"
         }
       ]
     }

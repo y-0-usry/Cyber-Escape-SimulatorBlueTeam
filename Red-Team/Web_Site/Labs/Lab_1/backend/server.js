@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const lowdb = require('lowdb');
+const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const path = require('path');
 const crypto = require('crypto');
@@ -9,13 +9,58 @@ const cookieParser = require('cookie-parser'); // Added for cookie handling in 2
 
 const app = express();
 const dataDir = path.join(__dirname, '../Data');
-if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-const adapter = new FileSync(path.join(dataDir, 'db.json'));
-const db = lowdb(adapter);
+const dbPath = path.join(dataDir, 'db.json');
+
+// Ensure data directory exists
+if (!fs.existsSync(dataDir)) {
+  try {
+    fs.mkdirSync(dataDir, { recursive: true });
+  } catch (err) {
+    console.error('Error creating data directory:', err);
+  }
+}
+
+// Delete old database file on startup (fresh start every time)
+if (fs.existsSync(dbPath)) {
+  try {
+    fs.unlinkSync(dbPath);
+    console.log('✅ Old database cleared, starting fresh');
+  } catch (err) {
+    console.error('Error clearing database:', err);
+  }
+}
+
+// Initialize database
+let db;
+try {
+  const adapter = new FileSync(dbPath);
+  db = low(adapter);
+  console.log('✅ Database initialized');
+} catch (err) {
+  console.error('❌ Database error:', err.message);
+  console.error('Using fallback in-memory database');
+  // Fallback: use simple in-memory object
+  db = {
+    get: (key) => ({ 
+      value: () => null,
+      find: () => ({ value: () => null }),
+      filter: () => ({ value: () => [] }),
+      size: () => ({ value: () => 0 })
+    }),
+    set: () => db,
+    write: () => {},
+    defaults: () => db
+  };
+}
 
 app.use(bodyParser.json());
 app.use(cookieParser()); // Added for cookie handling
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend'), { index: false }));
+
+// Redirect root path to game page
+app.get('/', (req, res) => {
+  res.redirect('/game.html');
+});
 
 db.defaults({
   users: [],
@@ -25,12 +70,53 @@ db.defaults({
   trash: [] // Added for trash functionality
 }).write();
 
-// Track concurrent requests for each endpoint
-const requestCounters = {
-  '/api/projects': { count: 0, batch: 0 },
-  '/api/trash/:id/restore': { count: 0, batch: 0 },
-  '/api/projects/:id/notes': { count: 0, batch: 0 }
-};
+// Initialize with default data if empty
+if (!db.get('users').value() || db.get('users').size().value() === 0) {
+  db.set('users', [
+    { id: 1, username: 'admin1', password: 'pass1', token: null, profile: { bio: 'Admin user', avatar: '' }, subscribed: false },
+    { id: 2, username: 'viewer2', password: 'pass2', token: null, profile: { bio: 'Viewer user', avatar: '' }, subscribed: false },
+    { id: 3, username: 'creator3', password: 'pass3', token: null, profile: { bio: 'Creator user', avatar: '' }, subscribed: false },
+    { id: 4, username: 'newuser4', password: 'pass4', token: null, profile: { bio: 'New user', avatar: '' }, subscribed: false },
+    { id: 5, username: 'attacker1', password: 'exploit123', token: null, profile: { bio: 'Attacker account for Red Team Lab', avatar: '' }, subscribed: false }
+  ]).write();
+}
+
+if (!db.get('projects').value() || db.get('projects').size().value() === 0) {
+  db.set('projects', [
+    {
+      id: 1,
+      name: 'Project A',
+      description: 'A sample collaborative project.',
+      creator_id: 1,
+      members: [{ user_id: 2, role: 'viewer', purchased: false }],
+      notes: [
+        { id: 1, content: 'Welcome to Project A', comments: [], created_at: new Date().toISOString() },
+        { id: 2, content: 'FLAG{youm_wara_youm_habiby_magani_noum}', comments: [], created_at: new Date().toISOString() }
+      ],
+      tasks: [{ id: 1, title: 'Sample Task', description: 'Do something', status: 'pending', assigned_to: null, comments: [], created_at: new Date().toISOString() }],
+      files: [{ id: 1, name: 'sample.txt', content: 'Sample file content', uploaded_by: 1, created_at: new Date().toISOString() }],
+      activity: [{ id: 1, type: 'project_created', user_id: 1, message: 'Project A created', timestamp: new Date().toISOString() }]
+    },
+    {
+      id: 2,
+      name: 'Project B',
+      description: 'Another project for testing.',
+      creator_id: 3,
+      members: [],
+      notes: [{ id: 1, content: 'Welcome to Project B', comments: [], created_at: new Date().toISOString() }],
+      tasks: [],
+      files: [],
+      activity: [{ id: 1, type: 'project_created', user_id: 3, message: 'Project B created', timestamp: new Date().toISOString() }]
+    }
+  ]).write();
+}
+
+// Request tracking disabled - race conditions now succeed 100%
+// const requestCounters = {
+//   '/api/projects': { count: 0, batch: 0 },
+//   '/api/trash/:id/restore': { count: 0, batch: 0 },
+//   '/api/projects/:id/notes': { count: 0, batch: 0 }
+// };
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -51,7 +137,8 @@ app.post('/api/reset', (req, res) => {
     { id: 1, username: 'admin1', password: 'pass1', token: null, profile: { bio: 'Admin user', avatar: '' }, subscribed: false },
     { id: 2, username: 'viewer2', password: 'pass2', token: null, profile: { bio: 'Viewer user', avatar: '' }, subscribed: false },
     { id: 3, username: 'creator3', password: 'pass3', token: null, profile: { bio: 'Creator user', avatar: '' }, subscribed: false },
-    { id: 4, username: 'newuser4', password: 'pass4', token: null, profile: { bio: 'New user', avatar: '' }, subscribed: false }
+    { id: 4, username: 'newuser4', password: 'pass4', token: null, profile: { bio: 'New user', avatar: '' }, subscribed: false },
+    { id: 5, username: 'attacker1', password: 'exploit123', token: null, profile: { bio: 'Attacker account for Red Team Lab', avatar: '' }, subscribed: false }
   ]).write();
 
   db.set('projects', [
@@ -61,7 +148,10 @@ app.post('/api/reset', (req, res) => {
       description: 'A sample collaborative project.',
       creator_id: 1,
       members: [{ user_id: 2, role: 'viewer', purchased: false }],
-      notes: [{ id: 1, content: 'Welcome to Project A', comments: [], created_at: new Date().toISOString() }],
+      notes: [
+        { id: 1, content: 'Welcome to Project A', comments: [], created_at: new Date().toISOString() },
+        { id: 2, content: 'FLAG{youm_wara_youm_habiby_magani_noum}', comments: [], created_at: new Date().toISOString() }
+      ],
       tasks: [{ id: 1, title: 'Sample Task', description: 'Do something', status: 'pending', assigned_to: null, comments: [], created_at: new Date().toISOString() }],
       files: [{ id: 1, name: 'sample.txt', content: 'Sample file content', uploaded_by: 1, created_at: new Date().toISOString() }],
       activity: [{ id: 1, type: 'project_created', user_id: 1, message: 'Project A created', timestamp: new Date().toISOString() }]
@@ -210,33 +300,14 @@ app.post('/api/trash/:id/restore', authMiddleware, (req, res) => {
   const limit = req.user.subscribed ? 20 : 3;
   if (userProjects >= limit) return res.status(403).json({ message: 'Project limit reached. Subscribe to restore more.' });
 
-  // Increment counter for this endpoint
-  requestCounters['/api/trash/:id/restore'].count++;
-  const totalRequests = requestCounters['/api/trash/:id/restore'].count;
-  const batch = requestCounters['/api/trash/:id/restore'].batch;
-
-  if (totalRequests > 10) {
-    // Split into two halves: first half (up to 50%) succeeds, second half fails
-    const half = Math.ceil(totalRequests / 2);
-    if (totalRequests > half + batch * 10) {
-      requestCounters['/api/trash/:id/restore'].count--;
-      return res.status(429).json({ message: 'Too many concurrent requests, try again later' });
-    }
-  }
-
-  // Collision-based delay
+  // Race condition: ALL requests succeed despite limit (no rejection)
+  // Collision-based delay simulates concurrent processing
   const collision = Math.random();
   const delay = collision > 0.7 ? 200 + Math.floor(Math.random() * 101) : 50 + Math.floor(Math.random() * 101); // 50-150ms or 200-300ms
   setTimeout(() => {
     db.get('projects').push({ ...trashProject, restored_at: new Date().toISOString() }).write();
     db.get('trash').remove({ id: projectId }).write();
     res.json({ success: true });
-
-    // Reset counter and increment batch after processing
-    requestCounters['/api/trash/:id/restore'].count--;
-    if (requestCounters['/api/trash/:id/restore'].count === 0) {
-      requestCounters['/api/trash/:id/restore'].batch++;
-    }
   }, delay);
 });
 
@@ -324,6 +395,13 @@ app.post('/api/projects/:id/members', authMiddleware, (req, res) => {
   const project = db.get('projects').find({ id: projectId }).value();
   if (!project) return res.status(404).json({ message: 'Project not found' });
   if (project.members.some(m => m.user_id === +userId)) return res.status(400).json({ message: 'Already member' });
+  
+  // VULNERABILITY: Missing ownership check - allows IDOR attack
+  // Comment this out to enable the vulnerability:
+  // const isRealAdmin = project.creator_id === req.user.id || project.members.some(m => m.user_id === req.user.id && m.role === 'admin');
+  // if (!isRealAdmin) return res.status(403).json({ message: 'Unauthorized' });
+  
+  // VULNERABILITY: No proper authorization - allows anyone to add members if they have fake admin role
   project.members.push({ user_id: +userId, role, purchased: false });
   project.activity.push({
     id: (project.activity.length || 0) + 1,
@@ -340,6 +418,8 @@ app.post('/api/projects/:id/members', authMiddleware, (req, res) => {
     timestamp: new Date().toISOString()
   }).write();
   db.write();
+  
+  // Track exploit step if this was done by a fake admin (from privilege escalation)
   const isRealAdmin = project.creator_id === req.user.id || project.members.some(m => m.user_id === req.user.id && m.role === 'admin');
   if (!isRealAdmin) {
     let exploits = db.get(`exploits.${req.user.id}`).value() || { step: 0 };
@@ -387,21 +467,8 @@ app.post('/api/projects/:id/notes', authMiddleware, (req, res) => {
   const noteCount = project.notes.length;
   if (noteCount >= 10) return res.status(400).json({ message: 'Maximum 10 notes allowed per project' });
 
-  // Increment counter for this endpoint
-  requestCounters['/api/projects/:id/notes'].count++;
-  const totalRequests = requestCounters['/api/projects/:id/notes'].count;
-  const batch = requestCounters['/api/projects/:id/notes'].batch;
-
-  if (totalRequests > 10) {
-    // Split into two halves: first half (up to 50%) succeeds, second half fails
-    const half = Math.ceil(totalRequests / 2);
-    if (totalRequests > half + batch * 10) {
-      requestCounters['/api/projects/:id/notes'].count--;
-      return res.status(429).json({ message: 'Too many concurrent requests, try again later' });
-    }
-  }
-
-  // Collision-based delay
+  // Race condition: ALL requests succeed despite limit (no rejection)
+  // Collision-based delay simulates concurrent processing
   const collision = Math.random();
   const delay = collision > 0.7 ? 200 + Math.floor(Math.random() * 101) : 50 + Math.floor(Math.random() * 101); // 50-150ms or 200-300ms
   setTimeout(() => {
@@ -416,12 +483,6 @@ app.post('/api/projects/:id/notes', authMiddleware, (req, res) => {
     });
     db.write();
     res.json({ success: true });
-
-    // Reset counter and increment batch after processing
-    requestCounters['/api/projects/:id/notes'].count--;
-    if (requestCounters['/api/projects/:id/notes'].count === 0) {
-      requestCounters['/api/projects/:id/notes'].batch++;
-    }
   }, delay);
 });
 
@@ -696,21 +757,8 @@ app.post('/api/projects', authMiddleware, (req, res) => {
   const limit = req.user.subscribed ? 20 : 3;
   if (userProjects >= limit) return res.status(403).json({ message: 'Project limit reached. Subscribe to create more.' });
 
-  // Increment counter for this endpoint
-  requestCounters['/api/projects'].count++;
-  const totalRequests = requestCounters['/api/projects'].count;
-  const batch = requestCounters['/api/projects'].batch;
-
-  if (totalRequests > 10) {
-    // Split into two halves: first half (up to 50%) succeeds, second half fails
-    const half = Math.ceil(totalRequests / 2);
-    if (totalRequests > half + batch * 10) {
-      requestCounters['/api/projects'].count--;
-      return res.status(429).json({ message: 'Too many concurrent requests, try again later' });
-    }
-  }
-
-  // Collision-based delay
+  // Race condition: ALL requests succeed despite limit (no rejection)
+  // Collision-based delay simulates concurrent processing
   const collision = Math.random();
   const delay = collision > 0.7 ? 200 + Math.floor(Math.random() * 101) : 50 + Math.floor(Math.random() * 101); // 50-150ms or 200-300ms
   setTimeout(() => {
@@ -734,15 +782,18 @@ app.post('/api/projects', authMiddleware, (req, res) => {
       timestamp: new Date().toISOString()
     }).write();
     res.json({ id });
-
-    // Reset counter and increment batch after processing
-    requestCounters['/api/projects'].count--;
-    if (requestCounters['/api/projects'].count === 0) {
-      requestCounters['/api/projects'].batch++;
-    }
   }, delay);
 });
 
 app.listen(3001, () => {
   console.log('Server running on http://localhost:3001');
+});
+
+// Handle errors
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
 });
