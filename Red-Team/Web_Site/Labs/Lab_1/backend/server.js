@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const low = require('lowdb');
+const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const path = require('path');
 const crypto = require('crypto');
@@ -9,53 +9,14 @@ const cookieParser = require('cookie-parser'); // Added for cookie handling in 2
 
 const app = express();
 const dataDir = path.join(__dirname, '../Data');
-const dbPath = path.join(dataDir, 'db.json');
-
-// Ensure data directory exists
-if (!fs.existsSync(dataDir)) {
-  try {
-    fs.mkdirSync(dataDir, { recursive: true });
-  } catch (err) {
-    console.error('Error creating data directory:', err);
-  }
-}
-
-// Delete old database file on startup (fresh start every time)
-if (fs.existsSync(dbPath)) {
-  try {
-    fs.unlinkSync(dbPath);
-    console.log('✅ Old database cleared, starting fresh');
-  } catch (err) {
-    console.error('Error clearing database:', err);
-  }
-}
-
-// Initialize database
-let db;
-try {
-  const adapter = new FileSync(dbPath);
-  db = low(adapter);
-  console.log('✅ Database initialized');
-} catch (err) {
-  console.error('❌ Database error:', err.message);
-  console.error('Using fallback in-memory database');
-  // Fallback: use simple in-memory object
-  db = {
-    get: (key) => ({ 
-      value: () => null,
-      find: () => ({ value: () => null }),
-      filter: () => ({ value: () => [] }),
-      size: () => ({ value: () => 0 })
-    }),
-    set: () => db,
-    write: () => {},
-    defaults: () => db
-  };
-}
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const adapter = new FileSync(path.join(dataDir, 'db.json'));
+const db = lowdb(adapter);
 
 app.use(bodyParser.json());
 app.use(cookieParser()); // Added for cookie handling
 app.use(express.static(path.join(__dirname, '../frontend'), { index: false }));
+app.use('/Data', express.static(path.join(__dirname, '../Data'))); // Serve Data folder (for Flag.mp4 and other files)
 
 // Redirect root path to game page
 app.get('/', (req, res) => {
@@ -69,47 +30,6 @@ db.defaults({
   notifications: [],
   trash: [] // Added for trash functionality
 }).write();
-
-// Initialize with default data if empty
-if (!db.get('users').value() || db.get('users').size().value() === 0) {
-  db.set('users', [
-    { id: 1, username: 'admin1', password: 'pass1', token: null, profile: { bio: 'Admin user', avatar: '' }, subscribed: false },
-    { id: 2, username: 'viewer2', password: 'pass2', token: null, profile: { bio: 'Viewer user', avatar: '' }, subscribed: false },
-    { id: 3, username: 'creator3', password: 'pass3', token: null, profile: { bio: 'Creator user', avatar: '' }, subscribed: false },
-    { id: 4, username: 'newuser4', password: 'pass4', token: null, profile: { bio: 'New user', avatar: '' }, subscribed: false },
-    { id: 5, username: 'attacker1', password: 'exploit123', token: null, profile: { bio: 'Attacker account for Red Team Lab', avatar: '' }, subscribed: false }
-  ]).write();
-}
-
-if (!db.get('projects').value() || db.get('projects').size().value() === 0) {
-  db.set('projects', [
-    {
-      id: 1,
-      name: 'Project A',
-      description: 'A sample collaborative project.',
-      creator_id: 1,
-      members: [{ user_id: 2, role: 'viewer', purchased: false }],
-      notes: [
-        { id: 1, content: 'Welcome to Project A', comments: [], created_at: new Date().toISOString() },
-        { id: 2, content: 'FLAG{youm_wara_youm_habiby_magani_noum}', comments: [], created_at: new Date().toISOString() }
-      ],
-      tasks: [{ id: 1, title: 'Sample Task', description: 'Do something', status: 'pending', assigned_to: null, comments: [], created_at: new Date().toISOString() }],
-      files: [{ id: 1, name: 'sample.txt', content: 'Sample file content', uploaded_by: 1, created_at: new Date().toISOString() }],
-      activity: [{ id: 1, type: 'project_created', user_id: 1, message: 'Project A created', timestamp: new Date().toISOString() }]
-    },
-    {
-      id: 2,
-      name: 'Project B',
-      description: 'Another project for testing.',
-      creator_id: 3,
-      members: [],
-      notes: [{ id: 1, content: 'Welcome to Project B', comments: [], created_at: new Date().toISOString() }],
-      tasks: [],
-      files: [],
-      activity: [{ id: 1, type: 'project_created', user_id: 3, message: 'Project B created', timestamp: new Date().toISOString() }]
-    }
-  ]).write();
-}
 
 // Request tracking disabled - race conditions now succeed 100%
 // const requestCounters = {
@@ -134,38 +54,48 @@ function authMiddleware(req, res, next) {
 
 app.post('/api/reset', (req, res) => {
   db.set('users', [
-    { id: 1, username: 'admin1', password: 'pass1', token: null, profile: { bio: 'Admin user', avatar: '' }, subscribed: false },
+    { id: 1, username: 'admin1', password: 'pass1', token: null, profile: { bio: 'Admin user - Project A owner', avatar: '' }, subscribed: false },
     { id: 2, username: 'viewer2', password: 'pass2', token: null, profile: { bio: 'Viewer user', avatar: '' }, subscribed: false },
-    { id: 3, username: 'creator3', password: 'pass3', token: null, profile: { bio: 'Creator user', avatar: '' }, subscribed: false },
-    { id: 4, username: 'newuser4', password: 'pass4', token: null, profile: { bio: 'New user', avatar: '' }, subscribed: false },
-    { id: 5, username: 'attacker1', password: 'exploit123', token: null, profile: { bio: 'Attacker account for Red Team Lab', avatar: '' }, subscribed: false }
+    { id: 3, username: 'creator3', password: 'pass3', token: null, profile: { bio: 'Creator user - Project B owner (has the FLAG)', avatar: '' }, subscribed: false },
+    { id: 4, username: 'target_user', password: 'SecurePass456!', token: null, profile: { bio: 'Target user - Add this user to Project B to find FLAG', avatar: '' }, subscribed: false },
+    { id: 5, username: 'attacker1', password: 'exploit123', token: null, profile: { bio: 'Red Team Attacker', avatar: '' }, subscribed: false }
   ]).write();
 
   db.set('projects', [
     {
       id: 1,
       name: 'Project A',
-      description: 'A sample collaborative project.',
+      description: 'Public collaboration project for team members.',
       creator_id: 1,
-      members: [{ user_id: 2, role: 'viewer', purchased: false }],
-      notes: [
-        { id: 1, content: 'Welcome to Project A', comments: [], created_at: new Date().toISOString() },
-        { id: 2, content: 'FLAG{youm_wara_youm_habiby_magani_noum}', comments: [], created_at: new Date().toISOString() }
+      members: [
+        { user_id: 5, role: 'viewer', purchased: false }
       ],
-      tasks: [{ id: 1, title: 'Sample Task', description: 'Do something', status: 'pending', assigned_to: null, comments: [], created_at: new Date().toISOString() }],
-      files: [{ id: 1, name: 'sample.txt', content: 'Sample file content', uploaded_by: 1, created_at: new Date().toISOString() }],
+      notes: [
+        { id: 1, content: 'Welcome to Project A! This is a collaborative workspace.', comments: [], created_at: new Date().toISOString() }
+      ],
+      tasks: [],
+      files: [],
       activity: [{ id: 1, type: 'project_created', user_id: 1, message: 'Project A created', timestamp: new Date().toISOString() }]
     },
     {
       id: 2,
-      name: 'Project B',
-      description: 'Another project for testing.',
+      name: 'Secret Project - Confidential',
+      description: 'RESTRICTED ACCESS - Contains classified information.',
       creator_id: 3,
       members: [],
-      notes: [{ id: 1, content: 'Welcome to Project B', comments: [], created_at: new Date().toISOString() }],
+      notes: [
+        { 
+          id: 1, 
+          content: '🔒 CONFIDENTIAL NOTE\n\n[VIDEO ATTACHMENT: Flag.mp4]\n\n🚩 FLAG{youm_wara_youm_habiby_magani_noum}\n\n⚠️ WARNING: This project contains sensitive information. Unauthorized access is prohibited.', 
+          comments: [], 
+          created_at: new Date().toISOString(),
+          hasVideo: true,
+          videoName: 'Flag.mp4'
+        }
+      ],
       tasks: [],
       files: [],
-      activity: [{ id: 1, type: 'project_created', user_id: 3, message: 'Project B created', timestamp: new Date().toISOString() }]
+      activity: [{ id: 1, type: 'project_created', user_id: 3, message: 'Secret Project created', timestamp: new Date().toISOString() }]
     }
   ]).write();
 
@@ -237,6 +167,19 @@ app.get('/api/users/search', authMiddleware, (req, res) => {
   res.json(users.map(u => ({ id: u.id, username: u.username })));
 });
 
+// Progress verification endpoint
+app.get('/api/verify-progress', authMiddleware, (req, res) => {
+  const userId = req.user.id;
+  
+  // Check total projects created by this user
+  const userProjects = db.get('projects').filter(p => p.creator_id === userId).value();
+  const projectsCount = userProjects.length;
+
+  res.json({
+    projectsCount: projectsCount
+  });
+});
+
 app.get('/api/projects', authMiddleware, (req, res) => {
   const projects = db.get('projects').filter(p => p.creator_id === req.user.id || p.members.some(m => m.user_id === req.user.id)).value();
   res.json(projects);
@@ -267,7 +210,7 @@ app.put('/api/projects/:id', authMiddleware, (req, res) => {
     timestamp: new Date().toISOString()
   });
   db.write();
-  res.json({ success: true });
+  res.json({ success: true, name: safeName });
 });
 
 app.delete('/api/projects/:id', authMiddleware, (req, res) => {
@@ -458,7 +401,7 @@ app.delete('/api/projects/:id/members/:userId', authMiddleware, (req, res) => {
 });
 
 app.post('/api/projects/:id/notes', authMiddleware, (req, res) => {
-  const { content } = req.body;
+  const { content, fileName } = req.body;
   const projectId = +req.params.id;
   const project = db.get('projects').find({ id: projectId }).value();
   if (!project) return res.status(404).json({ message: 'Project not found' });
@@ -473,7 +416,14 @@ app.post('/api/projects/:id/notes', authMiddleware, (req, res) => {
   const delay = collision > 0.7 ? 200 + Math.floor(Math.random() * 101) : 50 + Math.floor(Math.random() * 101); // 50-150ms or 200-300ms
   setTimeout(() => {
     const noteId = (project.notes.length || 0) + 1;
-    project.notes.push({ id: noteId, content, comments: [], created_at: new Date().toISOString() });
+    const noteObj = { id: noteId, content, comments: [], created_at: new Date().toISOString() };
+    if (fileName) {
+      noteObj.fileName = fileName;
+      const ext = fileName.split('.').pop().toLowerCase();
+      const videoExts = ['mp4','webm','ogg','avi','mov'];
+      if (videoExts.includes(ext)) noteObj.hasVideo = true;
+    }
+    project.notes.push(noteObj);
     project.activity.push({
       id: (project.activity.length || 0) + 1,
       type: 'note_added',
@@ -660,8 +610,28 @@ app.post('/api/projects/:id/files', authMiddleware, (req, res) => {
   if (!project) return res.status(404).json({ message: 'Project not found' });
   const isAdmin = project.creator_id === req.user.id || project.members.some(m => m.user_id === req.user.id && m.role === 'admin');
   if (!isAdmin) return res.status(403).json({ message: 'Unauthorized' });
+  // Sanitize filename to prevent path traversal and unsafe characters
+  let safeName = path.basename(name || 'upload.bin');
+  safeName = safeName.replace(/[^a-zA-Z0-9._-]/g, '_');
+
+  // If content is a DataURL, decode and write to disk under the Data directory
+  try {
+    if (typeof content === 'string' && content.startsWith('data:')) {
+      const commaIndex = content.indexOf(',');
+      const meta = content.substring(5, commaIndex); // e.g. image/png;base64
+      const isBase64 = meta.includes(';base64');
+      const dataPart = content.substring(commaIndex + 1);
+      const buffer = isBase64 ? Buffer.from(dataPart, 'base64') : Buffer.from(decodeURIComponent(dataPart), 'utf8');
+      const writePath = path.join(dataDir, safeName);
+      fs.writeFileSync(writePath, buffer);
+    }
+  } catch (err) {
+    console.error('Failed to write uploaded file to disk:', err);
+    // continue — still store file entry in DB so frontend can reference it if needed
+  }
+
   const fileId = (project.files.length || 0) + 1;
-  project.files.push({ id: fileId, name, content, uploaded_by: req.user.id, created_at: new Date().toISOString() });
+  project.files.push({ id: fileId, name: safeName, content, uploaded_by: req.user.id, created_at: new Date().toISOString() });
   project.activity.push({
     id: (project.activity.length || 0) + 1,
     type: 'file_uploaded',
@@ -682,7 +652,16 @@ app.delete('/api/projects/:id/files/:fileId', authMiddleware, (req, res) => {
   if (!isAdmin) return res.status(403).json({ message: 'Unauthorized' });
   const file = project.files.find(f => f.id === fileId);
   if (!file) return res.status(404).json({ message: 'File not found' });
+  // Remove file entry and attempt to delete the on-disk copy if it exists
   project.files = project.files.filter(f => f.id !== fileId);
+  try {
+    const diskPath = path.join(dataDir, path.basename(file.name));
+    if (fs.existsSync(diskPath)) {
+      fs.unlinkSync(diskPath);
+    }
+  } catch (err) {
+    console.error('Failed to remove file from disk:', err);
+  }
   project.activity.push({
     id: (project.activity.length || 0) + 1,
     type: 'file_deleted',
@@ -787,13 +766,4 @@ app.post('/api/projects', authMiddleware, (req, res) => {
 
 app.listen(3001, () => {
   console.log('Server running on http://localhost:3001');
-});
-
-// Handle errors
-process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
 });

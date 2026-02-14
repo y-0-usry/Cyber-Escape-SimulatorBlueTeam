@@ -197,6 +197,11 @@
                 </div>
                 <div class="modal-body">
                     <textarea class="form-control" id="new-note-content" placeholder="Note Content"></textarea>
+                    <div style="margin-top: 15px;">
+                        <label for="note-file-upload" class="form-label">Attach File (Optional)</label>
+                        <input type="file" class="form-control" id="note-file-upload">
+                        <small class="text-muted">Select a file to attach to this note (e.g., video, document, etc.)</small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -460,6 +465,25 @@
             notes.forEach((note, index) => {
                 const accordionItem = document.createElement('div');
                 accordionItem.className = 'accordion-item';
+                // Format content with proper line breaks
+                const formattedContent = note.content.replace(/\n/g, '<br>');
+                
+                // Build media section based on file type
+                let mediaSection = '';
+                if (note.fileName) {
+                    const ext = note.fileName.toLowerCase().split('.').pop();
+                    const videoExts = ['mp4', 'webm', 'ogg', 'avi', 'mov'];
+                    const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+                    
+                    if (videoExts.includes(ext)) {
+                        mediaSection = `<div class="mt-3"><strong>📹 Video Attachment:</strong><br><video width="100%" style="max-width: 500px; border-radius: 8px;" controls><source src="/Data/${note.fileName}" type="video/${ext === 'mp4' ? 'mp4' : ext}">Your browser does not support the video tag.</video><br><a href="/Data/${note.fileName}" download class="btn btn-sm btn-primary mt-2">Download ${note.fileName}</a></div>`;
+                    } else if (imageExts.includes(ext)) {
+                        mediaSection = `<div class="mt-3"><strong>🖼️ Image Attachment:</strong><br><img src="/Data/${note.fileName}" style="max-width: 500px; border-radius: 8px; margin-top: 10px;"><br><a href="/Data/${note.fileName}" download class="btn btn-sm btn-primary mt-2">Download ${note.fileName}</a></div>`;
+                    } else {
+                        mediaSection = `<div class="mt-3"><strong>📎 File Attachment:</strong> <a href="/Data/${note.fileName}" download>${note.fileName}</a></div>`;
+                    }
+                }
+                
                 accordionItem.innerHTML = `
                     <h2 class="accordion-header" id="noteHeading${index}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noteCollapse${index}">
@@ -468,7 +492,8 @@
                     </h2>
                     <div id="noteCollapse${index}" class="accordion-collapse collapse" data-bs-parent="#notes-list">
                         <div class="accordion-body">
-                            <p>${note.content}</p>
+                            <p>${formattedContent}</p>
+                            ${mediaSection}
                             <h6>Comments:</h6>
                             <ul>${note.comments.map(c => `<li>User ${c.user_id}: ${c.text} (${new Date(c.timestamp).toLocaleString()})</li>`).join('')}</ul>
                             ${(role === 'commenter' || hasAdminPriv) ? `
@@ -604,8 +629,33 @@
 
         async function handleAddNote() {
             const content = document.getElementById('new-note-content').value;
-            if (content) {
-                await apiCall(`/api/projects/${projectId}/notes`, 'POST', { content });
+            const fileInput = document.getElementById('note-file-upload');
+            let attachedFileName = null;
+
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                // read file as data URL
+                const dataUrl = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = err => reject(err);
+                    reader.readAsDataURL(file);
+                });
+                // upload file to project's files and use returned safe filename
+                const uploadResp = await apiCall(`/api/projects/${projectId}/files`, 'POST', { name: file.name, content: dataUrl });
+                if (uploadResp && uploadResp.name) {
+                    attachedFileName = uploadResp.name;
+                } else {
+                    // fallback to original name if server didn't return a name
+                    attachedFileName = file.name;
+                }
+            }
+
+            if (content || attachedFileName) {
+                await apiCall(`/api/projects/${projectId}/notes`, 'POST', { content, fileName: attachedFileName });
+                // clear inputs
+                document.getElementById('new-note-content').value = '';
+                if (fileInput) fileInput.value = '';
                 loadProject();
             }
         }

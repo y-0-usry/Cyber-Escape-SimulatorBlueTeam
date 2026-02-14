@@ -37,7 +37,7 @@
       "id": 4,
       "username": "newuser4",
       "password": "pass4",
-      "token": null,
+      "token": "06bebe4ef826a87c51e14fbb72228f5e44c41a63c77f28892d9948682e64e9a7",
       "profile": {
         "bio": "New user",
         "avatar": ""
@@ -48,9 +48,20 @@
       "id": 5,
       "username": "attacker1",
       "password": "exploit123",
-      "token": null,
+      "token": "1e8bf1982f5ea46e03b1d7450c1a88def72ffc2d5eb7920e21f69f6c4d402173",
       "profile": {
         "bio": "Attacker account for Red Team Lab",
+        "avatar": ""
+      },
+      "subscribed": false
+    },
+    {
+      "id": 6,
+      "username": "yousry",
+      "password": "123456",
+      "token": null,
+      "profile": {
+        "bio": "dd",
         "avatar": ""
       },
       "subscribed": false
@@ -74,13 +85,13 @@
           "id": 1,
           "content": "Welcome to Project A",
           "comments": [],
-          "created_at": "2026-02-12T14:48:29.544Z"
+          "created_at": "2026-02-13T23:59:54.565Z"
         },
         {
           "id": 2,
           "content": "FLAG{youm_wara_youm_habiby_magani_noum}",
           "comments": [],
-          "created_at": "2026-02-12T14:48:29.545Z"
+          "created_at": "2026-02-13T23:59:54.566Z"
         }
       ],
       "tasks": [
@@ -91,7 +102,7 @@
           "status": "pending",
           "assigned_to": null,
           "comments": [],
-          "created_at": "2026-02-12T14:48:29.545Z"
+          "created_at": "2026-02-13T23:59:54.566Z"
         }
       ],
       "files": [
@@ -100,7 +111,7 @@
           "name": "sample.txt",
           "content": "Sample file content",
           "uploaded_by": 1,
-          "created_at": "2026-02-12T14:48:29.545Z"
+          "created_at": "2026-02-13T23:59:54.566Z"
         }
       ],
       "activity": [
@@ -109,7 +120,7 @@
           "type": "project_created",
           "user_id": 1,
           "message": "Project A created",
-          "timestamp": "2026-02-12T14:48:29.545Z"
+          "timestamp": "2026-02-13T23:59:54.566Z"
         }
       ]
     },
@@ -118,13 +129,30 @@
       "name": "Project B",
       "description": "Another project for testing.",
       "creator_id": 3,
-      "members": [],
+      "members": [
+        {
+          "user_id": 4,
+          "role": "admin",
+          "purchased": false
+        },
+        {
+          "user_id": 6,
+          "role": "commenter",
+          "purchased": false
+        }
+      ],
       "notes": [
         {
           "id": 1,
           "content": "Welcome to Project B",
           "comments": [],
-          "created_at": "2026-02-12T14:48:29.545Z"
+          "created_at": "2026-02-13T23:59:54.566Z"
+        },
+        {
+          "id": 2,
+          "content": "FLAG{youm_wara_youm_habiby_magani_noum}",
+          "comments": [],
+          "created_at": "2026-02-14T01:47:37.621Z"
         }
       ],
       "tasks": [],
@@ -135,12 +163,2182 @@
           "type": "project_created",
           "user_id": 3,
           "message": "Project B created",
-          "timestamp": "2026-02-12T14:48:29.545Z"
+          "timestamp": "2026-02-13T23:59:54.566Z"
+        },
+        {
+          "id": 2,
+          "type": "member_added",
+          "user_id": 5,
+          "message": "User 4 added as viewer",
+          "timestamp": "2026-02-14T01:01:33.946Z"
+        },
+        {
+          "id": 3,
+          "type": "role_changed",
+          "user_id": 4,
+          "message": "newuser4 changed role to admin",
+          "timestamp": "2026-02-14T01:46:52.274Z"
+        },
+        {
+          "id": 4,
+          "type": "note_added",
+          "user_id": 4,
+          "message": "Note #2 added by newuser4",
+          "timestamp": "2026-02-14T01:47:37.621Z"
+        },
+        {
+          "id": 5,
+          "type": "member_added",
+          "user_id": 5,
+          "message": "User 6 added as commenter",
+          "timestamp": "2026-02-14T01:58:09.319Z"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [
+        {
+          "id": 1,
+          "title": "xx",
+          "description": "xx",
+          "status": "pending",
+          "assigned_to": null,
+          "comments": [],
+          "created_at": "2026-02-14T02:22:34.963Z"
+        }
+      ],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.228Z"
+        },
+        {
+          "id": 2,
+          "type": "task_added",
+          "user_id": 5,
+          "message": "Task #1 added by attacker1",
+          "timestamp": "2026-02-14T02:22:34.963Z"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [
+        {
+          "id": 1,
+          "name": "dvvd",
+          "content": "dvvddv",
+          "uploaded_by": 5,
+          "created_at": "2026-02-14T02:15:22.059Z"
+        }
+      ],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.242Z"
+        },
+        {
+          "id": 2,
+          "type": "file_uploaded",
+          "user_id": 5,
+          "message": "File dvvd uploaded by attacker1",
+          "timestamp": "2026-02-14T02:15:22.059Z"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.564Z"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.567Z"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.570Z"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.573Z"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.577Z"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [
+        {
+          "id": 1,
+          "content": "FLAG{youm_wara_youm_habiby_magani_noum}",
+          "comments": [],
+          "created_at": "2026-02-14T02:00:41.341Z"
+        }
+      ],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.581Z"
+        },
+        {
+          "id": 2,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #1 added by attacker1",
+          "timestamp": "2026-02-14T02:00:41.341Z"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.584Z"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.588Z"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.591Z"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.594Z"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.598Z"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.609Z"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.625Z"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.656Z"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.659Z"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.749Z"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.752Z"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.796Z"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.798Z"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:57:13.801Z"
         }
       ]
     }
   ],
-  "exploits": {},
-  "notifications": [],
-  "trash": []
+  "exploits": {
+    "4": {
+      "step": 1
+    },
+    "6": {
+      "step": 2
+    }
+  },
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 5,
+      "message": "You created project Test0",
+      "read": true,
+      "timestamp": "2026-02-14T00:16:02.486Z"
+    },
+    {
+      "id": 2,
+      "user_id": 5,
+      "message": "You created project Test1",
+      "read": true,
+      "timestamp": "2026-02-14T00:16:09.322Z"
+    },
+    {
+      "id": 3,
+      "user_id": 5,
+      "message": "You created project Test2",
+      "read": true,
+      "timestamp": "2026-02-14T00:16:14.629Z"
+    },
+    {
+      "id": 4,
+      "user_id": 5,
+      "message": "Project Test2 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:16:57.479Z"
+    },
+    {
+      "id": 5,
+      "user_id": 5,
+      "message": "Project Test1 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:02.272Z"
+    },
+    {
+      "id": 6,
+      "user_id": 5,
+      "message": "Project Test0 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:06.573Z"
+    },
+    {
+      "id": 7,
+      "user_id": 5,
+      "message": "You created project Test5",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.257Z"
+    },
+    {
+      "id": 8,
+      "user_id": 5,
+      "message": "You created project Test7",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.288Z"
+    },
+    {
+      "id": 9,
+      "user_id": 5,
+      "message": "You created project Test0",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.290Z"
+    },
+    {
+      "id": 10,
+      "user_id": 5,
+      "message": "You created project Test9",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.292Z"
+    },
+    {
+      "id": 11,
+      "user_id": 5,
+      "message": "You created project Test8",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.335Z"
+    },
+    {
+      "id": 12,
+      "user_id": 5,
+      "message": "You created project Test3",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.413Z"
+    },
+    {
+      "id": 13,
+      "user_id": 5,
+      "message": "You created project Test1",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.444Z"
+    },
+    {
+      "id": 14,
+      "user_id": 5,
+      "message": "You created project Test4",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.446Z"
+    },
+    {
+      "id": 15,
+      "user_id": 5,
+      "message": "You created project Test2",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.447Z"
+    },
+    {
+      "id": 16,
+      "user_id": 5,
+      "message": "You created project Test6",
+      "read": true,
+      "timestamp": "2026-02-14T00:17:55.459Z"
+    },
+    {
+      "id": 17,
+      "user_id": 5,
+      "message": "Project Test5 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:18:11.516Z"
+    },
+    {
+      "id": 18,
+      "user_id": 5,
+      "message": "Project Test9 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:18:29.599Z"
+    },
+    {
+      "id": 19,
+      "user_id": 5,
+      "message": "Project Test8 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:18:43.522Z"
+    },
+    {
+      "id": 20,
+      "user_id": 5,
+      "message": "Project Test3 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:18:46.975Z"
+    },
+    {
+      "id": 21,
+      "user_id": 5,
+      "message": "Project Test1 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:18:52.798Z"
+    },
+    {
+      "id": 22,
+      "user_id": 5,
+      "message": "Project Test4 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:19:02.039Z"
+    },
+    {
+      "id": 23,
+      "user_id": 5,
+      "message": "Project Test2 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:19:06.888Z"
+    },
+    {
+      "id": 24,
+      "user_id": 5,
+      "message": "Project Test6 moved to trash",
+      "read": true,
+      "timestamp": "2026-02-14T00:19:09.336Z"
+    },
+    {
+      "id": 25,
+      "user_id": 6,
+      "message": "You were added to project Test7 as viewer",
+      "read": false,
+      "timestamp": "2026-02-14T00:33:41.940Z"
+    },
+    {
+      "id": 26,
+      "user_id": 3,
+      "message": "You were added to project Test4 as commenter",
+      "read": false,
+      "timestamp": "2026-02-14T00:35:08.770Z"
+    },
+    {
+      "id": 27,
+      "user_id": 4,
+      "message": "You were added to project Project B as viewer",
+      "read": false,
+      "timestamp": "2026-02-14T01:01:33.946Z"
+    },
+    {
+      "id": 28,
+      "user_id": 5,
+      "message": "Project Test6 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:54:44.878Z"
+    },
+    {
+      "id": 29,
+      "user_id": 5,
+      "message": "Project Test7 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:54:49.746Z"
+    },
+    {
+      "id": 30,
+      "user_id": 5,
+      "message": "Project Test0 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:54:54.388Z"
+    },
+    {
+      "id": 31,
+      "user_id": 5,
+      "message": "Project Test4 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:54:58.859Z"
+    },
+    {
+      "id": 32,
+      "user_id": 5,
+      "message": "Project Test1 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:03.248Z"
+    },
+    {
+      "id": 33,
+      "user_id": 5,
+      "message": "Project Test9 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:08.369Z"
+    },
+    {
+      "id": 34,
+      "user_id": 5,
+      "message": "Project Test8 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:12.367Z"
+    },
+    {
+      "id": 35,
+      "user_id": 5,
+      "message": "Project Test2 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:16.730Z"
+    },
+    {
+      "id": 36,
+      "user_id": 5,
+      "message": "Project Test3 moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:21.227Z"
+    },
+    {
+      "id": 37,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.025Z"
+    },
+    {
+      "id": 38,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.029Z"
+    },
+    {
+      "id": 39,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.032Z"
+    },
+    {
+      "id": 40,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.034Z"
+    },
+    {
+      "id": 41,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.036Z"
+    },
+    {
+      "id": 42,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.056Z"
+    },
+    {
+      "id": 43,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.087Z"
+    },
+    {
+      "id": 44,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.168Z"
+    },
+    {
+      "id": 45,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.229Z"
+    },
+    {
+      "id": 46,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:55:50.244Z"
+    },
+    {
+      "id": 47,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:34.862Z"
+    },
+    {
+      "id": 48,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:39.060Z"
+    },
+    {
+      "id": 49,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:43.228Z"
+    },
+    {
+      "id": 50,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:47.406Z"
+    },
+    {
+      "id": 51,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:51.329Z"
+    },
+    {
+      "id": 52,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:55.295Z"
+    },
+    {
+      "id": 53,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:56:59.441Z"
+    },
+    {
+      "id": 54,
+      "user_id": 5,
+      "message": "Project sss moved to trash",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:03.653Z"
+    },
+    {
+      "id": 55,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.565Z"
+    },
+    {
+      "id": 56,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.568Z"
+    },
+    {
+      "id": 57,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.571Z"
+    },
+    {
+      "id": 58,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.575Z"
+    },
+    {
+      "id": 59,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.579Z"
+    },
+    {
+      "id": 60,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.582Z"
+    },
+    {
+      "id": 61,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.586Z"
+    },
+    {
+      "id": 62,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.589Z"
+    },
+    {
+      "id": 63,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.592Z"
+    },
+    {
+      "id": 64,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.595Z"
+    },
+    {
+      "id": 65,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.599Z"
+    },
+    {
+      "id": 66,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.610Z"
+    },
+    {
+      "id": 67,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.626Z"
+    },
+    {
+      "id": 68,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.657Z"
+    },
+    {
+      "id": 69,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.659Z"
+    },
+    {
+      "id": 70,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.750Z"
+    },
+    {
+      "id": 71,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.753Z"
+    },
+    {
+      "id": 72,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.797Z"
+    },
+    {
+      "id": 73,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.800Z"
+    },
+    {
+      "id": 74,
+      "user_id": 5,
+      "message": "You created project sss",
+      "read": false,
+      "timestamp": "2026-02-14T01:57:13.802Z"
+    },
+    {
+      "id": 75,
+      "user_id": 6,
+      "message": "You were added to project Project B as commenter",
+      "read": false,
+      "timestamp": "2026-02-14T01:58:09.319Z"
+    }
+  ],
+  "trash": [
+    {
+      "id": 4,
+      "name": "Test1",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test1 created",
+          "timestamp": "2026-02-14T00:16:09.321Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T00:17:02.270Z"
+    },
+    {
+      "id": 3,
+      "name": "Test0",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test0 created",
+          "timestamp": "2026-02-14T00:16:02.485Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T00:17:06.572Z"
+    },
+    {
+      "id": 3,
+      "name": "Test5",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test5 created",
+          "timestamp": "2026-02-14T00:17:55.256Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T00:18:11.514Z"
+    },
+    {
+      "id": 12,
+      "name": "Test6",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test6 created",
+          "timestamp": "2026-02-14T00:17:55.458Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:54:44.876Z",
+      "restored_at": "2026-02-14T00:20:25.975Z"
+    },
+    {
+      "id": 4,
+      "name": "Test7",
+      "description": "des",
+      "creator_id": 5,
+      "members": [
+        {
+          "user_id": 6,
+          "role": "admin",
+          "purchased": false
+        }
+      ],
+      "notes": [
+        {
+          "id": 1,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:20:57.797Z"
+        },
+        {
+          "id": 2,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.262Z"
+        },
+        {
+          "id": 3,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.263Z"
+        },
+        {
+          "id": 4,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.264Z"
+        },
+        {
+          "id": 5,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.265Z"
+        },
+        {
+          "id": 6,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.278Z"
+        },
+        {
+          "id": 7,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.293Z"
+        },
+        {
+          "id": 8,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.295Z"
+        },
+        {
+          "id": 9,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.296Z"
+        },
+        {
+          "id": 10,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.326Z"
+        },
+        {
+          "id": 11,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.328Z"
+        },
+        {
+          "id": 12,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.329Z"
+        },
+        {
+          "id": 13,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.343Z"
+        },
+        {
+          "id": 14,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.391Z"
+        },
+        {
+          "id": 15,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.423Z"
+        },
+        {
+          "id": 16,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.438Z"
+        },
+        {
+          "id": 17,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.439Z"
+        },
+        {
+          "id": 18,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.469Z"
+        },
+        {
+          "id": 19,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.485Z"
+        },
+        {
+          "id": 20,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.486Z"
+        },
+        {
+          "id": 21,
+          "content": "ddd",
+          "comments": [],
+          "created_at": "2026-02-14T00:21:33.488Z"
+        }
+      ],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test7 created",
+          "timestamp": "2026-02-14T00:17:55.288Z"
+        },
+        {
+          "id": 2,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #1 added by attacker1",
+          "timestamp": "2026-02-14T00:20:57.797Z"
+        },
+        {
+          "id": 3,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #2 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.262Z"
+        },
+        {
+          "id": 4,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #3 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.263Z"
+        },
+        {
+          "id": 5,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #4 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.264Z"
+        },
+        {
+          "id": 6,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #5 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.265Z"
+        },
+        {
+          "id": 7,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #6 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.278Z"
+        },
+        {
+          "id": 8,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #7 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.293Z"
+        },
+        {
+          "id": 9,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #8 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.295Z"
+        },
+        {
+          "id": 10,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #9 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.296Z"
+        },
+        {
+          "id": 11,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #10 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.326Z"
+        },
+        {
+          "id": 12,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #11 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.328Z"
+        },
+        {
+          "id": 13,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #12 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.329Z"
+        },
+        {
+          "id": 14,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #13 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.343Z"
+        },
+        {
+          "id": 15,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #14 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.391Z"
+        },
+        {
+          "id": 16,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #15 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.423Z"
+        },
+        {
+          "id": 17,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #16 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.438Z"
+        },
+        {
+          "id": 18,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #17 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.439Z"
+        },
+        {
+          "id": 19,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #18 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.469Z"
+        },
+        {
+          "id": 20,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #19 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.485Z"
+        },
+        {
+          "id": 21,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #20 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.486Z"
+        },
+        {
+          "id": 22,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #21 added by attacker1",
+          "timestamp": "2026-02-14T00:21:33.488Z"
+        },
+        {
+          "id": 23,
+          "type": "member_added",
+          "user_id": 5,
+          "message": "User 6 added as viewer",
+          "timestamp": "2026-02-14T00:33:41.940Z"
+        },
+        {
+          "id": 24,
+          "type": "role_changed",
+          "user_id": 6,
+          "message": "yousry changed role to admin",
+          "timestamp": "2026-02-14T00:34:30.625Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:54:49.744Z"
+    },
+    {
+      "id": 5,
+      "name": "Test0",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [
+        {
+          "id": 1,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.056Z"
+        },
+        {
+          "id": 2,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.058Z"
+        },
+        {
+          "id": 3,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.072Z"
+        },
+        {
+          "id": 4,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.074Z"
+        },
+        {
+          "id": 5,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.088Z"
+        },
+        {
+          "id": 6,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.089Z"
+        },
+        {
+          "id": 7,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.091Z"
+        },
+        {
+          "id": 8,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.092Z"
+        },
+        {
+          "id": 9,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.102Z"
+        },
+        {
+          "id": 10,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.104Z"
+        },
+        {
+          "id": 11,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.118Z"
+        },
+        {
+          "id": 12,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.120Z"
+        },
+        {
+          "id": 13,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.121Z"
+        },
+        {
+          "id": 14,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.134Z"
+        },
+        {
+          "id": 15,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.135Z"
+        },
+        {
+          "id": 16,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.136Z"
+        },
+        {
+          "id": 17,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.149Z"
+        },
+        {
+          "id": 18,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.150Z"
+        },
+        {
+          "id": 19,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.151Z"
+        },
+        {
+          "id": 20,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.211Z"
+        },
+        {
+          "id": 21,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.213Z"
+        },
+        {
+          "id": 22,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.242Z"
+        },
+        {
+          "id": 23,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.244Z"
+        },
+        {
+          "id": 24,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.273Z"
+        },
+        {
+          "id": 25,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.275Z"
+        },
+        {
+          "id": 26,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.277Z"
+        },
+        {
+          "id": 27,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.279Z"
+        },
+        {
+          "id": 28,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.280Z"
+        },
+        {
+          "id": 29,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.282Z"
+        },
+        {
+          "id": 30,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.283Z"
+        },
+        {
+          "id": 31,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.285Z"
+        },
+        {
+          "id": 32,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.305Z"
+        },
+        {
+          "id": 33,
+          "content": "xxxx",
+          "comments": [],
+          "created_at": "2026-02-14T01:44:32.307Z"
+        }
+      ],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test0 created",
+          "timestamp": "2026-02-14T00:17:55.290Z"
+        },
+        {
+          "id": 2,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #1 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.056Z"
+        },
+        {
+          "id": 3,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #2 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.058Z"
+        },
+        {
+          "id": 4,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #3 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.072Z"
+        },
+        {
+          "id": 5,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #4 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.074Z"
+        },
+        {
+          "id": 6,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #5 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.088Z"
+        },
+        {
+          "id": 7,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #6 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.089Z"
+        },
+        {
+          "id": 8,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #7 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.091Z"
+        },
+        {
+          "id": 9,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #8 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.092Z"
+        },
+        {
+          "id": 10,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #9 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.103Z"
+        },
+        {
+          "id": 11,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #10 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.104Z"
+        },
+        {
+          "id": 12,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #11 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.118Z"
+        },
+        {
+          "id": 13,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #12 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.120Z"
+        },
+        {
+          "id": 14,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #13 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.121Z"
+        },
+        {
+          "id": 15,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #14 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.134Z"
+        },
+        {
+          "id": 16,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #15 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.135Z"
+        },
+        {
+          "id": 17,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #16 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.136Z"
+        },
+        {
+          "id": 18,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #17 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.149Z"
+        },
+        {
+          "id": 19,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #18 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.150Z"
+        },
+        {
+          "id": 20,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #19 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.151Z"
+        },
+        {
+          "id": 21,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #20 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.211Z"
+        },
+        {
+          "id": 22,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #21 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.213Z"
+        },
+        {
+          "id": 23,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #22 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.242Z"
+        },
+        {
+          "id": 24,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #23 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.244Z"
+        },
+        {
+          "id": 25,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #24 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.273Z"
+        },
+        {
+          "id": 26,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #25 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.275Z"
+        },
+        {
+          "id": 27,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #26 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.277Z"
+        },
+        {
+          "id": 28,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #27 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.279Z"
+        },
+        {
+          "id": 29,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #28 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.280Z"
+        },
+        {
+          "id": 30,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #29 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.282Z"
+        },
+        {
+          "id": 31,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #30 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.283Z"
+        },
+        {
+          "id": 32,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #31 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.285Z"
+        },
+        {
+          "id": 33,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #32 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.305Z"
+        },
+        {
+          "id": 34,
+          "type": "note_added",
+          "user_id": 5,
+          "message": "Note #33 added by attacker1",
+          "timestamp": "2026-02-14T01:44:32.307Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:54:54.386Z"
+    },
+    {
+      "id": 10,
+      "name": "Test4",
+      "description": "des",
+      "creator_id": 5,
+      "members": [
+        {
+          "user_id": 3,
+          "role": "commenter",
+          "purchased": false
+        }
+      ],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test4 created",
+          "timestamp": "2026-02-14T00:17:55.445Z"
+        },
+        {
+          "id": 2,
+          "type": "member_added",
+          "user_id": 6,
+          "message": "User 3 added as commenter",
+          "timestamp": "2026-02-14T00:35:08.770Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:54:58.857Z",
+      "restored_at": "2026-02-14T00:20:25.789Z"
+    },
+    {
+      "id": 9,
+      "name": "Test1",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test1 created",
+          "timestamp": "2026-02-14T00:17:55.444Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:55:03.245Z",
+      "restored_at": "2026-02-14T00:20:25.851Z"
+    },
+    {
+      "id": 6,
+      "name": "Test9",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test9 created",
+          "timestamp": "2026-02-14T00:17:55.291Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:55:08.367Z",
+      "restored_at": "2026-02-14T00:20:25.854Z"
+    },
+    {
+      "id": 7,
+      "name": "Test8",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test8 created",
+          "timestamp": "2026-02-14T00:17:55.335Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:55:12.365Z",
+      "restored_at": "2026-02-14T00:20:25.867Z"
+    },
+    {
+      "id": 11,
+      "name": "Test2",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test2 created",
+          "timestamp": "2026-02-14T00:17:55.446Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:55:16.728Z",
+      "restored_at": "2026-02-14T00:20:25.869Z"
+    },
+    {
+      "id": 8,
+      "name": "Test3",
+      "description": "des",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "Test3 created",
+          "timestamp": "2026-02-14T00:17:55.413Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:55:21.225Z",
+      "restored_at": "2026-02-14T00:20:25.974Z"
+    },
+    {
+      "id": 3,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.024Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:34.860Z"
+    },
+    {
+      "id": 4,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.027Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:39.058Z"
+    },
+    {
+      "id": 5,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.032Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:43.225Z"
+    },
+    {
+      "id": 6,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.033Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:47.404Z"
+    },
+    {
+      "id": 7,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.035Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:51.326Z"
+    },
+    {
+      "id": 8,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.055Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:55.292Z"
+    },
+    {
+      "id": 9,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.086Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:56:59.440Z"
+    },
+    {
+      "id": 10,
+      "name": "sss",
+      "description": "",
+      "creator_id": 5,
+      "members": [],
+      "notes": [],
+      "tasks": [],
+      "files": [],
+      "activity": [
+        {
+          "id": 1,
+          "type": "project_created",
+          "user_id": 5,
+          "message": "sss created",
+          "timestamp": "2026-02-14T01:55:50.166Z"
+        }
+      ],
+      "deleted_at": "2026-02-14T01:57:03.650Z"
+    }
+  ]
 }

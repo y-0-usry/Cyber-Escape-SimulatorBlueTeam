@@ -1,1 +1,2 @@
-.html
+_id: req.user.id }).value();
+  res.json(trashProjects);
