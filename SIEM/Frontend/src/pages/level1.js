@@ -307,6 +307,7 @@ function renderGeneralQuestions() {
   const container = document.getElementById('questions-container');
   container.innerHTML = '';
   const questions = buildGeneralQuestions();
+  cachedGeneralQuestions = questions;
   totalQuestions = questions.length;
 
   questions.forEach(q => {
@@ -835,7 +836,12 @@ async function loadAlerts() {
 }
 
 // === EVENT LISTENERS ===
-document.getElementById('start-btn').addEventListener('click', () => {
+document.getElementById('start-btn').addEventListener('click', async () => {
+  await loadAlerts();
+  if (!alerts || alerts.length === 0) {
+    window.alert('⚠️ Failed to load alerts. Please run: node processAllLogs.js level1');
+    return;
+  }
   showSection('questions');
   renderGeneralQuestions();
   startTimer();

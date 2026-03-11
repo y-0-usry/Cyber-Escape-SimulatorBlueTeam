@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 2 Challenge</title><link rel="stylesheet" href="style.css" /></head>
+<body>
+  <nav class="nav"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="category.html">Category</a><a href="checkout.html">Checkout</a><a href="orders.html">Orders</a><a href="lab.html">Lab</a></nav>
+  <div class="container">
+    <div class="card">
+      <h2>Challenge Console</h2>
+      <div class="grid">
+        <div class="card"><p class="small">Time</p><p id="labTimer"><strong>20:00</strong></p></div>
+        <div class="card"><p class="small">Score</p><p id="labScore"><strong>0</strong></p></div>
+        <div class="card"><p class="small">Hints Left</p><p id="labHints"><strong>3</strong></p></div>
+        <div class="card"><p class="small">Progress</p><p id="labProgress"><strong>0/3</strong></p></div>
+      </div>
+      <button onclick="startLabAttempt()">Start Attempt</button>
+      <button class="secondary" onclick="checkProgress()">Check Progress</button>
+      <button class="warn" onclick="fullResetLab()">Reset Everything</button>
+      <pre id="challengeStatus" class="code">Press Start Attempt to begin.</pre>
+    </div>
+
+    <div class="card">
+      <h1>Lab 2 - Vulnerable Ecommerce</h1>
+      <p class="small">Use these credentials:</p>
+      <div class="code">username: attacker1\npassword: ShopHack123!</div>
+      <p class="small">Account ID (yours): <strong>1</strong>, initial balance: <strong>$100</strong></p>
+      <p class="small">High-value target product price: <strong>$700</strong></p>
+    </div>
+
+    <div class="card">
+      <h3>Challenges</h3>
+      <ol>
+        <li>Task 1: Retrieve the FLAG. <button class="secondary hint-btn-inline" onclick="useLabHint(1)">Hint</button></li>
+        <li>Task 2: Purchase the target product without paying. <button class="secondary hint-btn-inline" onclick="useLabHint(2)">Hint</button></li>
+        <li>Task 3: Purchase the target product without charging your own account. <button class="secondary hint-btn-inline" onclick="useLabHint(3)">Hint</button></li>
+      </ol>
+      <div id="taskState" class="small">Task1: Pending | Task2: Pending | Task3: Pending</div>
+      <button id="finishBtn" class="success hidden" onclick="finishLabAttempt()">Finish</button>
+      <pre id="finalResult" class="code hidden"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Submit FLAG</h3>
+      <input id="flagInput" placeholder="FLAG{...}" />
+      <button class="success" onclick="submitFlag()">Submit FLAG</button>
+    </div>
+
+    <div class="card"><button class="secondary" onclick="location.href='login.html'">Go Login</button></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

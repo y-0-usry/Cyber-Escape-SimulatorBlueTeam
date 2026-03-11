@@ -1,0 +1,741 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "attacker1",
+      "password": "ShopHack123!",
+      "token": "832e3118ea37bf722dab5910f2a805cebbe29aef6a832a4347e51a34f6e445ac",
+      "account_id": 1
+    },
+    {
+      "id": 2,
+      "username": "analyst2",
+      "password": "pass123",
+      "token": null,
+      "account_id": 2
+    },
+    {
+      "id": 3,
+      "username": "buyer3",
+      "password": "pass123",
+      "token": null,
+      "account_id": 3
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "owner_user_id": 1,
+      "balance": 100,
+      "initial_balance": 100
+    },
+    {
+      "id": 2,
+      "owner_user_id": 2,
+      "balance": 40,
+      "initial_balance": 40
+    },
+    {
+      "id": 3,
+      "owner_user_id": 3,
+      "balance": 25,
+      "initial_balance": 25
+    },
+    {
+      "id": 4,
+      "owner_user_id": null,
+      "balance": 60,
+      "initial_balance": 60
+    },
+    {
+      "id": 5,
+      "owner_user_id": null,
+      "balance": 80,
+      "initial_balance": 80
+    },
+    {
+      "id": 6,
+      "owner_user_id": null,
+      "balance": 50,
+      "initial_balance": 50
+    },
+    {
+      "id": 7,
+      "owner_user_id": null,
+      "balance": 35,
+      "initial_balance": 35
+    },
+    {
+      "id": 8,
+      "owner_user_id": null,
+      "balance": 20,
+      "initial_balance": 20
+    },
+    {
+      "id": 9,
+      "owner_user_id": null,
+      "balance": 95,
+      "initial_balance": 95
+    },
+    {
+      "id": 10,
+      "owner_user_id": null,
+      "balance": 3600,
+      "initial_balance": 5000
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "ELECTRONICS Product 1",
+      "category": "electronics",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated electronics item 1"
+    },
+    {
+      "id": 2,
+      "name": "ELECTRONICS Product 2",
+      "category": "electronics",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated electronics item 2"
+    },
+    {
+      "id": 3,
+      "name": "ELECTRONICS Product 3",
+      "category": "electronics",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated electronics item 3"
+    },
+    {
+      "id": 4,
+      "name": "ELECTRONICS Product 4",
+      "category": "electronics",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated electronics item 4"
+    },
+    {
+      "id": 5,
+      "name": "ELECTRONICS Product 5",
+      "category": "electronics",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated electronics item 5"
+    },
+    {
+      "id": 6,
+      "name": "ELECTRONICS Product 6",
+      "category": "electronics",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated electronics item 6"
+    },
+    {
+      "id": 7,
+      "name": "ELECTRONICS Product 7",
+      "category": "electronics",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated electronics item 7"
+    },
+    {
+      "id": 8,
+      "name": "ELECTRONICS Product 8",
+      "category": "electronics",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated electronics item 8"
+    },
+    {
+      "id": 9,
+      "name": "ELECTRONICS Product 9",
+      "category": "electronics",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated electronics item 9"
+    },
+    {
+      "id": 10,
+      "name": "ELECTRONICS Product 10",
+      "category": "electronics",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated electronics item 10"
+    },
+    {
+      "id": 11,
+      "name": "ELECTRONICS Product 11",
+      "category": "electronics",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated electronics item 11"
+    },
+    {
+      "id": 12,
+      "name": "ELECTRONICS Product 12",
+      "category": "electronics",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated electronics item 12"
+    },
+    {
+      "id": 13,
+      "name": "FASHION Product 1",
+      "category": "fashion",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated fashion item 1"
+    },
+    {
+      "id": 14,
+      "name": "FASHION Product 2",
+      "category": "fashion",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated fashion item 2"
+    },
+    {
+      "id": 15,
+      "name": "FASHION Product 3",
+      "category": "fashion",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated fashion item 3"
+    },
+    {
+      "id": 16,
+      "name": "FASHION Product 4",
+      "category": "fashion",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated fashion item 4"
+    },
+    {
+      "id": 17,
+      "name": "FASHION Product 5",
+      "category": "fashion",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated fashion item 5"
+    },
+    {
+      "id": 18,
+      "name": "FASHION Product 6",
+      "category": "fashion",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated fashion item 6"
+    },
+    {
+      "id": 19,
+      "name": "FASHION Product 7",
+      "category": "fashion",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated fashion item 7"
+    },
+    {
+      "id": 20,
+      "name": "FASHION Product 8",
+      "category": "fashion",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated fashion item 8"
+    },
+    {
+      "id": 21,
+      "name": "FASHION Product 9",
+      "category": "fashion",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated fashion item 9"
+    },
+    {
+      "id": 22,
+      "name": "FASHION Product 10",
+      "category": "fashion",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated fashion item 10"
+    },
+    {
+      "id": 23,
+      "name": "FASHION Product 11",
+      "category": "fashion",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated fashion item 11"
+    },
+    {
+      "id": 24,
+      "name": "FASHION Product 12",
+      "category": "fashion",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated fashion item 12"
+    },
+    {
+      "id": 25,
+      "name": "HOME Product 1",
+      "category": "home",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated home item 1"
+    },
+    {
+      "id": 26,
+      "name": "HOME Product 2",
+      "category": "home",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated home item 2"
+    },
+    {
+      "id": 27,
+      "name": "HOME Product 3",
+      "category": "home",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated home item 3"
+    },
+    {
+      "id": 28,
+      "name": "HOME Product 4",
+      "category": "home",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated home item 4"
+    },
+    {
+      "id": 29,
+      "name": "HOME Product 5",
+      "category": "home",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated home item 5"
+    },
+    {
+      "id": 30,
+      "name": "HOME Product 6",
+      "category": "home",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated home item 6"
+    },
+    {
+      "id": 31,
+      "name": "HOME Product 7",
+      "category": "home",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated home item 7"
+    },
+    {
+      "id": 32,
+      "name": "HOME Product 8",
+      "category": "home",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated home item 8"
+    },
+    {
+      "id": 33,
+      "name": "HOME Product 9",
+      "category": "home",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated home item 9"
+    },
+    {
+      "id": 34,
+      "name": "HOME Product 10",
+      "category": "home",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated home item 10"
+    },
+    {
+      "id": 35,
+      "name": "HOME Product 11",
+      "category": "home",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated home item 11"
+    },
+    {
+      "id": 36,
+      "name": "HOME Product 12",
+      "category": "home",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated home item 12"
+    },
+    {
+      "id": 37,
+      "name": "BOOKS Product 1",
+      "category": "books",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated books item 1"
+    },
+    {
+      "id": 38,
+      "name": "BOOKS Product 2",
+      "category": "books",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated books item 2"
+    },
+    {
+      "id": 39,
+      "name": "BOOKS Product 3",
+      "category": "books",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated books item 3"
+    },
+    {
+      "id": 40,
+      "name": "BOOKS Product 4",
+      "category": "books",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated books item 4"
+    },
+    {
+      "id": 41,
+      "name": "BOOKS Product 5",
+      "category": "books",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated books item 5"
+    },
+    {
+      "id": 42,
+      "name": "BOOKS Product 6",
+      "category": "books",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated books item 6"
+    },
+    {
+      "id": 43,
+      "name": "BOOKS Product 7",
+      "category": "books",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated books item 7"
+    },
+    {
+      "id": 44,
+      "name": "BOOKS Product 8",
+      "category": "books",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated books item 8"
+    },
+    {
+      "id": 45,
+      "name": "BOOKS Product 9",
+      "category": "books",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated books item 9"
+    },
+    {
+      "id": 46,
+      "name": "BOOKS Product 10",
+      "category": "books",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated books item 10"
+    },
+    {
+      "id": 47,
+      "name": "BOOKS Product 11",
+      "category": "books",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated books item 11"
+    },
+    {
+      "id": 48,
+      "name": "BOOKS Product 12",
+      "category": "books",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated books item 12"
+    },
+    {
+      "id": 49,
+      "name": "GAMING Product 1",
+      "category": "gaming",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated gaming item 1"
+    },
+    {
+      "id": 50,
+      "name": "GAMING Product 2",
+      "category": "gaming",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated gaming item 2"
+    },
+    {
+      "id": 51,
+      "name": "GAMING Product 3",
+      "category": "gaming",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated gaming item 3"
+    },
+    {
+      "id": 52,
+      "name": "GAMING Product 4",
+      "category": "gaming",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated gaming item 4"
+    },
+    {
+      "id": 53,
+      "name": "GAMING Product 5",
+      "category": "gaming",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated gaming item 5"
+    },
+    {
+      "id": 54,
+      "name": "GAMING Product 6",
+      "category": "gaming",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated gaming item 6"
+    },
+    {
+      "id": 55,
+      "name": "GAMING Product 7",
+      "category": "gaming",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated gaming item 7"
+    },
+    {
+      "id": 56,
+      "name": "GAMING Product 8",
+      "category": "gaming",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated gaming item 8"
+    },
+    {
+      "id": 57,
+      "name": "GAMING Product 9",
+      "category": "gaming",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated gaming item 9"
+    },
+    {
+      "id": 58,
+      "name": "GAMING Product 10",
+      "category": "gaming",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated gaming item 10"
+    },
+    {
+      "id": 59,
+      "name": "GAMING Product 11",
+      "category": "gaming",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated gaming item 11"
+    },
+    {
+      "id": 60,
+      "name": "GAMING Product 12",
+      "category": "gaming",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated gaming item 12"
+    },
+    {
+      "id": 61,
+      "name": "SPORTS Product 1",
+      "category": "sports",
+      "price": 25,
+      "stock": 50,
+      "description": "Top-rated sports item 1"
+    },
+    {
+      "id": 62,
+      "name": "SPORTS Product 2",
+      "category": "sports",
+      "price": 30,
+      "stock": 50,
+      "description": "Top-rated sports item 2"
+    },
+    {
+      "id": 63,
+      "name": "SPORTS Product 3",
+      "category": "sports",
+      "price": 35,
+      "stock": 50,
+      "description": "Top-rated sports item 3"
+    },
+    {
+      "id": 64,
+      "name": "SPORTS Product 4",
+      "category": "sports",
+      "price": 40,
+      "stock": 50,
+      "description": "Top-rated sports item 4"
+    },
+    {
+      "id": 65,
+      "name": "SPORTS Product 5",
+      "category": "sports",
+      "price": 45,
+      "stock": 50,
+      "description": "Top-rated sports item 5"
+    },
+    {
+      "id": 66,
+      "name": "SPORTS Product 6",
+      "category": "sports",
+      "price": 50,
+      "stock": 50,
+      "description": "Top-rated sports item 6"
+    },
+    {
+      "id": 67,
+      "name": "SPORTS Product 7",
+      "category": "sports",
+      "price": 55,
+      "stock": 50,
+      "description": "Top-rated sports item 7"
+    },
+    {
+      "id": 68,
+      "name": "SPORTS Product 8",
+      "category": "sports",
+      "price": 60,
+      "stock": 50,
+      "description": "Top-rated sports item 8"
+    },
+    {
+      "id": 69,
+      "name": "SPORTS Product 9",
+      "category": "sports",
+      "price": 65,
+      "stock": 50,
+      "description": "Top-rated sports item 9"
+    },
+    {
+      "id": 70,
+      "name": "SPORTS Product 10",
+      "category": "sports",
+      "price": 70,
+      "stock": 50,
+      "description": "Top-rated sports item 10"
+    },
+    {
+      "id": 71,
+      "name": "SPORTS Product 11",
+      "category": "sports",
+      "price": 75,
+      "stock": 50,
+      "description": "Top-rated sports item 11"
+    },
+    {
+      "id": 72,
+      "name": "SPORTS Product 12",
+      "category": "sports",
+      "price": 80,
+      "stock": 50,
+      "description": "Top-rated sports item 12"
+    },
+    {
+      "id": 777,
+      "name": "Quantum Enterprise Server",
+      "category": "electronics",
+      "price": 700,
+      "stock": 5,
+      "description": "High-value target product for checkout challenge."
+    }
+  ],
+  "categories": [
+    "electronics",
+    "fashion",
+    "home",
+    "books",
+    "gaming",
+    "sports"
+  ],
+  "carts": [
+    {
+      "user_id": 1,
+      "items": [
+        {
+          "productId": 777,
+          "qty": 2
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "charged_account_id": null,
+      "productId": 777,
+      "price": 700,
+      "status": "paid",
+      "payment_bypass": true,
+      "created_at": "2026-03-11T15:41:58.785Z"
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "charged_account_id": 10,
+      "productId": 777,
+      "price": 700,
+      "status": "paid",
+      "payment_bypass": false,
+      "created_at": "2026-03-11T15:42:34.004Z"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "charged_account_id": null,
+      "productId": 777,
+      "price": 700,
+      "status": "paid",
+      "payment_bypass": true,
+      "created_at": "2026-03-11T21:55:32.146Z"
+    },
+    {
+      "id": 4,
+      "user_id": 1,
+      "charged_account_id": 10,
+      "productId": 777,
+      "price": 700,
+      "status": "paid",
+      "payment_bypass": false,
+      "created_at": "2026-03-11T21:56:57.042Z"
+    }
+  ],
+  "secret": [
+    {
+      "id": 1,
+      "flag": "FLAG{ecom_sqli_category_secret_dump}",
+      "note": "internal-only"
+    }
+  ]
+}

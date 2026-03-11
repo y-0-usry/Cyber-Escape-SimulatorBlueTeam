@@ -79,6 +79,9 @@ function startTimer() {
 }
 
 function updateImpactDisplay() {
+    localStorage.setItem('level2_reward_hints', rewardHints);
+    localStorage.setItem('level2_final_score', finalScore);
+    showSection('final');
   const impactEl = document.getElementById('impact-level');
   if (impactEl) {
     impactEl.textContent = `${impactLevel}%`;
@@ -903,25 +906,54 @@ function showFinalResults() {
     <li>🔥 Impact Penalty: -${impactPenalty} points</li>
     <li>💡 Hints Used: ${hintsUsed}</li>
     <li>⏰ Time Extensions: ${timeExtensions}</li>
+`;
+
+  localStorage.setItem('level2_reward_hints', rewardHints);
+  localStorage.setItem('level2_final_score', finalScore);
+  showSection('final');
+}
+
 // === EVENT LISTENERS ===
-document.getElementById('start-btn').addEventListener('click', () => {
-  loadAlerts();
-});
+// Compatibility wrapper: Level2.html may use inline `onclick="startLevel()"`.
+function startLevel() {
+  try {
+    loadAlerts();
+  } catch (err) {
+    console.error('startLevel error:', err);
+    window.alert('Error starting level: ' + (err.message || err));
+  }
+}
+// Expose for inline `onclick` in HTML
+window.startLevel = startLevel;
 
-document.getElementById('reset-level').addEventListener('click', handleReset);
+// Register UI event listeners after DOM is ready to avoid missing elements
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) startBtn.addEventListener('click', () => { console.log('Level2: Start clicked'); loadAlerts(); });
 
-document.getElementById('submit-answers').addEventListener('click', evaluateGeneralQuestions);
+    const resetBtn = document.getElementById('reset-level');
+    if (resetBtn) resetBtn.addEventListener('click', handleReset);
 
-document.getElementById('submit-scenario').addEventListener('click', evaluateScenarioQuestions);
+    const submitAnswers = document.getElementById('submit-answers');
+    if (submitAnswers) submitAnswers.addEventListener('click', evaluateGeneralQuestions);
 
-document.getElementById('create-ticket').addEventListener('click', evaluateTicket);
+    const submitScenario = document.getElementById('submit-scenario');
+    if (submitScenario) submitScenario.addEventListener('click', evaluateScenarioQuestions);
 
-document.getElementById('return-dashboard').addEventListener('click', () => {
-  window.location.href = '/';
-});
+    const createTicketBtn = document.getElementById('create-ticket');
+    if (createTicketBtn) createTicketBtn.addEventListener('click', evaluateTicket);
 
-document.getElementById('view-answerkey')?.addEventListener('click', () => {
-  window.location.href = '/AnswerKey_Level2';
+    const returnDashboard = document.getElementById('return-dashboard');
+    if (returnDashboard) returnDashboard.addEventListener('click', () => { window.location.href = '/'; });
+
+    const viewAnswerKey = document.getElementById('view-answerkey');
+    if (viewAnswerKey) viewAnswerKey.addEventListener('click', () => { window.location.href = '/AnswerKey_Level2'; });
+
+    console.log('Level2: UI event listeners registered');
+  } catch (err) {
+    console.error('Error registering Level2 event listeners:', err);
+  }
 });
 
 // === LOAD ALERTS ===
