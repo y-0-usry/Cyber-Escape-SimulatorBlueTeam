@@ -26,7 +26,12 @@
       <p class="small">High-value target product price: <strong>$700</strong></p>
     </div>
 
-    <div class="card">
+    <div id="lockedTasksCard" class="card">
+      <h3>Tasks Locked</h3>
+      <p class="small">Press <strong>Start Attempt</strong> to reveal tasks and FLAG submission.</p>
+    </div>
+
+    <div id="tasksCard" class="card hidden">
       <h3>Challenges</h3>
       <ol>
         <li>Task 1: Retrieve the FLAG. <button class="secondary hint-btn-inline" onclick="useLabHint(1)">Hint</button></li>
@@ -38,7 +43,7 @@
       <pre id="finalResult" class="code hidden"></pre>
     </div>
 
-    <div class="card">
+    <div id="flagCard" class="card hidden">
       <h3>Submit FLAG</h3>
       <input id="flagInput" placeholder="FLAG{...}" />
       <button class="success" onclick="submitFlag()">Submit FLAG</button>

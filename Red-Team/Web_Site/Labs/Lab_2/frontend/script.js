@@ -1,17 +1,94 @@
 const API_BASE = '';
+const LAB_DURATION_SECONDS = 20 * 60;
+const LAB_STATE_KEY = 'lab2_attempt_state';
 
-let labState = {
-  started: false,
-  timerSeconds: 20 * 60,
-  timerId: null,
-  hintsLeft: 3,
-  score: 0,
-  tasks: { t1: false, t2: false, t3: false },
-  finalized: false
-};
+function defaultLabState() {
+  return {
+    started: false,
+    timerSeconds: LAB_DURATION_SECONDS,
+    timerId: null,
+    endsAt: null,
+    expiredNotified: false,
+    hintsLeft: 3,
+    score: 0,
+    tasks: { t1: false, t2: false, t3: false },
+    finalized: false
+  };
+}
+
+let labState = defaultLabState();
 
 function token() {
   return localStorage.getItem('lab2_token');
+}
+
+function saveLabState() {
+  const serializable = { ...labState, timerId: null };
+  localStorage.setItem(LAB_STATE_KEY, JSON.stringify(serializable));
+}
+
+function loadLabState() {
+  const raw = localStorage.getItem(LAB_STATE_KEY);
+  if (!raw) return;
+  try {
+    const parsed = JSON.parse(raw);
+    labState = { ...defaultLabState(), ...parsed, timerId: null };
+    if (!labState.started && !labState.finalized && labState.timerSeconds <= 0) {
+      labState.timerSeconds = LAB_DURATION_SECONDS;
+    }
+  } catch (e) {
+    labState = defaultLabState();
+  }
+}
+
+function syncTimerFromClock() {
+  if (!labState.started || !labState.endsAt) return;
+  const remaining = Math.max(0, Math.floor((labState.endsAt - Date.now()) / 1000));
+  labState.timerSeconds = remaining;
+
+  if (remaining <= 0) {
+    clearInterval(labState.timerId);
+    labState.timerId = null;
+    labState.started = false;
+    labState.endsAt = null;
+    if (!labState.expiredNotified && document.getElementById('challengeStatus')) {
+      alert('Time expired. Reset and try again.');
+      labState.expiredNotified = true;
+    }
+    saveLabState();
+  }
+}
+
+function startLiveTimerIfNeeded() {
+  clearInterval(labState.timerId);
+  if (!labState.started || !labState.endsAt) return;
+
+  syncTimerFromClock();
+  updateLabUI();
+  saveLabState();
+
+  labState.timerId = setInterval(() => {
+    syncTimerFromClock();
+    updateLabUI();
+    saveLabState();
+  }, 1000);
+}
+
+function setChallengeVisibility() {
+  const lockedCard = document.getElementById('lockedTasksCard');
+  const tasksCard = document.getElementById('tasksCard');
+  const flagCard = document.getElementById('flagCard');
+  if (!lockedCard || !tasksCard || !flagCard) return;
+
+  if (labState.started || labState.finalized) {
+    lockedCard.classList.add('hidden');
+    tasksCard.classList.remove('hidden');
+    flagCard.classList.remove('hidden');
+  } else {
+    lockedCard.classList.remove('hidden');
+    tasksCard.classList.add('hidden');
+    flagCard.classList.add('hidden');
+  }
 }
 
 async function apiCall(url, method = 'GET', body = null, useAuth = false) {
@@ -202,11 +279,19 @@ function updateLabUI() {
     if (done === 3 && !labState.finalized) finishBtn.classList.remove('hidden');
     else finishBtn.classList.add('hidden');
   }
+
+  setChallengeVisibility();
 }
 
 function startLabAttempt() {
-  if (labState.started) return;
+  if (labState.started) {
+    startLiveTimerIfNeeded();
+    return;
+  }
   labState.started = true;
+  labState.expiredNotified = false;
+  labState.timerSeconds = LAB_DURATION_SECONDS;
+  labState.endsAt = Date.now() + LAB_DURATION_SECONDS * 1000;
   const out = document.getElementById('challengeStatus');
   if (out) out.textContent = 'Attempt started. Solve tasks then press Check Progress.';
   const finalResult = document.getElementById('finalResult');
@@ -215,17 +300,8 @@ function startLabAttempt() {
     finalResult.textContent = '';
   }
 
-  clearInterval(labState.timerId);
-  labState.timerId = setInterval(() => {
-    labState.timerSeconds--;
-    updateLabUI();
-    if (labState.timerSeconds <= 0) {
-      clearInterval(labState.timerId);
-      labState.started = false;
-      alert('Time expired. Reset and try again.');
-    }
-  }, 1000);
-
+  saveLabState();
+  startLiveTimerIfNeeded();
   updateLabUI();
 }
 
@@ -243,6 +319,7 @@ function useLabHint(taskNum) {
 
   labState.hintsLeft -= 1;
   labState.score = Math.max(0, labState.score - 5);
+  saveLabState();
   updateLabUI();
   alert(hints[taskNum] || 'Keep investigating request flow.');
 }
@@ -252,6 +329,10 @@ async function checkProgress() {
   if (!out) return;
   if (!token()) {
     out.textContent = 'Login required: please login first with challenge credentials.';
+    return;
+  }
+  if (!labState.started) {
+    out.textContent = 'Start Attempt first to unlock and track challenge progress.';
     return;
   }
 
@@ -266,6 +347,7 @@ async function checkProgress() {
 
     if (labState.tasks.t2 && !oldT2) labState.score += 120;
     if (labState.tasks.t3 && !oldT3) labState.score += 120;
+    saveLabState();
 
     out.textContent = [
       `Task 2 (buy without paying): ${labState.tasks.t2 ? 'DONE' : 'PENDING'}`,
@@ -281,12 +363,17 @@ async function checkProgress() {
 }
 
 async function submitFlag() {
+  if (!labState.started) {
+    alert('Start Attempt first.');
+    return;
+  }
   const flag = document.getElementById('flagInput').value.trim();
   try {
     const resp = await apiCall('/api/challenge/submit-flag', 'POST', { flag }, true);
     if (resp.success) {
       if (!labState.tasks.t1) labState.score += 160;
       labState.tasks.t1 = true;
+      saveLabState();
       updateLabUI();
 
       const done = [labState.tasks.t1, labState.tasks.t2, labState.tasks.t3].filter(Boolean).length;
@@ -311,6 +398,7 @@ function finishLabAttempt() {
 
   clearInterval(labState.timerId);
   labState.started = false;
+  labState.endsAt = null;
 
   const task1Points = labState.tasks.t1 ? 160 : 0;
   const task2Points = labState.tasks.t2 ? 120 : 0;
@@ -322,6 +410,7 @@ function finishLabAttempt() {
 
   labState.score = finalScore;
   labState.finalized = true;
+  saveLabState();
   updateLabUI();
 
   const out = document.getElementById('challengeStatus');
@@ -335,28 +424,30 @@ function finishLabAttempt() {
       `Task Bonus: ${task1Points + task2Points + task3Points}`,
       `Hint Penalty: -${hintPenalty}`,
       `Time Bonus: +${timeBonus}`,
-      `Final Score: ${finalScore}`
+      `Final Score: ${finalScore}`,
+      'Automatic reset will run in 4 seconds.'
     ].join('\n');
   }
+
+  setTimeout(async () => {
+    await fullResetLab(true);
+    alert('Lab 2 reset automatically after completion. Login again to start a fresh attempt.');
+    location.href = 'login.html';
+  }, 4000);
 }
 
-async function fullResetLab() {
+async function fullResetLab(silent = false) {
   try {
     await apiCall('/api/reset', 'POST');
   } catch (e) {
     // Keep going to reset local attempt state even if backend reset fails.
   }
 
+  localStorage.removeItem('lab2_token');
+  localStorage.removeItem(LAB_STATE_KEY);
+
   clearInterval(labState.timerId);
-  labState = {
-    started: false,
-    timerSeconds: 20 * 60,
-    timerId: null,
-    hintsLeft: 3,
-    score: 0,
-    tasks: { t1: false, t2: false, t3: false },
-    finalized: false
-  };
+  labState = defaultLabState();
   const out = document.getElementById('challengeStatus');
   if (out) out.textContent = 'Everything reset. Start a new attempt.';
   const flagInput = document.getElementById('flagInput');
@@ -367,10 +458,16 @@ async function fullResetLab() {
     finalResult.textContent = '';
   }
   updateLabUI();
-  alert('Lab state reset complete.');
+  if (!silent) {
+    alert('Lab state reset complete. Login again to start a fresh attempt.');
+    location.href = 'login.html';
+  }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  loadLabState();
+  syncTimerFromClock();
+  startLiveTimerIfNeeded();
   setAuthUI();
   loadProducts();
   loadProfile();

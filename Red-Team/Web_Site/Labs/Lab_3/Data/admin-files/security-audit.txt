@@ -1,0 +1,3 @@
+Security audit notes
+- Email-based admin shortcuts still pending cleanup
+- File viewer should be reviewed

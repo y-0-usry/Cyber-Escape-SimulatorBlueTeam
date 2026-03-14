@@ -135,8 +135,11 @@
         async function resetLab() {
             if (confirm('Reset all data?')) {
                 await fetch('/api/reset', { method: 'POST' });
+                localStorage.removeItem('token');
+                localStorage.removeItem('gameState');
+                localStorage.removeItem('lastGameScore');
                 alert('Data reset');
-                loadProjects();
+                window.location = 'login.html';
             }
         }
 

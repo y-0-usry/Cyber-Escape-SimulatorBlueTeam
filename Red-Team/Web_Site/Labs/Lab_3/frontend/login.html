@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - Cyber Escape Workspace Cloud</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="lab.html">Lab Challenge</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+  </nav>
+  <div class="container">
+    <div class="split">
+      <div class="card">
+        <h2>Login</h2>
+        <p class="muted">Use one of the provided lab accounts.</p>
+        <input id="username" placeholder="Username" />
+        <input id="password" type="password" placeholder="Password" />
+        <button onclick="login()">Sign In</button>
+      </div>
+      <div class="card">
+        <h3>Lab Accounts</h3>
+        <pre>attacker1 / OrgBreak2026!
+trialhelper / TrialBridge2026!</pre>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

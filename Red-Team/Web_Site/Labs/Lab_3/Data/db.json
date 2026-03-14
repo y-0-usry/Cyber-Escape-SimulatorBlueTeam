@@ -1,0 +1,129 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "attacker1",
+      "password": "OrgBreak2026!",
+      "token": "aa8382501bebf1b524325b7e98bb711c36a31331077531719568420e6dbf4649",
+      "name": "Ammar Red",
+      "email": "attacker@redops.local",
+      "org_id": 1
+    },
+    {
+      "id": 2,
+      "username": "trialhelper",
+      "password": "TrialBridge2026!",
+      "token": null,
+      "name": "Trial Helper",
+      "email": "helper@cyberescape.com",
+      "org_id": 2
+    },
+    {
+      "id": 3,
+      "username": "admin1",
+      "password": "AdminPass!2026",
+      "token": null,
+      "name": "Cyber Escape Admin",
+      "email": "admin@CyberEscape.com",
+      "org_id": 3
+    }
+  ],
+  "orgs": [
+    {
+      "id": 1,
+      "owner_user_id": 1,
+      "raw_name": "Red Siege Labs",
+      "display_name": "Red Siege Labs",
+      "slug": "red-siege-labs",
+      "plan": "free",
+      "project_limit": 2,
+      "trial_days_left": 0,
+      "trial_expired": true,
+      "plan_notice": "Your 14-day trial expired. Add billing details to create more projects."
+    },
+    {
+      "id": 2,
+      "owner_user_id": 2,
+      "raw_name": "Velocity Sandbox",
+      "display_name": "Velocity Sandbox",
+      "slug": "velocity-sandbox",
+      "plan": "trial",
+      "project_limit": 50,
+      "trial_days_left": 4,
+      "trial_expired": false,
+      "sticky_trial": true,
+      "plan_notice": "Trial active. 4 days left before downgrade."
+    },
+    {
+      "id": 3,
+      "owner_user_id": 3,
+      "raw_name": "Cyber Escape",
+      "display_name": "Cyber Escape",
+      "slug": "cyber-escape",
+      "plan": "enterprise",
+      "project_limit": 500,
+      "trial_days_left": null,
+      "trial_expired": false,
+      "plan_notice": "Enterprise plan active."
+    }
+  ],
+  "org_members": [
+    {
+      "org_id": 1,
+      "username": "attacker1",
+      "role": "owner"
+    },
+    {
+      "org_id": 2,
+      "username": "trialhelper",
+      "role": "owner"
+    },
+    {
+      "org_id": 3,
+      "username": "admin1",
+      "role": "owner"
+    },
+    {
+      "org_id": 3,
+      "username": "ops-bot",
+      "role": "automation"
+    },
+    {
+      "org_id": 3,
+      "username": "finance-review",
+      "role": "viewer"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "org_id": 1,
+      "name": "SOC Automation",
+      "summary": "Alert triage runners and webhook bridge."
+    },
+    {
+      "id": 2,
+      "org_id": 1,
+      "name": "Tenant Drill",
+      "summary": "Quarterly tenant isolation exercises."
+    },
+    {
+      "id": 3,
+      "org_id": 2,
+      "name": "Trial Ops Board",
+      "summary": "Temporary org used for demo projects."
+    },
+    {
+      "id": 4,
+      "org_id": 3,
+      "name": "Billing Console Refresh",
+      "summary": "Admin-only redesign workstream."
+    }
+  ],
+  "challenge_progress": [
+    {
+      "user_id": 1,
+      "flag_submitted": false
+    }
+  ]
+}

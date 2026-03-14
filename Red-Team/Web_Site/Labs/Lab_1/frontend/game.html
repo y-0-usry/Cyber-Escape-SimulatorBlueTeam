@@ -561,6 +561,14 @@
 
                 <!-- Start Button -->
                 <div id="startSection">
+                    <div class="task-card" style="margin-bottom: 20px; border: 2px dashed #667eea; background: #f7f9ff;">
+                        <div class="task-header">
+                            <span class="task-number" style="background: #667eea;">🔒</span>
+                            <p class="task-title">Tasks Locked</p>
+                            <span class="task-status pending">Start Required</span>
+                        </div>
+                        <p class="task-description"><strong>Press Start Challenge</strong> to reveal tasks and FLAG submission.</p>
+                    </div>
                     <button class="btn-start-game" onclick="showIntro()">
                         <i class="fas fa-play"></i> Start Challenge
                     </button>
@@ -654,16 +662,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const LAB1_DURATION_SECONDS = 30 * 60;
+
         // Game State
         let gameState = {
             isRunning: false,
-            timeRemaining: 30 * 60, // 30 minutes in seconds
+            timeRemaining: LAB1_DURATION_SECONDS,
             score: 0,
             hintsUsed: 0,
             hintsAvailable: 8,
             tasksCompleted: 0,
             completedTasks: [false, false, false, false],
             timerId: null,
+            deadlineTs: null,
             projectsVerified: false,
             projectBonus: 0,
             flagPoints: 0,
@@ -678,22 +689,63 @@
         // Initialize
 
         function initGame() {
-            // Clear old game state ONLY - keep token intact
-            localStorage.removeItem('gameState');
-            localStorage.removeItem('lastGameScore');
-            // Reset game state
-            gameState = {
+            const defaultState = {
                 isRunning: false,
-                timeRemaining: 30 * 60,
+                timeRemaining: LAB1_DURATION_SECONDS,
                 score: 0,
                 hintsUsed: 0,
                 hintsAvailable: 8,
                 tasksCompleted: 0,
                 completedTasks: [false, false, false, false],
                 timerId: null,
-                projectsVerified: false
+                deadlineTs: null,
+                projectsVerified: false,
+                projectBonus: 0,
+                flagPoints: 0,
+                speedBonus: 0,
+                hintsPenalty: 0,
+                finalized: false
             };
+
+            const savedRaw = localStorage.getItem('gameState');
+            if (savedRaw) {
+                try {
+                    const saved = JSON.parse(savedRaw);
+                    gameState = { ...defaultState, ...saved, timerId: null };
+                } catch (e) {
+                    gameState = { ...defaultState };
+                }
+            } else {
+                gameState = { ...defaultState };
+            }
+
+            if (!gameState.isRunning && !gameState.finalized && gameState.timeRemaining <= 0) {
+                gameState.timeRemaining = LAB1_DURATION_SECONDS;
+            }
+
+            syncTimeFromDeadline();
+
+            if (gameState.isRunning) {
+                document.getElementById('startSection').style.display = 'none';
+                document.getElementById('gameRunning').style.display = 'block';
+                startTimer();
+            } else {
+                document.getElementById('startSection').style.display = 'block';
+                document.getElementById('gameRunning').style.display = 'none';
+            }
+
             updateDisplay();
+            saveGameState();
+        }
+
+        function syncTimeFromDeadline() {
+            if (!gameState.isRunning || !gameState.deadlineTs) return;
+            const remaining = Math.max(0, Math.floor((gameState.deadlineTs - Date.now()) / 1000));
+            gameState.timeRemaining = remaining;
+            if (remaining <= 0) {
+                gameState.deadlineTs = null;
+                gameState.isRunning = false;
+            }
         }
 
         function showIntro() {
@@ -710,6 +762,7 @@
             window.open('index.html', '_blank');
             
             gameState.isRunning = true;
+            gameState.deadlineTs = Date.now() + (Math.max(0, gameState.timeRemaining) * 1000);
             document.getElementById('startSection').style.display = 'none';
             document.getElementById('gameRunning').style.display = 'block';
             startTimer();
@@ -717,9 +770,11 @@
         }
 
         function startTimer() {
+            clearInterval(gameState.timerId);
             gameState.timerId = setInterval(() => {
-                gameState.timeRemaining--;
+                syncTimeFromDeadline();
                 updateDisplay();
+                saveGameState();
 
                 if (gameState.timeRemaining <= 0) {
                     timeExpired();
@@ -728,9 +783,12 @@
         }
 
         function updateDisplay() {
+            syncTimeFromDeadline();
+
             // Timer
-            const minutes = Math.floor(gameState.timeRemaining / 60);
-            const seconds = gameState.timeRemaining % 60;
+            const safeRemaining = Math.max(0, gameState.timeRemaining);
+            const minutes = Math.floor(safeRemaining / 60);
+            const seconds = safeRemaining % 60;
             const timerDisplay = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             document.getElementById('timerDisplay').textContent = timerDisplay;
 
@@ -883,7 +941,11 @@
 
         function timeExpired() {
             clearInterval(gameState.timerId);
+            gameState.timerId = null;
             gameState.isRunning = false;
+            gameState.timeRemaining = 0;
+            gameState.deadlineTs = null;
+            saveGameState();
             alert('⏰ Time expired! Game over.');
             finishGame();
         }
@@ -901,14 +963,32 @@
             gameState.score -= hintsPenalty;
 
             gameState.finalized = true;
+            gameState.deadlineTs = null;
 
             clearInterval(gameState.timerId);
+            gameState.timerId = null;
             gameState.isRunning = false;
 
             setTimeout(() => {
                 showResults();
                 saveGameState();
             }, 500);
+        }
+
+        async function resetLabAfterCompletion() {
+            try {
+                await fetch('/api/reset', { method: 'POST' });
+            } catch (error) {
+                // Continue local cleanup even if backend reset fails.
+            }
+
+            clearInterval(gameState.timerId);
+            localStorage.removeItem('token');
+            localStorage.removeItem('gameState');
+            localStorage.removeItem('lastGameScore');
+            initGame();
+            alert('Lab 1 reset automatically. Login again to start a fresh attempt.');
+            window.location = 'login.html';
         }
 
         function showResults() {
@@ -931,10 +1011,14 @@ Excellent work! You've demonstrated advanced penetration testing skills.
             `;
             alert(resultMsg);
             localStorage.setItem('lastGameScore', gameState.score);
+            setTimeout(() => {
+                resetLabAfterCompletion();
+            }, 200);
         }
 
         function saveGameState() {
-            localStorage.setItem('gameState', JSON.stringify(gameState));
+            const serializable = { ...gameState, timerId: null };
+            localStorage.setItem('gameState', JSON.stringify(serializable));
         }
 
         function logout() {

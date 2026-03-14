@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile - Cyber Escape Workspace Cloud</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="org.html">Organization</a>
+    <a href="projects.html">Projects</a>
+    <a href="profile.html">Profile</a>
+    <a href="pricing.html">Pricing</a>
+    <a id="adminNavLink" class="hidden" href="admin.html">Admin Panel</a>
+    <a href="lab.html">Lab Challenge</a>
+    <button class="inline secondary" onclick="logout()">Logout</button>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+  </nav>
+  <div class="container">
+    <div class="card" id="profileForm">
+      <h2>Profile Settings</h2>
+      <p class="muted">Name can be changed directly. Email changes require internal support approval.</p>
+      <label>Name</label>
+      <input id="profileName" />
+      <label>Email</label>
+      <input id="profileEmail" disabled />
+      <button onclick="updateProfile()">Save Profile</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
