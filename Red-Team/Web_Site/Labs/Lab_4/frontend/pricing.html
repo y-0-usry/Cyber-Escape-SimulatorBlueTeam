@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Pricing - BigScope</title><link rel="stylesheet" href="style.css" /></head>
+<body>
+<nav class="nav">
+  <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="org.html">Organization</a><a href="members.html">Members</a><a href="audit.html">Audit</a><a href="projects.html">Projects</a><a href="reports.html">Reports</a><a href="billing.html">Billing</a><a href="pricing.html">Pricing</a><a href="support.html">Support</a><a href="settings.html">Settings</a><a href="lab.html">Lab Challenge</a>
+  <button class="inline secondary" onclick="logout()">Logout</button><span class="spacer"></span><span id="roleState" class="badge">Role: none</span><span id="authState" class="badge">Guest</span>
+</nav>
+<div class="container">
+  <div class="grid">
+    <div class="card"><h3>Starter</h3><p class="stat">$199</p><p class="muted">Basic governance and limited audit retention.</p></div>
+    <div class="card success-box"><h3>Business</h3><p class="stat">$699</p><p class="muted">Expanded role controls, API access, and reports.</p></div>
+    <div class="card"><h3>Enterprise</h3><p class="stat">Custom</p><p class="muted">Dedicated support, unlimited tenants, and custom policy engine.</p></div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

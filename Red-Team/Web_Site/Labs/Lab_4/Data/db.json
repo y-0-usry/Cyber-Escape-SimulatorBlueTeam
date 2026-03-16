@@ -1,0 +1,158 @@
+{
+  "users": [
+    {
+      "id": 10,
+      "username": "account_owner",
+      "password": "OwnerSafe2026!",
+      "token": null,
+      "name": "account owner",
+      "email": "owner@bigscope.local",
+      "org_id": 200
+    },
+    {
+      "id": 11,
+      "username": "attacker1",
+      "password": "TakeOver2026!",
+      "token": "adce67586854193b890298d0c367735674898a808418f4341b6f7b220f7c6e06",
+      "name": "Red Team Operator",
+      "email": "attacker@redscope.local",
+      "org_id": 200
+    },
+    {
+      "id": 12,
+      "username": "admin_ops",
+      "password": "OpsPass2026!",
+      "token": null,
+      "name": "Ops Admin",
+      "email": "ops@bigscope.local",
+      "org_id": 200
+    },
+    {
+      "id": 13,
+      "username": "viewer_audit",
+      "password": "ViewerPass2026!",
+      "token": null,
+      "name": "Audit Viewer",
+      "email": "audit@bigscope.local",
+      "org_id": 200
+    },
+    {
+      "id": 14,
+      "username": "viewer_support",
+      "password": "ViewerPass2026!",
+      "token": null,
+      "name": "Support Viewer",
+      "email": "support@bigscope.local",
+      "org_id": 200
+    }
+  ],
+  "orgs": [
+    {
+      "id": 200,
+      "name": "BigScope Security",
+      "slug": "bigscope-security",
+      "creator_user_id": 10,
+      "description": "Enterprise attack surface management workspace.",
+      "trial_days_left": 9,
+      "plan": "business"
+    }
+  ],
+  "org_members": [
+    {
+      "org_id": 200,
+      "user_id": 10,
+      "access_rights": 1,
+      "joined_at": "2026-03-16T20:47:03.049Z"
+    },
+    {
+      "org_id": 200,
+      "user_id": 11,
+      "access_rights": 2,
+      "joined_at": "2026-03-16T20:47:03.049Z"
+    },
+    {
+      "org_id": 200,
+      "user_id": 12,
+      "access_rights": 2,
+      "joined_at": "2026-03-16T20:47:03.049Z"
+    },
+    {
+      "org_id": 200,
+      "user_id": 13,
+      "access_rights": 3,
+      "joined_at": "2026-03-16T20:47:03.049Z"
+    },
+    {
+      "org_id": 200,
+      "user_id": 14,
+      "access_rights": 3,
+      "joined_at": "2026-03-16T20:47:03.049Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "org_id": 200,
+      "name": "Bug Intake Automation",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "org_id": 200,
+      "name": "Triage Correlation Engine",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "org_id": 200,
+      "name": "Asset Exposure Watch",
+      "status": "active"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": 1,
+      "type": "seed",
+      "actor_user_id": 10,
+      "target_user_id": 10,
+      "from_access_rights": 1,
+      "to_access_rights": 1,
+      "message": "Seed initialized",
+      "created_at": "2026-03-16T20:47:03.049Z"
+    }
+  ],
+  "challenge_progress": [
+    {
+      "user_id": 11,
+      "flag_submitted": false
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "title": "Monthly Abuse Report",
+      "severity": "medium",
+      "status": "open"
+    },
+    {
+      "id": 2,
+      "title": "Role Drift Analysis",
+      "severity": "high",
+      "status": "open"
+    }
+  ],
+  "billing_events": [
+    {
+      "id": 1,
+      "event": "invoice_generated",
+      "amount": 1200,
+      "currency": "USD"
+    },
+    {
+      "id": 2,
+      "event": "payment_success",
+      "amount": 1200,
+      "currency": "USD"
+    }
+  ]
+}

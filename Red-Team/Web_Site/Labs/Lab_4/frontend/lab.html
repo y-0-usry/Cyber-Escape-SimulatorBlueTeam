@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lab 4 Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="org.html">Organization</a>
+    <a href="members.html">Members</a>
+    <a href="audit.html">Audit</a>
+    <a href="projects.html">Projects</a>
+    <a href="reports.html">Reports</a>
+    <a href="billing.html">Billing</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="support.html">Support</a>
+    <a href="settings.html">Settings</a>
+    <a href="lab.html">Lab Challenge</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="roleState" class="badge">Role: none</span>
+    <span id="authState" class="badge">Guest</span>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Challenge Console</h2>
+      <div class="grid">
+        <div class="card"><p class="muted">Time</p><p id="labTimer" class="stat">20:00</p></div>
+        <div class="card"><p class="muted">Score</p><p id="labScore" class="stat">0</p></div>
+        <div class="card"><p class="muted">Hints Left</p><p id="labHints" class="stat">3</p></div>
+        <div class="card"><p class="muted">Progress</p><p id="labProgress" class="stat">0/3</p></div>
+      </div>
+      <button onclick="startLabAttempt()">Start Attempt</button>
+      <button class="secondary" onclick="checkProgress()">Check Progress</button>
+      <button class="warn" onclick="fullResetLab()">Reset Everything</button>
+      <pre id="challengeStatus">Press Start Attempt to begin.</pre>
+    </div>
+
+    <div class="card">
+      <h3>Credentials</h3>
+      <pre>username: attacker1
+password: TakeOver2026!</pre>
+    </div>
+
+    <div id="lockedTasksCard" class="card">
+      <h3>Tasks Locked</h3>
+      <p class="muted">Start Attempt to reveal all challenge tasks.</p>
+    </div>
+
+    <div id="tasksCard" class="card hidden">
+      <h3>Tasks</h3>
+      <ol>
+        <li>Do a privilege escalation inside your organization. <button class="inline secondary" onclick="useLabHint(1)">Hint</button></li>
+        <li>Perform an organization takeover. <button class="inline secondary" onclick="useLabHint(2)">Hint</button></li>
+        <li>Retrieve the FLAG through an action that seems missing from the UI. <button class="inline secondary" onclick="useLabHint(3)">Hint</button></li>
+      </ol>
+      <div id="taskState" class="muted">Task1: Pending | Task2: Pending | Task3: Pending</div>
+      <button id="finishBtn" class="success hidden" onclick="finishLabAttempt()">Finish</button>
+      <pre id="finalResult" class="hidden"></pre>
+    </div>
+
+    <div id="flagCard" class="card hidden">
+      <h3>Submit FLAG</h3>
+      <input id="flagInput" placeholder="FLAG{...}" />
+      <button class="success" onclick="submitFlag()">Submit FLAG</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

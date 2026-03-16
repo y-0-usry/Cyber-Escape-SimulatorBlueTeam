@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Projects - BigScope</title><link rel="stylesheet" href="style.css" /></head>
+<body>
+<nav class="nav">
+  <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="org.html">Organization</a><a href="members.html">Members</a><a href="audit.html">Audit</a><a href="projects.html">Projects</a><a href="reports.html">Reports</a><a href="billing.html">Billing</a><a href="pricing.html">Pricing</a><a href="support.html">Support</a><a href="settings.html">Settings</a><a href="lab.html">Lab Challenge</a>
+  <button class="inline secondary" onclick="logout()">Logout</button><span class="spacer"></span><span id="roleState" class="badge">Role: none</span><span id="authState" class="badge">Guest</span>
+</nav>
+<div class="container"><div class="card"><h2>Projects</h2><p class="muted">Live tenant projects and operational status.</p></div><div id="projectsWrap" class="grid"></div></div>
+<script src="script.js"></script>
+</body>
+</html>

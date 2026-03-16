@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - BigScope</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="lab.html">Lab Challenge</a>
+    <span class="spacer"></span>
+    <span id="roleState" class="badge">Role: none</span>
+    <span id="authState" class="badge">Guest</span>
+  </nav>
+
+  <div class="container split">
+    <div class="card">
+      <h2>Sign In</h2>
+      <p class="muted">Use provided credentials. Account creation is disabled for this lab.</p>
+      <input id="username" placeholder="Username" />
+      <input id="password" type="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+    </div>
+
+    <div class="card">
+      <h3>Challenge Account</h3>
+      <pre>username: attacker1
+password: TakeOver2026!</pre>
+      <p class="muted">Start from this user. You are initially admin inside victim org.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
