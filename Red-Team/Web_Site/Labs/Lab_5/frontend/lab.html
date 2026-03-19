@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lab 5 Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html">Profile</a>
+    <a href="faq.html">FAQ</a>
+    <a href="lab.html">Lab 5</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Challenge Console</h2>
+      <div class="grid">
+        <div class="card"><p class="muted">Time</p><p id="labTimer" class="stat">20:00</p></div>
+        <div class="card"><p class="muted">Score</p><p id="labScore" class="stat">0</p></div>
+        <div class="card"><p class="muted">Hints Left</p><p id="labHints" class="stat">3</p></div>
+        <div class="card"><p class="muted">Status</p><p id="labProgress" class="stat">Searching...</p></div>
+      </div>
+      <button onclick="startLabAttempt()">Start Attempt</button>
+      <button class="warn" onclick="fullResetLab()">Reset Everything</button>
+      <pre id="challengeStatus">Press Start Attempt to begin.</pre>
+    </div>
+
+    <div class="card">
+      <h3>Credentials</h3>
+      <pre>username: attacker1
+password: ShopHack123!</pre>
+      <p class="small">Starting balance: $500</p>
+    </div>
+
+    <div id="lockedTasksCard" class="card">
+      <h3>Tasks Locked</h3>
+      <p class="muted">Press <strong>Start Attempt</strong> to reveal challenge tasks.</p>
+    </div>
+
+    <div id="tasksCard" class="card hidden">
+      <h3>Objective</h3>
+      <p>Find the FLAG hidden in the ecommerce platform.</p>
+      <div id="taskState" class="muted"></div>
+      <button class="secondary" onclick="useLabHint(1)">Need Help? (Use Hint)</button>
+      <button id="finishBtn" class="success hidden" onclick="finishLabAttempt()">Finish</button>
+      <pre id="finalResult" class="hidden"></pre>
+    </div>
+
+    <div id="flagCard" class="card hidden">
+      <h3>Submit FLAG</h3>
+      <input id="flagInput" placeholder="FLAG{...}" />
+      <button class="success" onclick="submitFlag()">Submit FLAG</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
