@@ -19,6 +19,7 @@ let cachedGeneralQuestions = null;
 let phase1CorrectCount = 0;
 let phase2CorrectCount = 0;
 let ticketSubmitted = false;
+const WRONG_ANSWER_PENALTY = 2;
 
 // === DOM SECTIONS ===
 const sections = {
@@ -479,9 +480,11 @@ function evaluateGeneralQuestions() {
     }
   });
   
-  score += phase1Score;
   // Track current correct count idempotently
   phase1CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  const wrongAnswers = Math.max(0, cards.length - phase1CorrectCount);
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + phase1Score - wrongPenalty);
   // Accuracy tracks Phase 1 only (matches existing totalQuestions)
   correctAnswers = phase1CorrectCount;
   updateScore();
@@ -739,8 +742,10 @@ function evaluatePhase2() {
     }
   });
 
-  score += phase2Score;
   phase2CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  const wrongAnswers = Math.max(0, cards.length - phase2CorrectCount);
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + phase2Score - wrongPenalty);
   updateScore();
   
   const percentage = Math.round((phase2CorrectCount / cards.length) * 100);
@@ -776,14 +781,24 @@ function submitTicket() {
 }
 
 // === FINAL RESULTS ===
+function getPlayerLevelByScore(points) {
+  if (points >= 170) return 'Elite Analyst';
+  if (points >= 140) return 'Senior Analyst';
+  if (points >= 110) return 'SOC Analyst';
+  if (points >= 80) return 'Junior Analyst';
+  return 'Trainee Analyst';
+}
+
 function showFinalResults() {
   const timeTaken = Math.floor((Date.now() - startTime) / 1000);
   const minutes = Math.floor(timeTaken / 60);
   const seconds = timeTaken % 60;
   
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  const finalScore = score;
+  const playerLevel = getPlayerLevelByScore(finalScore);
 
-  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-score').textContent = finalScore;
   document.getElementById('final-time').textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
   document.getElementById('final-accuracy').textContent = `${accuracy}%`;
 
@@ -792,16 +807,16 @@ function showFinalResults() {
   
   if (accuracy === 100 && score >= 150) {
     rating = '🟢 Excellent Analysis!';
-    ratingHTML = `<h3 class="text-lg text-green-300 mb-2">🎖️ ${rating}</h3><p class="text-green-100">Perfect classification and analysis. You're ready for advanced scenarios.</p>`;
+    ratingHTML = `<h3 class="text-lg text-green-300 mb-2">🎖️ ${rating}</h3><p class="text-cyan-300 mb-2">Player Level: ${playerLevel}</p><p class="text-green-100">Perfect classification and analysis. You're ready for advanced scenarios.</p>`;
   } else if (accuracy >= 80 && score >= 120) {
     rating = '🟢 Great Work!';
-    ratingHTML = `<h3 class="text-lg text-green-300 mb-2">🎖️ ${rating}</h3><p class="text-green-100">Strong investigation skills. Minor areas for improvement.</p>`;
+    ratingHTML = `<h3 class="text-lg text-green-300 mb-2">🎖️ ${rating}</h3><p class="text-cyan-300 mb-2">Player Level: ${playerLevel}</p><p class="text-green-100">Strong investigation skills. Minor areas for improvement.</p>`;
   } else if (accuracy >= 60) {
     rating = '🟡 Good Effort';
-    ratingHTML = `<h3 class="text-lg text-yellow-300 mb-2">📚 ${rating}</h3><p class="text-yellow-100">You identified the main threats. Review the answer key to improve.</p>`;
+    ratingHTML = `<h3 class="text-lg text-yellow-300 mb-2">📚 ${rating}</h3><p class="text-cyan-300 mb-2">Player Level: ${playerLevel}</p><p class="text-yellow-100">You identified the main threats. Review the answer key to improve.</p>`;
   } else {
     rating = '🔴 Keep Learning';
-    ratingHTML = `<h3 class="text-lg text-red-300 mb-2">📖 ${rating}</h3><p class="text-red-100">Review SIEM basics and attack patterns. Practice helps!</p>`;
+    ratingHTML = `<h3 class="text-lg text-red-300 mb-2">📖 ${rating}</h3><p class="text-cyan-300 mb-2">Player Level: ${playerLevel}</p><p class="text-red-100">Review SIEM basics and attack patterns. Practice helps!</p>`;
   }
 
   document.getElementById('performance-rating').innerHTML = ratingHTML;

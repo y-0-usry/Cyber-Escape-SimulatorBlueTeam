@@ -4,8 +4,8 @@
       "id": 1,
       "username": "attacker1",
       "password": "ShopHack123!",
-      "token": null,
-      "balance": 500
+      "token": "48d419789dcb4ed25bd96ddb05792fc64bcc356d140bdc579585a501d8c085e2",
+      "balance": 440
     }
   ],
   "products": [
@@ -49,14 +49,45 @@
       "maxUsesPerUser": 5
     }
   ],
-  "couponUsage": [],
-  "orders": [],
+  "couponUsage": [
+    {
+      "user_id": 1,
+      "code": "MEGA80",
+      "uses": 1
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "productId": 101,
+      "productName": "Pro Wireless Headset",
+      "originalPrice": 300,
+      "paidAmount": 60,
+      "couponCode": "MEGA80",
+      "status": "paid",
+      "refunded": false,
+      "refundAmount": 0,
+      "created_at": "2026-03-19T01:41:53.256Z"
+    }
+  ],
   "audits": [
     {
       "id": 1,
       "event": "system_init",
       "message": "Lab 5 initialized",
       "created_at": "2026-03-19T01:23:22.464Z"
+    },
+    {
+      "id": 2,
+      "event": "purchase_completed",
+      "user_id": 1,
+      "order_id": 1,
+      "product_id": 101,
+      "original_price": 300,
+      "paid_amount": 60,
+      "coupon_code": "MEGA80",
+      "created_at": "2026-03-19T01:41:53.257Z"
     }
   ],
   "secret": [

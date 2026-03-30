@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 4 - Ghost Mode Investigation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: #040d21; color: #e0f2f1; font-family: 'Inter', sans-serif; }
+    .card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 0 15px rgba(59,130,246,0.4); }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen p-6">
+  <header class="flex flex-col gap-2 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2">
+      <h1 class="text-3xl font-bold text-blue-400">Level 4: SOC Analyst - Ghost Mode</h1>
+      <div class="flex gap-2 items-center text-sm flex-wrap">
+        <div class="bg-gray-800 px-3 py-2 rounded">⏳ Time: <span id="timer">25:00</span></div>
+        <div class="bg-gray-800 px-3 py-2 rounded">🔥 Impact: <span id="impact-level" class="text-green-400">0%</span></div>
+        <div class="bg-gray-800 px-3 py-2 rounded">🔄 Attempts: <span id="attempts">3</span></div>
+        <button id="add-time-btn" onclick="addTimeExtension()" class="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded">⏰ Add 5 Mins (0/3)</button>
+        <button id="siem-btn" onclick="window.open('http://localhost:3000', '_blank')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded">📊 SIEM Dashboard</button>
+        <button id="reset-level" onclick="handleReset()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded">Reset</button>
+      </div>
+    </div>
+    <div id="impact-warning" class="hidden bg-red-900/50 border-l-4 border-red-500 p-3 rounded text-red-200 text-sm"></div>
+  </header>
+
+  <section id="intro-section" class="bg-gray-900 p-6 rounded mb-6">
+    <h2 class="text-2xl text-cyan-300 mb-3"><i class="fas fa-user-secret"></i> Ghost Mode Brief</h2>
+    <p class="text-blue-100 leading-relaxed mb-4">
+      You are an employee in the SOC team operating in Ghost Mode. Your mission is to investigate alerts without assumptions and identify the real incident.
+    </p>
+
+    <div class="bg-gray-800 p-4 rounded mb-4 border-l-4 border-blue-500">
+      <h3 class="text-lg text-blue-300 mb-2">Mission Rules</h3>
+      <ul class="text-sm text-blue-100 space-y-1">
+        <li>Classify alerts first using evidence only.</li>
+        <li>Complete all phases with full accuracy to proceed.</li>
+        <li>Create final incident ticket at the end.</li>
+      </ul>
+    </div>
+
+    <button id="start-btn" onclick="startLevel()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-semibold">
+      <i class="fas fa-play"></i> Start Investigation
+    </button>
+  </section>
+
+  <section id="questions-section" class="bg-gray-900 p-4 rounded mb-6 hidden">
+    <div class="flex justify-between items-center mb-3">
+      <h2 class="text-2xl text-blue-400"><i class="fas fa-clipboard-list"></i> Phase 1: Triage and Classification</h2>
+      <div class="flex gap-2 text-sm">
+        <span class="bg-green-800 px-3 py-1 rounded">Score: <span id="score">0</span></span>
+        <span class="bg-yellow-800 px-3 py-1 rounded">Hints: <span id="hints-used">0</span></span>
+      </div>
+    </div>
+    <div id="questions-container" class="grid gap-4"></div>
+    <div class="mt-4 flex justify-end">
+      <button id="submit-answers" onclick="evaluatePhase1()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Submit Phase 1</button>
+    </div>
+  </section>
+
+  <section id="scenario-section" class="bg-gray-900 p-4 rounded mb-6 hidden">
+    <h2 class="text-2xl text-orange-400 mb-3"><i class="fas fa-project-diagram"></i> Phase 2: ATT&CK Mapping and Investigation</h2>
+    <div id="scenario-container" class="grid gap-4"></div>
+    <div class="mt-4 flex justify-end">
+      <button id="submit-scenario" onclick="evaluatePhase2()" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Submit Phase 2</button>
+    </div>
+  </section>
+
+  <section id="ticket-section" class="bg-gray-900 p-6 rounded mb-6 hidden">
+    <h2 class="text-2xl text-green-400 mb-3"><i class="fas fa-ticket"></i> Phase 3: Incident Ticket</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-blue-200 mb-1">Incident Title</label>
+        <input id="ticket-title" type="text" class="w-full bg-gray-800 text-white p-2 rounded" placeholder="e.g., SMB Worm Ransomware Outbreak">
+      </div>
+      <div>
+        <label class="block text-sm text-blue-200 mb-1">Priority</label>
+        <select id="ticket-priority" class="w-full bg-gray-800 text-white p-2 rounded">
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm text-blue-200 mb-1">Attack Type</label>
+        <input id="ticket-attack" type="text" class="w-full bg-gray-800 text-white p-2 rounded" placeholder="e.g., SMB Exploit + Ransomware + Lateral Movement">
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm text-blue-200 mb-1">Summary</label>
+        <textarea id="ticket-summary" rows="4" class="w-full bg-gray-800 text-white p-2 rounded" placeholder="What happened, root cause, containment, and remediation plan"></textarea>
+      </div>
+    </div>
+    <div class="mt-4 flex justify-end">
+      <button id="create-ticket" onclick="submitTicket()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Create Ticket</button>
+    </div>
+  </section>
+
+  <section id="final-section" class="bg-gray-900 p-6 rounded mb-6 hidden">
+    <h2 class="text-3xl text-green-300 mb-4 text-center"><i class="fas fa-check-circle"></i> Level 4 Complete!</h2>
+
+    <div id="performance-rating" class="bg-gray-800 p-6 rounded mb-4 border-2 border-green-500"></div>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-4">
+      <div class="bg-gray-800 p-4 rounded">
+        <p class="text-sm text-blue-200">Total Score</p>
+        <p class="text-3xl text-green-400 font-bold" id="final-score">0</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded">
+        <p class="text-sm text-blue-200">Time Taken</p>
+        <p class="text-2xl text-cyan-400 font-bold" id="final-time">00:00</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded">
+        <p class="text-sm text-blue-200">Accuracy</p>
+        <p class="text-2xl text-yellow-400 font-bold" id="final-accuracy">0%</p>
+      </div>
+    </div>
+
+    <div class="flex gap-2 mb-4">
+      <button id="return-dashboard" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Return to Dashboard</button>
+      <button id="restart-level" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Restart Level</button>
+    </div>
+  </section>
+
+  <script src="/level4.js"></script>
+</body>
+</html>

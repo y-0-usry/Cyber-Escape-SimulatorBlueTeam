@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "js-yaml": "^4.1.0",
     "lowdb": "^7.0.1",
     "winston": "^3.17.0"

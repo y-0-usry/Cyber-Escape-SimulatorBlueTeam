@@ -13,6 +13,7 @@ let timeExtensions = 0; // Track how many times "Add 5 mins" was used
 let impactLevel = 0; // Progressive alert impact (0-100)
 let impactInterval = null; // Timer for progressive impact
 let cachedGeneralQuestions = null; // Cache questions to prevent re-evaluation
+const WRONG_ANSWER_PENALTY = 2;
 
 // === UTILITY: Get Alerts Data Path ===
 function getAlertsPath(level) {
@@ -424,7 +425,10 @@ function evaluateGeneralQuestions() {
   const previousCorrect = correctAnswers;
   correctAnswers = correct;
   const newlyCorrect = Math.max(0, correct - previousCorrect);
-  score += newlyCorrect * 10;
+  const wrongAnswers = Math.max(0, cards.length - correct);
+  const earnedPoints = newlyCorrect * 10;
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + earnedPoints - wrongPenalty);
   updateScore();
 
   if (correct === cards.length) {
@@ -579,7 +583,10 @@ function evaluateScenarioQuestions() {
   const phase2Questions = cards.length;
   const previousPhase2Correct = totalQuestions > 0 ? correctAnswers - (totalQuestions - phase2Questions) : 0;
   const newlyCorrect = Math.max(0, correct - previousPhase2Correct);
-  score += newlyCorrect * 20;
+  const wrongAnswers = Math.max(0, cards.length - correct);
+  const earnedPoints = newlyCorrect * 20;
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + earnedPoints - wrongPenalty);
   correctAnswers = (totalQuestions > 0 ? totalQuestions - phase2Questions : 0) + correct;
   totalQuestions = totalQuestions > 0 ? totalQuestions : phase2Questions;
   updateScore();
@@ -616,6 +623,14 @@ function createIncidentTicket() {
 }
 
 // === FINAL RESULTS ===
+function getPlayerLevelByScore(points) {
+  if (points >= 300) return 'Elite Analyst';
+  if (points >= 220) return 'Senior Analyst';
+  if (points >= 150) return 'SOC Analyst';
+  if (points >= 80) return 'Junior Analyst';
+  return 'Trainee Analyst';
+}
+
 function showFinalResults(elapsedSeconds, speedBonus) {
   const m = Math.floor(elapsedSeconds / 60);
   const s = elapsedSeconds % 60;
@@ -624,6 +639,7 @@ function showFinalResults(elapsedSeconds, speedBonus) {
   // Calculate impact penalty
   const impactPenalty = Math.floor(impactLevel / 2); // 0-50 point penalty
   const finalScore = Math.max(0, score - impactPenalty);
+  const playerLevel = getPlayerLevelByScore(finalScore);
 
   document.getElementById('final-score').textContent = finalScore;
   document.getElementById('final-time').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
@@ -641,6 +657,7 @@ function showFinalResults(elapsedSeconds, speedBonus) {
     <li class="flex justify-between"><span>⏰ Time Extensions:</span><span class="text-orange-400">${timeExtensions} (-${timeExtensionPenalty} points)</span></li>
     <li class="flex justify-between"><span>⚡ Speed Bonus:</span><span class="text-blue-400">+${speedBonus} points</span></li>
     <li class="flex justify-between"><span>🔥 Impact Penalty:</span><span class="text-red-400">-${impactPenalty} points (${impactLevel}%)</span></li>
+    <li class="flex justify-between"><span>🏅 Player Level:</span><span class="text-cyan-300">${playerLevel}</span></li>
     <li class="flex justify-between border-t border-gray-700 pt-2 mt-2 font-bold"><span>📊 Final Score:</span><span class="text-lg text-green-400">${finalScore}</span></li>
   `;
   
@@ -677,6 +694,7 @@ function showFinalResults(elapsedSeconds, speedBonus) {
     ratingEl.innerHTML = `
       <div class="text-center">
         <p class="text-3xl font-bold ${ratingColor} mb-2">${rating}</p>
+        <p class="text-cyan-300 mb-2">Player Level: ${playerLevel}</p>
         ${rewardHints > 0 ? `<p class="text-green-300">🎁 Earned ${rewardHints} free hint${rewardHints > 1 ? 's' : ''} for next level!</p>` : '<p class="text-gray-400">Keep practicing to earn rewards!</p>'}
       </div>
     `;

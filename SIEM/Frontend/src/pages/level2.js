@@ -19,6 +19,7 @@ let cachedGeneralQuestions = null; // Cache questions to avoid re-randomization
 let phase1CorrectCount = 0;
 let phase2CorrectCount = 0;
 let ticketSubmitted = false;
+const WRONG_ANSWER_PENALTY = 2;
 
 // === UTILITY: Get Alerts Data Path ===
 function getAlertsPath(level) {
@@ -518,9 +519,11 @@ function evaluateGeneralQuestions() {
     }
   });
   
-  score += phase1Score;
   // Update idempotent correct count
   phase1CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  const wrongAnswers = Math.max(0, cards.length - phase1CorrectCount);
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + phase1Score - wrongPenalty);
   correctAnswers = phase1CorrectCount + phase2CorrectCount;
   updateScore();
   
@@ -808,8 +811,10 @@ function evaluateScenarioQuestions() {
     }
   });
 
-  score += phase2Score;
   phase2CorrectCount = Array.from(cards).filter(c => c.classList.contains('border-green-500')).length;
+  const wrongAnswers = Math.max(0, cards.length - phase2CorrectCount);
+  const wrongPenalty = wrongAnswers * WRONG_ANSWER_PENALTY;
+  score = Math.max(0, score + phase2Score - wrongPenalty);
   correctAnswers = phase1CorrectCount + phase2CorrectCount;
   updateScore();
 
@@ -849,6 +854,14 @@ function evaluateTicket() {
 }
 
 // === FINAL RESULTS ===
+function getPlayerLevelByScore(points) {
+  if (points >= 320) return 'Elite Analyst';
+  if (points >= 260) return 'Senior Analyst';
+  if (points >= 200) return 'SOC Analyst';
+  if (points >= 140) return 'Junior Analyst';
+  return 'Trainee Analyst';
+}
+
 function showFinalResults() {
   clearInterval(timerId);
   clearInterval(impactInterval);
@@ -869,6 +882,7 @@ function showFinalResults() {
   // Final score
   const finalScore = score;
   const accuracy = Math.round((correctAnswers / totalQuestions) * 100);
+  const playerLevel = getPlayerLevelByScore(finalScore);
 
   // Performance rating
   let rating = '';
@@ -893,6 +907,7 @@ function showFinalResults() {
   const ratingDiv = document.getElementById('performance-rating');
   ratingDiv.innerHTML = `
     <h3 class="text-2xl text-green-400 mb-2">${rating}</h3>
+    <p class="text-cyan-300">Player Level: ${playerLevel}</p>
     <p class="text-gray-300">Score: ${finalScore} / 350</p>
     <p class="text-gray-300">Accuracy: ${accuracy}%</p>
     <p class="text-gray-300">Time: ${minutes}m ${seconds}s</p>
@@ -906,6 +921,7 @@ function showFinalResults() {
     <li>🔥 Impact Penalty: -${impactPenalty} points</li>
     <li>💡 Hints Used: ${hintsUsed}</li>
     <li>⏰ Time Extensions: ${timeExtensions}</li>
+    <li>🏅 Player Level: ${playerLevel}</li>
 `;
 
   localStorage.setItem('level2_reward_hints', rewardHints);
