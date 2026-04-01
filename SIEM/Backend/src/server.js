@@ -110,6 +110,15 @@ app.get('/level4', (req, res) => {
   });
 });
 
+// Level 5 game page
+app.get('/level5', (req, res) => {
+  res.sendFile(path.join(pagesPath, 'Level5.html'), (err) => {
+    if (err) {
+      res.status(500).send('Error serving Level5.html');
+    }
+  });
+});
+
 // Answer Key Level 3 page
 app.get('/LEVEL3_ANSWERS', (req, res) => {
   res.sendFile(path.join(pagesPath, 'LEVEL3_ANSWERS.html'), (err) => {

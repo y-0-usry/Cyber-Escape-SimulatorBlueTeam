@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Recap - Cyber Escape Simulator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: #040d21; color: #e0f2f1; font-family: 'Inter', sans-serif; }
+    .scroll-smooth { scroll-behavior: smooth; }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(59,130,246,0.5); }
+    .timeline-dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+    .badge-severity { 
+      display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;
+    }
+    .severity-critical { background: #dc2626; color: white; }
+    .severity-high { background: #ea580c; color: white; }
+    .severity-medium { background: #eab308; color: #000; }
+    .severity-low { background: #16a34a; color: white; }
+    .section-title { 
+      border-left: 4px solid #3b82f6; padding-left: 16px; margin-top: 32px; margin-bottom: 16px; 
+    }
+    .highlight-box { 
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.1) 100%); 
+      border-left: 4px solid #3b82f6; padding: 16px; border-radius: 8px; margin: 16px 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 scroll-smooth">
+  <div id="recap-container" class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 rounded-lg mb-8">
+      <h1 id="recap-title" class="text-4xl font-bold mb-2">Level Recap</h1>
+      <p id="recap-subtitle" class="text-lg text-blue-100">Complete breakdown of the scenario, timeline, and key learnings</p>
+    </header>
+
+    <!-- Score Section (if passed) -->
+    <div id="score-section" class="hidden bg-gray-900 p-6 rounded-lg mb-8 border-l-4 border-green-500">
+      <h2 class="text-2xl font-bold text-green-400 mb-4">🎉 Congratulations!</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-gray-800 p-4 rounded text-center">
+          <div class="text-gray-400 text-sm mb-1">Your Score</div>
+          <div id="final-score" class="text-3xl font-bold text-green-400">85/100</div>
+        </div>
+        <div class="bg-gray-800 p-4 rounded text-center">
+          <div class="text-gray-400 text-sm mb-1">Accuracy</div>
+          <div id="accuracy" class="text-3xl font-bold text-blue-400">92%</div>
+        </div>
+        <div class="bg-gray-800 p-4 rounded text-center">
+          <div class="text-gray-400 text-sm mb-1">Time Used</div>
+          <div id="time-used" class="text-3xl font-bold text-orange-400">12m 34s</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🎬 Scenario Section -->
+    <section class="bg-gray-900 p-6 rounded-lg mb-8 card-hover">
+      <h2 id="scenario-title" class="text-2xl font-bold text-cyan-300 mb-4">
+        <i class="fas fa-film"></i> What Happened
+      </h2>
+      <div id="scenario-description" class="text-blue-100 leading-relaxed mb-6 text-lg"></div>
+      
+      <div class="bg-gray-800 p-4 rounded border-l-4 border-yellow-500 mb-4">
+        <h3 class="text-lg font-semibold text-yellow-300 mb-3">⛓️ Attack Chain</h3>
+        <div id="attack-chain" class="space-y-2"></div>
+      </div>
+    </section>
+
+    <!-- 📊 Timeline Section -->
+    <section class="bg-gray-900 p-6 rounded-lg mb-8 card-hover">
+      <h2 class="text-2xl font-bold text-cyan-300 mb-4">
+        <i class="fas fa-clock"></i> Attack Timeline
+      </h2>
+      <div id="timeline-events" class="space-y-4"></div>
+    </section>
+
+    <!-- 🎯 Key Learnings Section -->
+    <section class="bg-gray-900 p-6 rounded-lg mb-8 card-hover">
+      <h2 class="text-2xl font-bold text-cyan-300 mb-4">
+        <i class="fas fa-book"></i> Key Learnings
+      </h2>
+      <div id="learnings-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- ❌ Common Mistakes Section -->
+    <section class="bg-gray-900 p-6 rounded-lg mb-8 card-hover">
+      <h2 class="text-2xl font-bold text-cyan-300 mb-4">
+        <i class="fas fa-exclamation-triangle"></i> Common Mistakes to Avoid
+      </h2>
+      <div id="mistakes-container" class="space-y-4"></div>
+    </section>
+
+    <!-- 📊 Score Explanation Section -->
+    <section class="bg-gray-900 p-6 rounded-lg mb-8 card-hover">
+      <h2 id="score-exp-title" class="text-2xl font-bold text-cyan-300 mb-4">
+        <i class="fas fa-chart-bar"></i> Score Explanation
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h3 class="text-lg font-semibold text-blue-300 mb-3">Score Components</h3>
+          <div id="score-components" class="space-y-2"></div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-red-300 mb-3">Penalties</h3>
+          <div id="score-penalties" class="space-y-2"></div>
+        </div>
+      </div>
+      <div id="score-interpretation" class="highlight-box text-base"></div>
+    </section>
+
+    <!-- Navigation Buttons -->
+    <section class="flex flex-wrap gap-3 justify-between items-center bg-gray-800 p-6 rounded-lg mb-8">
+      <div id="prev-levels-container" class="flex flex-wrap gap-2">
+        <!-- Previous level buttons will be inserted here -->
+      </div>
+      
+      <div class="flex gap-2">
+        <button id="next-level-btn" onclick="goToNextLevel()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded font-semibold flex items-center gap-2">
+          <i class="fas fa-arrow-right"></i> Next Level
+        </button>
+      </div>
+    </section>
+
+    <!-- Back to Levels -->
+    <div class="text-center">
+      <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-semibold">
+        <i class="fas fa-home"></i> Back to Level Selection
+      </button>
+    </div>
+  </div>
+
+  <script src="recap-data.js"></script>
+  <script src="recap.js"></script>
+</body>
+    
+    // Ensure level is in valid range
+    if (currentLevel < 1) currentLevel = 1;
+    if (currentLevel > 5) currentLevel = 5;
+
+    // Get score from session storage (if available)
+    const sessionScore = sessionStorage.getItem(`level${currentLevel}Score`);
+    
+    // Populate recap data
+    function populateRecap() {
+      const recap = recapData[`level${currentLevel}`];
+      if (!recap) {
+        console.error(`No recap data for level ${currentLevel}`);
+        return;
+      }
+
+      // Update title
+      document.getElementById('recap-title').textContent = recap.title;
+      document.getElementById('recap-subtitle').textContent = `🎓 Learn from Level ${currentLevel}: ${recap.scenario.title}`;
+
+      // Scenario
+      document.getElementById('scenario-description').textContent = recap.scenario.description;
+      const chainHTML = recap.scenario.attackChain.map(item => 
+        `<div class="flex gap-4 items-start">
+          <div class="text-yellow-400 font-mono font-bold min-w-16">${item.time}</div>
+          <div>
+            <div class="text-white font-semibold">${item.event}</div>
+            <div class="text-gray-400 text-sm">${item.type}</div>
+          </div>
+        </div>`
+      ).join('');
+      document.getElementById('attack-chain').innerHTML = chainHTML;
+
+      // Timeline
+      const timelineHTML = recap.timeline.events.map(event =>
+        `<div class="bg-gray-800 p-4 rounded border-l-4 ${
+          event.severity === 'critical' ? 'border-red-500' :
+          event.severity === 'high' ? 'border-orange-500' :
+          event.severity === 'medium' ? 'border-yellow-500' : 'border-green-500'
+        }">
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="text-lg font-semibold text-white">${event.id}. ${event.title}</h4>
+            <span class="badge-severity severity-${event.severity}">${event.severity.toUpperCase()}</span>
+          </div>
+          <div class="flex gap-4 text-sm">
+            <div class="text-blue-400 font-mono">${event.time}</div>
+            <div class="text-gray-300">${event.description}</div>
+          </div>
+        </div>`
+      ).join('');
+      document.getElementById('timeline-events').innerHTML = timelineHTML;
+
+      // Key Learnings
+      const learningsHTML = recap.keyLearnings.map(learn =>
+        `<div class="bg-gray-800 p-4 rounded card-hover">
+          <div class="text-2xl mb-2">${learn.icon}</div>
+          <h4 class="text-lg font-semibold text-blue-300 mb-2">${learn.title}</h4>
+          <p class="text-gray-300 text-sm leading-relaxed">${learn.description}</p>
+        </div>`
+      ).join('');
+      document.getElementById('learnings-container').innerHTML = learningsHTML;
+
+      // Common Mistakes
+      const mistakesHTML = recap.commonMistakes.map(mistake =>
+        `<div class="bg-gray-800 p-4 rounded border-l-4 border-red-500">
+          <div class="mb-2 text-red-300 font-semibold">${mistake.mistake}</div>
+          <div class="mb-2 text-green-300 font-semibold text-sm">${mistake.solution}</div>
+          <div class="text-gray-400 text-sm italic">${mistake.impact}</div>
+        </div>`
+      ).join('');
+      document.getElementById('mistakes-container').innerHTML = mistakesHTML;
+
+      // Score Explanation
+      const scoreExp = recap.scoreExplanation;
+      const componentHTML = scoreExp.components.map(comp =>
+        `<div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500">
+          <div class="flex justify-between items-start mb-1">
+            <span class="font-semibold text-blue-300">${comp.category}</span>
+            <span class="text-yellow-400 font-bold">${comp.points} pts</span>
+          </div>
+          <div class="text-gray-400 text-sm">${comp.note}</div>
+        </div>`
+      ).join('');
+      document.getElementById('score-components').innerHTML = componentHTML;
+
+      const penaltyHTML = scoreExp.penalties.map(pen =>
+        `<div class="bg-gray-800 p-3 rounded border-l-4 border-red-500">
+          <div class="flex justify-between items-start mb-1">
+            <span class="font-semibold">${pen.action}</span>
+            <span class="text-red-400 font-bold">${pen.points}</span>
+          </div>
+        </div>`
+      ).join('');
+      document.getElementById('score-penalties').innerHTML = penaltyHTML;
+
+      document.getElementById('score-interpretation').innerHTML = 
+        `<p class="text-base"><strong>📈 Score Interpretation:</strong></p>
+         <p class="mt-2">${scoreExp.interpretation}</p>`;
+
+      // Previous level buttons
+      let prevHTML = '';
+      for (let i = 1; i < currentLevel; i++) {
+        prevHTML += `
+          <button onclick="goToLevel(${i})" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-semibold text-sm">
+            <i class="fas fa-chevron-left"></i> Level ${i}
+          </button>
+        `;
+      }
+      document.getElementById('prev-levels-container').innerHTML = prevHTML || 
+        '<span class="text-gray-400 text-sm">This is the first level!</span>';
+
+      // Next level button
+      const nextBtn = document.getElementById('next-level-btn');
+      if (currentLevel >= 5) {
+        nextBtn.textContent = '🎓 Course Complete!';
+        nextBtn.onclick = () => alert('You\'ve completed all levels! 🎉');
+        nextBtn.disabled = true;
+        nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+
+      // Show score section if available
+      if (sessionScore) {
+        const scoreSection = document.getElementById('score-section');
+        scoreSection.classList.remove('hidden');
+        const parts = sessionScore.split('|');
+        document.getElementById('final-score').textContent = `${parts[0]}/100`;
+        document.getElementById('accuracy').textContent = parts[1] || '0%';
+        document.getElementById('time-used').textContent = parts[2] || '0m 0s';
+      }
+    }
+
+    // Navigation functions
+    function goToLevel(level) {
+      window.location.href = `Recap-Level${level}.html`;
+    }
+
+    function goToNextLevel() {
+      if (currentLevel < 5) {
+        window.location.href = `Level${currentLevel + 1}.html`;
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', populateRecap);
+  </script>
+</body>
+</html>
+

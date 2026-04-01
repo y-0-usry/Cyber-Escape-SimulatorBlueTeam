@@ -715,9 +715,21 @@ function showFinalResults() {
   clearInterval(impactInterval);
   showSection('final');
 
+  // Store scores for recap page
+  let accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  let timeUsed = Math.floor((startTime ? (Date.now() - startTime) / 1000 : 0) / 60);
+  sessionStorage.setItem('level4Score', `${Math.round(finalScore || score)}|${accuracy}%|${timeUsed}m`);
+
   document.getElementById('return-dashboard').onclick = () => {
     window.location.href = '/';
   };
+
+  const viewRecap = document.getElementById('view-recap');
+  if (viewRecap) {
+    viewRecap.onclick = () => {
+      window.location.href = 'Recap-Level4.html';
+    };
+  }
 
   document.getElementById('restart-level').onclick = () => {
     window.location.reload();

@@ -705,11 +705,22 @@ function showFinalResults(elapsedSeconds, speedBonus) {
 
   showSection('final');
   
+  // Store scores for recap page
+  sessionStorage.setItem('level1Score', `${Math.round(finalScore)}|${accuracy}%|${Math.floor(timerSeconds / 60)}m ${timerSeconds % 60}s`);
+  
   // Add buttons
   const finalSection = document.getElementById('final-section');
   if (finalSection && !document.getElementById('answer-key-btn')) {
     const buttonContainer = document.createElement('div');
     buttonContainer.className = 'flex gap-4 mt-6 flex-wrap';
+    
+    const recapBtn = document.createElement('button');
+    recapBtn.id = 'recap-btn';
+    recapBtn.className = 'bg-green-600 hover:bg-green-700 px-6 py-3 rounded font-semibold flex items-center gap-2';
+    recapBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> View Recap & Learn';
+    recapBtn.addEventListener('click', () => {
+      window.location.href = 'Recap-Level1.html';
+    });
     
     const answerKeyBtn = document.createElement('button');
     answerKeyBtn.id = 'answer-key-btn';
@@ -719,6 +730,7 @@ function showFinalResults(elapsedSeconds, speedBonus) {
       window.location.href = '/AnswerKey.html';
     });
     
+    buttonContainer.appendChild(recapBtn);
     buttonContainer.appendChild(answerKeyBtn);
     
     const scoreCard = finalSection.querySelector('.bg-gray-800');

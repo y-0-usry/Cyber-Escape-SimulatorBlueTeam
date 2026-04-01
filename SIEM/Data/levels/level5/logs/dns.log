@@ -1,0 +1,9 @@
+2026-03-28 08:29:58 10.10.8.8 A update.microsoft.com 8.8.8.8 NOERROR
+2026-03-28 08:30:02 10.10.8.8 A portal.company.local 10.10.0.10 NOERROR
+2026-03-28 08:30:06 10.10.1.20 A mfa-provider.company.com 8.8.4.4 NOERROR
+2026-03-28 08:30:18 10.10.1.20 A auth.company.com 8.8.4.4 NOERROR
+2026-03-28 08:31:45 10.10.1.12 A admin.company.local 10.10.0.10 NOERROR
+2026-03-28 08:32:12 10.10.2.20 A finance.company.local 10.10.0.10 NOERROR
+2026-03-28 08:33:05 10.10.4.50 A hr-data.company.local 10.10.0.10 NOERROR
+2026-03-28 08:33:32 10.10.6.10 A payroll.company.local 10.10.0.10 NOERROR
+2026-03-28 08:34:15 10.10.5.22 A storage.company.local 10.10.0.10 NOERROR

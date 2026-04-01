@@ -960,8 +960,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const createTicketBtn = document.getElementById('create-ticket');
     if (createTicketBtn) createTicketBtn.addEventListener('click', evaluateTicket);
 
+    // Store scores for recap page
+    let accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+    sessionStorage.setItem('level2Score', `${Math.round(score)}|${accuracy}%|${Math.floor((startTime ? (Date.now() - startTime) / 1000 : 0) / 60)}m`);
+
     const returnDashboard = document.getElementById('return-dashboard');
     if (returnDashboard) returnDashboard.addEventListener('click', () => { window.location.href = '/'; });
+
+    const viewRecap = document.getElementById('view-recap');
+    if (viewRecap) viewRecap.addEventListener('click', () => { window.location.href = 'Recap-Level2.html'; });
 
     const viewAnswerKey = document.getElementById('view-answerkey');
     if (viewAnswerKey) viewAnswerKey.addEventListener('click', () => { window.location.href = '/AnswerKey_Level2'; });

@@ -825,9 +825,21 @@ function showFinalResults() {
   clearInterval(timerId);
   clearInterval(impactInterval);
 
+  // Store scores for recap page
+  let accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  let timeUsed = Math.floor((startTime ? (Date.now() - startTime) / 1000 : 0) / 60);
+  sessionStorage.setItem('level3Score', `${Math.round(finalScore || score)}|${accuracy}%|${timeUsed}m`);
+
   document.getElementById('return-dashboard').onclick = () => {
     window.location.href = '/';
   };
+
+  const viewRecap = document.getElementById('view-recap');
+  if (viewRecap) {
+    viewRecap.onclick = () => {
+      window.location.href = 'Recap-Level3.html';
+    };
+  }
 
   document.getElementById('view-answerkey').onclick = () => {
     window.open('/LEVEL3_ANSWERS.html', '_blank');

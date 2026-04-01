@@ -1,0 +1,77 @@
+[
+  {
+    "@timestamp": "2026-03-28T08:30:12Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "contractor.temp"
+    },
+    "source": {
+      "ip": "77.33.18.100"
+    },
+    "event_outcome": "success",
+    "raw": "2026-03-28T08:30:12Z VPN_CONNECT User: contractor.temp | IP: 77.33.18.100 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-03-28T08:30:34Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "consultant.ops"
+    },
+    "source": {
+      "ip": "66.180.1.9"
+    },
+    "event_outcome": "success",
+    "raw": "2026-03-28T08:30:34Z VPN_CONNECT User: consultant.ops | IP: 66.180.1.9 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-03-28T08:31:00Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "employee3"
+    },
+    "source": {
+      "ip": "10.10.1.50"
+    },
+    "event_outcome": "success",
+    "raw": "2026-03-28T08:31:00Z VPN_CONNECT User: employee3 | IP: 10.10.1.50 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-03-28T08:31:10Z",
+    "event": {
+      "action": "vpn_disconnect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "employee3"
+    },
+    "source": {
+      "ip": "10.10.1.50"
+    },
+    "event_outcome": "success",
+    "raw": "2026-03-28T08:31:10Z VPN_DISCONNECT User: employee3 | IP: 10.10.1.50 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-03-28T08:31:50Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "employee1"
+    },
+    "source": {
+      "ip": "88.21.90.7"
+    },
+    "event_outcome": "success",
+    "raw": "2026-03-28T08:31:50Z VPN_CONNECT User: employee1 | IP: 88.21.90.7 | Status: SUCCESS"
+  }
+]
