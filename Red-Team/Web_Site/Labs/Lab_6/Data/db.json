@@ -1,0 +1,223 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "victim.admin",
+      "password": "AdminRoot2026!",
+      "name": "Victim Admin",
+      "email": "admin@orglab.local",
+      "token": null,
+      "org_id": 601
+    },
+    {
+      "id": 2,
+      "username": "attacker1",
+      "password": "ManagerBreak2026!",
+      "name": "Attacker Manager",
+      "email": "attacker.manager@orglab.local",
+      "token": "035d3a11d6b874032afc5547158eb34dddae2f7988fde3b9a0fdd8b52925abf1",
+      "org_id": 601
+    },
+    {
+      "id": 3,
+      "username": "helper.employee",
+      "password": "EmployeeOnly2026!",
+      "name": "Helper Employee",
+      "email": "helper.employee@orglab.local",
+      "token": null,
+      "org_id": 601
+    },
+    {
+      "id": 4,
+      "username": "owned.manager",
+      "password": "Owned2026!",
+      "name": "Owned Operator",
+      "email": "owned.manager@orglab.local",
+      "token": "bc12d56874ee175468333f7b207d46c2cc0de563bfd423e944b880315cc9d6e3",
+      "org_id": 601
+    }
+  ],
+  "orgs": [
+    {
+      "id": 601,
+      "name": "Northbridge Org Cloud",
+      "slug": "northbridge-org-cloud",
+      "description": "Internal workspace for projects, invites, and audit operations.",
+      "plan": "business",
+      "trial_days_left": 18,
+      "created_at": "2026-04-06T12:48:39.554Z"
+    }
+  ],
+  "org_members": [
+    {
+      "org_id": 601,
+      "user_id": 1,
+      "role": "employee",
+      "joined_at": "2026-04-06T12:48:39.554Z"
+    },
+    {
+      "org_id": 601,
+      "user_id": 2,
+      "role": "manager",
+      "joined_at": "2026-04-06T12:48:39.554Z"
+    },
+    {
+      "org_id": 601,
+      "user_id": 3,
+      "role": "employee",
+      "joined_at": "2026-04-06T12:48:39.554Z"
+    },
+    {
+      "org_id": 601,
+      "user_id": 4,
+      "role": "admin",
+      "joined_at": "2026-04-06T12:49:27.089Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "org_id": 601,
+      "name": "Asset Inventory",
+      "summary": "Keeps tenant assets synchronized.",
+      "status": "active",
+      "owner_user_id": 1
+    },
+    {
+      "id": 2,
+      "org_id": 601,
+      "name": "Role Sync Engine",
+      "summary": "Propagates access policy changes.",
+      "status": "active",
+      "owner_user_id": 1
+    },
+    {
+      "id": 3,
+      "org_id": 601,
+      "name": "Incident Workbench",
+      "summary": "Organizes audit and response notes.",
+      "status": "active",
+      "owner_user_id": 2
+    },
+    {
+      "id": 4,
+      "org_id": 601,
+      "name": "Secure Imports",
+      "summary": "Monitors file-driven workflows.",
+      "status": "active",
+      "owner_user_id": 2
+    }
+  ],
+  "invites": [
+    {
+      "id": 7001,
+      "org_id": 601,
+      "email": "owned.manager@orglab.local",
+      "role": "admin",
+      "status": "accepted",
+      "created_by_user_id": 1,
+      "created_at": "2026-04-06T12:48:39.554Z",
+      "accepted_by_user_id": 4,
+      "updated_at": "2026-04-06T12:49:18.001Z",
+      "updated_by_user_id": 2,
+      "accepted_at": "2026-04-06T12:49:27.091Z"
+    },
+    {
+      "id": 7002,
+      "org_id": 601,
+      "email": "new.employee@orglab.local",
+      "role": "employee",
+      "status": "pending",
+      "created_by_user_id": 1,
+      "created_at": "2026-04-06T12:48:39.554Z",
+      "accepted_by_user_id": null
+    },
+    {
+      "id": 7003,
+      "org_id": 601,
+      "email": "test@gmail.com",
+      "role": "employee",
+      "status": "pending",
+      "created_by_user_id": 2,
+      "created_at": "2026-04-06T12:48:58.354Z",
+      "accepted_by_user_id": null
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "file": "auth.log",
+      "label": "Authentication Audit",
+      "content": "[12:10] victim.admin signed in\n[12:15] attacker1 signed in"
+    },
+    {
+      "id": 2,
+      "file": "invite.log",
+      "label": "Invite Audit",
+      "content": "[12:21] invite 7001 created\n[12:23] invite 7002 created"
+    },
+    {
+      "id": 3,
+      "file": "projects.log",
+      "label": "Project Activity",
+      "content": "[12:30] Asset Inventory updated\n[12:33] Role Sync Engine saved"
+    },
+    {
+      "id": 4,
+      "file": "billing.log",
+      "label": "Billing Events",
+      "content": "[12:40] invoice generated\n[12:41] payment confirmed"
+    }
+  ],
+  "profile_updates": [],
+  "challenge_progress": [
+    {
+      "user_id": 4,
+      "flag_submitted": true
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": 1,
+      "type": "seed",
+      "actor_user_id": 1,
+      "target_user_id": 1,
+      "message": "Lab 6 initialized",
+      "created_at": "2026-04-06T12:48:39.554Z"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-04-06T12:48:58.355Z",
+      "type": "invite_create",
+      "actor_user_id": 2,
+      "target_user_id": 7003,
+      "message": "Invite created for test@gmail.com"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-04-06T12:49:18.002Z",
+      "type": "invite_update",
+      "actor_user_id": 2,
+      "target_user_id": 7001,
+      "message": "Invite updated: 7001"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-04-06T12:49:27.092Z",
+      "type": "invite_accept",
+      "actor_user_id": 4,
+      "target_user_id": 7001,
+      "message": "Invite accepted by owned.manager@orglab.local"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-04-06T12:49:33.051Z",
+      "type": "role_change",
+      "actor_user_id": 4,
+      "target_user_id": 1,
+      "from_role": "admin",
+      "to_role": "employee",
+      "message": "Role updated for 1"
+    }
+  ]
+}

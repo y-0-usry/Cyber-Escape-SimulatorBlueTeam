@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Northbridge Org Cloud</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="org.html">Org</a>
+    <a href="projects.html">Projects</a>
+    <a href="invites.html">Invites</a>
+    <a href="members.html">Members</a>
+    <a href="logs.html">Logs</a>
+    <a id="adminNavLink" class="hidden" href="admin.html">Admin</a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="lab.html">Lab 6</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+    <span id="roleState" class="badge">Role: none</span>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="card hero-panel">
+        <h1>Northbridge Org Cloud</h1>
+        <p class="muted">Internal workspace for organization data, member access, project planning, invites, and operational logs.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+          <a class="button" href="login.html">Sign in</a>
+          <a class="button secondary" href="dashboard.html">Open workspace</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Workspace Snapshot</h3>
+        <div id="homeSummary"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

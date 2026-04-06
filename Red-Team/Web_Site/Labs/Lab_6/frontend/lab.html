@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lab 6</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="org.html">Org</a>
+    <a href="projects.html">Projects</a>
+    <a href="invites.html">Invites</a>
+    <a href="members.html">Members</a>
+    <a href="logs.html">Logs</a>
+    <a id="adminNavLink" class="hidden" href="admin.html">Admin</a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="lab.html">Lab 6</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+    <span id="roleState" class="badge">Role: none</span>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Challenge Console</h2>
+      <div class="grid">
+        <div class="card"><p class="muted">Time</p><p id="labTimer" class="stat">20:00</p></div>
+        <div class="card"><p class="muted">Score</p><p id="labScore" class="stat">0</p></div>
+        <div class="card"><p class="muted">Status</p><p id="labStatus" class="stat stat-sm">Idle</p></div>
+      </div>
+      <div class="actions-row mt-14">
+        <button onclick="startLabAttempt()">Start Attempt</button>
+        <button class="secondary" onclick="syncChallenge()">Check Progress</button>
+        <button class="warn" onclick="fullResetLab()">Reset Everything</button>
+      </div>
+      <pre id="challengeStatus">Press Start Attempt to begin.</pre>
+    </div>
+
+    <div id="providedAccountsCard" class="card hidden">
+      <h3>Provided Accounts</h3>
+      <div class="split">
+        <div class="card">
+          <strong>Attacker Account</strong>
+          <p class="muted mt-8">Username: attacker1</p>
+          <p class="muted">Password: ManagerBreak2026!</p>
+          <p class="muted">Role: manager</p>
+        </div>
+        <div class="card">
+          <strong>Attacker-Controlled Account</strong>
+          <p class="muted mt-8">Username: owned.manager</p>
+          <p class="muted">Password: Owned2026!</p>
+          <p class="muted">Email: owned.manager@orglab.local</p>
+          <p class="muted">Initial org access: none</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lockedTasksCard" class="card">
+      <h3>Objectives Locked</h3>
+      <p class="muted">Start the attempt to reveal challenge tracking.</p>
+    </div>
+
+    <div id="tasksCard" class="card hidden">
+      <h3>Objectives</h3>
+      <div class="split">
+        <div class="card"><strong>Task 1: Org takeover</strong><p id="task1State" class="muted">Pending</p></div>
+        <div class="card"><strong>Task 2: Find flag</strong><p id="task2State" class="muted">Pending</p></div>
+      </div>
+      <div id="finalResult" class="hidden mt-16"></div>
+    </div>
+
+    <div id="flagCard" class="card hidden">
+      <h3>Submit FLAG</h3>
+      <input id="flagInput" placeholder="FLAG{...}" />
+      <div class="mt-12"><button class="success" onclick="submitFlag()">Submit FLAG</button></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

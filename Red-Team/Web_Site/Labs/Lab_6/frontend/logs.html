@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Logs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="org.html">Org</a>
+    <a href="projects.html">Projects</a>
+    <a href="invites.html">Invites</a>
+    <a href="members.html">Members</a>
+    <a href="logs.html">Logs</a>
+    <a id="adminNavLink" class="hidden" href="admin.html">Admin</a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="lab.html">Lab 6</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+    <span id="roleState" class="badge">Role: none</span>
+  </nav>
+
+  <div class="container">
+    <div id="logsWrap"></div>
+    <div class="card" style="margin-top:16px;">
+      <h3>Viewer</h3>
+      <pre id="logViewer">Select a log file.</pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

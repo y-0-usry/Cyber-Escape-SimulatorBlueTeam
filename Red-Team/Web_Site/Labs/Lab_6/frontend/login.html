@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <span class="spacer"></span>
+    <span id="authState" class="badge">Guest</span>
+    <span id="roleState" class="badge">Role: none</span>
+  </nav>
+
+  <div class="container" style="max-width:520px;">
+    <div class="card">
+      <h2>Sign in</h2>
+      <p class="muted">Access your organization workspace.</p>
+      <div class="form-grid">
+        <div>
+          <label>Username</label>
+          <input id="username" placeholder="username" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input id="password" type="password" placeholder="password" />
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
