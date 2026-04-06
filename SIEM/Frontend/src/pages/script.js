@@ -39,6 +39,15 @@ levelSelector.addEventListener('change', () => {
   loadAlerts(levelSelector.value);
 });
 
+// Support opening dashboard directly on a specific level, e.g. /?level=level6
+const urlLevel = new URLSearchParams(window.location.search).get('level');
+if (urlLevel) {
+  const opt = Array.from(levelSelector.options).find(o => o.value === urlLevel);
+  if (opt) {
+    levelSelector.value = urlLevel;
+  }
+}
+
 closeModal.addEventListener('click', () => {
   modal.classList.add('hidden');
 });

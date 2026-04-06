@@ -1,0 +1,50 @@
+2026-04-06T09:00:00Z | Alert: [UPDATE] Software update installed successfully on monitoring-server-01 | SID: 660001 | Source: 52.144.11.20 | Dest: 10.20.1.15 | Priority: 3
+2026-04-06T09:00:04Z | Alert: [INFO] Update verified from trusted vendor certificate | SID: 660002 | Source: 52.144.11.20 | Dest: 10.20.1.15 | Priority: 3
+2026-04-06T09:00:11Z | Alert: [WARNING] Update package hash differs from previous baseline but signature valid | SID: 660003 | Source: 52.144.11.20 | Dest: 10.20.1.15 | Priority: 2
+2026-04-06T09:00:18Z | Alert: [UPDATE] Orion platform service restarted after update | SID: 660004 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 3
+2026-04-06T09:01:05Z | Alert: [PROCESS] New service started: update_service.exe | SID: 660005 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:01:12Z | Alert: [WARNING] Unknown background service detected under SYSTEM account | SID: 660006 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:01:24Z | Alert: [PROCESS] update_service.exe spawned hidden child process svchost_upd.exe | SID: 660007 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:02:00Z | Alert: [NETWORK] Outbound connection to 77.91.33.10 over HTTPS | SID: 660008 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:02:08Z | Alert: [ALERT] Unknown external communication detected from update service | SID: 660009 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:02:19Z | Alert: [C2] Beacon pattern every 60 seconds to 77.91.33.10 | SID: 660010 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:02:30Z | Alert: [C2] Secondary fallback communication to 185.199.110.153 | SID: 660011 | Source: 10.20.1.15 | Dest: 185.199.110.153 | Priority: 1
+2026-04-06T09:03:04Z | Alert: [PERSISTENCE] Service registered for auto-start: windows_update_monitor | SID: 660012 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:03:16Z | Alert: [WARNING] Suspicious startup entry added in HKLM Run key | SID: 660013 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:03:28Z | Alert: [PERSISTENCE] Scheduled task created: UpdateTelemetryHealthCheck | SID: 660014 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:04:05Z | Alert: [ACCESS] Internal system enumeration started from monitoring-server-01 | SID: 660015 | Source: 10.20.1.15 | Dest: 10.20.2.0 | Priority: 1
+2026-04-06T09:04:14Z | Alert: [ALERT] Unusual access to multiple systems in short interval | SID: 660016 | Source: 10.20.1.15 | Dest: 10.20.2.34 | Priority: 1
+2026-04-06T09:04:27Z | Alert: [ACCESS] Domain user listing command executed remotely | SID: 660017 | Source: 10.20.1.15 | Dest: 10.20.2.10 | Priority: 1
+2026-04-06T09:04:39Z | Alert: [ACCESS] Security group membership queried from privileged context | SID: 660018 | Source: 10.20.1.15 | Dest: 10.20.2.10 | Priority: 1
+2026-04-06T09:05:02Z | Alert: [SECURITY] Unauthorized access confirmed to configuration repository | SID: 660019 | Source: 10.20.1.15 | Dest: 10.20.3.55 | Priority: 1
+2026-04-06T09:05:19Z | Alert: [ALERT] Potential data exfiltration detected via encrypted outbound stream | SID: 660020 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:05:32Z | Alert: [ALERT] Compressed archive prepared: telemetry_bundle_20260406.zip | SID: 660021 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:05:45Z | Alert: [SECURITY] Data staging activity outside maintenance window | SID: 660022 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:06:12Z | Alert: [ALERT] Large encrypted outbound burst to 77.91.33.10 | SID: 660023 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:06:23Z | Alert: [C2] Tasking response received from remote infrastructure | SID: 660024 | Source: 77.91.33.10 | Dest: 10.20.1.15 | Priority: 1
+2026-04-06T09:06:40Z | Alert: [ALERT] Lateral credential probing against admin-vault service | SID: 660025 | Source: 10.20.1.15 | Dest: 10.20.4.90 | Priority: 1
+2026-04-06T09:06:55Z | Alert: [ACCESS] Service account token reused across systems | SID: 660026 | Source: 10.20.1.15 | Dest: 10.20.2.44 | Priority: 1
+2026-04-06T09:07:06Z | Alert: [WARNING] Security logging policy queried unexpectedly | SID: 660027 | Source: 10.20.1.15 | Dest: 10.20.2.5 | Priority: 2
+2026-04-06T09:07:20Z | Alert: [ALERT] Covert DNS-like tunneling pattern detected in HTTPS metadata | SID: 660028 | Source: 10.20.1.15 | Dest: 77.91.33.10 | Priority: 1
+2026-04-06T09:07:38Z | Alert: [SECURITY] Unauthorized access confirmed on backup-catalog server | SID: 660029 | Source: 10.20.1.15 | Dest: 10.20.5.12 | Priority: 1
+2026-04-06T09:07:49Z | Alert: [ALERT] Potential data exfiltration detected toward cloud object endpoint | SID: 660030 | Source: 10.20.1.15 | Dest: 104.18.12.201 | Priority: 1
+2026-04-06T09:08:05Z | Alert: [ALERT] Failed web exploit blocked at WAF (SQL injection) | SID: 660031 | Source: 198.55.44.9 | Dest: 10.20.7.20 | Priority: 2
+2026-04-06T09:08:10Z | Alert: [ALERT] XSS payload blocked on support portal | SID: 660032 | Source: 176.33.14.22 | Dest: 10.20.7.21 | Priority: 2
+2026-04-06T09:08:14Z | Alert: [ALERT] RDP brute-force blocked by firewall | SID: 660033 | Source: 45.190.11.77 | Dest: 10.20.8.30 | Priority: 2
+2026-04-06T09:08:20Z | Alert: [ALERT] Malware download blocked by proxy policy | SID: 660034 | Source: 102.44.21.18 | Dest: 10.20.8.40 | Priority: 2
+2026-04-06T09:08:31Z | Alert: [ALERT] Phishing attachment quarantined before execution | SID: 660035 | Source: 203.77.21.9 | Dest: 10.20.9.11 | Priority: 2
+2026-04-06T09:08:42Z | Alert: [ALERT] Credential stuffing attempt blocked on VPN gateway | SID: 660036 | Source: 154.88.33.17 | Dest: 10.20.0.1 | Priority: 2
+2026-04-06T09:08:55Z | Alert: [ALERT] Legacy webserver exploited, webshell upload succeeded | SID: 660037 | Source: 198.77.52.61 | Dest: 10.20.10.25 | Priority: 1
+2026-04-06T09:09:07Z | Alert: [ALERT] Outbound callback from webshell host to 91.222.13.77 | SID: 660038 | Source: 10.20.10.25 | Dest: 91.222.13.77 | Priority: 1
+2026-04-06T09:09:18Z | Alert: [ALERT] DB service account abuse succeeded on inventory-db | SID: 660039 | Source: 10.20.6.33 | Dest: 10.20.6.10 | Priority: 1
+2026-04-06T09:09:29Z | Alert: [SECURITY] Suspicious export query returned 25000 rows | SID: 660040 | Source: 10.20.6.33 | Dest: 10.20.6.10 | Priority: 1
+2026-04-06T09:09:40Z | Alert: [INFO] Daily vulnerability scan approved by SecOps | SID: 660041 | Source: 10.20.99.5 | Dest: 10.20.0.0 | Priority: 3
+2026-04-06T09:09:52Z | Alert: [INFO] Backup service uploaded archive to approved storage | SID: 660042 | Source: 10.20.5.44 | Dest: 172.16.1.50 | Priority: 3
+2026-04-06T09:10:05Z | Alert: [INFO] Patch management agent heartbeat normal | SID: 660043 | Source: 10.20.3.14 | Dest: 10.20.3.1 | Priority: 3
+2026-04-06T09:10:16Z | Alert: [INFO] Helpdesk password reset executed with valid ticket | SID: 660044 | Source: 10.20.2.88 | Dest: 10.20.2.88 | Priority: 3
+2026-04-06T09:10:27Z | Alert: [WARNING] High API volume from internal monitoring bot | SID: 660045 | Source: 10.20.4.90 | Dest: 10.20.4.22 | Priority: 3
+2026-04-06T09:10:38Z | Alert: [INFO] Contractor VPN connected successfully using MFA | SID: 660046 | Source: 196.201.55.10 | Dest: 10.20.0.1 | Priority: 3
+2026-04-06T09:10:49Z | Alert: [INFO] Finance team bulk report generated during approved window | SID: 660047 | Source: 10.20.6.21 | Dest: 10.20.6.10 | Priority: 3
+2026-04-06T09:11:00Z | Alert: [WARNING] Repeated failed login then account auto-locked: user temp.ops | SID: 660048 | Source: 10.20.11.33 | Dest: 10.20.2.10 | Priority: 2
+2026-04-06T09:11:12Z | Alert: [ALERT] Suspicious update channel fallback reached deprecated endpoint | SID: 660049 | Source: 10.20.1.15 | Dest: 52.144.11.20 | Priority: 2
+2026-04-06T09:11:25Z | Alert: [ALERT] Update process attempted credential dump from lsass memory | SID: 660050 | Source: 10.20.1.15 | Dest: 10.20.1.15 | Priority: 1

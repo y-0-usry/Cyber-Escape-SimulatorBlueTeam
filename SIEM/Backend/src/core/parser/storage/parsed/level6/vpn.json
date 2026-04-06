@@ -1,0 +1,122 @@
+[
+  {
+    "@timestamp": "2026-04-06T08:58:30Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "sec.ops"
+    },
+    "source": {
+      "ip": "196.201.10.22"
+    },
+    "event_outcome": "success",
+    "raw": "2026-04-06T08:58:30Z VPN_CONNECT User: sec.ops | IP: 196.201.10.22 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-04-06T09:00:40Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "contractor.audit"
+    },
+    "source": {
+      "ip": "196.201.55.10"
+    },
+    "event_outcome": "success",
+    "raw": "2026-04-06T09:00:40Z VPN_CONNECT User: contractor.audit | IP: 196.201.55.10 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-04-06T09:01:50Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "temp.ops"
+    },
+    "source": {
+      "ip": "154.88.33.17"
+    },
+    "event_outcome": "failed",
+    "raw": "2026-04-06T09:01:50Z VPN_CONNECT User: temp.ops | IP: 154.88.33.17 | Status: FAILED"
+  },
+  {
+    "@timestamp": "2026-04-06T09:01:58Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "temp.ops"
+    },
+    "source": {
+      "ip": "154.88.33.17"
+    },
+    "event_outcome": "failed",
+    "raw": "2026-04-06T09:01:58Z VPN_CONNECT User: temp.ops | IP: 154.88.33.17 | Status: FAILED"
+  },
+  {
+    "@timestamp": "2026-04-06T09:02:06Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "temp.ops"
+    },
+    "source": {
+      "ip": "154.88.33.17"
+    },
+    "event_outcome": "failed",
+    "raw": "2026-04-06T09:02:06Z VPN_CONNECT User: temp.ops | IP: 154.88.33.17 | Status: FAILED"
+  },
+  {
+    "@timestamp": "2026-04-06T09:02:15Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "temp.ops"
+    },
+    "source": {
+      "ip": "154.88.33.17"
+    },
+    "event_outcome": "blocked",
+    "raw": "2026-04-06T09:02:15Z VPN_CONNECT User: temp.ops | IP: 154.88.33.17 | Status: BLOCKED"
+  },
+  {
+    "@timestamp": "2026-04-06T09:03:20Z",
+    "event": {
+      "action": "vpn_connect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "db.service"
+    },
+    "source": {
+      "ip": "10.20.6.33"
+    },
+    "event_outcome": "success",
+    "raw": "2026-04-06T09:03:20Z VPN_CONNECT User: db.service | IP: 10.20.6.33 | Status: SUCCESS"
+  },
+  {
+    "@timestamp": "2026-04-06T09:07:40Z",
+    "event": {
+      "action": "vpn_disconnect",
+      "type": "vpn"
+    },
+    "user": {
+      "name": "contractor.audit"
+    },
+    "source": {
+      "ip": "196.201.55.10"
+    },
+    "event_outcome": "success",
+    "raw": "2026-04-06T09:07:40Z VPN_DISCONNECT User: contractor.audit | IP: 196.201.55.10 | Status: SUCCESS"
+  }
+]

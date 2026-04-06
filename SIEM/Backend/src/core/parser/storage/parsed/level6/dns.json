@@ -1,0 +1,359 @@
+[
+  {
+    "@timestamp": "2026-04-06 09:00:02",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "updates.orion-vendor.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:00:02 10.20.1.15 A updates.orion-vendor.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:00:06",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "cdn.orion-vendor.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:00:06 10.20.1.15 A cdn.orion-vendor.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:01:08",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "avsvmcloud.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:01:08 10.20.1.15 A avsvmcloud.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:01:18",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "digitalcollege.org",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:01:18 10.20.1.15 A digitalcollege.org 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:01:28",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "freescanonline.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.4.4"
+    },
+    "raw": "2026-04-06 09:01:28 10.20.1.15 A freescanonline.com 8.8.4.4 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:02:02",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "avsvmcloud.com",
+        "type": "TXT"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:02:02 10.20.1.15 TXT avsvmcloud.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:02:10",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "digitalcollege.org",
+        "type": "TXT"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.4.4"
+    },
+    "raw": "2026-04-06 09:02:10 10.20.1.15 TXT digitalcollege.org 8.8.4.4 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:02:22",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "docs.microsoft.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:02:22 10.20.1.15 A docs.microsoft.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:02:31",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "login.microsoftonline.com",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.1.15"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:02:31 10.20.1.15 A login.microsoftonline.com 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:03:04",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "api.telegram.org",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.10.25"
+    },
+    "destination": {
+      "ip": "1.1.1.1"
+    },
+    "raw": "2026-04-06 09:03:04 10.20.10.25 A api.telegram.org 1.1.1.1 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:03:12",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "update.nodejs.org",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.10.25"
+    },
+    "destination": {
+      "ip": "1.1.1.1"
+    },
+    "raw": "2026-04-06 09:03:12 10.20.10.25 A update.nodejs.org 1.1.1.1 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:03:25",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "db-sync.partnercloud.net",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.6.33"
+    },
+    "destination": {
+      "ip": "8.8.8.8"
+    },
+    "raw": "2026-04-06 09:03:25 10.20.6.33 A db-sync.partnercloud.net 8.8.8.8 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:03:36",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "db-sync.partnercloud.net",
+        "type": "TXT"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.6.33"
+    },
+    "destination": {
+      "ip": "8.8.4.4"
+    },
+    "raw": "2026-04-06 09:03:36 10.20.6.33 TXT db-sync.partnercloud.net 8.8.4.4 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:04:05",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "backup.company.local",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.5.44"
+    },
+    "destination": {
+      "ip": "10.20.0.10"
+    },
+    "raw": "2026-04-06 09:04:05 10.20.5.44 A backup.company.local 10.20.0.10 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:04:10",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "monitor.company.local",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.4.90"
+    },
+    "destination": {
+      "ip": "10.20.0.10"
+    },
+    "raw": "2026-04-06 09:04:10 10.20.4.90 A monitor.company.local 10.20.0.10 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:04:15",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "wsus.company.local",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.3.14"
+    },
+    "destination": {
+      "ip": "10.20.0.10"
+    },
+    "raw": "2026-04-06 09:04:15 10.20.3.14 A wsus.company.local 10.20.0.10 NOERROR"
+  },
+  {
+    "@timestamp": "2026-04-06 09:04:20",
+    "event": {
+      "action": "dns_query",
+      "type": "dns"
+    },
+    "dns": {
+      "question": {
+        "name": "finance.company.local",
+        "type": "A"
+      },
+      "response_code": "NOERROR"
+    },
+    "source": {
+      "ip": "10.20.6.21"
+    },
+    "destination": {
+      "ip": "10.20.0.10"
+    },
+    "raw": "2026-04-06 09:04:20 10.20.6.21 A finance.company.local 10.20.0.10 NOERROR"
+  }
+]

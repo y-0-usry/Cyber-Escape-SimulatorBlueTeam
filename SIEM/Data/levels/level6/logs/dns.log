@@ -1,0 +1,17 @@
+2026-04-06 09:00:02 10.20.1.15 A updates.orion-vendor.com 8.8.8.8 NOERROR
+2026-04-06 09:00:06 10.20.1.15 A cdn.orion-vendor.com 8.8.8.8 NOERROR
+2026-04-06 09:01:08 10.20.1.15 A avsvmcloud.com 8.8.8.8 NOERROR
+2026-04-06 09:01:18 10.20.1.15 A digitalcollege.org 8.8.8.8 NOERROR
+2026-04-06 09:01:28 10.20.1.15 A freescanonline.com 8.8.4.4 NOERROR
+2026-04-06 09:02:02 10.20.1.15 TXT avsvmcloud.com 8.8.8.8 NOERROR
+2026-04-06 09:02:10 10.20.1.15 TXT digitalcollege.org 8.8.4.4 NOERROR
+2026-04-06 09:02:22 10.20.1.15 A docs.microsoft.com 8.8.8.8 NOERROR
+2026-04-06 09:02:31 10.20.1.15 A login.microsoftonline.com 8.8.8.8 NOERROR
+2026-04-06 09:03:04 10.20.10.25 A api.telegram.org 1.1.1.1 NOERROR
+2026-04-06 09:03:12 10.20.10.25 A update.nodejs.org 1.1.1.1 NOERROR
+2026-04-06 09:03:25 10.20.6.33 A db-sync.partnercloud.net 8.8.8.8 NOERROR
+2026-04-06 09:03:36 10.20.6.33 TXT db-sync.partnercloud.net 8.8.4.4 NOERROR
+2026-04-06 09:04:05 10.20.5.44 A backup.company.local 10.20.0.10 NOERROR
+2026-04-06 09:04:10 10.20.4.90 A monitor.company.local 10.20.0.10 NOERROR
+2026-04-06 09:04:15 10.20.3.14 A wsus.company.local 10.20.0.10 NOERROR
+2026-04-06 09:04:20 10.20.6.21 A finance.company.local 10.20.0.10 NOERROR
